@@ -12,6 +12,7 @@
 		<org.springframework-version>3.1.0.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<org.hamcrest.hamcrest-all.version>1.1</org.hamcrest.hamcrest-all.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -154,6 +155,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>${org.hamcrest.hamcrest-all.version}</version>
 			<scope>test</scope>
 		</dependency>
 	
