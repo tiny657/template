@@ -48,7 +48,7 @@
 
 <!-- content -->
 <div id="content">
-<P>  The time on the server is ${serverTime}. </P>
+<P>  message is ${field.name}. </P>
 </div>
 <!-- //content -->
 

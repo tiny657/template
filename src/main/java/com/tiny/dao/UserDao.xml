@@ -9,7 +9,7 @@
     </resultMap>
     
 	<update id="dropUser">
-		DROP TABLE IF EXISTS 'user';
+		DROP TABLE IF EXISTS user;
 	</update>
 	
 	<update id="createUser">

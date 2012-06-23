@@ -6,7 +6,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-		"file:src/main/webapp/WEB-INF/app-config.xml",
-		"file:src/main/webapp/WEB-INF/jdbc-context.xml" })
+		"classpath:applicationContext.xml",
+		"classpath:jdbc-context.xml" })
 public class CommonTest {
 }
