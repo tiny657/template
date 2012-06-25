@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -48,7 +49,7 @@
 
 <!-- content -->
 <div id="content">
-<P>  message is ${field.name}. </P>
+<P>  message is <spring:message code="field.name" /></P>
 </div>
 <!-- //content -->
 
