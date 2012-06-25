@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!-- LAYOUT -->
+	<definition name="defaultLayout" template="/WEB-INF/view/layout/defaultLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/fragment/header.jsp" />
+		<put-attribute name="top" value="/WEB-INF/view/layout/fragment/top.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/fragment/footer.jsp" />
+
+		<put-list-attribute name="lazyloadngScripts">
+			<!-- <add-attribute value="js/xxx.js" /> -->
+		</put-list-attribute>
+	</definition>
+
+	<!-- SERVICE -->
+	<definition name="user" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/home/user.jsp" />
+	</definition>
+</tiles-definitions>

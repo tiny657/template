@@ -13,15 +13,14 @@ import com.tiny.dao.UserDao;
 @Controller
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	UserDao userDao;
-	
+
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView result = new ModelAndView();
-		result.setViewName("home");
-		logger.error("TEST");
+		result.setViewName("user");
 		return result;
 	}
 }
