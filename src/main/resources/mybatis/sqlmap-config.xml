@@ -8,6 +8,6 @@
 		<setting name="lazyLoadingEnabled" value="false" />
 	</settings>
 	<typeAliases>
-		<typeAlias type="com.tiny.domain.User" alias="user"/>
+		<typeAlias type="com.tiny.domain.User" alias="user" />
 	</typeAliases>
 </configuration>
