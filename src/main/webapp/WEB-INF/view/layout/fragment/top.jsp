@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- header -->
-<div id="header">
-	<!-- Global Navigation Bar -->
-	<div class="gnb">gnb</div>
-	<!-- //Global Navigation Bar -->
-
-	<!-- Service Title Area -->
-	<div class="sta"></div>
-	<!-- // Service Title Area -->
-
-	<!-- Local Navigation Bar -->
-	<div class="lnb"></div>
-	<!-- //Local Navigation Bar -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#">Project name</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- //header -->
