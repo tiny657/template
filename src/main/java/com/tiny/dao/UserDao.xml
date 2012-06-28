@@ -20,6 +20,17 @@
 		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
 	</update>
 	
+	<insert id="saveUser" parameterType="user">
+		INSERT 
+		INTO user 
+				(name, 
+				company,
+				password)
+		VALUES (#{name}, 
+				#{company},
+				password(#{password}));
+	</insert>
+	
 	<select id="getAllUser" resultMap="result">
 		SELECT name, company, password
 		FROM user;
@@ -32,16 +43,10 @@
 		LIMIT 1;
 	</select>
 	
-	<insert id="saveUser" parameterType="user">
-		INSERT 
-		INTO user 
-				(name, 
-				company,
-				password)
-		VALUES (#{name}, 
-				#{company},
-				password(#{password}));
-	</insert>
+	<select id="countUser" resultType="int">  
+		SELECT COUNT(*)
+		FROM user;
+	</select>
 	
 	<update id="updateUser" parameterType="user"> 
   		UPDATE user

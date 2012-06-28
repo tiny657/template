@@ -28,22 +28,33 @@ public class UserDaoTest extends CommonTest {
 
 	@Test
 	public void testInsertUser() {
+		assertThat(userDao.countUser(), is(0));
 		userDao.saveUser(new User("name", "tiny", "password"));
+		assertThat(userDao.countUser(), is(1));
 	}
 	
 	@Test
 	public void testUpdateUser() {
-		userDao.updateUser(new User("name", "tiny4", "pass"));
+		userDao.saveUser(new User("name", "tiny", "password"));
+		assertThat(userDao.countUser(), is(1));
+		
+		userDao.updateUser(new User("name", "tiny2", "password"));
+		assertThat(userDao.countUser(), is(1));
 	}
 	
 	@Test
 	public void testGetUser() {
-		User user = userDao.getUser("test");
+		userDao.saveUser(new User("name", "tiny", "password"));
+		User user = userDao.getUser("name");
 		assertThat(user.getCompany(), is("tiny"));
 	}
 	
 	@Test
 	public void testDeleteUser() {
+		userDao.saveUser(new User("name", "tiny", "password"));
+		assertThat(userDao.countUser(), is(1));
+		
 		userDao.deleteUser("name");
+		assertThat(userDao.countUser(), is(0));
 	}
 }
