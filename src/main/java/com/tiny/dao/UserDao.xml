@@ -8,9 +8,9 @@
 		<result property="password" column="password" />
 	</resultMap>
     
-	<update id="dropUser">
+	<delete id="dropUser">
 		DROP TABLE IF EXISTS user;
-	</update>
+	</delete>
 	
 	<update id="createUser">
 		CREATE TABLE IF NOT EXISTS user (

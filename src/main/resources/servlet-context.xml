@@ -6,8 +6,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-	<!-- JUnit 테스트 수행 시 사용함 -->
-	<context:component-scan base-package="com.tiny" />
+	<context:component-scan base-package="com.tiny" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="order" value="1" />
@@ -22,7 +23,7 @@
 		<property name="defaultLocale" value="en" />
 	</bean>
 
-	<!--  TILES2 LAYOUT -->
+	<!-- TILES2 LAYOUT -->
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
@@ -34,7 +35,7 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</bean>
-	
+
 	<!-- JSR-303 support will be detected on classpath and enabled automatically -->
 	<mvc:annotation-driven />
 </beans>
