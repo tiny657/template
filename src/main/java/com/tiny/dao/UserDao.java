@@ -8,9 +8,9 @@ public interface UserDao {
 	public void dropUser();
 	
 	public void saveUser(User user);
+	public List<User> getAllUser();
 	public User getUser(String name);
 	public Integer countUser();
 	public void updateUser(User user);
 	public void deleteUser(String name);
-	public List<User> getAllUser();
 }
