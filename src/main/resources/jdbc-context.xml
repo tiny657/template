@@ -10,7 +10,7 @@
 			http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	   		">
 
-	<context:property-placeholder location="classpath:jdbc.properties,classpath:mybatis/mybatis.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- Enable annotation style of managing transactions -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -35,7 +35,7 @@
 
 	<!-- scan for mappers and let them be autowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.tiny.dao" />
+		<property name="basePackage" value="com.tiny" />
 	</bean>
 
 </beans>
