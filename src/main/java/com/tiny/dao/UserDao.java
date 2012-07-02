@@ -1,7 +1,8 @@
 package com.tiny.dao;
 
 import java.util.List;
-import com.tiny.domain.User;
+
+import com.tiny.user.User;
 
 public interface UserDao {
 	public void createUser();

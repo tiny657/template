@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
-import com.tiny.domain.User;
+import com.tiny.user.User;
 
 public class UserDaoTest extends CommonTest {
 	@Autowired

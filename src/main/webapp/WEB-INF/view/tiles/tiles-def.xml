@@ -13,7 +13,7 @@
 	</definition>
 
 	<!-- SERVICE -->
-	<definition name="user" extends="defaultLayout">
-		<put-attribute name="body" value="/WEB-INF/view/home/user.jsp" />
+	<definition name="home" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/home/home.jsp" />
 	</definition>
 </tiles-definitions>

@@ -1,0 +1,126 @@
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tiny.dao.DocumentDao">
+	<resultMap id="result" type="document">
+		<result property="documentId" column="documentId" />
+		<result property="point" column="point" />
+		<result property="isNotice" column="isNotice" />
+		<result property="title" column="title" />
+		<result property="titleBold" column="titleBold" />
+		<result property="titleColor" column="titleColor" />
+		<result property="content" column="content" />
+		<result property="likeCount" column="likeCount" />
+		<result property="dislikeCount" column="dislikeCount" />
+		<result property="commentCount" column="commentCount" />
+		<result property="shareCount" column="shareCount" />
+		<result property="userId" column="userId" />
+		<result property="nickName" column="nickName" />
+		<result property="ipAddress" column="ipAddress" />
+		<result property="tags" column="tags" />
+		<result property="regDate" column="regDate" />
+		<result property="lastUpdate" column="lastUpdate" />
+	</resultMap>
+	
+	<update id="createDocument">
+		CREATE TABLE IF NOT EXISTS document (
+			documentId INT AUTO_INCREMENT,
+			point INT,
+			isNotice BOOLEAN,
+			title VARCHAR(250),
+			titleBold BOOLEAN,
+			titleColor VARCHAR(7),
+			content TEXT,
+			likeCount INT,
+			dislikeCount INT,
+			commentCount INT,
+			shareCount INT,
+			userId VARCHAR(12),
+			nickName VARCHAR(20),
+			ipAddress CHAR(8),
+			tags TEXT,
+			regDate DATE,
+			lastUpdate DATE,
+			PRIMARY KEY (documentId)
+		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
+	</update>
+	
+	<insert id="saveDocument" parameterType="document">
+		INSERT
+		INTO document 
+				(point,
+				isNotice,
+				title,
+				titleBold,
+				titleColor,
+				content,
+				likeCount,
+				dislikeCount,
+				commentCount,
+				shareCount,
+				userId,
+				nickName,
+				ipAddress,
+				tags,
+				regDate,
+				lastUpdate)
+		VALUES (#{point},
+				#{isNotice},
+				#{title},
+				#{titleBold},
+				#{titleColor},
+				#{content},
+				#{likeCount},
+				#{dislikeCount},
+				#{commentCount},
+				#{shareCount},
+				#{userId},
+				#{nickName},
+				#{ipAddress},
+				#{tags},
+				NOW(),
+				NOW());
+	</insert>
+	
+	<select id="getAllDocument" resultMap="result">
+		SELECT *
+		FROM document;
+	</select>
+	
+	<select id="getDocument" resultType="document">
+		SELECT *
+		FROM document
+		LIMIT 1;
+	</select>
+	
+	<select id="countDocument" resultType="int">
+		SELECT COUNT(*)
+		FROM document;
+	</select>
+	
+	<update id="updateDocument" parameterType="document">
+  		UPDATE document
+  		SET
+  			point = #{point},
+			isNotice = #{isNotice},
+			title = #{title},
+			titleBold = #{titleBold},
+			titleColor = #{titleColor},
+			content = #{content},
+			likeCount = #{likeCount},
+			dislikeCount = #{dislikeCount},
+			commentCount = #{commentCount},
+			shareCount = #{shareCount},
+			userId = #{userId},
+			nickName = #{nickName},
+			ipAddress = #{ipAddress},
+			tags = #{tags},
+			lastUpdate = NOW()
+  		where documentId = #{documentId};
+	</update>
+	
+	<delete id="deleteDocument" parameterType="string">
+		DELETE
+		FROM document
+		WHERE documentId = #{documentId};
+	</delete>
+</mapper>

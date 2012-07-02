@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
 
-public class UserControllerTest extends CommonTest {
+public class HomeControllerTest extends CommonTest {
 	@Autowired
-	UserController userController;
+	HomeController homeController;
 	
 	@Test
 	public void testHome() {
-		userController.home();
+		homeController.home();
 	}
 }

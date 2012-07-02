@@ -16,14 +16,14 @@
 	</update>
 	
 	<insert id="saveUser" parameterType="user">
-		INSERT 
-		INTO user 
-				(name, 
+		INSERT
+		INTO user
+				(name,
 				company,
 				password)
-		VALUES (#{name}, 
+		VALUES (#{name},
 				#{company},
-				password(#{password}));
+				PASSWORD(#{password}));
 	</insert>
 	
 	<select id="getAllUser" resultMap="result">
@@ -31,24 +31,24 @@
 		FROM user;
 	</select>
 	
-	<select id="getUser" resultType="user">  
+	<select id="getUser" resultType="user">
 		SELECT name, company, password
 		FROM user
 		WHERE name = #{value}
 		LIMIT 1;
 	</select>
 	
-	<select id="countUser" resultType="int">  
+	<select id="countUser" resultType="int">
 		SELECT COUNT(*)
 		FROM user;
 	</select>
 	
-	<update id="updateUser" parameterType="user"> 
+	<update id="updateUser" parameterType="user">
   		UPDATE user
-  		SET 
+  		SET
   			name = #{name},
 			company = #{company},
-			password = #{password} 
+			password = #{password}
   		where name = #{name};
 	</update>
 	

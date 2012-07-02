@@ -1,0 +1,73 @@
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tiny.dao.CommentDao">
+	<resultMap id="result" type="comment">
+		<result property="commentId" column="commentId" />
+		<result property="documentId" column="documentId" />
+		<result property="like" column="like" />
+		<result property="dislike" column="dislike" />
+		<result property="content" column="content" />
+		<result property="userId" column="userId" />
+	</resultMap>
+	
+	<update id="createComment">
+		CREATE TABLE IF NOT EXISTS comment (
+			commentId INT AUTO_INCREMENT,
+			documentId VARCHAR(12),
+			like BOOLEAN,
+			dislike BOOLEAN,
+			content TEXT,
+			userId VARCHAR(12),
+			PRIMARY KEY (commentId),
+			FOREIGN KEY (documentId) REFERENCES document(documentId)
+		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
+	</update>
+	
+	<insert id="saveComment" parameterType="comment">
+		INSERT
+		INTO comment 
+				(documentId,
+				like,
+				dislike,
+				content,
+				userId)
+		VALUES (#{documentId},
+				#{like},
+				#{dislike},
+				#{content},
+				#{userId});
+	</insert>
+	
+	<select id="getAllComment" resultMap="result">
+		SELECT *
+		FROM comment;
+	</select>
+	
+	<select id="getComment" resultType="comment">
+		SELECT *
+		FROM comment
+		WHERE commentId = #{value}
+		LIMIT 1;
+	</select>
+	
+	<select id="countComment" resultType="int">
+		SELECT COUNT(*)
+		FROM comment;
+	</select>
+	
+	<update id="updateComment" parameterType="comment">
+  		UPDATE comment
+  		SET
+  			like = #{like},
+			dislike = #{dislike},
+			content = #{content},
+			userId = #{userId}
+  		where commentId = #{commentId};
+	</update>
+	
+	<delete id="deleteComment" parameterType="string">
+		DELETE
+		FROM comment
+		WHERE commentId = #{commentId};
+	</delete>
+</mapper>

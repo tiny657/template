@@ -1,4 +1,4 @@
-package com.tiny.domain;
+package com.tiny.user;
 
 import lombok.Data;
 
