@@ -3,7 +3,6 @@ package com.tiny.dao;
 import java.util.List;
 
 import com.tiny.comment.Comment;
-import com.tiny.user.User;
 
 public interface CommentDao {
 	public void createComment();

@@ -3,7 +3,6 @@ package com.tiny.dao;
 import java.util.List;
 
 import com.tiny.member.Member;
-import com.tiny.user.User;
 
 public interface MemberDao {
 	public void createMember();
