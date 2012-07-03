@@ -8,18 +8,18 @@ public class Comment {
 	int commentId;
 	// Foreign Key
 	int documentId;
-	boolean like;
-	boolean dislike;
+	boolean likeCount;
+	boolean dislikeCount;
 	String content;
 	String userId;
 	
 	public Comment() {
 	}
 	
-	public Comment(int documentId, boolean like, boolean dislike, String content, String userId) {
+	public Comment(int documentId, boolean likeCount, boolean dislikeCount, String content, String userId) {
 		this.documentId = documentId;
-		this.like = like;
-		this.dislike = dislike;
+		this.likeCount = likeCount;
+		this.dislikeCount = dislikeCount;
 		this.content = content;
 		this.userId = userId;
 	}

@@ -11,7 +11,7 @@ public interface CommentDao {
 	
 	public void saveComment(Comment comment);
 	public List<Comment> getAllComment();
-	public User getComment(int commentId);
+	public Comment getComment();
 	public Integer countComment();
 	public void updateComment(Comment comment);
 	public void deleteComment(int commentId);

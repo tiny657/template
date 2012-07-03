@@ -21,33 +21,51 @@ public class DocumentDaoTest extends CommonTest {
 
 	@Test
 	public void testInsertDocument() {
+		// Given
 		int count = documentDao.countDocument();
+		
+		// When
 		documentDao.saveDocument(getDocument());
+		
+		// Then
 		assertThat(documentDao.countDocument(), is(count + 1));
 	}
 
 	@Test
 	public void testUpdateDocument() {
+		// Given
 		documentDao.saveDocument(getDocument());
 		int count = documentDao.countDocument();
 
+		// When
 		documentDao.updateDocument(documentDao.getDocument());
+		
+		// Then
 		assertThat(documentDao.countDocument(), is(count));
 	}
 
 	@Test
 	public void testGetDocument() {
+		// Given
 		documentDao.saveDocument(getDocument());
+		
+		// When
 		Document document = documentDao.getDocument();
+		
+		// Then
 		assertThat(document.getTitle(), is(getDocument().getTitle()));
 	}
 
 	@Test
 	public void testDeleteDocument() {
+		// Given
 		documentDao.saveDocument(getDocument());
 		int count = documentDao.countDocument();
 
+		// When
 		documentDao.deleteDocument(documentDao.getDocument().getDocumentId());
+		
+		// Then
 		assertThat(documentDao.countDocument(), is(count - 1));
 	}
 	

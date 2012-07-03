@@ -13,9 +13,9 @@
 	<update id="createComment">
 		CREATE TABLE IF NOT EXISTS comment (
 			commentId INT AUTO_INCREMENT,
-			documentId VARCHAR(12),
-			like BOOLEAN,
-			dislike BOOLEAN,
+			documentId INT,
+			likeCount BOOLEAN,
+			dislikeCount BOOLEAN,
 			content TEXT,
 			userId VARCHAR(12),
 			PRIMARY KEY (commentId),
@@ -27,13 +27,13 @@
 		INSERT
 		INTO comment 
 				(documentId,
-				like,
-				dislike,
+				likeCount,
+				dislikeCount,
 				content,
 				userId)
 		VALUES (#{documentId},
-				#{like},
-				#{dislike},
+				#{likeCount},
+				#{dislikeCount},
 				#{content},
 				#{userId});
 	</insert>
@@ -46,7 +46,6 @@
 	<select id="getComment" resultType="comment">
 		SELECT *
 		FROM comment
-		WHERE commentId = #{value}
 		LIMIT 1;
 	</select>
 	
@@ -58,8 +57,8 @@
 	<update id="updateComment" parameterType="comment">
   		UPDATE comment
   		SET
-  			like = #{like},
-			dislike = #{dislike},
+  			likeCount = #{likeCount},
+			dislikeCount = #{dislikeCount},
 			content = #{content},
 			userId = #{userId}
   		where commentId = #{commentId};
