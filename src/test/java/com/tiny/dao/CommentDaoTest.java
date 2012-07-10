@@ -86,6 +86,6 @@ public class CommentDaoTest extends CommonTest {
 	}
 
 	public Document getDocument() {
-		return new Document(100, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
+		return new Document(10, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
 	}
 }

@@ -23,10 +23,10 @@ public class DocumentDaoTest extends CommonTest {
 	public void testInsertDocument() {
 		// Given
 		int count = documentDao.countDocument();
-		
+
 		// When
 		documentDao.saveDocument(getDocument());
-		
+
 		// Then
 		assertThat(documentDao.countDocument(), is(count + 1));
 	}
@@ -39,7 +39,7 @@ public class DocumentDaoTest extends CommonTest {
 
 		// When
 		documentDao.updateDocument(documentDao.getDocument());
-		
+
 		// Then
 		assertThat(documentDao.countDocument(), is(count));
 	}
@@ -48,10 +48,10 @@ public class DocumentDaoTest extends CommonTest {
 	public void testGetDocument() {
 		// Given
 		documentDao.saveDocument(getDocument());
-		
+
 		// When
 		Document document = documentDao.getDocument();
-		
+
 		// Then
 		assertThat(document.getTitle(), is(getDocument().getTitle()));
 	}
@@ -64,12 +64,12 @@ public class DocumentDaoTest extends CommonTest {
 
 		// When
 		documentDao.deleteDocument(documentDao.getDocument().getDocumentId());
-		
+
 		// Then
 		assertThat(documentDao.countDocument(), is(count - 1));
 	}
-	
+
 	public Document getDocument() {
-		return new Document(100, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
+		return new Document(10, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
 	}
 }

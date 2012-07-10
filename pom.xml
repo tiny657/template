@@ -38,6 +38,8 @@
 		<junit.version>4.8.2</junit.version>
 		<!-- LOMBOK -->
 		<lombok.version>0.11.0</lombok.version>
+		<!-- CHECKSTYLE -->
+		<checkstyle.version>2.6</checkstyle.version>
 	</properties>
 
 	<dependencies>
@@ -220,6 +222,16 @@
 				<version>1.2.1</version>
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+			<!-- CHECKSTYLE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<configLocation>tinyCheckstyle.xml</configLocation>
 				</configuration>
 			</plugin>
 			<!-- COBERTURA -->
