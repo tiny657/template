@@ -13,10 +13,10 @@ import com.tiny.document.Document;
 
 public class CommentDaoTest extends CommonTest {
 	@Autowired
-	CommentDao commentDao;
-	
+	private CommentDao commentDao;
+
 	@Autowired
-	DocumentDao documentDao;
+	private DocumentDao documentDao;
 
 	@Before
 	public void before() {
@@ -29,10 +29,10 @@ public class CommentDaoTest extends CommonTest {
 		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
 		int count = commentDao.countComment();
-		
+
 		// When
 		commentDao.saveComment(getComment(doc.getDocumentId()));
-		
+
 		// Then
 		assertThat(commentDao.countComment(), is(count + 1));
 	}
@@ -44,10 +44,10 @@ public class CommentDaoTest extends CommonTest {
 		Document doc = documentDao.getDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();
-		
+
 		// When
 		commentDao.updateComment(getComment(doc.getDocumentId()));
-		
+
 		// Then
 		assertThat(commentDao.countComment(), is(count));
 	}
@@ -58,10 +58,10 @@ public class CommentDaoTest extends CommonTest {
 		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
-		
+
 		// When
-		Comment comment = commentDao.getComment();;
-		
+		Comment comment = commentDao.getComment();
+
 		// Then
 		assertThat(comment.getUserId(), is(getComment(doc.getDocumentId()).getUserId()));
 	}
@@ -76,15 +76,15 @@ public class CommentDaoTest extends CommonTest {
 
 		// When
 		commentDao.deleteComment(commentDao.getComment().getCommentId());
-		
+
 		// Then
 		assertThat(commentDao.countComment(), is(count - 1));
 	}
-	
+
 	public Comment getComment(int documentId) {
 		return new Comment(documentId, false, false, "content", "userId");
 	}
-	
+
 	public Document getDocument() {
 		return new Document(100, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
 	}

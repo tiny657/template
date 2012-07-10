@@ -5,17 +5,17 @@ import lombok.Data;
 @Data
 public class Comment {
 	// Primary Key
-	int commentId;
+	private int commentId;
 	// Foreign Key
-	int documentId;
-	boolean likeCount;
-	boolean dislikeCount;
-	String content;
-	String userId;
-	
+	private int documentId;
+	private boolean likeCount;
+	private boolean dislikeCount;
+	private String content;
+	private String userId;
+
 	public Comment() {
 	}
-	
+
 	public Comment(int documentId, boolean likeCount, boolean dislikeCount, String content, String userId) {
 		this.documentId = documentId;
 		this.likeCount = likeCount;

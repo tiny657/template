@@ -9,12 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView result = new ModelAndView();
 		result.setViewName("home");
+		LOGGER.info("homeController");
 		return result;
 	}
 }

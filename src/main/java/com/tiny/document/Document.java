@@ -7,30 +7,30 @@ import lombok.Data;
 @Data
 public class Document {
 	// Primary Key
-	int documentId;
-	int point;
-	boolean isNotice;
+	private int documentId;
+	private int point;
+	private boolean isNotice;
 	// varchar(250)
-	String title;
-	boolean titleBold;
+	private String title;
+	private boolean titleBold;
 	// varchar(7)
-	String titleColor;
+	private String titleColor;
 	// Text
-	String content;
-	int likeCount;
-	int dislikeCount;
-	int commentCount;
-	int shareCount;
+	private String content;
+	private int likeCount;
+	private int dislikeCount;
+	private int commentCount;
+	private int shareCount;
 	// varchar(12)
-	String userId;
+	private String userId;
 	// varchar(20)
-	String nickName;
+	private String nickName;
 	// char(8)
-	String ipAddress;
+	private String ipAddress;
 	// Text
-	String tags;
-	Date regDate;
-	Date lastUpdate;
+	private String tags;
+	private Date regDate;
+	private Date lastUpdate;
 	
 	public Document() {
 	}

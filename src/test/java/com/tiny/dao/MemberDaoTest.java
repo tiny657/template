@@ -8,14 +8,13 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
 import com.tiny.common.CommonTest;
 import com.tiny.member.Member;
 
 public class MemberDaoTest extends CommonTest {
 	@Autowired
-	MemberDao memberDao;
+	private MemberDao memberDao;
 
 	@Before
 	public void before() {
@@ -26,10 +25,10 @@ public class MemberDaoTest extends CommonTest {
 	public void testInsertMember() {
 		// Given
 		int count = memberDao.countMember();
-		
+
 		// When
 		memberDao.saveMember(getMember());
-		
+
 		// Then
 		assertThat(memberDao.countMember(), is(count + 1));
 	}
@@ -42,7 +41,7 @@ public class MemberDaoTest extends CommonTest {
 
 		// When
 		memberDao.updateMember(getMember());
-		
+
 		// Then
 		assertThat(memberDao.countMember(), is(count));
 	}
@@ -52,10 +51,10 @@ public class MemberDaoTest extends CommonTest {
 		// Given
 		Member memberTmp = getMember();
 		memberDao.saveMember(memberTmp);
-		
+
 		// When
 		Member member = memberDao.getMember(memberTmp.getUserId());
-		
+
 		// Then
 		assertThat(member.getUserId(), is(memberTmp.getUserId()));
 	}
@@ -69,12 +68,13 @@ public class MemberDaoTest extends CommonTest {
 
 		// When
 		memberDao.deleteMember(member.getUserId());
-		
+
 		// Then
 		assertThat(memberDao.countMember(), is(count - 1));
 	}
-	
+
 	public Member getMember() {
-		return new Member(("userId" + Math.random()).substring(0, 10), "mail@gmail.com", "nickname", "pass", new Date(), "desc", 100, 1, 2, 3, 4, false, false);
+		return new Member(("userId" + Math.random()).substring(0, 10), "mail@gmail.com", "nickname", "pass",
+				new Date(), "desc", 100, 1, 2, 3, 4, false, false);
 	}
 }

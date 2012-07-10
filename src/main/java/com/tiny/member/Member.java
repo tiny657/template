@@ -7,27 +7,27 @@ import lombok.Data;
 @Data
 public class Member {
 	// Primary Key
-	int memberId;
+	private int memberId;
 	// varchar(12)
-	String userId;
+	private String userId;
 	// Unique, varchar(30)
-	String email;
+	private String email;
 	// varchar(20)
-	String nickName;
+	private String nickName;
 	// char(41)
-	String password;
-	Date birthday;
+	private String password;
+	private Date birthday;
 	// Text
-	String description;
-	int point;
-	int documentCount;
-	int commentCount;
-	int likeCount;
-	int dislikeCount;
-	boolean isAdmin;
-	boolean allowMailing;
-	Date regDate;
-	Date lastLogin;
+	private String description;
+	private int point;
+	private int documentCount;
+	private int commentCount;
+	private int likeCount;
+	private int dislikeCount;
+	private boolean isAdmin;
+	private boolean allowMailing;
+	private Date regDate;
+	private Date lastLogin;
 
 	public Member() {
 	}
