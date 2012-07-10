@@ -7,7 +7,7 @@ import com.tiny.common.CommonTest;
 
 public class HomeControllerTest extends CommonTest {
 	@Autowired
-	HomeController homeController;
+	private HomeController homeController;
 	
 	@Test
 	public void testHome() {

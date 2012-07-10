@@ -12,7 +12,7 @@ import com.tiny.document.Document;
 
 public class DocumentDaoTest extends CommonTest {
 	@Autowired
-	DocumentDao documentDao;
+	private DocumentDao documentDao;
 
 	@Before
 	public void before() {
