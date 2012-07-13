@@ -7,8 +7,9 @@ Skill Set
  - Tiles2 : JSP Layout Framework
  - JUnit : Java Test Framework
  - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
- - Cobertura : Code Coverage check
- - Checkstyle : Coding Convention check
+ - Cobertura : Code Coverage 검사 툴
+ - Checkstyle : Coding Convention 검사 툴
+ - Selenium : Automatic Web Browser Test Framework
  
  
 Getting Started
@@ -54,6 +55,7 @@ Getting Started
 		Password : 없음
 
 		Import existing projects 시 No projects found 라는 에러가 발생하면 아래 단계를 수행 후 다시 시도한다.
+		Package Explorer에서 template 우클릭 -> Configure -> Convert To Maven Project를 수행하여 maven project로 만든다.
 
  - Maven eclipse project 생성
 
@@ -63,7 +65,10 @@ Getting Started
  - Checkstyle 적용
 
  		sts Package Explorer에서 template project 우클릭 -> Checkstyle -> Activate Checkstyle
-
+ 		
+ - 브라우저 설치
+		
+		Internet Explorer, Chrome, Firefox, Opera
 
 STS Setting
 -------------------

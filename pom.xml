@@ -40,6 +40,10 @@
 		<lombok.version>0.11.0</lombok.version>
 		<!-- CHECKSTYLE -->
 		<checkstyle.version>2.6</checkstyle.version>
+		<!-- SELENIUM -->
+		<selenium.version>2.24.1</selenium.version>
+		<!-- OPERADRIVER -->
+		<operadriver.version>0.14</operadriver.version>
 	</properties>
 
 	<dependencies>
@@ -179,6 +183,17 @@
 			<version>${hamcrest.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.opera</groupId>
+			<artifactId>operadriver</artifactId>
+			<version>${operadriver.version}</version>
+		</dependency>
+
 
 		<!-- LOMBOK -->
 		<dependency>
