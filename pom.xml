@@ -42,8 +42,6 @@
 		<checkstyle.version>2.6</checkstyle.version>
 		<!-- SELENIUM -->
 		<selenium.version>2.24.1</selenium.version>
-		<!-- OPERADRIVER -->
-		<operadriver.version>0.14</operadriver.version>
 	</properties>
 
 	<dependencies>
@@ -199,13 +197,6 @@
 			<artifactId>selenium-remote-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.opera</groupId>
-			<artifactId>operadriver</artifactId>
-			<version>${operadriver.version}</version>
-		</dependency>
-
 
 		<!-- LOMBOK -->
 		<dependency>

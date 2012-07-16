@@ -68,7 +68,7 @@ Getting Started
  		
  - 브라우저 설치
 		
-		Internet Explorer, Chrome, Firefox, Opera
+		Internet Explorer, Chrome, Firefox : Selenium 테스트를 위하여 설치함
 
 STS Setting
 -------------------
