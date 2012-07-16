@@ -242,6 +242,7 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+			
 			<!-- CHECKSTYLE -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -252,6 +253,7 @@
 					<configLocation>tinyCheckstyle.xml</configLocation>
 				</configuration>
 			</plugin>
+			
 			<!-- COBERTURA -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

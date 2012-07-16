@@ -104,6 +104,7 @@ STS Setting
    		Preference -> Web -> CSS Files -> Encoding : ISO 10646/Unicode(UTF-8)
    		Preference -> Web -> HTML Files -> Encoding : ISO 10646/Unicode(UTF-8)
    		Preference -> Web -> JSP Files -> Encoding : ISO 10646/Unicode(UTF-8)
+   		Preference -> General -> Content Types -> Text -> Java Properties Files -> *.properties -> UTF-8을 선택 후 Update
 	
  - LF 사용하기
  
