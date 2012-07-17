@@ -16,4 +16,9 @@
 	<definition name="home" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/home/home.jsp" />
 	</definition>
+	
+	<!-- SAMPLE -->
+	<definition name="mobile" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/sample/mobile.jsp" />
+	</definition>
 </tiles-definitions>

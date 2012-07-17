@@ -14,6 +14,9 @@
 		<source-encoding>UTF-8</source-encoding>
 		<!-- SPRING -->
 		<springframework.version>3.1.0.RELEASE</springframework.version>
+		<!-- SPRING MOBILE -->
+		<springmobileframework.version>1.0.0.M3</springmobileframework.version>
+		<wurfl.version>1.2.2</wurfl.version>
 		<!-- SPRING RELATED LIBRARY -->
 		<cglib.version>2.2.2</cglib.version>
 		<aspectj.version>1.6.9</aspectj.version>
@@ -44,6 +47,14 @@
 		<selenium.version>2.24.1</selenium.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>springsource-milestones</id>
+			<name>SpringSource Milestones Proxy</name>
+			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- SPRING -->
 		<dependency>
@@ -56,6 +67,47 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<!-- SPRING MOBILE -->
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-device</artifactId>
+			<version>${springmobileframework.version}</version>
+		</dependency>
+
+		<!-- WURFL -->
+		<dependency>
+			<groupId>net.sourceforge.wurfl</groupId>
+			<artifactId>wurfl</artifactId>
+			<version>${wurfl.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- SPRING FRAMEWORK JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -242,7 +294,7 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
-			
+
 			<!-- CHECKSTYLE -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -253,7 +305,7 @@
 					<configLocation>tinyCheckstyle.xml</configLocation>
 				</configuration>
 			</plugin>
-			
+
 			<!-- COBERTURA -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
