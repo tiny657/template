@@ -5,12 +5,14 @@ Skill Set
  - Maven : Build & Dependency Management
  - Bootstrap : CSS Framework
  - Tiles2 : JSP Layout Framework
- - JUnit : Java Test Framework
  - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
  - Cobertura : Code Coverage 검사 툴
  - Checkstyle : Coding Convention 검사 툴
- - Selenium : Automatic Web Browser Test Framework
+ - Spring Mobile : Spring Mobile MVC
  - Wurfl : Mobile Device Database
+ - Selenium : Automatic Web Browser Test Framework
+ - JUnit : Java Test Framework
+ - Mockito : Mocking Framework
  
  
 Getting Started

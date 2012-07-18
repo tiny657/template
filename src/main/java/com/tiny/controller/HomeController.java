@@ -13,9 +13,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home() {
-		ModelAndView result = new ModelAndView();
-		result.setViewName("home");
 		LOGGER.info("homeController");
-		return result;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
+		return mav;
 	}
 }

@@ -12,11 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MobileController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MobileController.class);
-
 	private WurflDevice wurflDevice;
 
 	@RequestMapping(value = "/mobile", method = { RequestMethod.GET })
-	public ModelAndView wurfl(Device device) {
+	public ModelAndView getDeviceInfo(Device device) {
 		ModelAndView mav = new ModelAndView();
 		wurflDevice = new WurflDevice((net.sourceforge.wurfl.core.Device) device);
 
@@ -29,9 +28,9 @@ public class MobileController {
 		LOGGER.info("getCapability(device_os_version) : " + wurflDevice.getCapability("device_os_version"));
 		LOGGER.info("getCapability(mobile_browser) : " + wurflDevice.getCapability("mobile_browser"));
 		LOGGER.info("getMarkUp : " + wurflDevice.getMarkUp());
+		
 		mav = new ModelAndView();
 		mav.setViewName("mobile");
-
 		return mav;
 	}
 }
