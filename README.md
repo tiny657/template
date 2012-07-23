@@ -116,3 +116,13 @@ STS Setting
  - md 파일 editor 설정하기
  
    		Preferences/General/Editors/File Associations/*.md 파일에 Text Editor 추가
+
+ - resources 순서를 변경함
+ 
+ 		STS에서 local 설정을 적용하기 위해 다음과 같이 설정함.
+ 		Project Properties -> Java Build Path -> Order and Export 에서 아래와 같은 순서로 설정함.
+ 		src/main/java
+ 		src/main/resources
+ 		src/main/resources-local
+ 		src/main/resources-dev
+ 		src/main/resources-release

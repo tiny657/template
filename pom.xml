@@ -257,7 +257,7 @@
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- LOMBOK -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -325,5 +325,44 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources-${env}</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 	</build>
+
+	<profiles>
+		<!-- LOCAL SERVER -->
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>local</env>
+			</properties>
+		</profile>
+		
+		<!-- DEVELOPMENT SERVER -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		
+		<!-- REAL SERVER -->
+		<profile>
+			<id>release</id>
+			<properties>
+				<env>release</env>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
