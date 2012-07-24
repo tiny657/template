@@ -14,14 +14,18 @@ public class HomeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView home(SitePreference sitePreference) {
+	public ModelAndView home() {
 		LOGGER.info("homeController");
 		ModelAndView mav = new ModelAndView();
-		if (sitePreference == SitePreference.MOBILE) {
-			mav.setViewName("homeMobile");
-		} else {
-			mav.setViewName("home");
-		}
+		mav.setViewName("home");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/m/home", method = RequestMethod.GET)
+	public ModelAndView homeMobile() {
+		LOGGER.info("homeMobileController");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("home");
 		return mav;
 	}
 }

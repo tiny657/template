@@ -52,6 +52,7 @@
 		<bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
 		<bean class="org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor" factory-method="urlPath">
 			<constructor-arg value="/m" />
+			<constructor-arg value="/template-0.0.1" />
 		</bean>
 	</mvc:interceptors>
 </beans>

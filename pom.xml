@@ -6,7 +6,7 @@
 	<artifactId>template</artifactId>
 	<name>template</name>
 	<packaging>war</packaging>
-	<version>0.0.1-BUILD-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<properties>
 		<!-- JDK -->
 		<jdk.version>1.6</jdk.version>
