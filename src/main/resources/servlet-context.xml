@@ -39,20 +39,19 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</bean>
 
-	<!-- Interceptors -->
-	<mvc:interceptors>
-		<bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor">
-			<constructor-arg>
-				<device:wurfl-device-resolver root-location="/WEB-INF/wurfl/wurfl-2.3.2.zip"
-					patch-locations="/WEB-INF/wurfl/web_browsers_patch.xml" />
-			</constructor-arg>
-		</bean>
-	</mvc:interceptors>
-
+	<!-- Configures the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven>
-		<!-- device DI처리하기 위해 필요함 -->
 		<mvc:argument-resolvers>
-			<bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+			<bean class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
+
+	<!-- INTERCEPTORS -->
+	<mvc:interceptors>
+		<!-- Detects the client's Device -->
+		<bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+		<bean class="org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor" factory-method="urlPath">
+			<constructor-arg value="/m" />
+		</bean>
+	</mvc:interceptors>
 </beans>

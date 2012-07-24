@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.site.SitePreference;
 
 import com.tiny.common.CommonTest;
 
@@ -26,7 +27,7 @@ public class HomeControllerTest extends CommonTest {
 		webdriver.get("https://github.com");
 
 		// Then
-		assertThat("GitHub · Social Coding", is(webdriver.getTitle()));
+		assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
 		webdriver.quit();
 	}
 
@@ -57,7 +58,7 @@ public class HomeControllerTest extends CommonTest {
 		webdriver.get("https://github.com");
 
 		// Then
-		assertThat("GitHub · Social Coding", is(webdriver.getTitle()));
+		assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
 		webdriver.quit();
 	}
 
@@ -73,14 +74,19 @@ public class HomeControllerTest extends CommonTest {
 			webdriver.get("https://github.com");
 
 			// Then
-			assertThat("GitHub · Social Coding", is(webdriver.getTitle()));
+			assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
 			webdriver.quit();
 		}
 	}
 
 	@Test
 	public void testHome() {
-		homeController.home();
+		assertThat(homeController.home(SitePreference.MOBILE).getViewName(), is("homeMobile"));
+	}
+
+	@Test
+	public void testHomeMobile() {
+		assertThat(homeController.home(SitePreference.NORMAL).getViewName(), is("home"));
 	}
 
 	private boolean isWindow() {

@@ -9,7 +9,6 @@ Skill Set
  - Cobertura : Code Coverage 검사 툴
  - Checkstyle : Coding Convention 검사 툴
  - Spring Mobile : Spring Mobile MVC
- - Wurfl : Mobile Device Database
  - Selenium : Automatic Web Browser Test Framework
  - JUnit : Java Test Framework
  - Mockito : Mocking Framework
@@ -65,7 +64,7 @@ Package Explorer에서 template 우클릭 -> Configure -> Convert To Maven Proje
 	Internet Explorer, Chrome, Firefox : Selenium 테스트를 위하여 설치
 
 STS Setting
--------------------
+-----------
 ### Eclipse Plugin 설치 ###
 	MoreUnit : http://moreunit.sourceforge.net/update-site
 	Checkstyle : http://eclipse-cs.sf.net/update
@@ -94,7 +93,7 @@ STS Setting
 	Preference -> Web -> JSP Files -> Encoding : ISO 10646/Unicode(UTF-8)
 	Preference -> General -> Content Types -> Text -> Java Properties Files -> *.properties -> UTF-8을 선택 후 Update
 	
-### LF 사용 (Not CRLF) ###
+### 개행문자 (LF 사용, Not CRLF) ###
 	Preference -> General -> Workspace -> New text file line delimiter : Unix
 
 ### md 파일 editor 설정 ###

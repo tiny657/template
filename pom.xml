@@ -15,8 +15,7 @@
 		<!-- SPRING -->
 		<springframework.version>3.1.0.RELEASE</springframework.version>
 		<!-- SPRING MOBILE -->
-		<springmobileframework.version>1.0.0.M3</springmobileframework.version>
-		<wurfl.version>1.2.2</wurfl.version>
+		<springmobileframework.version>1.0.0.RELEASE</springmobileframework.version>
 		<!-- SPRING RELATED LIBRARY -->
 		<cglib.version>2.2.2</cglib.version>
 		<aspectj.version>1.6.9</aspectj.version>
@@ -50,9 +49,9 @@
 
 	<repositories>
 		<repository>
-			<id>springsource-milestones</id>
-			<name>SpringSource Milestones Proxy</name>
-			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.springsource.org/release</url>
 		</repository>
 	</repositories>
 
@@ -94,19 +93,6 @@
 			<groupId>org.springframework.mobile</groupId>
 			<artifactId>spring-mobile-device</artifactId>
 			<version>${springmobileframework.version}</version>
-		</dependency>
-
-		<!-- WURFL -->
-		<dependency>
-			<groupId>net.sourceforge.wurfl</groupId>
-			<artifactId>wurfl</artifactId>
-			<version>${wurfl.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- SPRING FRAMEWORK JDBC -->
@@ -347,7 +333,7 @@
 				<env>local</env>
 			</properties>
 		</profile>
-		
+
 		<!-- DEVELOPMENT SERVER -->
 		<profile>
 			<id>dev</id>
@@ -355,7 +341,7 @@
 				<env>dev</env>
 			</properties>
 		</profile>
-		
+
 		<!-- REAL SERVER -->
 		<profile>
 			<id>release</id>
