@@ -17,8 +17,16 @@
 		<put-attribute name="body" value="/WEB-INF/view/home/home.jsp" />
 	</definition>
 	
+	<definition name="homeM" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/home/homeM.jsp" />
+	</definition>
+	
 	<!-- SAMPLE -->
 	<definition name="mobile" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/sample/mobile.jsp" />
+	</definition>
+	
+	<definition name="mobileM" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/sample/mobileM.jsp" />
 	</definition>
 </tiles-definitions>

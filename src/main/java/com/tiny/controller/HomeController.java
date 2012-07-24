@@ -20,12 +20,12 @@ public class HomeController {
 		mav.setViewName("home");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/m/home", method = RequestMethod.GET)
-	public ModelAndView homeMobile() {
+	public ModelAndView homeM() {
 		LOGGER.info("homeMobileController");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("home");
+		mav.setViewName("homeM");
 		return mav;
 	}
 }

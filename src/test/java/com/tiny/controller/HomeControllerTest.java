@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mobile.device.site.SitePreference;
 
 import com.tiny.common.CommonTest;
 
@@ -81,12 +80,12 @@ public class HomeControllerTest extends CommonTest {
 
 	@Test
 	public void testHome() {
-		assertThat(homeController.home(SitePreference.MOBILE).getViewName(), is("homeMobile"));
+		assertThat(homeController.home().getViewName(), is("home"));
 	}
 
 	@Test
-	public void testHomeMobile() {
-		assertThat(homeController.home(SitePreference.NORMAL).getViewName(), is("home"));
+	public void testHomeM() {
+		assertThat(homeController.homeM().getViewName(), is("homeM"));
 	}
 
 	private boolean isWindow() {
