@@ -1,7 +1,7 @@
 package com.tiny.controller;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -16,12 +16,12 @@ import com.tiny.common.CommonTest;
 public class HomeControllerTest extends CommonTest {
 	@Autowired
 	private HomeController homeController;
-
+	
 	@Test
 	public void testFireFox() {
 		// Given
 		WebDriver webdriver = new FirefoxDriver();
-
+		
 		// When
 		webdriver.get("https://github.com");
 

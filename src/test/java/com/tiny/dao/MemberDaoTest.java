@@ -1,7 +1,7 @@
 package com.tiny.dao;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ import com.tiny.member.Member;
 public class MemberDaoTest extends CommonTest {
 	@Autowired
 	private MemberDao memberDao;
-
+	
 	@Before
 	public void before() {
 		memberDao.createMember();
