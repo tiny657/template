@@ -58,7 +58,6 @@
 		<!-- On pre-handle, redirects mobile users to "myapp.com/template-0.0.1/m" (declare after DeviceResolverHandlerInterceptor) -->	
 		<bean class="org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor" factory-method="urlPath">
 			<constructor-arg value="/m" />
-			<constructor-arg value="/template-0.0.1" />
 		</bean>
 	</mvc:interceptors>
 </beans>
