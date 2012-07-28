@@ -31,10 +31,10 @@ public class Document {
 	private String tags;
 	private Date regDate;
 	private Date lastUpdate;
-	
+
 	public Document() {
 	}
-	
+
 	public Document(int point, boolean isNotice, String title, boolean titleBold, String titleColor, String content,
 			int likeCount, int dislikeCount, int commentCount, int shareCount, String userId, String nickName,
 			String ipAddress, String tags) {
