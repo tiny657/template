@@ -84,7 +84,7 @@ public class CommentDaoTest extends CommonTest {
 		assertThat(commentDao.countComment(), is(count - 1));
 	}
 
-	public Comment getComment(int documentId) {
+	private Comment getComment(int documentId) {
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent("content");
@@ -93,7 +93,7 @@ public class CommentDaoTest extends CommonTest {
 		return comment;
 	}
 
-	public Document getDocument() {
+	private Document getDocument() {
 		Document document = new Document();
 		document.setTitle("title");
 		document.setContent("content");

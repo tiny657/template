@@ -77,7 +77,7 @@ public class DocumentDaoTest extends CommonTest {
 		assertThat(documentDao.countDocument(), is(count - 1));
 	}
 
-	public Document getDocument() {
+	private Document getDocument() {
 		Document document = new Document();
 		document.setTitle("title");
 		document.setContent("content");

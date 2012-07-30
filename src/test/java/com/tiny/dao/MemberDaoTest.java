@@ -74,7 +74,7 @@ public class MemberDaoTest extends CommonTest {
 		assertThat(memberDao.countMember(), is(count - 1));
 	}
 
-	public Member getMember() {
+	private Member getMember() {
 		Member member = new Member();
 		member.setUserId(("u" + Math.random() * 100).substring(0, 12));
 		member.setPassword("password");
