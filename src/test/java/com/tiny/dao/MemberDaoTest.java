@@ -18,6 +18,7 @@ public class MemberDaoTest extends CommonTest {
 	
 	@Before
 	public void before() {
+		memberDao.dropMember();
 		memberDao.createMember();
 	}
 
@@ -74,7 +75,11 @@ public class MemberDaoTest extends CommonTest {
 	}
 
 	public Member getMember() {
-		return new Member(("u" + Math.random() * 100).substring(0, 12), "mail@gmail.com", "nickname", "pass",
-				new Date(), "desc", 100, 1, 2, 3, 4, false, false);
+		Member member = new Member();
+		member.setUserId(("u" + Math.random() * 100).substring(0, 12));
+		member.setPassword("password");
+		member.setRegDate(new Date());
+		member.setLastLogin(new Date());
+		return member;
 	}
 }

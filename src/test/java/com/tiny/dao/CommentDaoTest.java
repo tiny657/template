@@ -3,6 +3,8 @@ package com.tiny.dao;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class CommentDaoTest extends CommonTest {
 
 	@Before
 	public void before() {
+		commentDao.dropComment();
 		commentDao.createComment();
 	}
 
@@ -82,10 +85,22 @@ public class CommentDaoTest extends CommonTest {
 	}
 
 	public Comment getComment(int documentId) {
-		return new Comment(documentId, false, false, "content", "userId");
+		Comment comment = new Comment();
+		comment.setDocumentId(documentId);
+		comment.setContent("content");
+		comment.setUserId("userId");
+		comment.setRegDate(new Date());
+		return comment;
 	}
 
 	public Document getDocument() {
-		return new Document(10, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
+		Document document = new Document();
+		document.setTitle("title");
+		document.setContent("content");
+		document.setUserId("userId");
+		document.setIpAddress("112233FF");
+		document.setRegDate(new Date());
+		document.setLastUpdate(new Date());
+		return document;
 	}
 }

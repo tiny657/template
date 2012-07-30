@@ -3,6 +3,8 @@ package com.tiny.dao;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,16 @@ import com.tiny.document.Document;
 
 public class DocumentDaoTest extends CommonTest {
 	@Autowired
+	private CommentDao commentDao;
+	
+	@Autowired
 	private DocumentDao documentDao;
 
 	@Before
 	public void before() {
+		// Because of constraint in Comment.
+		commentDao.dropComment();
+		documentDao.dropDocument();
 		documentDao.createDocument();
 	}
 
@@ -36,9 +44,9 @@ public class DocumentDaoTest extends CommonTest {
 		// Given
 		documentDao.saveDocument(getDocument());
 		int count = documentDao.countDocument();
-
+		
 		// When
-		documentDao.updateDocument(documentDao.getDocument());
+		documentDao.updateDocument(getDocument());
 
 		// Then
 		assertThat(documentDao.countDocument(), is(count));
@@ -70,6 +78,13 @@ public class DocumentDaoTest extends CommonTest {
 	}
 
 	public Document getDocument() {
-		return new Document(10, false, "title", false, "", "content", 1, 2, 3, 4, "userId", "nick", "11223344", "tags");
+		Document document = new Document();
+		document.setTitle("title");
+		document.setContent("content");
+		document.setUserId("userId");
+		document.setIpAddress("112233FF");
+		document.setRegDate(new Date());
+		document.setLastUpdate(new Date());
+		return document;
 	}
 }
