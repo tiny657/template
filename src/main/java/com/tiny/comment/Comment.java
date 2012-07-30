@@ -1,5 +1,7 @@
 package com.tiny.comment;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -12,6 +14,7 @@ public class Comment {
 	private boolean dislikeCount;
 	private String content;
 	private String userId;
+	private Date regDate;
 
 	public Comment() {
 	}

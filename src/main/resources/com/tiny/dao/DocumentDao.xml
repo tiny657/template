@@ -21,25 +21,29 @@
 		<result property="lastUpdate" column="lastUpdate" />
 	</resultMap>
 	
+	<delete id="dropDocument">
+		DROP TABLE IF EXISTS document;
+	</delete>
+	
 	<update id="createDocument">
 		CREATE TABLE IF NOT EXISTS document (
 			documentId INT AUTO_INCREMENT,
-			point INT,
-			isNotice BOOLEAN,
-			title VARCHAR(250),
-			titleBold BOOLEAN,
-			titleColor VARCHAR(7),
-			content TEXT,
-			likeCount INT,
-			dislikeCount INT,
-			commentCount INT,
-			shareCount INT,
-			userId VARCHAR(12),
+			point INT DEFAULT 0,
+			isNotice BOOLEAN DEFAULT false,
+			title VARCHAR(250) NOT NULL,
+			titleBold BOOLEAN DEFAULT false,
+			titleColor VARCHAR(7) DEFAULT 0,
+			content TEXT NOT NULL,
+			likeCount INT DEFAULT 0,
+			dislikeCount INT DEFAULT 0,
+			commentCount INT DEFAULT 0,
+			shareCount INT DEFAULT 0,
+			userId VARCHAR(12) NOT NULL,
 			nickName VARCHAR(20),
-			ipAddress CHAR(8),
+			ipAddress CHAR(8) NOT NULL,
 			tags TEXT,
-			regDate DATE,
-			lastUpdate DATE,
+			regDate DATE NOT NULL,
+			lastUpdate DATE NOT NULL,
 			PRIMARY KEY (documentId)
 		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
 	</update>
@@ -118,7 +122,7 @@
   		where documentId = #{documentId};
 	</update>
 	
-	<delete id="deleteDocument" parameterType="string">
+	<delete id="deleteDocument" parameterType="int">
 		DELETE
 		FROM document
 		WHERE documentId = #{documentId};

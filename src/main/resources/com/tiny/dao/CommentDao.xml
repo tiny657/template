@@ -10,14 +10,19 @@
 		<result property="userId" column="userId" />
 	</resultMap>
 	
+	<delete id="dropComment">
+		DROP TABLE IF EXISTS comment;
+	</delete>
+	
 	<update id="createComment">
 		CREATE TABLE IF NOT EXISTS comment (
 			commentId INT AUTO_INCREMENT,
 			documentId INT,
-			likeCount BOOLEAN,
-			dislikeCount BOOLEAN,
-			content TEXT,
-			userId VARCHAR(12),
+			likeCount BOOLEAN DEFAULT 0,
+			dislikeCount BOOLEAN DEFAULT 0,
+			content TEXT NOT NULL,
+			userId VARCHAR(12) NOT NULL,
+			regDate DATE NOT NULL,
 			PRIMARY KEY (commentId),
 			FOREIGN KEY (documentId) REFERENCES document(documentId)
 		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
@@ -30,12 +35,14 @@
 				likeCount,
 				dislikeCount,
 				content,
-				userId)
+				userId,
+				regDate)
 		VALUES (#{documentId},
 				#{likeCount},
 				#{dislikeCount},
 				#{content},
-				#{userId});
+				#{userId},
+				#{regDate});
 	</insert>
 	
 	<select id="getAllComment" resultMap="result">
@@ -60,11 +67,12 @@
   			likeCount = #{likeCount},
 			dislikeCount = #{dislikeCount},
 			content = #{content},
-			userId = #{userId}
+			userId = #{userId},
+			regDate = #{regDate}
   		where commentId = #{commentId};
 	</update>
 	
-	<delete id="deleteComment" parameterType="string">
+	<delete id="deleteComment" parameterType="int">
 		DELETE
 		FROM comment
 		WHERE commentId = #{commentId};
