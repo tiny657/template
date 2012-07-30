@@ -15,15 +15,4 @@ public class Comment {
 	private String content;
 	private String userId;
 	private Date regDate;
-
-	public Comment() {
-	}
-
-	public Comment(int documentId, boolean likeCount, boolean dislikeCount, String content, String userId) {
-		this.documentId = documentId;
-		this.likeCount = likeCount;
-		this.dislikeCount = dislikeCount;
-		this.content = content;
-		this.userId = userId;
-	}
 }
