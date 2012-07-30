@@ -17,7 +17,7 @@ public interface MemberDao {
 
 	public List<Member> getAllMember();
 
-	@Cacheable(value = "repository", key = "userId")
+	@Cacheable(value = "repository")
 	public Member getMember(String userId);
 
 	public Integer countMember();
