@@ -2,9 +2,6 @@ package com.tiny.dao;
 
 import java.util.List;
 
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-
 import com.tiny.comment.Comment;
 
 public interface CommentDao {
