@@ -25,7 +25,7 @@ import com.tiny.social.SimpleConnectionSignUp;
 import com.tiny.social.User;
 
 @Configuration
-@PropertySource("classpath:com/tiny/social/config/application.properties")
+@PropertySource("classpath:social.properties")
 public class SocialConfig {
 
 	@Inject
