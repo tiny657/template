@@ -78,16 +78,6 @@ public class HomeControllerTest extends CommonTest {
 		}
 	}
 
-	@Test
-	public void testHome() {
-		assertThat(homeController.home().getViewName(), is("home"));
-	}
-
-	@Test
-	public void testHomeM() {
-		assertThat(homeController.homeM().getViewName(), is("homeM"));
-	}
-
 	private boolean isWindow() {
 		String os = System.getProperty("os.name").toLowerCase();
 		if (0 <= os.indexOf("win")) {

@@ -19,7 +19,7 @@
 		<!-- SPRING SOCIAL -->
 		<springsocial.version>1.1.0.BUILD-SNAPSHOT</springsocial.version>
 		<springsocialfacebook.version>1.1.0.BUILD-SNAPSHOT</springsocialfacebook.version>
-		<springsecurity.crypto-version>3.1.0.RELEASE</springsecurity.crypto-version>
+		<springsecuritycrypto.version>3.1.0.RELEASE</springsecuritycrypto.version>
 		<!-- SPRING RELATED LIBRARY -->
 		<cglib.version>2.2.2</cglib.version>
 		<aspectj.version>1.6.9</aspectj.version>
@@ -120,7 +120,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
-			<version>${springsecurity.version}</version>
+			<version>${springsecuritycrypto.version}</version>
 		</dependency>
 
 		<!-- SPRING FRAMEWORK JDBC -->
