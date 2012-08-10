@@ -1,6 +1,7 @@
 Skill Set
 ---------
  - Spring : Java Framework
+ - Spring Social : Social Login (facebook)
  - Mybatis : SQL mapping Framework
  - Maven : Build & Dependency Management
  - Bootstrap : CSS Framework

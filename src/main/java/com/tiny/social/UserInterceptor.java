@@ -13,7 +13,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 	private final UsersConnectionRepository connectionRepository;
 
 	private final UserCookieGenerator userCookieGenerator = new UserCookieGenerator();
-	
+
 	public UserInterceptor(UsersConnectionRepository connectionRepository) {
 		this.connectionRepository = connectionRepository;
 	}

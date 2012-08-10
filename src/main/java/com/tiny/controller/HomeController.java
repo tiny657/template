@@ -23,21 +23,13 @@ public class HomeController {
 		this.facebook = facebook;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public ModelAndView home() {
 		LOGGER.info("homeController");
 		ModelAndView mav = new ModelAndView();
 		List<Reference> friends = facebook.friendOperations().getFriends();
 		mav.setViewName("home");
 		mav.addObject("friends", friends);
-		return mav;
-	}
-
-	@RequestMapping(value = "/m", method = RequestMethod.GET)
-	public ModelAndView homeM() {
-		LOGGER.info("homeMobileController");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("homeM");
 		return mav;
 	}
 }
