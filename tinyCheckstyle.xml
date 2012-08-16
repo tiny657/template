@@ -117,7 +117,7 @@ Slightly modified version of Sun Checks that better matches the default code for
     </module>
     <module name="UpperEll"/>
     <module name="LineLength">
-      <property name="max" value="120"/>
+      <property name="max" value="125"/>
       <property name="tabWidth" value="4"/>
     </module>
   </module>
