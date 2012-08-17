@@ -15,10 +15,35 @@ Skill Set
  - Mockito : Mocking Framework
  - Ehcache : cache Framework
  
+ 
 Getting Started
 ---------------
 ### JDK 설치 ###
-http://www.oracle.com/technetwork/java/javaee/downloads/index.html
+```
+$ yum install java-1.6.0-openjdk.x86_64 java-1.6.0-openjdk-devel.x86_64
+```
+참고 : http://www.oracle.com/technetwork/java/javaee/downloads/index.html
+
+### MySQL 설치 ###
+```
+$ yum install mysql-server
+```
+
+MySQL 서버 시작
+```
+$ service mysqld start
+```
+참고 : http://dev.mysql.com/downloads/mysql
+
+### Mysql 기본 template DB 생성 ###
+	$ mysql -u root -e "CREATE DATABASE template"
+
+### Tomcat 설치 ###
+```
+$ yum install tomcat6-webapps tomcat6-admin-webapps
+```
+Tomcat 시작
+$ service tomcat6 start
 
 ### STS 설치 ###
 http://www.springsource.org/downloads/sts
@@ -26,18 +51,9 @@ http://www.springsource.org/downloads/sts
 ### Maven 설치 ###
 http://maven.apache.org/download.html
 
-### MySQL 설치 ###
-http://dev.mysql.com/downloads/mysql
 
 ### Lombok 설치 ###
 http://projectlombok.org/mavenrepo/index.html
-
-### Mysql 설정 ###
-	id : root  
-	pw :
-
-### Mysql 기본 template DB 생성 ###
-	$ mysql -u root -e "CREATE DATABASE template"
 
 ### Project clone ###
 sts의 File > Import > Projects from Git > URI 선택 후 아래 설정값을 입력  
