@@ -32,4 +32,14 @@ public class HomeController {
 		mav.addObject("friends", friends);
 		return mav;
 	}
+	
+	@RequestMapping(value = { "/m", "/m/home" }, method = RequestMethod.GET)
+	public ModelAndView homeM() {
+		LOGGER.info("homeMController");
+		ModelAndView mav = new ModelAndView();
+		List<Reference> friends = facebook.friendOperations().getFriends();
+		mav.setViewName("homeM");
+		mav.addObject("friends", friends);
+		return mav;
+	}
 }

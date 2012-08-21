@@ -4,4 +4,7 @@
 	<definition name="home" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/home/home.jsp" />
 	</definition>
+	<definition name="homeM" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/home/homeM.jsp" />
+	</definition>
 </tiles-definitions>
