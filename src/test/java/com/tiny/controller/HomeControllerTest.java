@@ -9,14 +9,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
 
 public class HomeControllerTest extends CommonTest {
-	@Autowired
-	private HomeController homeController;
-	
 	@Test
 	public void testFireFox() {
 		// Given

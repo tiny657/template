@@ -2,10 +2,10 @@ package com.tiny.controller;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
@@ -16,29 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	private final Facebook facebook;
-
-	@Inject
-	public HomeController(Facebook facebook) {
-		this.facebook = facebook;
-	}
+	
+	@Autowired
+	private Facebook facebook;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(SitePreference sitePreference) {
 		LOGGER.info("homeController");
 		ModelAndView mav = new ModelAndView();
 		List<Reference> friends = facebook.friendOperations().getFriends();
-		mav.setViewName("home");
-		mav.addObject("friends", friends);
-		return mav;
-	}
-	
-	@RequestMapping(value = { "/m", "/m/home" }, method = RequestMethod.GET)
-	public ModelAndView homeM() {
-		LOGGER.info("homeMController");
-		ModelAndView mav = new ModelAndView();
-		List<Reference> friends = facebook.friendOperations().getFriends();
-		mav.setViewName("homeM");
+		if (SitePreference.MOBILE == sitePreference) {
+			mav.setViewName("homeM");
+		} else {
+			mav.setViewName("home");
+		}
 		mav.addObject("friends", friends);
 		return mav;
 	}

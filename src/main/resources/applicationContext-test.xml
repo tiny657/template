@@ -11,4 +11,5 @@
     <import resource="applicationContext-ehcache.xml" />
     
 	<!-- Configures Spring Social -->
+ 	<bean class="com.tiny.social.config.SocialConfig" />
 </beans>
