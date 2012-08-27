@@ -20,32 +20,6 @@
 		<result property="lastLogin" column="lastLogin" />
 	</resultMap>
 	
-	<delete id="dropMember">
-		DROP TABLE IF EXISTS member;
-	</delete>
-	
-	<update id="createMember">
-		CREATE TABLE IF NOT EXISTS member (
-			memberId INT AUTO_INCREMENT,
-			userId VARCHAR(12) UNIQUE NOT NULL,
-			email VARCHAR(40),
-			nickName VARCHAR(20),
-			password CHAR(41) NOT NULL,
-			birthday DATE,
-			description TEXT,
-			point INT DEFAULT 0,
-			documentCount INT DEFAULT 0,
-			commentCount INT DEFAULT 0,
-			likeCount INT DEFAULT 0,
-			dislikeCount INT DEFAULT 0,
-			isAdmin BOOLEAN DEFAULT false,
-			allowMailing BOOLEAN DEFAULT false,
-			regDate DATETIME NOT NULL,
-			lastLogin DATETIME NOT NULL,
-			PRIMARY KEY (memberId)
-		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
-	</update>
-	
 	<insert id="saveMember" parameterType="member">
 		INSERT
 		INTO member 

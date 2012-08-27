@@ -20,12 +20,6 @@ public class CommentDaoTest extends CommonTest {
 	@Autowired
 	private DocumentDao documentDao;
 
-	@Before
-	public void before() {
-		commentDao.dropComment();
-		commentDao.createComment();
-	}
-
 	@Test
 	public void testInsertComment() {
 		// Given

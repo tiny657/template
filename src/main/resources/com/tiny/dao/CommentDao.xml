@@ -10,24 +10,6 @@
 		<result property="userId" column="userId" />
 	</resultMap>
 	
-	<delete id="dropComment">
-		DROP TABLE IF EXISTS comment;
-	</delete>
-	
-	<update id="createComment">
-		CREATE TABLE IF NOT EXISTS comment (
-			commentId INT AUTO_INCREMENT,
-			documentId INT,
-			likeCount BOOLEAN DEFAULT 0,
-			dislikeCount BOOLEAN DEFAULT 0,
-			content TEXT NOT NULL,
-			userId VARCHAR(12) NOT NULL,
-			regDate DATE NOT NULL,
-			PRIMARY KEY (commentId),
-			FOREIGN KEY (documentId) REFERENCES document(documentId)
-		) ENGINE=InnoDB DEFAULT CHARSET=UTF8
-	</update>
-	
 	<insert id="saveComment" parameterType="comment">
 		INSERT
 		INTO comment 

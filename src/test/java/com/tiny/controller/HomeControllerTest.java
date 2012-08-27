@@ -42,8 +42,6 @@ public class HomeControllerTest extends CommonTest {
 					chromeBinary = "src/main/resources/drivers/chrome/chromedriver-linux32";
 				}
 			}
-
-			System.setProperty("webdriver.chrome.driver", chromeBinary);
 		}
 
 		System.setProperty("webdriver.chrome.driver", chromeBinary);

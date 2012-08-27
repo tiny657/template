@@ -19,14 +19,6 @@ public class DocumentDaoTest extends CommonTest {
 	@Autowired
 	private DocumentDao documentDao;
 
-	@Before
-	public void before() {
-		// Because of constraint in Comment.
-		commentDao.dropComment();
-		documentDao.dropDocument();
-		documentDao.createDocument();
-	}
-
 	@Test
 	public void testInsertDocument() {
 		// Given

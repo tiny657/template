@@ -16,12 +16,6 @@ public class MemberDaoTest extends CommonTest {
 	@Autowired
 	private MemberDao memberDao;
 	
-	@Before
-	public void before() {
-		memberDao.dropMember();
-		memberDao.createMember();
-	}
-
 	@Test
 	public void testInsertMember() {
 		// Given

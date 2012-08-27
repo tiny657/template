@@ -51,7 +51,6 @@ http://www.springsource.org/downloads/sts
 ### Maven 설치 ###
 http://maven.apache.org/download.html
 
-
 ### Lombok 설치 ###
 http://projectlombok.org/mavenrepo/index.html
 
@@ -153,3 +152,11 @@ Project Properties > Java Build Path > Order and Export 에서 아래와 같은 
 	src/main/resources-local
 	src/main/resources-dev
 	src/main/resources-release
+	
+CentOS
+------
+### ssh로 War 파일 배포 ###
+/usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요
+/etc/sudoers 파일에 아래 부분 주석 처리함
+
+	Defaults    requiretty
