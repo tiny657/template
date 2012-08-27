@@ -15,9 +15,9 @@
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
-				<p class="navbar-text pull-right">
-					<a href="/signout" class="navbar-link">Sign Out</a>
-				</p>
+				<ul class="nav pull-right">
+					<li><a href="/signout" class="navbar-link">Sign Out</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
