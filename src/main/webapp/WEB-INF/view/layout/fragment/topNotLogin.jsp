@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script type="text/javascript" language="javascript" >
+<script type="text/javascript">
     $(document).ready(function () {
           $('.dropdown-toggle').dropdown();
     }); 
- </script>
- 
+    
+    function facebookLogin() {
+    	$('#facebookForm').submit();
+    }
+</script>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -29,11 +34,15 @@
 						</a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
 							<li>
-								<a tabindex="-1" href="#">Facebook</a>
+								<a tabindex="-1" href="javascript:facebookLogin()">Facebook</a>
+								<div style="display:none">
+									<form id="facebookForm" action="<c:url value="/signin/facebook" />" method=POST>
+										<input type="hidden" name="scope" value="email,publish_stream,offline_access" />
+									</form>
+								</div>
 							</li>
 							<li>
 								<a tabindex="-1" href="#">Twitter</a>
-							</li>
 							<li>
 								<a tabindex="-1" href="#">LinkedIn</a>
 							</li>
@@ -48,3 +57,4 @@
 		</div>
 	</div>
 </div>
+
