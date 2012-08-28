@@ -13,21 +13,6 @@ CREATE TABLE IF NOT EXISTS UserConnection (
     PRIMARY KEY (userId, providerId, providerUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE IF NOT EXISTS UserConnection (
-	userId VARCHAR(255) NOT NULL,
-    providerId VARCHAR(255) NOT NULL,
-    providerUserId VARCHAR(255),
-    rank INT NOT NULL,
-    displayName VARCHAR(255),
-    profileUrl VARCHAR(512),
-    imageUrl VARCHAR(512),
-    accessToken VARCHAR(255) NOT NULL,					
-    secret VARCHAR(255),
-    refreshToken VARCHAR(255),
-    expireTime BIGINT,
-    PRIMARY KEY (userId, providerId, providerUserId)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
-
 CREATE TABLE IF NOT EXISTS document (
 	documentId INT AUTO_INCREMENT,
 	point INT DEFAULT 0,
@@ -67,4 +52,16 @@ CREATE TABLE IF NOT EXISTS member (
 	regDate DATETIME NOT NULL,
 	lastLogin DATETIME NOT NULL,
 	PRIMARY KEY (memberId)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS comment (
+	commentId INT AUTO_INCREMENT,
+	documentId INT,
+	likeCount BOOLEAN DEFAULT 0,
+	dislikeCount BOOLEAN DEFAULT 0,
+	content TEXT NOT NULL,
+	userId VARCHAR(12) NOT NULL,
+	regDate DATE NOT NULL,
+	PRIMARY KEY (commentId),
+	FOREIGN KEY (documentId) REFERENCES document(documentId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
