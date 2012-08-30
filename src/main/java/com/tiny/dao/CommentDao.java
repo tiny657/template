@@ -5,10 +5,6 @@ import java.util.List;
 import com.tiny.comment.Comment;
 
 public interface CommentDao {
-	public void createComment();
-
-	public void dropComment();
-
 	public void saveComment(Comment comment);
 
 	public List<Comment> getAllComment();

@@ -8,11 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import com.tiny.member.Member;
 
 public interface MemberDao {
-	public void createMember();
-
-	@CacheEvict(value = "repository", allEntries = true)
-	public void dropMember();
-
 	public void saveMember(Member member);
 
 	public List<Member> getAllMember();
