@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.tiny.common.CommonTest;
 
-public class HomeControllerTest extends CommonTest {
+public class ListControllerTest extends CommonTest {
 	@Test
 	public void testFireFox() {
 		// Given

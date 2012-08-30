@@ -31,4 +31,12 @@ public class Document {
 	private String tags;
 	private Date regDate;
 	private Date lastUpdate;
+
+	public void setIpAddress(String ipAddress) {
+		String[] split = ipAddress.split("\\.");
+		if (split.length == 4) {
+			this.ipAddress = String.format("%02x%02x%02x%02x", Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+					Integer.parseInt(split[2]), Integer.parseInt(split[3]));
+		}
+	}
 }

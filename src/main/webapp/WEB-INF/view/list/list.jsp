@@ -1,7 +1,32 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="container">
+	<div class="row">
+		<div class="span12">
+			<form:form method="post" action="/" modelAttribute="document">
+				<input type="text" class="span12" name="title" placeholder="Title">
+				<textarea rows="3" class="span12" name="content"></textarea>
+				<button type="submit" class="btn">Save</button>
+			</form:form>
+		</div>
+	</div>
+	<div class="accordion" id="accordion2">
+		<c:forEach var="document" items="${documents}">
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${document.documentId}">${document.title}</a>
+				</div>
+				
+				<div id="collapse${document.documentId}" class="accordion-body collapse">
+					<div class="accordion-inner">${document.content}</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	
 	<!-- Main hero unit for a primary marketing message or call to action -->
 	<div class="hero-unit">
 		<h1>Hello, world!</h1>

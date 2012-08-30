@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS UserConnection (
+CREATE TABLE UserConnection (
 	userId VARCHAR(255) NOT NULL,
     providerId VARCHAR(255) NOT NULL,
     providerUserId VARCHAR(255),
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS UserConnection (
     PRIMARY KEY (userId, providerId, providerUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE IF NOT EXISTS document (
+CREATE TABLE document (
 	documentId INT AUTO_INCREMENT,
 	point INT DEFAULT 0,
 	isNotice BOOLEAN DEFAULT false,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS document (
 	PRIMARY KEY (documentId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE IF NOT EXISTS member (
+CREATE TABLE member (
 	memberId INT AUTO_INCREMENT,
 	userId VARCHAR(12) UNIQUE NOT NULL,
 	email VARCHAR(40),
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS member (
 	PRIMARY KEY (memberId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE IF NOT EXISTS comment (
+CREATE TABLE comment (
 	commentId INT AUTO_INCREMENT,
 	documentId INT,
 	likeCount BOOLEAN DEFAULT 0,

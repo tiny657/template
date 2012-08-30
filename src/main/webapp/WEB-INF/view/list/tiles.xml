@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-	<definition name="home" extends="defaultLayout">
-		<put-attribute name="body" value="/WEB-INF/view/home/home.jsp" />
-	</definition>
-	<definition name="homeM" extends="defaultLayout">
-		<put-attribute name="body" value="/WEB-INF/view/home/homeM.jsp" />
+	<definition name="list" extends="defaultLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/list.jsp" />
 	</definition>
 </tiles-definitions>
