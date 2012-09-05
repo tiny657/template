@@ -35,6 +35,7 @@
 	<select id="getComment" resultType="comment">
 		SELECT *
 		FROM comment
+		ORDER BY commentId desc
 		LIMIT 1;
 	</select>
 	
