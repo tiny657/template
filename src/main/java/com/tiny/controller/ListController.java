@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tiny.common.util.XssFilter;
 import com.tiny.document.Document;
 import com.tiny.service.ListService;
 
@@ -30,16 +32,19 @@ public class ListController {
 		List<Document> documents = listService.getAll();
 		ModelMap model = new ModelMap();
 		model.addAttribute("documents", documents);
+		model.addAttribute("newDocument", new Document());
 		mav.addAllObjects(model);
 		return mav;
 	}
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request, Document document) {
+	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
 		document.setIpAddress(request.getRemoteAddr());
 		document.setUserId(listService.getUserId());
+		document.setTitle(XssFilter.doFilter(document.getTitle()));
+		document.setContent(XssFilter.doFilter(document.getContent()));
 		listService.register(document);
-		
+
 		return list();
 	}
 }
