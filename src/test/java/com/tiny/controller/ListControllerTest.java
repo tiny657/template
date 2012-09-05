@@ -26,6 +26,7 @@ public class ListControllerTest extends CommonTest {
 		webdriver.quit();
 	}
 
+	/*
 	@Test
 	public void testChrome() {
 		// Given
@@ -54,6 +55,7 @@ public class ListControllerTest extends CommonTest {
 		assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
 		webdriver.quit();
 	}
+	*/
 
 	@Test
 	public void testIE() {
