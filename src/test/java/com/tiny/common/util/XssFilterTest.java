@@ -15,7 +15,7 @@ public class XssFilterTest extends CommonTest {
 	@Test
 	public void testEscapeHtml() {
 		// Given
-		String inputString = "<test>  &";
+		String inputString = "<test>&";
 				
 		// When
 		String ret = xssFilter.doFilter(inputString);
