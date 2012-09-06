@@ -21,6 +21,9 @@ import com.tiny.service.ListService;
 @Controller
 public class ListController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
+	
+	@Autowired
+	private XssFilter xssFilter;
 
 	@Autowired
 	private ListService listService;
@@ -41,8 +44,8 @@ public class ListController {
 	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
 		document.setIpAddress(request.getRemoteAddr());
 		document.setUserId(listService.getUserId());
-		document.setTitle(XssFilter.doFilter(document.getTitle()));
-		document.setContent(XssFilter.doFilter(document.getContent()));
+		document.setTitle(xssFilter.doFilter(document.getTitle()));
+		document.setContent(xssFilter.doFilter(document.getContent()));
 		listService.register(document);
 
 		return list();

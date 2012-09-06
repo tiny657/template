@@ -1,8 +1,12 @@
 package com.tiny.common.util;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.stereotype.Component;
+
+@Component
 public class XssFilter {
-	public static String doFilter(String inputString) {
-		return inputString.replace("'", "&acute").replace("\"", "&quot").replace("<", "&lt").replace(">", "&gt")
-				.replace(" ", "&nbsp").replace("\r\n", "<br/>");
+	public String doFilter(String inputString) {
+		String escapedHtml = StringEscapeUtils.escapeHtml(inputString);
+		return escapedHtml.replace("\r\n", "<br/>").replace(" ", "&nbsp");
 	}
 }
