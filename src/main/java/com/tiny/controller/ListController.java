@@ -19,9 +19,6 @@ import com.tiny.service.ListService;
 @Controller
 public class ListController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
-	
-	@Autowired
-	private XssFilter xssFilter;
 
 	@Autowired
 	private ListService listService;
@@ -29,20 +26,17 @@ public class ListController {
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("list");
 		ModelMap model = new ModelMap();
 		model.addAttribute("documents", listService.getAll());
 		model.addAttribute("newDocument", new Document());
 		mav.addAllObjects(model);
+		mav.setViewName("list");
 		return mav;
 	}
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
 		document.setIpAddress(request.getRemoteAddr());
-		document.setUserId(listService.getUserId());
-		document.setTitle(xssFilter.doFilter(document.getTitle()));
-		document.setContent(xssFilter.doFilter(document.getContent()));
 		listService.register(document);
 		return list();
 	}

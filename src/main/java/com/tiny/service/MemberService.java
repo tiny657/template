@@ -22,11 +22,11 @@ public class MemberService {
 		member.setEmail(profile.getEmail());
 		return member;
 	}
-	
+
 	public FacebookProfile getProfile() {
 		return facebook.userOperations().getUserProfile();
 	}
-	
+
 	public byte[] getProfileImage() {
 		return facebook.userOperations().getUserProfileImage();
 	}

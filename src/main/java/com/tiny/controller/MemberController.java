@@ -21,18 +21,15 @@ public class MemberController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private Facebook facebook;
-	
-	@Autowired
 	private MemberService memberService;
 
 	@RequestMapping(value = { "/profile" }, method = RequestMethod.GET)
 	public ModelAndView profile() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member");
 		ModelMap model = new ModelMap();
 		model.addAttribute("member", memberService.getMember(memberService.getProfile()));
 		mav.addAllObjects(model);
+		mav.setViewName("member");
 		return mav;
 	}
 	

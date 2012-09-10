@@ -12,7 +12,7 @@ import com.tiny.member.Member;
 
 public class MemberServiceTest extends CommonTest {
 	private FacebookTemplate facebook;
-	
+
 	@Autowired
 	private MemberService memberService;
 
