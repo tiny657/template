@@ -28,4 +28,12 @@ public class Member {
 	private boolean allowMailing;
 	private Date regDate;
 	private Date lastLogin;
+	private byte[] profileImage;
+
+	public void setProfileImage(byte[] image) {
+		profileImage = new byte[image.length];
+		for (int i = 0; i < image.length; i++) {
+			profileImage[i] = image[i];
+		}
+	}
 }

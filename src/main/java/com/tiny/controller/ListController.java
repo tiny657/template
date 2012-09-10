@@ -1,7 +1,5 @@
 package com.tiny.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -32,9 +30,8 @@ public class ListController {
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("list");
-		List<Document> documents = listService.getAll();
 		ModelMap model = new ModelMap();
-		model.addAttribute("documents", documents);
+		model.addAttribute("documents", listService.getAll());
 		model.addAttribute("newDocument", new Document());
 		mav.addAllObjects(model);
 		return mav;
@@ -47,7 +44,6 @@ public class ListController {
 		document.setTitle(xssFilter.doFilter(document.getTitle()));
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		listService.register(document);
-
 		return list();
 	}
 }
