@@ -16,12 +16,18 @@ public class MemberService {
 	@Autowired
 	private Facebook facebook;
 
-	public Member getMember() {
+	public Member getMember(FacebookProfile profile) {
 		Member member = new Member();
-		FacebookProfile profile = facebook.userOperations().getUserProfile();
-		member.setProfileImage(facebook.userOperations().getUserProfileImage());
 		member.setNickName(profile.getName());
 		member.setEmail(profile.getEmail());
 		return member;
+	}
+	
+	public FacebookProfile getProfile() {
+		return facebook.userOperations().getUserProfile();
+	}
+	
+	public byte[] getProfileImage() {
+		return facebook.userOperations().getUserProfileImage();
 	}
 }

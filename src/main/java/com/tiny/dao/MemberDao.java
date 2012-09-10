@@ -2,9 +2,6 @@ package com.tiny.dao;
 
 import java.util.List;
 
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-
 import com.tiny.member.Member;
 
 public interface MemberDao {
@@ -12,7 +9,6 @@ public interface MemberDao {
 
 	public List<Member> getAllMember();
 
-	@Cacheable(value = "repository")
 	public Member getMember(String userId);
 
 	public Integer countMember();

@@ -31,14 +31,14 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member");
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.getMember());
+		model.addAttribute("member", memberService.getMember(memberService.getProfile()));
 		mav.addAllObjects(model);
 		return mav;
 	}
 	
 	@RequestMapping(value = { "/profileImage" }, method = RequestMethod.GET)
 	public void profileImage(HttpServletResponse response) {
-		byte[] userProfileImage = facebook.userOperations().getUserProfileImage(); 
+		byte[] userProfileImage = memberService.getProfileImage();
 		response.setContentType("image/jpeg");
 		try {
 			response.getOutputStream().write(userProfileImage);
