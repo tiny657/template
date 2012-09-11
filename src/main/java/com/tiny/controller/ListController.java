@@ -28,6 +28,7 @@ public class ListController {
 		ModelMap model = new ModelMap();
 		model.addAttribute("documents", listService.getAll());
 		model.addAttribute("newDocument", new Document());
+		model.addAttribute("url", "list");
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
