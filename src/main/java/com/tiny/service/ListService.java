@@ -1,11 +1,11 @@
 package com.tiny.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Service;
 
 import com.tiny.common.util.XssFilter;
@@ -23,14 +23,16 @@ public class ListService {
 	private ListRepository listRepository;
 
 	@Autowired
-	private Facebook facebook;
+	private FacebookService facebookService;
 
 	public void register(Document document) {
-		document.setUserId(getUserId());
+		document.setUserId(facebookService.getId());
+		document.setEmail(facebookService.getEmail());
+		document.setName(facebookService.getName());
 		document.setTitle(xssFilter.doFilter(document.getTitle()));
 		document.setContent(xssFilter.doFilter(document.getContent()));
-		document.setRegDate(new java.sql.Date(java.util.Calendar.getInstance().getTimeInMillis()));
-		document.setLastUpdate(new java.sql.Date(java.util.Calendar.getInstance().getTimeInMillis()));
+		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
+		document.setLastUpdate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		listRepository.register(document);
 	}
 
@@ -41,9 +43,5 @@ public class ListService {
 		}
 
 		return documents;
-	}
-
-	public String getUserId() {
-		return facebook.userOperations().getUserProfile().getName();
 	}
 }

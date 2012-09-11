@@ -14,7 +14,8 @@
 		<result property="commentCount" column="commentCount" />
 		<result property="shareCount" column="shareCount" />
 		<result property="userId" column="userId" />
-		<result property="nickName" column="nickName" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
 		<result property="ipAddress" column="ipAddress" />
 		<result property="tags" column="tags" />
 		<result property="regDate" column="regDate" />
@@ -35,7 +36,8 @@
 				commentCount,
 				shareCount,
 				userId,
-				nickName,
+				name,
+				email,
 				ipAddress,
 				tags,
 				regDate,
@@ -51,7 +53,8 @@
 				#{commentCount},
 				#{shareCount},
 				#{userId},
-				#{nickName},
+				#{name},
+				#{email},
 				#{ipAddress},
 				#{tags},
 				NOW(),
@@ -89,7 +92,8 @@
 			commentCount = #{commentCount},
 			shareCount = #{shareCount},
 			userId = #{userId},
-			nickName = #{nickName},
+			name = #{name},
+			email = #{email},
 			ipAddress = #{ipAddress},
 			tags = #{tags},
 			lastUpdate = NOW()

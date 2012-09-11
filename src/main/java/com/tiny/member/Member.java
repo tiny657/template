@@ -13,7 +13,7 @@ public class Member {
 	// Unique, varchar(30)
 	private String email;
 	// varchar(20)
-	private String nickName;
+	private String name;
 	// char(41)
 	private String password;
 	private Date birthday;

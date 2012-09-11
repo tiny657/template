@@ -5,7 +5,7 @@
 		<result property="memberId" column="memberId" />
 		<result property="userId" column="userId" />
 		<result property="email" column="email" />
-		<result property="nickName" column="nickName" />
+		<result property="name" column="name" />
 		<result property="password" column="password" />
 		<result property="birthday" column="birthday" />
 		<result property="description" column="description" />
@@ -25,7 +25,7 @@
 		INTO member 
 				(userId,
 				email,
-				nickName,
+				name,
 				password,
 				birthday,
 				description,
@@ -40,7 +40,7 @@
 				lastLogin)
 		VALUES (#{userId},
 				#{email},
-				#{nickName},
+				#{name},
 				#{password},
 				#{birthday},
 				#{description},
@@ -77,7 +77,7 @@
   		SET
   			userId = #{userId},
 			email = #{email},
-			nickName = #{nickName},
+			name = #{name},
 			password = #{password},
 			birthday = #{birthday},
 			description = #{description},

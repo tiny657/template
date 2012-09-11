@@ -4,7 +4,7 @@
 <div class="container">
 	<img src="/profileImage" />
 	<ul>
-		<li>${member.nickName}</li>
+		<li>${member.name}</li>
 		<li>${member.email}</li>
 	</ul>
 

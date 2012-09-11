@@ -24,7 +24,9 @@ public class Document {
 	// varchar(12)
 	private String userId;
 	// varchar(20)
-	private String nickName;
+	private String name;
+	// varchar(40)
+	private String email;
 	// char(8)
 	private String ipAddress;
 	// Text

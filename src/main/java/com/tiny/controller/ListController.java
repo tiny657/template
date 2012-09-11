@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tiny.common.util.XssFilter;
 import com.tiny.document.Document;
 import com.tiny.service.ListService;
 
