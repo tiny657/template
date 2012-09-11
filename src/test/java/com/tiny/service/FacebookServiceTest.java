@@ -2,10 +2,8 @@ package com.tiny.service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 
