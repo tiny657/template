@@ -2,11 +2,9 @@
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
 <div class="container">
-	<img src="/profileImage" />
-	<ul>
-		<li>${member.name}</li>
-		<li>${member.email}</li>
-	</ul>
+	<img class="thumbnail" src="/profileImage" />
+	<h3 style="color:#0082CC">${member.name}</h3>
+	<h4 style="color:#AAA">${member.email}</h4>
 
 	<hr>
 
