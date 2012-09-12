@@ -21,6 +21,7 @@
 						<c:when test="${url eq 'profile'}"><li class="active"><a href="/profile">Profile</a></li></c:when>
 						<c:otherwise><li><a href="/profile">Profile</a></li></c:otherwise>
 					</c:choose>
+					<li><form:form method="get" action="/search" class="navbar-search pull-left"><input type="text" class="search-query span2" name="q" placeholder="Search"></form:form></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="/signout" class="navbar-link">Sign Out</a></li>
