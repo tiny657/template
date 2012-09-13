@@ -22,9 +22,9 @@
 			<a class="brand" href="#">Project name</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a href="#">List</a></li>
+					<li><a href="#">Profile</a></li>
+					<li><form:form method="get" action="/search" class="navbar-search pull-left"><input type="text" class="search-query span2" name="q" placeholder="Search"></form:form></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li id="fat-menu" class="dropdown">
