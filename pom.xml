@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 	<version>0.0.1</version>
 	<properties>
+		<!-- DEPENDENCIES -->
 		<!-- JDK -->
 		<jdk.version>1.6</jdk.version>
 		<!-- ENCODING -->
@@ -51,6 +52,12 @@
 		<checkstyle.version>2.6</checkstyle.version>
 		<!-- SELENIUM -->
 		<selenium.version>2.24.1</selenium.version>
+
+		<!-- PLUGIN -->
+		<!-- SQL-MAVEN -->
+		<sql-maven-plugin.version>1.5</sql-maven-plugin.version>
+		<!-- TOMCAT-MAVEN -->
+		<tomcat-maven-plugin.version>1.1</tomcat-maven-plugin.version>
 	</properties>
 
 	<repositories>
@@ -378,7 +385,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>${sql-maven-plugin.version}</version>
 				<dependencies>
 					<dependency>
 						<groupId>mysql</groupId>
@@ -386,7 +393,7 @@
 						<version>${mysql.jdbc.version}</version>
 					</dependency>
 				</dependencies>
-				
+
 				<!-- mvn test 수행 시 mvn sql:execute 미리 수행 -->
 				<executions>
 					<execution>
@@ -409,6 +416,17 @@
 					<autocommit>true</autocommit>
 				</configuration>
 			</plugin>
+
+			<!-- mvn tomcat:deploy 배포 가능 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>${tomcat-maven-plugin.version}</version>
+				<configuration>
+					<url>http://54.248.89.221:8080/manager</url>
+					<path>/ROOT</path>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<resources>
@@ -421,7 +439,7 @@
 		</resources>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
