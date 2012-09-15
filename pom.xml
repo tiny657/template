@@ -394,7 +394,7 @@
 					</dependency>
 				</dependencies>
 
-				<!-- mvn test 수행 시 mvn sql:execute 미리 수행 -->
+				<!-- mvn test 수행 시 mvn sql:execute 을 process-test-resources 다음에 수행 -->
 				<executions>
 					<execution>
 						<phase>process-test-resources</phase>
@@ -439,6 +439,7 @@
 		</resources>
 		<pluginManagement>
 			<plugins>
+				<!-- sql-maven-plugin 사용 시 eclipse에 <phase>에서 error가 발생하는 것 display하지 않게 함 -->
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -496,4 +497,14 @@
 			</properties>
 		</profile>
 	</profiles>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+	</reporting>
 </project>
