@@ -24,4 +24,8 @@ public class ListRepository {
 	public List<Document> getAll() {
 		return documentDao.getAllDocument();
 	}
+
+	public void delete(Integer documentId) {
+		documentDao.deleteDocument(documentId);
+	}
 }

@@ -41,7 +41,13 @@ public class ListController {
 		listService.register(document);
 		return list();
 	}
-	
+
+	@RequestMapping(value = { "/" }, method = RequestMethod.DELETE)
+	public ModelAndView delete(@RequestParam(value = "id", required = true) Integer documentId) {
+		listService.delete(documentId);
+		return list();
+	}
+
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam(value = "q", required = true) String q) {
 		return list();

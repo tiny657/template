@@ -44,4 +44,8 @@ public class ListService {
 
 		return documents;
 	}
+	
+	public void delete(Integer documentId) {
+		listRepository.delete(documentId);
+	}
 }

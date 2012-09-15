@@ -19,12 +19,32 @@
 				</div>
 
 				<div id="collapse${document.documentId}" class="accordion-body collapse">
-					<div class="accordion-inner">${document.content}</div>
+					<div class="accordion-inner">
+						${document.content}
+						
+						<form:form method="delete" action="/?id=${document.documentId}">
+							<br/><a href="#deleteModal" role="button" class="btn btn-small btn-danger" data-toggle="modal">Delete</a>
+							<!-- Modal -->
+							<div class="modal hide fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h3 id="myModalLabel">DELETE</h3>
+								</div>
+								<div class="modal-body">
+									<p>Do you want to delete?</p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+									<button type="submit" class="btn btn-primary">Yes</button>
+								</div>
+							</div>
+						</form:form>
+					</div>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
-
+	
 	<hr>
 
 	<footer>
