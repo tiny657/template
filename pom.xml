@@ -504,6 +504,15 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<!-- 50토큰이 중복일 경우 에러로 판단함 -->
+					<minimumTokens>50</minimumTokens>
+				</configuration>
+			</plugin>
 		</plugins>
 
 	</reporting>
