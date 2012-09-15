@@ -36,7 +36,7 @@ public class MemberController {
 		mav.setViewName("member");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = { "/profileImage" }, method = RequestMethod.GET)
 	public void profileImage(HttpServletResponse response) {
 		byte[] userProfileImage = facebookService.getProfileImage();

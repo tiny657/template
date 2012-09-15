@@ -22,7 +22,7 @@
 					<div class="accordion-inner">
 						${document.content}
 						
-						<form:form method="delete" action="/?id=${document.documentId}">
+						<form:form method="delete" action="/?documentId=${document.documentId}">
 							<br/><a href="#deleteModal" role="button" class="btn btn-small btn-danger" data-toggle="modal">Delete</a>
 							<!-- Modal -->
 							<div class="modal hide fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

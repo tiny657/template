@@ -23,6 +23,13 @@ public class ListController {
 	@Autowired
 	private ListService listService;
 
+	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
+	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
+		document.setIpAddress(request.getRemoteAddr());
+		listService.register(document);
+		return list();
+	}
+	
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
@@ -35,21 +42,14 @@ public class ListController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
-		document.setIpAddress(request.getRemoteAddr());
-		listService.register(document);
-		return list();
-	}
-
 	@RequestMapping(value = { "/" }, method = RequestMethod.DELETE)
-	public ModelAndView delete(@RequestParam(value = "id", required = true) Integer documentId) {
+	public ModelAndView delete(@RequestParam Integer documentId) {
 		listService.delete(documentId);
 		return list();
 	}
 
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
-	public ModelAndView search(@RequestParam(value = "q", required = true) String q) {
+	public ModelAndView search(@RequestParam String q) {
 		return list();
 	}
 }
