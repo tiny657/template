@@ -97,6 +97,10 @@ Cobertura : http://ecobertura.johoop.de/update
 	테스트 코드에서 우클릭 후 Cover As > Junit Test 수행 후 아래 view에서 커버리지 확인
 	View : Window > Show View > Others > eCobertura > Coverage Session View
 
+FindBugs : http://findbugs.cs.umd.edu/eclipse
+
+	프로젝트 명 우클릭 > Find bugs > Find bugs 수행 후 아래 Bug Explorer에서 정적 분석 결과 확인
+
 ### STS의 Java Convention을 기본 템플릿으로 사용함 ###
 	Preference > Java > Code Style > Formatter > New > Java Convention를 기반으로 기본 템플릿 생성
 
