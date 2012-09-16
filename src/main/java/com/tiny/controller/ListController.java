@@ -29,7 +29,7 @@ public class ListController {
 		listService.register(document);
 		return list();
 	}
-	
+
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();

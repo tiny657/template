@@ -7,7 +7,7 @@ Skill Set
  - Bootstrap : CSS Framework
  - Tiles2 : JSP Layout Framework
  - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
- - Cobertura : Code Coverage 검사 툴
+ - Emma : Code Coverage 검사 툴
  - Checkstyle : Coding Convention 검사 툴
  - Spring Mobile : Spring Mobile MVC
  - Selenium : Automatic Web Browser Test Framework
@@ -92,10 +92,10 @@ Checkstyle : http://eclipse-cs.sf.net/update
 
 	View : Window > Show View > Others > Checkstyle > Checkstyle violations
 	
-Cobertura : http://ecobertura.johoop.de/update
+Emma :  http://update.eclemma.org/
 
-	테스트 코드에서 우클릭 후 Cover As > Junit Test 수행 후 아래 view에서 커버리지 확인
-	View : Window > Show View > Others > eCobertura > Coverage Session View
+	프로젝트 이륾을 우클릭 후 Coverage As > Junit Test 수행 후 아래 view에서 커버리지 확인
+	View : Window > Show View > Others > Java > Coverage
 
 FindBugs : http://findbugs.cs.umd.edu/eclipse
 

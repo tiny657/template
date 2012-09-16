@@ -14,7 +14,7 @@ import com.tiny.member.Member;
 public class MemberDaoTest extends CommonTest {
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@Test
 	public void testInsertMember() {
 		// Given

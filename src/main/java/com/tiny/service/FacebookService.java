@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FacebookService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FacebookService.class);
-	
+
 	@Autowired
 	private Facebook facebook;
 
@@ -26,11 +26,11 @@ public class FacebookService {
 	public String getId() {
 		return facebook.userOperations().getUserProfile().getId();
 	}
-	
+
 	public String getEmail() {
 		return facebook.userOperations().getUserProfile().getEmail();
 	}
-	
+
 	public String getName() {
 		return facebook.userOperations().getUserProfile().getName();
 	}

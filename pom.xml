@@ -370,17 +370,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- COBERTURA -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<configuration>
-					<formats>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
-
 			<!-- mvn test 수행 시 create.sql 수행 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -500,11 +489,19 @@
 
 	<reporting>
 		<plugins>
+			<!-- EMMA -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+			</plugin>
+			
+			<!-- Findbugs -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 			</plugin>
 			
+			<!-- PMD -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -514,6 +511,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
 	</reporting>
 </project>

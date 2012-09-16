@@ -13,14 +13,14 @@ import com.tiny.document.Document;
 @Repository
 public class ListRepository {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListRepository.class);
-	
+
 	@Autowired
 	private DocumentDao documentDao;
-	
+
 	public void register(Document document) {
 		documentDao.saveDocument(document);
 	}
-	
+
 	public List<Document> getAll() {
 		return documentDao.getAllDocument();
 	}

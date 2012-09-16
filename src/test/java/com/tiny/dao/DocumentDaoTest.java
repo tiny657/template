@@ -13,9 +13,6 @@ import com.tiny.document.Document;
 
 public class DocumentDaoTest extends CommonTest {
 	@Autowired
-	private CommentDao commentDao;
-	
-	@Autowired
 	private DocumentDao documentDao;
 
 	@Test
@@ -35,7 +32,7 @@ public class DocumentDaoTest extends CommonTest {
 		// Given
 		documentDao.saveDocument(getDocument());
 		int count = documentDao.countDocument();
-		
+
 		// When
 		documentDao.updateDocument(getDocument());
 

@@ -19,10 +19,10 @@ import com.tiny.service.MemberService;
 @Controller
 public class MemberController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private FacebookService facebookService;
 
