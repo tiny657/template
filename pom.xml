@@ -50,6 +50,8 @@
 		<lombok.version>0.11.0</lombok.version>
 		<!-- CHECKSTYLE -->
 		<checkstyle.version>2.6</checkstyle.version>
+		<!-- FINDBUGS -->
+		<findbugs.version>2.5.2</findbugs.version>
 		<!-- SELENIUM -->
 		<selenium.version>2.24.1</selenium.version>
 
@@ -369,6 +371,13 @@
 					<configLocation>tinyCheckstyle.xml</configLocation>
 				</configuration>
 			</plugin>
+			
+			<!-- FINDBUGS -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.version}</version>
+			</plugin>
 
 			<!-- mvn test 수행 시 create.sql 수행 -->
 			<plugin>
@@ -489,16 +498,16 @@
 
 	<reporting>
 		<plugins>
-			<!-- EMMA -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>emma-maven-plugin</artifactId>
-			</plugin>
-			
 			<!-- Findbugs -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.version}</version>
+				<configuration>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+					<xmlOutput>true</xmlOutput>
+                </configuration>
 			</plugin>
 			
 			<!-- PMD -->

@@ -2,18 +2,20 @@ Skill Set
 ---------
  - Spring : Java Framework
  - Spring Social : Social Login (facebook)
+ - Spring Mobile : Spring Mobile MVC
  - Mybatis : SQL mapping Framework
+ - Ehcache : cache Framework
  - Maven : Build & Dependency Management
  - Bootstrap : CSS Framework
  - Tiles2 : JSP Layout Framework
- - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
- - Emma : Code Coverage 검사 툴
- - Checkstyle : Coding Convention 검사 툴
- - Spring Mobile : Spring Mobile MVC
  - Selenium : Automatic Web Browser Test Framework
  - JUnit : Java Test Framework
  - Mockito : Mocking Framework
- - Ehcache : cache Framework
+ - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
+ - MoreUnit : Code, Test Code 이동 툴
+ - Emma : Code Coverage 검사 툴
+ - Checkstyle : Coding Convention 검사 툴
+ - FindBugs : 코드 정적 분석 툴
  
  
 Getting Started
