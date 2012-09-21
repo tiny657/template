@@ -7,7 +7,7 @@
 			<form:form method="post" action="/" modelAttribute="newDocument">
 				<form:input type="text" path="title" class="span12" placeholder="Title" />
 				<form:textarea path="content" rows="3" class="span12"></form:textarea>
-				<button type="submit" class="btn">Save</button>
+				<button type="submit" class="btn btn-info">Save</button>
 			</form:form>
 		</div>
 	</div>
@@ -39,6 +39,21 @@
 								</div>
 							</div>
 						</form:form>
+						
+						<%-- Comment --%>
+						<c:set var="documentId">${document.documentId}</c:set>
+						<c:forEach var="comment" items="${comments[documentId]}">
+							<blockquote>
+								<p>${comment.content}</p>
+							</blockquote>
+						</c:forEach>
+						<blockquote id="lastCommentPosition${document.documentId}"></blockquote>
+						<div class="span11">
+							<textarea id="newComment${document.documentId}" rows="3" class="span11"></textarea>
+							<br />
+							<button type="submit" class="btn btn-info" onclick="sendComment(${document.documentId})">Save</button>
+							<br /><br />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -46,8 +61,23 @@
 	</div>
 	
 	<hr>
-
+	
 	<footer>
 		<p>&copy; Company 2012</p>
 	</footer>
+	
+	<script type="text/javascript">
+		function sendComment(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/comment",
+				dataType: "text",
+				data: {"documentId": documentId, "content": $("#newComment" + documentId).val()},
+				success : function(content) {
+					$("#newComment" + documentId).val('');
+					$("blockquote#lastCommentPosition" + documentId).before(content);
+				}
+			});
+		}
+	</script>
 </div>

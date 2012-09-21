@@ -4,7 +4,9 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,10 +21,14 @@ public class CommentDaoTest extends CommonTest {
 	@Autowired
 	private DocumentDao documentDao;
 
+	@Before
+	public void setUp() {
+		documentDao.saveDocument(getDocument());
+	}
+
 	@Test
 	public void testInsertComment() {
 		// Given
-		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
 		int count = commentDao.countComment();
 
@@ -34,9 +40,21 @@ public class CommentDaoTest extends CommonTest {
 	}
 
 	@Test
+	public void testGetComments() {
+		// Given
+		Document doc = documentDao.getDocument();
+		commentDao.saveComment(getComment(doc.getDocumentId()));
+
+		// When
+		List<Comment> comments = commentDao.getComments(commentDao.getLastCommentId());
+
+		// Then
+		assertThat(comments.get(0).getUserId(), is(getComment(doc.getDocumentId()).getUserId()));
+	}
+
+	@Test
 	public void testUpdateComment() {
 		// Given
-		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();
@@ -49,32 +67,32 @@ public class CommentDaoTest extends CommonTest {
 	}
 
 	@Test
-	public void testGetComment() {
+	public void testDeleteComment() {
 		// Given
-		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
-
+		int count = commentDao.countComment();
+		
 		// When
-		Comment comment = commentDao.getComment();
+		commentDao.deleteComment(commentDao.getLastCommentId());
 
 		// Then
-		assertThat(comment.getUserId(), is(getComment(doc.getDocumentId()).getUserId()));
+		assertThat(commentDao.countComment(), is(count - 1));
 	}
 
 	@Test
-	public void testDeleteComment() {
+	public void testDeleteCommentWithDocumentId() {
 		// Given
-		documentDao.saveDocument(getDocument());
 		Document doc = documentDao.getDocument();
+		commentDao.saveComment(getComment(doc.getDocumentId()));
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();
 
 		// When
-		commentDao.deleteComment(commentDao.getComment().getCommentId());
+		commentDao.deleteCommentWithDocumentId(doc.getDocumentId());
 
 		// Then
-		assertThat(commentDao.countComment(), is(count - 1));
+		assertThat(commentDao.countComment(), is(count - 2));
 	}
 
 	private Comment getComment(int documentId) {

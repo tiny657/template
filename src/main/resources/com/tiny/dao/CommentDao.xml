@@ -27,16 +27,14 @@
 				#{regDate});
 	</insert>
 	
-	<select id="getAllComment" resultMap="result">
-		SELECT *
-		FROM comment;
-	</select>
-	
-	<select id="getComment" resultType="comment">
+	<select id="getComments" parameterType="int" resultMap="result">
 		SELECT *
 		FROM comment
-		ORDER BY commentId desc
-		LIMIT 1;
+		WHERE documentId = #{documentId}
+	</select>
+	
+	<select id="getLastCommentId" resultType="int">
+		SELECT LAST_INSERT_ID()
 	</select>
 	
 	<select id="countComment" resultType="int">
@@ -59,5 +57,11 @@
 		DELETE
 		FROM comment
 		WHERE commentId = #{commentId};
+	</delete>
+	
+	<delete id="deleteCommentWithDocumentId" parameterType="int">
+		DELETE
+		FROM comment
+		WHERE documentId = #{documentId};
 	</delete>
 </mapper>

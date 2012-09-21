@@ -13,7 +13,8 @@ Skill Set
  - Mockito : Mocking Framework
  - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
  - MoreUnit : Code, Test Code 이동 툴
- - Emma : Code Coverage 검사 툴
+ - Emma : Code Coverage 검사 툴 (eclipse)
+ - Cobertura : Code Coverage 검사 툴 (jenkins)
  - Checkstyle : Coding Convention 검사 툴
  - FindBugs : 코드 정적 분석 툴
  
@@ -159,10 +160,33 @@ Project Properties > Java Build Path > Order and Export 에서 아래와 같은 
 	src/main/resources-dev
 	src/main/resources-release
 	
-CentOS
-------
+AWS 운영 서버 설정 (Amazon Linux AMI)
+----------------------------------
 ### ssh로 War 파일 배포 ###
 /usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요
 /etc/sudoers 파일에 아래 부분 주석 처리함
 
 	Defaults    requiretty
+
+### tomcat 배포 ###
+/usr/share/tomcat6/conf/tomcat-users.conf 파일에 아래 내용 추가
+
+	<tomcat-users>
+	    <role rolename="manager"/>
+	    <user username="admin" password="" roles="manager"/>
+	</tomcat-users>
+	
+pom.xml 파일에 AWS 배포 서버 IP 설정
+
+	!-- mvn tomcat:deploy 배포 가능 -->
+	<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>tomcat-maven-plugin</artifactId>
+		<version>${tomcat-maven-plugin.version}</version>
+		<configuration>
+			<url>http://54.248.89.221:8080/manager</url>
+			<path>/ROOT</path>
+		</configuration>
+	</plugin>
+			
+mvn tomcat:undeploy tomcat:deploy으로 AWS 서버에 배포

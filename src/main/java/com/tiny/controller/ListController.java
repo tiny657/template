@@ -1,5 +1,9 @@
 package com.tiny.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tiny.comment.Comment;
 import com.tiny.document.Document;
+import com.tiny.service.CommentService;
 import com.tiny.service.ListService;
 
 @Controller
@@ -22,6 +28,9 @@ public class ListController {
 
 	@Autowired
 	private ListService listService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
@@ -34,8 +43,16 @@ public class ListController {
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("documents", listService.getAll());
+		List<Document> documents = listService.getAll();
+		model.addAttribute("documents", documents);
 		model.addAttribute("newDocument", new Document());
+		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
+		for (Document document : documents) {
+			model.addAttribute("newComment" + document.getDocumentId(), new Comment());
+			List<Comment> comments = commentService.getComments(document.getDocumentId());
+			map.put(Integer.toString(document.getDocumentId()), comments);
+		}
+		model.addAttribute("comments", map);
 		model.addAttribute("url", "list");
 		mav.addAllObjects(model);
 		mav.setViewName("list");
@@ -44,6 +61,7 @@ public class ListController {
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.DELETE)
 	public ModelAndView delete(@RequestParam Integer documentId) {
+		commentService.deleteWithDocumentId(documentId);
 		listService.delete(documentId);
 		return list();
 	}
