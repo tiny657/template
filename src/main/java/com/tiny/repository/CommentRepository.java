@@ -26,7 +26,7 @@ public class CommentRepository {
 	}
 
 	public void deleteWithDocumentId(Integer documentId) {
-		commentDao.deleteComment(documentId);
+		commentDao.deleteCommentWithDocumentId(documentId);
 	}
 	
 	public void delete(Integer commentId) {
