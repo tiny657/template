@@ -13,19 +13,22 @@
 	</div>
 	<div class="accordion" id="accordion2">
 		<c:forEach var="document" items="${documents}">
+			<%-- documentId를 string으로 설정함. comment에서 Map key로 integer 사용 안 됨. --%>
+			<c:set var="documentId">${document.documentId}</c:set>
+			
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${document.documentId}">${document.title}</a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${documentId}">${document.title}</a>
 				</div>
 
-				<div id="collapse${document.documentId}" class="accordion-body collapse">
+				<div id="collapse${documentId}" class="accordion-body collapse">
 					<div class="accordion-inner">
 						${document.content}
 						
-						<form:form method="delete" action="/?documentId=${document.documentId}">
-							<br/><a href="#deleteModal" role="button" class="btn btn-small btn-danger" data-toggle="modal">Delete</a>
-							<!-- Modal -->
-							<div class="modal hide fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<form:form method="delete" action="/?documentId=${documentId}">
+							<br/><a href="#deleteModal${documentId}" role="button" class="btn btn-small btn-danger" data-toggle="modal">Delete</a>
+							<%-- Modal --%>
+							<div class="modal hide fade" id="deleteModal${documentId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 									<h3 id="myModalLabel">DELETE</h3>
@@ -41,17 +44,16 @@
 						</form:form>
 						
 						<%-- Comment --%>
-						<c:set var="documentId">${document.documentId}</c:set>
 						<c:forEach var="comment" items="${comments[documentId]}">
 							<blockquote>
 								<p>${comment.content}</p>
 							</blockquote>
 						</c:forEach>
-						<blockquote id="lastCommentPosition${document.documentId}"></blockquote>
+						<blockquote id="lastCommentPosition${documentId}"></blockquote>
 						<div class="span11">
-							<textarea id="newComment${document.documentId}" rows="3" class="span11"></textarea>
+							<textarea id="newComment${documentId}" rows="3" class="span11"></textarea>
 							<br />
-							<button type="submit" class="btn btn-info" onclick="sendComment(${document.documentId})">Save</button>
+							<button type="submit" class="btn btn-info" onclick="sendComment(${documentId})">Save</button>
 							<br /><br />
 						</div>
 					</div>
