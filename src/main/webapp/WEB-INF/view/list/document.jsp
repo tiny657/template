@@ -37,7 +37,7 @@
 			</c:forEach>
 			<blockquote id="lastCommentPosition${documentId}"></blockquote>
 			<div class="span11">
-				<textarea id="newComment${documentId}" rows="3" class="span11"></textarea>
+				<textarea id="newComment${documentId}" rows="1" class="span11" placeholder="comment"></textarea>
 				<br />
 				<button type="submit" class="btn btn-info" onclick="saveComment(${documentId})">Save</button>
 				<br /><br />
