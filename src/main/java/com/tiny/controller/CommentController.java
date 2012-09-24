@@ -23,11 +23,11 @@ public class CommentController {
 	private CommentService commentService;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
-	public @ResponseBody String register(@RequestParam Integer documentId, @RequestParam String content) {
+	public @ResponseBody String save(@RequestParam Integer documentId, @RequestParam String content) {
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent(content);
-		commentService.register(comment);
+		commentService.save(comment);
 		return "<blockquote><p>" + content + "</p></blockquote>";
 	}
 

@@ -17,12 +17,16 @@ public class ListRepository {
 	@Autowired
 	private DocumentDao documentDao;
 
-	public void register(Document document) {
+	public void save(Document document) {
 		documentDao.saveDocument(document);
 	}
 
 	public List<Document> getAll() {
 		return documentDao.getAllDocument();
+	}
+	
+	public Document getLastDocument() {
+		return documentDao.getLastDocument();
 	}
 
 	public void delete(Integer documentId) {

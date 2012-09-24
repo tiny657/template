@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.common.util.XssFilter;
 import com.tiny.document.Document;
@@ -25,7 +26,7 @@ public class ListService {
 	@Autowired
 	private FacebookService facebookService;
 
-	public void register(Document document) {
+	public void save(Document document) {
 		document.setUserId(facebookService.getId());
 		document.setEmail(facebookService.getEmail());
 		document.setName(facebookService.getName());
@@ -33,7 +34,13 @@ public class ListService {
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		document.setLastUpdate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
-		listRepository.register(document);
+		listRepository.save(document);
+	}
+	
+	@Transactional
+	public Document saveTransactional(Document document) {
+		save(document);
+		return listRepository.getLastDocument();
 	}
 
 	public List<Document> getAll() {
@@ -43,6 +50,10 @@ public class ListService {
 		}
 
 		return documents;
+	}
+	
+	public Document getLastDocument() {
+		return listRepository.getLastDocument();
 	}
 	
 	public void delete(Integer documentId) {

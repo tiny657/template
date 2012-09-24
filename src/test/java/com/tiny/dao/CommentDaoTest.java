@@ -29,7 +29,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testInsertComment() {
 		// Given
-		Document doc = documentDao.getDocument();
+		Document doc = documentDao.getLastDocument();
 		int count = commentDao.countComment();
 
 		// When
@@ -42,7 +42,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testGetComments() {
 		// Given
-		Document doc = documentDao.getDocument();
+		Document doc = documentDao.getLastDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 
 		// When
@@ -55,7 +55,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testUpdateComment() {
 		// Given
-		Document doc = documentDao.getDocument();
+		Document doc = documentDao.getLastDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();
 
@@ -69,7 +69,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testDeleteComment() {
 		// Given
-		Document doc = documentDao.getDocument();
+		Document doc = documentDao.getLastDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();
 		
@@ -83,7 +83,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testDeleteCommentWithDocumentId() {
 		// Given
-		Document doc = documentDao.getDocument();
+		Document doc = documentDao.getLastDocument();
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		commentDao.saveComment(getComment(doc.getDocumentId()));
 		int count = commentDao.countComment();

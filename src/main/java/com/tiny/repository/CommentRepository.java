@@ -17,7 +17,7 @@ public class CommentRepository {
 	@Autowired
 	private CommentDao commentDao;
 
-	public void register(Comment comment) {
+	public void save(Comment comment) {
 		commentDao.saveComment(comment);
 	}
 

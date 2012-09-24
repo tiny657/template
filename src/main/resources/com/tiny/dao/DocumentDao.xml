@@ -63,14 +63,14 @@
 	
 	<select id="getAllDocument" resultMap="result">
 		SELECT *
-		FROM document;
+		FROM document
+		ORDER BY documentId DESC;
 	</select>
 	
-	<select id="getDocument" resultType="document">
+	<select id="getLastDocument" resultType="document">
 		SELECT *
 		FROM document
-		ORDER BY documentId desc
-		LIMIT 1;
+		WHERE documentId = LAST_INSERT_ID();
 	</select>
 	
 	<select id="countDocument" resultType="int">

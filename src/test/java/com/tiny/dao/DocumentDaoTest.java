@@ -46,7 +46,7 @@ public class DocumentDaoTest extends CommonTest {
 		documentDao.saveDocument(getDocument());
 
 		// When
-		Document document = documentDao.getDocument();
+		Document document = documentDao.getLastDocument();
 
 		// Then
 		assertThat(document.getTitle(), is(getDocument().getTitle()));
@@ -59,7 +59,7 @@ public class DocumentDaoTest extends CommonTest {
 		int count = documentDao.countDocument();
 
 		// When
-		documentDao.deleteDocument(documentDao.getDocument().getDocumentId());
+		documentDao.deleteDocument(documentDao.getLastDocument().getDocumentId());
 
 		// Then
 		assertThat(documentDao.countDocument(), is(count - 1));

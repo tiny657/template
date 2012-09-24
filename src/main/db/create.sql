@@ -1,8 +1,7 @@
-DROP TABLE IF EXISTS UserConnection;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS document;
-CREATE TABLE UserConnection (
+CREATE TABLE IF NOT EXISTS UserConnection (
 	userId VARCHAR(255) NOT NULL,
     providerId VARCHAR(255) NOT NULL,
     providerUserId VARCHAR(255),

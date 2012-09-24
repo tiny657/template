@@ -9,7 +9,7 @@ public interface DocumentDao {
 
 	public List<Document> getAllDocument();
 
-	public Document getDocument();
+	public Document getLastDocument();
 
 	public Integer countDocument();
 

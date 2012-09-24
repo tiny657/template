@@ -4,4 +4,7 @@
 	<definition name="list" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/list.jsp" />
 	</definition>
+	<definition name="document" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/document.jsp" />
+	</definition>
 </tiles-definitions>

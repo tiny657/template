@@ -28,15 +28,21 @@ public class ListController {
 
 	@Autowired
 	private ListService listService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request, @ModelAttribute Document document) {
+	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
+	public ModelAndView saveDocument(HttpServletRequest request, @ModelAttribute Document document) {
+		// register form data
 		document.setIpAddress(request.getRemoteAddr());
-		listService.register(document);
-		return list();
+
+		ModelAndView mav = new ModelAndView();
+		ModelMap model = new ModelMap();
+		model.addAttribute("document", listService.saveTransactional(document));
+		mav.addAllObjects(model);
+		mav.setViewName("document");
+		return mav;
 	}
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)

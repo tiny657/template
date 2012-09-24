@@ -25,11 +25,11 @@ public class CommentService {
 	@Autowired
 	private FacebookService facebookService;
 
-	public void register(Comment comment) {
+	public void save(Comment comment) {
 		comment.setUserId(facebookService.getId());
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
-		commentRepository.register(comment);
+		commentRepository.save(comment);
 	}
 
 	public List<Comment> getComments(Integer documentId) {
