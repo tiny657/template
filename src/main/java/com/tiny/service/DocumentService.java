@@ -11,17 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.common.util.XssFilter;
 import com.tiny.document.Document;
-import com.tiny.repository.ListRepository;
+import com.tiny.repository.DocumentRepository;
 
 @Service
-public class ListService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ListService.class);
+public class DocumentService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentService.class);
 	
 	@Autowired
 	private XssFilter xssFilter;
 
 	@Autowired
-	private ListRepository listRepository;
+	private DocumentRepository documentRepository;
 
 	@Autowired
 	private FacebookService facebookService;
@@ -34,17 +34,17 @@ public class ListService {
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		document.setLastUpdate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
-		listRepository.save(document);
+		documentRepository.save(document);
 	}
 	
 	@Transactional
 	public Document saveTransactional(Document document) {
 		save(document);
-		return listRepository.getLastDocument();
+		return documentRepository.getLastDocument();
 	}
 
 	public List<Document> getAll() {
-		List<Document> documents = listRepository.getAll();
+		List<Document> documents = documentRepository.getAll();
 		for (Document document : documents) {
 			document.setContent(document.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
 		}
@@ -53,10 +53,10 @@ public class ListService {
 	}
 	
 	public Document getLastDocument() {
-		return listRepository.getLastDocument();
+		return documentRepository.getLastDocument();
 	}
 	
 	public void delete(Integer documentId) {
-		listRepository.delete(documentId);
+		documentRepository.delete(documentId);
 	}
 }

@@ -20,36 +20,34 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tiny.comment.Comment;
 import com.tiny.document.Document;
 import com.tiny.service.CommentService;
-import com.tiny.service.ListService;
+import com.tiny.service.DocumentService;
 
 @Controller
-public class ListController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
+public class DocumentController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentController.class);
 
 	@Autowired
-	private ListService listService;
+	private DocumentService documentService;
 
 	@Autowired
 	private CommentService commentService;
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
 	public ModelAndView saveDocument(HttpServletRequest request, @ModelAttribute Document document) {
-		// register form data
-		document.setIpAddress(request.getRemoteAddr());
-
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("document", listService.saveTransactional(document));
+		document.setIpAddress(request.getRemoteAddr());
+		model.addAttribute("document", documentService.saveTransactional(document));
 		mav.addAllObjects(model);
 		mav.setViewName("document");
 		return mav;
 	}
 
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/document" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		List<Document> documents = listService.getAll();
+		List<Document> documents = documentService.getAll();
 		model.addAttribute("documents", documents);
 		model.addAttribute("newDocument", new Document());
 		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
@@ -65,11 +63,10 @@ public class ListController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.DELETE)
-	public ModelAndView delete(@RequestParam Integer documentId) {
+	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
+	public void delete(@RequestParam Integer documentId) {
 		commentService.deleteWithDocumentId(documentId);
-		listService.delete(documentId);
-		return list();
+		documentService.delete(documentId);
 	}
 
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)

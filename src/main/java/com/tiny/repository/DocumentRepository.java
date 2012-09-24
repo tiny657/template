@@ -11,8 +11,8 @@ import com.tiny.dao.DocumentDao;
 import com.tiny.document.Document;
 
 @Repository
-public class ListRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ListRepository.class);
+public class DocumentRepository {
+	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentRepository.class);
 
 	@Autowired
 	private DocumentDao documentDao;

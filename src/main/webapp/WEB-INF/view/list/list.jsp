@@ -6,7 +6,7 @@
 		<div class="span12">
 			<input type="text" id="title" path="title" class="span12" placeholder="title" />
 			<textarea path="content" id="content" rows="3" class="span12" placeholder="contents"></textarea>
-			<button type="submit" class="btn btn-info" onclick="writeDocument()">Save</button>
+			<button type="submit" class="btn btn-info" onclick="saveDocument()">Save</button>
 			<br /><br />
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 	</footer>
 	
 	<script type="text/javascript">
-		function writeDocument() {
+		function saveDocument() {
 			$.ajax({
 				type : "POST",
 				url : "/document",
@@ -38,7 +38,7 @@
 			});
 		}
 				
-		function writeComment(documentId) {
+		function saveComment(documentId) {
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -47,6 +47,18 @@
 				success : function(content) {
 					$("#newComment" + documentId).val('');
 					$("blockquote#lastCommentPosition" + documentId).before(content);
+				}
+			});
+		}
+		
+		function deleteDocument(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/document",
+				dataType: "text",
+				data: {"documentId": documentId, _method: "DELETE"},
+				success : function() {
+					$("div#document" + documentId).remove();
 				}
 			});
 		}
