@@ -14,8 +14,8 @@
 			<div class="nav-collapse">
 				<ul class="nav">
 					<c:choose>
-						<c:when test="${url eq 'list'}"><li class="active"><a href="/list">List</a></li></c:when>
-						<c:otherwise><li><a href="/list">List</a></li></c:otherwise>
+						<c:when test="${url eq 'document'}"><li class="active"><a href="/document">Document</a></li></c:when>
+						<c:otherwise><li><a href="/document">Document</a></li></c:otherwise>
 					</c:choose>
 					<c:choose>
 						<c:when test="${url eq 'profile'}"><li class="active"><a href="/profile">Profile</a></li></c:when>
