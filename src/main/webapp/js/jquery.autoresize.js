@@ -11,7 +11,7 @@
 	var defaultOptions = {
 		onresize: function() {}, // Callback to call 
 		buffer: 1, // Number of extra rows to display
-		minRows: 4, // Minimum amount of rows to display
+		minRows: 3, // Minimum amount of rows to display
 		animate: true,
 		animationDuration: 50,
 		resizeOnStart: false // Set to true if you want to resize
@@ -71,7 +71,7 @@
 						last_height = height;
 					}
 				};
-
+				
 			textarea.unbind('.autoresize')
 					.bind('focus.autoresize', eventListener)
 					.bind('change.autoresize', eventListener)

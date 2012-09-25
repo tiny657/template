@@ -5,8 +5,8 @@
 	<div class="row">
 		<div class="span12">
 			<input type="text" id="title" path="title" class="span12" placeholder="title" />
-			<textarea path="content" id="content" class="span12" rows="1" placeholder="contents"></textarea>
-			<button type="submit" class="btn btn-info" onclick="saveDocument()">Save</button>
+			<textarea path="content" id="content" class="span12" placeholder="contents"></textarea>
+			<button type="submit" class="btn btn-info" onclick="saveDocument()" id="save">Save</button>
 			<br /><br />
 		</div>
 	</div>
@@ -62,6 +62,6 @@
 				}
 			});
 		}
-		$('textarea').autoresize({minRows: 3});
+		$('textarea').autoresize();
 	</script>
 </div>

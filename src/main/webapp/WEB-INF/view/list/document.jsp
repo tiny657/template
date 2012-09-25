@@ -37,10 +37,16 @@
 			</c:forEach>
 			<blockquote id="lastCommentPosition${documentId}"></blockquote>
 			<div class="span11">
-				<textarea id="newComment${documentId}" rows="1" class="span11" placeholder="comment"></textarea>
+				<textarea id="newComment${documentId}" class="span11" placeholder="comment"></textarea>
 				<br />
-				<button type="submit" class="btn btn-info" onclick="saveComment(${documentId})">Save</button>
+				<button type="submit" class="btn btn-info" id="saveComment${documentId}" onclick="saveComment(${documentId})" style="display:none;">Save</button>
 				<br /><br />
+				<script>
+					$("#newComment${documentId}").click(function() {
+						$("#saveComment${documentId}").css('display', 'inline');
+					});
+				</script>
+				
 			</div>
 		</div>
 	</div>
