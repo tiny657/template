@@ -3,12 +3,14 @@
 <%-- documentId를 string으로 설정함. comment에서 Map key로 integer 사용 안 됨. --%>
 <c:set var="documentId">${document.documentId}</c:set>
 
-<%-- Document --%>
+<%-- document list --%>
 <div class="accordion-group" id="document${documentId}">
+	<%-- title --%>
 	<div class="accordion-heading">
 		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${documentId}">${document.title}</a>
 	</div>
 	
+	<%-- content --%>
 	<div id="collapse${documentId}" class="accordion-body collapse">
 		<div class="accordion-inner">
 			${document.content}
@@ -29,13 +31,20 @@
 				</div>
 			</div>
 			
-			<%-- Comment --%>
+			<%-- comment list --%>
 			<c:forEach var="comment" items="${comments[documentId]}">
 				<blockquote>
 					<p>${comment.content}</p>
 				</blockquote>
 			</c:forEach>
-			<blockquote id="lastCommentPosition${documentId}"></blockquote>
+	
+			<%-- new comment after sending comment --%>
+			<blockquote id="lastCommentPosition${documentId}" style="display:none;"></blockquote>
+			
+			<%-- waiting icon --%>
+			<blockquote><p><img src="img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
+			
+			<%-- comment form --%>
 			<div class="span11">
 				<textarea id="newComment${documentId}" class="span11" placeholder="comment"></textarea>
 				<br />
