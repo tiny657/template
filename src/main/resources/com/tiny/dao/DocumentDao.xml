@@ -5,9 +5,7 @@
 		<result property="documentId" column="documentId" />
 		<result property="point" column="point" />
 		<result property="isNotice" column="isNotice" />
-		<result property="title" column="title" />
-		<result property="titleBold" column="titleBold" />
-		<result property="titleColor" column="titleColor" />
+		<result property="color" column="color" />
 		<result property="content" column="content" />
 		<result property="likeCount" column="likeCount" />
 		<result property="dislikeCount" column="dislikeCount" />
@@ -27,9 +25,7 @@
 		INTO document 
 				(point,
 				isNotice,
-				title,
-				titleBold,
-				titleColor,
+				color,
 				content,
 				likeCount,
 				dislikeCount,
@@ -44,9 +40,7 @@
 				lastUpdate)
 		VALUES (#{point},
 				#{isNotice},
-				#{title},
-				#{titleBold},
-				#{titleColor},
+				#{color},
 				#{content},
 				#{likeCount},
 				#{dislikeCount},
@@ -83,9 +77,7 @@
   		SET
   			point = #{point},
 			isNotice = #{isNotice},
-			title = #{title},
-			titleBold = #{titleBold},
-			titleColor = #{titleColor},
+			color = #{color},
 			content = #{content},
 			likeCount = #{likeCount},
 			dislikeCount = #{dislikeCount},

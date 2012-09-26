@@ -106,7 +106,6 @@ public class CommentDaoTest extends CommonTest {
 
 	private Document getDocument() {
 		Document document = new Document();
-		document.setTitle("title");
 		document.setContent("content");
 		document.setUserId("userId");
 		document.setIpAddress("127.0.0.1");

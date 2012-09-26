@@ -10,11 +10,8 @@ public class Document {
 	private int documentId;
 	private int point;
 	private boolean isNotice;
-	// varchar(250)
-	private String title;
-	private boolean titleBold;
 	// varchar(7)
-	private String titleColor;
+	private String color;
 	// Text
 	private String content;
 	private int likeCount;

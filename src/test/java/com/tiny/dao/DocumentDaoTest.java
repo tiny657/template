@@ -49,7 +49,7 @@ public class DocumentDaoTest extends CommonTest {
 		Document document = documentDao.getLastDocument();
 
 		// Then
-		assertThat(document.getTitle(), is(getDocument().getTitle()));
+		assertThat(document.getContent(), is(getDocument().getContent()));
 	}
 
 	@Test
@@ -67,7 +67,6 @@ public class DocumentDaoTest extends CommonTest {
 
 	private Document getDocument() {
 		Document document = new Document();
-		document.setTitle("title");
 		document.setContent("content");
 		document.setUserId("userId");
 		document.setIpAddress("127.0.0.1");

@@ -30,7 +30,6 @@ public class DocumentService {
 		document.setUserId(facebookService.getId());
 		document.setEmail(facebookService.getEmail());
 		document.setName(facebookService.getName());
-		document.setTitle(xssFilter.doFilter(document.getTitle()));
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		document.setLastUpdate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
