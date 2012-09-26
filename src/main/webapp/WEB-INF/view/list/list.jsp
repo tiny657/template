@@ -8,16 +8,18 @@
 			<input type="text" id="title" path="title" class="span12" placeholder="title" />
 			<textarea path="content" id="content" class="span12" placeholder="contents"></textarea>
 			<button type="submit" class="btn btn-info" onclick="saveDocument()" id="save">Save</button>
-			<br /><br />
+			<br />
+			<br />
 		</div>
 	</div>
-	
+
 	<div class="accordion" id="accordion2">
 		<%-- waiting icon --%>
-		<div class="accordion-group" id="waitingDocument" style="display:none;">
+		<div class="accordion-group" id="waitingDocument" style="display: none;">
 			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${documentId}">
-					<img src="img/wait24trans.gif" id="waitingDocument" />
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse${documentId}"> <img
+					src="img/wait24trans.gif" id="waitingDocument"
+				/>
 				</a>
 			</div>
 		</div>
@@ -28,13 +30,13 @@
 			<%@include file="document.jsp"%>
 		</c:forEach>
 	</div>
-	
+
 	<hr>
-	
+
 	<footer>
 		<p>&copy; Company 2012</p>
 	</footer>
-	
+
 	<script type="text/javascript">
 		function saveDocument() {
 			$.ajax({

@@ -2,7 +2,7 @@ package com.tiny.controller;
 
 import com.tiny.common.CommonTest;
 
-public class DocumentControllerTest extends CommonTest {
+public class ListControllerTest extends CommonTest {
 	/*
 	@Test
 	public void testFireFox() {

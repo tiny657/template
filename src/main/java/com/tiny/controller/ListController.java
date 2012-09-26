@@ -23,8 +23,8 @@ import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 
 @Controller
-public class DocumentController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentController.class);
+public class ListController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
 
 	@Autowired
 	private DocumentService documentService;
@@ -43,7 +43,7 @@ public class DocumentController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/", "/document" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();

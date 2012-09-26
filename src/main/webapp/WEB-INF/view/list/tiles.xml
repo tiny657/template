@@ -7,4 +7,7 @@
 	<definition name="document" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/document.jsp" />
 	</definition>
+	<definition name="comment" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/comment.jsp" />
+	</definition>
 </tiles-definitions>

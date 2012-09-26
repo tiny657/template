@@ -33,9 +33,7 @@
 			
 			<%-- comment list --%>
 			<c:forEach var="comment" items="${comments[documentId]}">
-				<blockquote>
-					<p>${comment.content}</p>
-				</blockquote>
+				<%@include file="comment.jsp"%>
 			</c:forEach>
 	
 			<%-- new comment after sending comment --%>
