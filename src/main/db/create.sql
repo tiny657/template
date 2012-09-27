@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS template;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS document;
@@ -21,7 +22,7 @@ CREATE TABLE member (
 	userId VARCHAR(16) UNIQUE NOT NULL,
 	name VARCHAR(20),
 	email VARCHAR(40),
-	password CHAR(41) NOT NULL,
+	password CHAR(16) NOT NULL,
 	birthday DATE,
 	description TEXT,
 	point INT DEFAULT 0,
