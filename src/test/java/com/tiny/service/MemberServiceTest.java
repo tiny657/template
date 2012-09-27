@@ -2,7 +2,9 @@ package com.tiny.service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -10,6 +12,7 @@ import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import com.tiny.common.CommonTest;
 import com.tiny.member.Member;
 
+@Ignore
 public class MemberServiceTest extends CommonTest {
 	private FacebookTemplate facebook;
 
@@ -23,7 +26,7 @@ public class MemberServiceTest extends CommonTest {
 	}
 
 	@Test
-	public void testGetMemger() {
+	public void testGetMember() {
 		Member member = memberService.getMember(facebook.userOperations().getUserProfile());
 		assertThat(member.getName(), is("Gildong Hong"));
 		assertThat(member.getEmail(), is("tiny657@naver.com"));

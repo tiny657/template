@@ -8,13 +8,13 @@ import lombok.Data;
 public class Member {
 	// Primary Key
 	private int memberId;
-	// varchar(12)
+	// varchar(16)
 	private String userId;
-	// Unique, varchar(30)
+	// Unique, varchar(40)
 	private String email;
 	// varchar(20)
 	private String name;
-	// char(41)
+	// char(16)
 	private String password;
 	private Date birthday;
 	// Text
