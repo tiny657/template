@@ -419,10 +419,11 @@
 				</executions>
 				<configuration>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/template</url>
+					<url>jdbc:mysql://localhost:3306</url>
 					<username>root</username>
 					<password></password>
 					<autocommit>true</autocommit>
+					<sqlCommand>CREATE DATABASE IF NOT EXISTS template</sqlCommand>
 				</configuration>
 			</plugin>
 

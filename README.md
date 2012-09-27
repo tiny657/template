@@ -193,6 +193,6 @@ pom.xml 파일에 AWS 배포 서버 IP 설정
 			
 mvn tomcat:undeploy tomcat:deploy으로 AWS 서버에 배포
 
-### 빌드 서버 ###
-빌드서버
+빌드 서버
+--------
 - [http://travis-ci.org/#!/tiny657/template](http://travis-ci.org/#!/tiny657/template)
