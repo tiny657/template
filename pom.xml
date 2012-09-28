@@ -516,7 +516,7 @@
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>${findbugs.version}</version>
 				<configuration>
-					<includeFilterFile>findbugs-basic_filter.xml</includeFilterFile>
+					<includeFilterFile>findbugs_basic_filter.xml</includeFilterFile>
 					<findbugsXmlOutput>true</findbugsXmlOutput>
 					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
 					<xmlOutput>true</xmlOutput>
