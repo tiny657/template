@@ -22,7 +22,8 @@ public class MemberServiceTest extends CommonTest {
 	@Before
 	public void before() {
 		facebook = new FacebookTemplate(
-				"AAAC1oNlnFTcBAHgMtDUZCe8XZAbS3Lnl8pbZAsi9gUZCZC8iiN70eGW1ZAcZCsaki9sJJq2ODkazf9I3ZB3Vvvqz8ZCTjwxr4XnqPCePjct6FtQZDZD");
+				"AAAC1oNlnFTcBAHgMtDUZCe8XZAbS3Lnl8pbZAsi9gUZCZC8iiN70eGW1ZAcZCsaki9sJJq2ODkazf9I3ZB3Vvvqz8ZCTjwxr4Xn"
+						+ "qPCePjct6FtQZDZD");
 	}
 
 	@Test

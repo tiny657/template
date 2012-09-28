@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.comment.Comment;
 import com.tiny.common.CommonTest;
@@ -20,47 +21,48 @@ public class CommentDaoTest extends CommonTest {
 
 	@Autowired
 	private DocumentDao documentDao;
+	
+	private Document document;
 
+	@Transactional
 	@Before
 	public void setUp() {
 		documentDao.saveDocument(getDocument());
+		document = documentDao.getLastDocument();
 	}
 
 	@Test
 	public void testInsertComment() {
 		// Given
-		Document doc = documentDao.getLastDocument();
 		int count = commentDao.countComment();
 
 		// When
-		commentDao.saveComment(getComment(doc.getDocumentId()));
+		commentDao.saveComment(getComment(document.getDocumentId()));
 
 		// Then
 		assertThat(commentDao.countComment(), is(count + 1));
 	}
-
+	
 	@Test
 	public void testGetComments() {
 		// Given
-		Document doc = documentDao.getLastDocument();
-		commentDao.saveComment(getComment(doc.getDocumentId()));
-
+		commentDao.saveComment(getComment(document.getDocumentId()));
+		
 		// When
-		List<Comment> comments = commentDao.getComments(commentDao.getLastCommentId());
+		List<Comment> comments = commentDao.getComments(document.getDocumentId());
 
 		// Then
-		assertThat(comments.get(0).getUserId(), is(getComment(doc.getDocumentId()).getUserId()));
+		assertThat(comments.get(0).getUserId(), is(getComment(document.getDocumentId()).getUserId()));
 	}
 
 	@Test
 	public void testUpdateComment() {
 		// Given
-		Document doc = documentDao.getLastDocument();
-		commentDao.saveComment(getComment(doc.getDocumentId()));
+		commentDao.saveComment(getComment(document.getDocumentId()));
 		int count = commentDao.countComment();
 
 		// When
-		commentDao.updateComment(getComment(doc.getDocumentId()));
+		commentDao.updateComment(getComment(document.getDocumentId()));
 
 		// Then
 		assertThat(commentDao.countComment(), is(count));
@@ -69,8 +71,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testDeleteComment() {
 		// Given
-		Document doc = documentDao.getLastDocument();
-		commentDao.saveComment(getComment(doc.getDocumentId()));
+		commentDao.saveComment(getComment(document.getDocumentId()));
 		int count = commentDao.countComment();
 		
 		// When
@@ -83,13 +84,12 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void testDeleteCommentWithDocumentId() {
 		// Given
-		Document doc = documentDao.getLastDocument();
-		commentDao.saveComment(getComment(doc.getDocumentId()));
-		commentDao.saveComment(getComment(doc.getDocumentId()));
+		commentDao.saveComment(getComment(document.getDocumentId()));
+		commentDao.saveComment(getComment(document.getDocumentId()));
 		int count = commentDao.countComment();
 
 		// When
-		commentDao.deleteCommentWithDocumentId(doc.getDocumentId());
+		commentDao.deleteCommentWithDocumentId(document.getDocumentId());
 
 		// Then
 		assertThat(commentDao.countComment(), is(count - 2));

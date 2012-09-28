@@ -1,7 +1,9 @@
 package com.tiny.service;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,7 +20,8 @@ public class FacebookServiceTest extends CommonTest {
 	@Before
 	public void before() {
 		facebook = new FacebookTemplate(
-				"AAAC1oNlnFTcBAHgMtDUZCe8XZAbS3Lnl8pbZAsi9gUZCZC8iiN70eGW1ZAcZCsaki9sJJq2ODkazf9I3ZB3Vvvqz8ZCTjwxr4XnqPCePjct6FtQZDZD");
+				"AAAC1oNlnFTcBAHgMtDUZCe8XZAbS3Lnl8pbZAsi9gUZCZC8iiN70eGW1ZAcZCsaki9sJJq2ODkazf9I3ZB3Vvvqz8ZCTjwxr4Xn"
+						+ "qPCePjct6FtQZDZD");
 	}
 
 	@Test
@@ -28,5 +31,11 @@ public class FacebookServiceTest extends CommonTest {
 		assertThat(userProfile.getEmail(), is("tiny657@naver.com"));
 		assertThat(userProfile.getId(), is("100004435682348"));
 		assertThat(userProfile.getGender(), is("male"));
+	}
+	
+	@Test
+	public void testGetFriend() {
+		List<FacebookProfile> friendProfiles = facebook.friendOperations().getFriendProfiles();
+		assertThat(friendProfiles.size(), greaterThan(0));
 	}
 }

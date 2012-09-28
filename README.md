@@ -143,7 +143,7 @@ Preference > Java > Editor > Templates > Favorites > New Type에 클릭 후 아�
 	context : java
 	description : ti 입력 후 Ctrl + Space 입력 시 아래 package가 자동 import
 	pattern : 
-	import static org.hamcrest.CoreMatchers.*;
+	import static org.hamcrest.Matchers.*;
 	import static org.junit.Assert.*;
 	import static org.junit.matchers.JUnitMatchers.*;
 	import static org.mockito.Matchers.*;
