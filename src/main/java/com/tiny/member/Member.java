@@ -6,18 +6,12 @@ import lombok.Data;
 
 @Data
 public class Member {
-	// Primary Key
 	private int memberId;
-	// varchar(16)
 	private String userId;
-	// Unique, varchar(40)
 	private String email;
-	// varchar(20)
 	private String name;
-	// char(16)
 	private String password;
 	private Date birthday;
-	// Text
 	private String description;
 	private int point;
 	private int documentCount;

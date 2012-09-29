@@ -10,26 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.service.FacebookService;
-import com.tiny.service.MemberService;
 
 @Controller
-public class MemberController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
-
-	@Autowired
-	private MemberService memberService;
+public class FriendController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FriendController.class);
 
 	@Autowired
 	private FacebookService facebookService;
 
-	@RequestMapping(value = { "/profile" }, method = RequestMethod.GET)
-	public ModelAndView profile() {
+	@RequestMapping(value = { "/friend" }, method = RequestMethod.GET)
+	public ModelAndView getFriends() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.getMember(facebookService.getProfile()));
-		model.addAttribute("url", "profile");
+		model.addAttribute("friends", facebookService.getFriends());
 		mav.addAllObjects(model);
-		mav.setViewName("member");
+		mav.setViewName("friend");
 		return mav;
 	}
 }

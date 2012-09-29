@@ -6,27 +6,19 @@ import lombok.Data;
 
 @Data
 public class Document {
-	// Primary Key
 	private int documentId;
 	private int point;
 	private boolean isNotice;
-	// varchar(7)
 	private String color;
-	// Text
 	private String content;
 	private int likeCount;
 	private int dislikeCount;
 	private int commentCount;
 	private int shareCount;
-	// varchar(12)
 	private String userId;
-	// varchar(20)
 	private String name;
-	// varchar(40)
 	private String email;
-	// char(8)
 	private String ipAddress;
-	// Text
 	private String tags;
 	private Date regDate;
 	private Date lastUpdate;
