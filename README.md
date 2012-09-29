@@ -1,3 +1,5 @@
+Template
+--------
 [![travis-ci](https://secure.travis-ci.org/tiny657/template.png?branch=master)](http://travis-ci.org//tiny657/template)
 
 Skill Set
@@ -23,44 +25,62 @@ Skill Set
  
 Getting Started
 ---------------
-### JDK 설치 ###
-```
-$ yum install java-1.6.0-openjdk.x86_64 java-1.6.0-openjdk-devel.x86_64
-```
+### JDK ###
+설치하기
+
+	$ yum install java-1.6.0-openjdk.x86_64 java-1.6.0-openjdk-devel.x86_64
+	
 참고 : http://www.oracle.com/technetwork/java/javaee/downloads/index.html
 
-### MySQL 설치 ###
-```
-$ yum install mysql-server
-```
+### MySQL ###
 
-MySQL 서버 시작
-```
-$ service mysqld start
-```
+설치하기
+
+	$ yum install mysql-server
+
+시작하기
+
+	$ service mysqld start
+
 참고 : http://dev.mysql.com/downloads/mysql
 
-### Mysql 기본 template DB 생성 ###
+### MySQL DB 생성 ###
+
+기본 template DB 생성하기
+
 	$ mysql -u root -e "CREATE DATABASE template"
 
-### Tomcat 설치 ###
-```
-$ yum install tomcat6-webapps tomcat6-admin-webapps
-```
-Tomcat 시작
-$ service tomcat6 start
+### Tomcat ###
 
-### STS 설치 ###
-http://www.springsource.org/downloads/sts
+설치하기
+
+	$ yum install tomcat6-webapps tomcat6-admin-webapps
+	
+시작하기
+
+	$ service tomcat6 start
+
+### SpringSource Tool Suite ###
+
+설치하기
+
+	http://www.springsource.org/downloads/sts
  
-### Maven 설치 ###
-http://maven.apache.org/download.html
+### Maven ###
 
-### Lombok 설치 ###
-http://projectlombok.org/mavenrepo/index.html
+설치하기
+
+	http://maven.apache.org/download.html
+
+### Lombok ###
+
+설치하기
+
+	http://projectlombok.org/mavenrepo/index.html
 
 ### Project clone ###
-sts의 File > Import > Projects from Git > URI 선택 후 아래 설정값을 입력  
+
+STS의 File > Import > Projects from Git > URI 선택 후 아래 설정값을 입력한다.
 
 	URI : ssh://git@github.com:[ID]/template.git
 	Host : github.com
@@ -70,74 +90,101 @@ sts의 File > Import > Projects from Git > URI 선택 후 아래 설정값을 �
 	User : git
 	Password : 없음
 
-Import existing projects 시 No projects found 라는 에러가 발생하면 아래 단계를 수행 후 다시 시도  
-Package Explorer에서 template 우클릭 > Configure > Convert To Maven Project를 수행하여 maven project로 생성  
+Import existing projects 시 No projects found 라는 에러가 발생하면 아래 단계를 수행 후 다시 시도한다.  
+Package Explorer에서 template 우클릭 > Configure > Convert To Maven Project를 수행하여 maven project로 생성한다.
 
-### Maven eclipse project 생성 ###
-다운로드 받아진 template project에서 경로에서 아래와 같이 입력하여 eclipse project를 생성  
+### Eclipse project 생성 ###
+다운로드 받아진 template project에서 경로에서 아래와 같이 입력하여 eclipse project를 생성한다.
 
 	$ mvn eclipse:eclipse
 
-### Checkstyle 적용 ###
- 	sts Package Explorer에서 template project 우클릭 > Checkstyle > Activate Checkstyle
- 		
 ### 브라우저 설치 ###
-	Internet Explorer, Chrome, Firefox : Selenium 테스트를 위하여 설치
+Selenium 테스트를 위해 아래 브라우저 설치한다.
+ - Internet Explorer
+ - Chrome
+ - Firefox
 
 
 STS Setting
 -----------
 ### Eclipse Plugin 설치 ###
+ - STS > Help > Install New Software... 클릭 후 work with에 설치하고자 plugin URL을 입력한다.
+
 MoreUnit : http://moreunit.sourceforge.net/update-site
 
-	Ctrl + j : 구현 코드와 테스트 코드 간 이동 방법
-	Ctrl + r : 구현 코드에서 테스트코드를 수행
+	Ctrl + j : 구현 코드와 테스트 코드 간 이동한다.
+	Ctrl + r : 구현 코드에서 테스트코드를 수행한다.
 		
 Checkstyle : http://eclipse-cs.sf.net/update
 
-	View : Window > Show View > Others > Checkstyle > Checkstyle violations
+ - Activation
+ 
+		프로젝트 이름을 우클릭 후 Checkstyle > Activate Checkstyle
+ 
+ - View
+ 
+		Window > Show View > Others > Checkstyle > Checkstyle violations
 	
-Emma :  http://update.eclemma.org/
+Emma : http://update.eclemma.org/
 
-	프로젝트 이륾을 우클릭 후 Coverage As > Junit Test 수행 후 아래 view에서 커버리지 확인
-	View : Window > Show View > Others > Java > Coverage
+ - 커버리지 검사
+ 
+		프로젝트 이름을 우클릭 후 Coverage As > Junit Test 수행 후 아래 view에서 결과 확인한다.
+ 
+ - View
+ 
+		Window > Show View > Others > Java > Coverage
 
 FindBugs : http://findbugs.cs.umd.edu/eclipse
 
-	프로젝트 명 우클릭 > Find bugs > Find bugs 수행 후 아래 Bug Explorer에서 정적 분석 결과 확인
+ - 정적 분석
 
-### STS의 Java Convention을 기본 템플릿으로 사용함 ###
-	Preference > Java > Code Style > Formatter > New > Java Convention를 기반으로 기본 템플릿 생성
+		프로젝트 명 우클릭 > Find bugs > Find bugs 수행 후 아래 view에서 결과 확인한다.
+		
+ - view
+
+		Window > Show View > Find Bugs > Bug Explorer	
+
+### Java Convention을 기본 템플릿으로 사용함 ###
+
+ - Preference > Java > Code Style > Formatter > New > Java Convention를 기반으로 기본 템플릿 생성한다.
 
 ### Checkstyle 설정파일 불러오기 ###
-	Preference > Checkstyle > New 선택하여 아래 설정대로 입력
+
+Preference > Checkstyle > New 선택하여 아래 설정대로 입력한다.
+
 	Type : External Configuration File
 	Name : tinyCheckstyle
 	Location : tinyCheckstyle.xml
 
-### Maximum Line Width : 120 ###
-	Preference > Java > Code Style > Formatter > Edit > Line Wrapping > Maximum line width : 120
-	Preference > XML > XML Files > Editor > Line width : 120
-	Preference > Web > JSP Files > Editor > Line Width : 120 
+### Line Width : 120 ###
 
-### Indent 설정 ###
-	Preference > Java > Code Style > Formatter > edit > Indentation > 4
-	Preference > Java > Code Style > Formatter > edit > Indentation > Tab policy > Tabs only
+ - Preference > Java > Code Style > Formatter > Edit > Line Wrapping > Maximum line width : 120
+ - Preference > XML > XML Files > Editor > Line width : 120
+ - Preference > Web > JSP Files > Editor > Line Width : 120 
+
+### Tab Indent 설정 ###
+
+ - Preference > Java > Code Style > Formatter > edit > Indentation > 4
+ - Preference > Java > Code Style > Formatter > edit > Indentation > Tab policy > Tabs only
 
 ### Encoding 수정 ###
-	Preference > Web > CSS Files > Encoding : ISO 10646/Unicode(UTF-8)
-	Preference > Web > HTML Files > Encoding : ISO 10646/Unicode(UTF-8)
-	Preference > Web > JSP Files > Encoding : ISO 10646/Unicode(UTF-8)
-	Preference > General > Content Types > Text > Java Properties Files > *.properties > UTF-8을 선택 후 Update
+
+ - Preference > Web > CSS Files > Encoding : ISO 10646/Unicode(UTF-8)
+ - Preference > Web > HTML Files > Encoding : ISO 10646/Unicode(UTF-8)
+ - Preference > Web > JSP Files > Encoding : ISO 10646/Unicode(UTF-8)
+ - Preference > General > Content Types > Text > Java Properties Files > *.properties > UTF-8을 선택 후 Update
 	
 ### 개행문자 (LF 사용, Not CRLF) ###
-	Preference > General > Workspace > New text file line delimiter : Unix
+
+ - Preference > General > Workspace > New text file line delimiter : Unix
 
 ### md 파일 editor 설정 ###
-	Preferences/General/Editors/File Associations/*.md 파일에 Text Editor 추가
+
+ - Preferences/General/Editors/File Associations/*.md 파일에 Text Editor 추가한다.
 
 ### 자주 쓰는 static import 등록 ###
-Preference > Java > Editor > Templates > Favorites > New Type에 클릭 후 아래 내용 추가
+Preference > Java > Editor > Templates > Favorites > New Type에 클릭 후 아래 내용 추가한다.
 
 	name : ti
 	context : java
@@ -150,11 +197,11 @@ Preference > Java > Editor > Templates > Favorites > New Type에 클릭 후 아�
 	import static org.mockito.Mockito.*;
 
 ### static import 에서 *이 풀리지 않게 설정 ###
-	Preference > Java > Code Style > Organize Imports > Number of static imports를 1로 설정
+ - Preference > Java > Code Style > Organize Imports > Number of static imports를 1로 설정한다.
 
 ### resources 순서 변경 ###
-STS에서 local 설정을 적용하기 위해 다음과 같이 설정  
-Project Properties > Java Build Path > Order and Export 에서 아래와 같은 순서로 설정 변경  
+STS에서 local 설정을 적용하기 위해 다음과 같이 설정한다.  
+Project Properties > Java Build Path > Order and Export 에서 아래와 같은 순서로 설정 변경한다.
  	
 	src/main/java
 	src/main/resources
@@ -163,15 +210,17 @@ Project Properties > Java Build Path > Order and Export 에서 아래와 같은 
 	src/main/resources-release
 	
 AWS 운영 서버 설정 (Amazon Linux AMI)
-----------------------------------
+-----------------------------------
 ### ssh로 War 파일 배포 ###
-/usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요
-/etc/sudoers 파일에 아래 부분 주석 처리함
+
+/usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요하다.  
+/etc/sudoers 파일에 아래 부분 주석 처리한다.
 
 	Defaults    requiretty
 
 ### tomcat 배포 ###
-/usr/share/tomcat6/conf/tomcat-users.conf 파일에 아래 내용 추가
+
+mvn으로 tomcat에 배포하기 위해서 /usr/share/tomcat6/conf/tomcat-users.conf 파일에 아래 내용 추가한다.
 
 	<tomcat-users>
 	    <role rolename="manager"/>
@@ -191,7 +240,9 @@ pom.xml 파일에 AWS 배포 서버 IP 설정
 		</configuration>
 	</plugin>
 			
-mvn tomcat:undeploy tomcat:deploy으로 AWS 서버에 배포
+AWS 서버 배포
+
+	mvn tomcat:undeploy tomcat:deploy
 
 빌드 서버
 --------
