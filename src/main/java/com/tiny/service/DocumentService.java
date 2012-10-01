@@ -27,19 +27,18 @@ public class DocumentService {
 	private FacebookService facebookService;
 
 	public void save(Document document) {
-		document.setUserId(facebookService.getId());
+		document.setProviderUserId(facebookService.getId());
 		document.setEmail(facebookService.getEmail());
 		document.setName(facebookService.getName());
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
-		document.setLastUpdate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		documentRepository.save(document);
 	}
 	
 	@Transactional
 	public Document saveTransactional(Document document) {
 		save(document);
-		return documentRepository.getLastDocument();
+		return documentRepository.getLast();
 	}
 
 	public List<Document> getAll() {
@@ -51,8 +50,8 @@ public class DocumentService {
 		return documents;
 	}
 	
-	public Document getLastDocument() {
-		return documentRepository.getLastDocument();
+	public Document getLast() {
+		return documentRepository.getLast();
 	}
 	
 	public void delete(Integer documentId) {

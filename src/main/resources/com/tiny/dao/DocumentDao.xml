@@ -11,16 +11,15 @@
 		<result property="dislikeCount" column="dislikeCount" />
 		<result property="commentCount" column="commentCount" />
 		<result property="shareCount" column="shareCount" />
-		<result property="userId" column="userId" />
+		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="email" column="email" />
 		<result property="ipAddress" column="ipAddress" />
 		<result property="tags" column="tags" />
 		<result property="regDate" column="regDate" />
-		<result property="lastUpdate" column="lastUpdate" />
 	</resultMap>
 	
-	<insert id="saveDocument" parameterType="document">
+	<insert id="save" parameterType="document">
 		INSERT
 		INTO document 
 				(point,
@@ -31,13 +30,12 @@
 				dislikeCount,
 				commentCount,
 				shareCount,
-				userId,
+				providerUserId,
 				name,
 				email,
 				ipAddress,
 				tags,
-				regDate,
-				lastUpdate)
+				regDate)
 		VALUES (#{point},
 				#{isNotice},
 				#{color},
@@ -46,33 +44,32 @@
 				#{dislikeCount},
 				#{commentCount},
 				#{shareCount},
-				#{userId},
+				#{providerUserId},
 				#{name},
 				#{email},
 				#{ipAddress},
 				#{tags},
-				NOW(),
 				NOW());
 	</insert>
 	
-	<select id="getAllDocument" resultMap="result">
+	<select id="getAll" resultMap="result">
 		SELECT *
 		FROM document
 		ORDER BY documentId DESC;
 	</select>
 	
-	<select id="getLastDocument" resultType="document">
+	<select id="getLast" resultType="document">
 		SELECT *
 		FROM document
 		WHERE documentId = LAST_INSERT_ID();
 	</select>
 	
-	<select id="countDocument" resultType="int">
+	<select id="count" resultType="int">
 		SELECT COUNT(*)
 		FROM document;
 	</select>
 	
-	<update id="updateDocument" parameterType="document">
+	<update id="update" parameterType="document">
   		UPDATE document
   		SET
   			point = #{point},
@@ -83,16 +80,15 @@
 			dislikeCount = #{dislikeCount},
 			commentCount = #{commentCount},
 			shareCount = #{shareCount},
-			userId = #{userId},
+			providerUserId = #{providerUserId},
 			name = #{name},
 			email = #{email},
 			ipAddress = #{ipAddress},
-			tags = #{tags},
-			lastUpdate = NOW()
+			tags = #{tags}
   		where documentId = #{documentId};
 	</update>
 	
-	<delete id="deleteDocument" parameterType="int">
+	<delete id="delete" parameterType="int">
 		DELETE
 		FROM document
 		WHERE documentId = #{documentId};

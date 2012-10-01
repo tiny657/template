@@ -17,7 +17,7 @@ final class UserCookieGenerator {
 	public void addCookie(String userId, HttpServletResponse response) {
 		userCookieGenerator.addCookie(response, userId);
 	}
-
+	
 	public void removeCookie(HttpServletResponse response) {
 		userCookieGenerator.addCookie(response, "");
 	}

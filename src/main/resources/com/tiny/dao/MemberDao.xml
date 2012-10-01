@@ -3,98 +3,89 @@
 <mapper namespace="com.tiny.dao.MemberDao">
 	<resultMap id="result" type="member">
 		<result property="memberId" column="memberId" />
-		<result property="userId" column="userId" />
+		<result property="providerUserId" column="providerUserId" />
 		<result property="email" column="email" />
 		<result property="name" column="name" />
-		<result property="password" column="password" />
-		<result property="birthday" column="birthday" />
-		<result property="description" column="description" />
 		<result property="point" column="point" />
 		<result property="documentCount" column="documentCount" />
 		<result property="commentCount" column="commentCount" />
 		<result property="likeCount" column="likeCount" />
 		<result property="dislikeCount" column="dislikeCount" />
 		<result property="isAdmin" column="isAdmin" />
-		<result property="allowMailing" column="allowMailing" />
 		<result property="regDate" column="regDate" />
 		<result property="lastLogin" column="lastLogin" />
 	</resultMap>
 	
-	<insert id="saveMember" parameterType="member">
+	<insert id="save" parameterType="member">
 		INSERT
-		INTO member 
-				(userId,
+		INTO member
+				(providerUserId,
 				email,
 				name,
-				password,
-				birthday,
-				description,
 				point,
 				documentCount,
 				commentCount,
 				likeCount,
 				dislikeCount,
 				isAdmin,
-				allowMailing,
 				regDate,
 				lastLogin)
-		VALUES (#{userId},
+		VALUES (#{providerUserId},
 				#{email},
 				#{name},
-				#{password},
-				#{birthday},
-				#{description},
 				#{point},
 				#{documentCount},
 				#{commentCount},
 				#{likeCount},
 				#{dislikeCount},
 				#{isAdmin},
-				#{allowMailing},
 				NOW(),
 				NOW());
 	</insert>
 	
-	<select id="getAllMember" resultMap="result">
+	<select id="getAll" resultMap="result">
 		SELECT *
 		FROM member;
 	</select>
 	
-	<select id="getMember" resultType="member">
+	<select id="get" resultType="member">
 		SELECT *
 		FROM member
-		WHERE userId = #{value}
-		LIMIT 1;
+		WHERE providerUserId = #{value}
 	</select>
 	
-	<select id="countMember" resultType="int">
+	<select id="count" resultType="int">
 		SELECT COUNT(*)
 		FROM member;
 	</select>
 	
-	<update id="updateMember" parameterType="member">
+	<update id="update" parameterType="member">
   		UPDATE member
   		SET
-  			userId = #{userId},
 			email = #{email},
 			name = #{name},
-			password = #{password},
-			birthday = #{birthday},
-			description = #{description},
 			point = #{point},
 			documentCount = #{documentCount},
 			commentCount = #{commentCount},
 			likeCount = #{likeCount},
 			dislikeCount = #{dislikeCount},
 			isAdmin = #{isAdmin},
-			allowMailing = #{allowMailing},
 			lastLogin = NOW()
-  		where userId = #{userId};
+  		where providerUserId = #{providerUserId};
 	</update>
 	
-	<delete id="deleteMember" parameterType="int">
+	<update id="updateLastLogin" parameterType="String">
+  		UPDATE member
+  		SET
+			lastLogin = NOW()
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<delete id="delete" parameterType="String">
 		DELETE
 		FROM member
-		WHERE userId = #{userId};
+		WHERE providerUserId = #{providerUserId};
 	</delete>
 </mapper>

@@ -19,19 +19,15 @@ CREATE TABLE IF NOT EXISTS UserConnection (
 
 CREATE TABLE member (
 	memberId INT AUTO_INCREMENT,
-	userId VARCHAR(16) UNIQUE NOT NULL,
+	providerUserId VARCHAR(16) UNIQUE NOT NULL,
 	name VARCHAR(20),
 	email VARCHAR(40),
-	password CHAR(16) NOT NULL,
-	birthday DATE,
-	description TEXT,
 	point INT DEFAULT 0,
 	documentCount INT DEFAULT 0,
 	commentCount INT DEFAULT 0,
 	likeCount INT DEFAULT 0,
 	dislikeCount INT DEFAULT 0,
 	isAdmin BOOLEAN DEFAULT false,
-	allowMailing BOOLEAN DEFAULT false,
 	regDate DATETIME NOT NULL,
 	lastLogin DATETIME NOT NULL,
 	PRIMARY KEY (memberId)
@@ -47,13 +43,12 @@ CREATE TABLE document (
 	dislikeCount INT DEFAULT 0,
 	commentCount INT DEFAULT 0,
 	shareCount INT DEFAULT 0,
-	userId VARCHAR(16) NOT NULL,
+	providerUserId VARCHAR(16) NOT NULL,
 	name VARCHAR(20),
 	email VARCHAR(40),
 	ipAddress CHAR(8) NOT NULL,
 	tags TEXT,
 	regDate DATE NOT NULL,
-	lastUpdate DATE NOT NULL,
 	PRIMARY KEY (documentId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
@@ -63,7 +58,7 @@ CREATE TABLE comment (
 	likeCount BOOLEAN DEFAULT 0,
 	dislikeCount BOOLEAN DEFAULT 0,
 	content TEXT NOT NULL,
-	userId VARCHAR(16) NOT NULL,
+	providerUserId VARCHAR(16) NOT NULL,
 	regDate DATE NOT NULL,
 	PRIMARY KEY (commentId),
 	FOREIGN KEY (documentId) REFERENCES document(documentId)

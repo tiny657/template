@@ -15,13 +15,12 @@ public class Document {
 	private int dislikeCount;
 	private int commentCount;
 	private int shareCount;
-	private String userId;
+	private String providerUserId;
 	private String name;
 	private String email;
 	private String ipAddress;
 	private String tags;
 	private Date regDate;
-	private Date lastUpdate;
 
 	public void setIpAddress(String ipAddress) {
 		String[] split = ipAddress.split("\\.");

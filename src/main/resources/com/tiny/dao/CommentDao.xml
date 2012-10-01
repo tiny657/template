@@ -10,24 +10,24 @@
 		<result property="userId" column="userId" />
 	</resultMap>
 	
-	<insert id="saveComment" parameterType="comment">
+	<insert id="save" parameterType="comment">
 		INSERT
 		INTO comment 
 				(documentId,
 				likeCount,
 				dislikeCount,
 				content,
-				userId,
+				providerUserId,
 				regDate)
 		VALUES (#{documentId},
 				#{likeCount},
 				#{dislikeCount},
 				#{content},
-				#{userId},
+				#{providerUserId},
 				#{regDate});
 	</insert>
 	
-	<select id="getComments" parameterType="int" resultMap="result">
+	<select id="get" parameterType="int" resultMap="result">
 		SELECT *
 		FROM comment
 		WHERE documentId = #{documentId}
@@ -37,29 +37,29 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
-	<select id="countComment" resultType="int">
+	<select id="count" resultType="int">
 		SELECT COUNT(*)
 		FROM comment;
 	</select>
 	
-	<update id="updateComment" parameterType="comment">
+	<update id="update" parameterType="comment">
   		UPDATE comment
   		SET
   			likeCount = #{likeCount},
 			dislikeCount = #{dislikeCount},
 			content = #{content},
-			userId = #{userId},
+			providerUserId = #{providerUserId},
 			regDate = #{regDate}
   		where commentId = #{commentId};
 	</update>
 	
-	<delete id="deleteComment" parameterType="int">
+	<delete id="delete" parameterType="int">
 		DELETE
 		FROM comment
 		WHERE commentId = #{commentId};
 	</delete>
 	
-	<delete id="deleteCommentWithDocumentId" parameterType="int">
+	<delete id="deleteWithDocumentId" parameterType="int">
 		DELETE
 		FROM comment
 		WHERE documentId = #{documentId};

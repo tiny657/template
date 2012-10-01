@@ -18,18 +18,18 @@ public class DocumentRepository {
 	private DocumentDao documentDao;
 
 	public void save(Document document) {
-		documentDao.saveDocument(document);
+		documentDao.save(document);
 	}
 
 	public List<Document> getAll() {
-		return documentDao.getAllDocument();
+		return documentDao.getAll();
 	}
 	
-	public Document getLastDocument() {
-		return documentDao.getLastDocument();
+	public Document getLast() {
+		return documentDao.getLast();
 	}
 
 	public void delete(Integer documentId) {
-		documentDao.deleteDocument(documentId);
+		documentDao.delete(documentId);
 	}
 }

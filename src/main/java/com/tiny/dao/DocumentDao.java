@@ -5,15 +5,15 @@ import java.util.List;
 import com.tiny.document.Document;
 
 public interface DocumentDao {
-	public void saveDocument(Document document);
+	public void save(Document document);
 
-	public List<Document> getAllDocument();
+	public List<Document> getAll();
 
-	public Document getLastDocument();
+	public Document getLast();
 
-	public Integer countDocument();
+	public Integer count();
 
-	public void updateDocument(Document document);
+	public void update(Document document);
 
-	public void deleteDocument(int documentId);
+	public void delete(int documentId);
 }

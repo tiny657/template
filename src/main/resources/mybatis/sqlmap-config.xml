@@ -10,5 +10,6 @@
 		<typeAlias type="com.tiny.member.Member" alias="member" />
 		<typeAlias type="com.tiny.document.Document" alias="document" />
 		<typeAlias type="com.tiny.comment.Comment" alias="comment" />
+		<typeAlias type="com.tiny.userConnection.UserConnection" alias="userConnection" />
 	</typeAliases>
 </configuration>

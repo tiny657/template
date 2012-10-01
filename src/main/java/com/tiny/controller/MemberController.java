@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tiny.service.FacebookService;
+import com.tiny.common.util.Constant;
 import com.tiny.service.MemberService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class MemberController {
@@ -19,15 +20,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@Autowired
-	private FacebookService facebookService;
-
 	@RequestMapping(value = { "/profile" }, method = RequestMethod.GET)
 	public ModelAndView profile() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.getMember(facebookService.getProfile()));
-		model.addAttribute("url", "profile");
+		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("url", Constant.profile);
 		mav.addAllObjects(model);
 		mav.setViewName("member");
 		return mav;

@@ -18,35 +18,35 @@ public class DocumentDaoTest extends CommonTest {
 	@Test
 	public void testInsertDocument() {
 		// Given
-		int count = documentDao.countDocument();
+		int count = documentDao.count();
 
 		// When
-		documentDao.saveDocument(getDocument());
+		documentDao.save(getDocument());
 
 		// Then
-		assertThat(documentDao.countDocument(), is(count + 1));
+		assertThat(documentDao.count(), is(count + 1));
 	}
 
 	@Test
 	public void testUpdateDocument() {
 		// Given
-		documentDao.saveDocument(getDocument());
-		int count = documentDao.countDocument();
+		documentDao.save(getDocument());
+		int count = documentDao.count();
 
 		// When
-		documentDao.updateDocument(getDocument());
+		documentDao.update(getDocument());
 
 		// Then
-		assertThat(documentDao.countDocument(), is(count));
+		assertThat(documentDao.count(), is(count));
 	}
 
 	@Test
 	public void testGetDocument() {
 		// Given
-		documentDao.saveDocument(getDocument());
+		documentDao.save(getDocument());
 
 		// When
-		Document document = documentDao.getLastDocument();
+		Document document = documentDao.getLast();
 
 		// Then
 		assertThat(document.getContent(), is(getDocument().getContent()));
@@ -55,23 +55,22 @@ public class DocumentDaoTest extends CommonTest {
 	@Test
 	public void testDeleteDocument() {
 		// Given
-		documentDao.saveDocument(getDocument());
-		int count = documentDao.countDocument();
+		documentDao.save(getDocument());
+		int count = documentDao.count();
 
 		// When
-		documentDao.deleteDocument(documentDao.getLastDocument().getDocumentId());
+		documentDao.delete(documentDao.getLast().getDocumentId());
 
 		// Then
-		assertThat(documentDao.countDocument(), is(count - 1));
+		assertThat(documentDao.count(), is(count - 1));
 	}
 
 	private Document getDocument() {
 		Document document = new Document();
 		document.setContent("content");
-		document.setUserId("userId");
+		document.setProviderUserId("userId");
 		document.setIpAddress("127.0.0.1");
 		document.setRegDate(new Date());
-		document.setLastUpdate(new Date());
 		return document;
 	}
 }

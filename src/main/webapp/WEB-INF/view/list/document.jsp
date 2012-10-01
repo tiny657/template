@@ -34,7 +34,9 @@
 		</script>
 	</td>
 	<td>
-		<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
+		<c:if test="${member.providerUserId eq document.providerUserId}">
+			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
+		</c:if>
 		<%-- Modal --%>
 		<div class="modal hide fade" id="deleteModal${documentId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">

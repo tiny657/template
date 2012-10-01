@@ -18,18 +18,18 @@ public class CommentRepository {
 	private CommentDao commentDao;
 
 	public void save(Comment comment) {
-		commentDao.saveComment(comment);
+		commentDao.save(comment);
 	}
 
-	public List<Comment> getComments(Integer documentId) {
-		return commentDao.getComments(documentId);
+	public List<Comment> get(Integer documentId) {
+		return commentDao.get(documentId);
 	}
 
 	public void deleteWithDocumentId(Integer documentId) {
-		commentDao.deleteCommentWithDocumentId(documentId);
+		commentDao.deleteWithDocumentId(documentId);
 	}
 	
 	public void delete(Integer commentId) {
-		commentDao.deleteComment(commentId);
+		commentDao.delete(commentId);
 	}
 }

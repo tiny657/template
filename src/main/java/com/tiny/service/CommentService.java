@@ -26,14 +26,14 @@ public class CommentService {
 	private FacebookService facebookService;
 
 	public void save(Comment comment) {
-		comment.setUserId(facebookService.getId());
+		comment.setProviderUserId(facebookService.getId());
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
 	}
 
-	public List<Comment> getComments(Integer documentId) {
-		List<Comment> comments = commentRepository.getComments(documentId);
+	public List<Comment> get(Integer documentId) {
+		List<Comment> comments = commentRepository.get(documentId);
 		for (Comment comment : comments) {
 			comment.setContent(comment.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
 		}

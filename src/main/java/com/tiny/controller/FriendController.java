@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tiny.common.util.Constant;
 import com.tiny.service.FacebookService;
 
 @Controller
@@ -23,6 +24,7 @@ public class FriendController {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		model.addAttribute("friends", facebookService.getFriends());
+		model.addAttribute("url", Constant.friend);
 		mav.addAllObjects(model);
 		mav.setViewName("friend");
 		return mav;

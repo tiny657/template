@@ -18,59 +18,58 @@ public class MemberDaoTest extends CommonTest {
 	@Test
 	public void testInsertMember() {
 		// Given
-		int count = memberDao.countMember();
+		int count = memberDao.count();
 
 		// When
-		memberDao.saveMember(getMember());
+		memberDao.save(getMember());
 
 		// Then
-		assertThat(memberDao.countMember(), is(count + 1));
+		assertThat(memberDao.count(), is(count + 1));
 	}
 
 	@Test
 	public void testUpdateMember() {
 		// Given
-		memberDao.saveMember(getMember());
-		int count = memberDao.countMember();
+		memberDao.save(getMember());
+		int count = memberDao.count();
 
 		// When
-		memberDao.updateMember(getMember());
+		memberDao.update(getMember());
 
 		// Then
-		assertThat(memberDao.countMember(), is(count));
+		assertThat(memberDao.count(), is(count));
 	}
 
 	@Test
 	public void testGetMember() {
 		// Given
 		Member memberTmp = getMember();
-		memberDao.saveMember(memberTmp);
+		memberDao.save(memberTmp);
 
 		// When
-		Member member = memberDao.getMember(memberTmp.getUserId());
+		Member member = memberDao.get(memberTmp.getProviderUserId());
 
 		// Then
-		assertThat(member.getUserId(), is(memberTmp.getUserId()));
+		assertThat(member.getProviderUserId(), is(memberTmp.getProviderUserId()));
 	}
 
 	@Test
 	public void testDeleteMember() {
 		// Given
 		Member member = getMember();
-		memberDao.saveMember(member);
-		int count = memberDao.countMember();
+		memberDao.save(member);
+		int count = memberDao.count();
 
 		// When
-		memberDao.deleteMember(member.getUserId());
+		memberDao.delete(member.getProviderUserId());
 
 		// Then
-		assertThat(memberDao.countMember(), is(count - 1));
+		assertThat(memberDao.count(), is(count - 1));
 	}
 
 	private Member getMember() {
 		Member member = new Member();
-		member.setUserId(("u" + Math.random() * 100).substring(0, 12));
-		member.setPassword("password");
+		member.setProviderUserId(("u" + Math.random() * 100).substring(0, 12));
 		member.setRegDate(new Date());
 		member.setLastLogin(new Date());
 		return member;

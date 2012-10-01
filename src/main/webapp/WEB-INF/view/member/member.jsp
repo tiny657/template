@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
 <div class="container">
-	<img class="thumbnail" src="http://graph.facebook.com/${member.userId}/picture?type=large" />
+	<img class="thumbnail" src="http://graph.facebook.com/${member.providerUserId}/picture?type=large" />
 	<h3 style="color:#0082CC">${member.name}</h3>
 	<h4 style="color:#AAA">${member.email}</h4>
 

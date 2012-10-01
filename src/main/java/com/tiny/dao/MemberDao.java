@@ -5,15 +5,17 @@ import java.util.List;
 import com.tiny.member.Member;
 
 public interface MemberDao {
-	public void saveMember(Member member);
+	public void save(Member member);
 
-	public List<Member> getAllMember();
+	public List<Member> getAll();
 
-	public Member getMember(String userId);
+	public Member get(String providerUserId);
+	
+	public Integer count();
 
-	public Integer countMember();
+	public void update(Member member);
+	
+	public void updateLastLogin(String userId);
 
-	public void updateMember(Member member);
-
-	public void deleteMember(String userId);
+	public void delete(String userId);
 }
