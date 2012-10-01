@@ -9,6 +9,8 @@ public interface CommentDao {
 
 	public List<Comment> get(Integer documentId);
 	
+	public Comment getLast();
+	
 	public Integer getLastCommentId();
 
 	public Integer count();

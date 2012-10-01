@@ -75,6 +75,18 @@
 				}
 			});
 		}
+		
+		function deleteComment(commentId) {
+			$.ajax({
+				type : "POST",
+				url : "/comment",
+				dataType: "text",
+				data: {"commentId": commentId, _method: "DELETE"},
+				success : function() {
+					$("#comment" + commentId).remove();
+				}
+			});
+		}
 		$("textarea").autoresize();
 	</script>
 </div>

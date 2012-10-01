@@ -36,7 +36,7 @@ public class DocumentService {
 	}
 	
 	@Transactional
-	public Document saveTransactional(Document document) {
+	public Document saveAndGet(Document document) {
 		save(document);
 		return documentRepository.getLast();
 	}

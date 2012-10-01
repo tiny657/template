@@ -17,6 +17,7 @@ import com.tiny.document.Document;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class DocumentController {
@@ -36,7 +37,8 @@ public class DocumentController {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		document.setIpAddress(request.getRemoteAddr());
-		model.addAttribute("document", documentService.saveTransactional(document));
+		model.addAttribute("document", documentService.saveAndGet(document));
+		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("document");
 		return mav;

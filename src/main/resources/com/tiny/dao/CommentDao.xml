@@ -33,6 +33,12 @@
 		WHERE documentId = #{documentId}
 	</select>
 	
+	<select id="getLast" parameterType="int" resultMap="result">
+		SELECT *
+		FROM comment
+		WHERE commentId = LAST_INSERT_ID();
+	</select>
+	
 	<select id="getLastCommentId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>

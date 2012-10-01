@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.comment.Comment;
 import com.tiny.common.util.XssFilter;
@@ -30,6 +31,12 @@ public class CommentService {
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
+	}
+	
+	@Transactional
+	public Comment saveAndGet(Comment comment) {
+		save(comment);
+		return commentRepository.getLast();
 	}
 
 	public List<Comment> get(Integer documentId) {

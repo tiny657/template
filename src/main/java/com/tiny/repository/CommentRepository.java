@@ -24,6 +24,10 @@ public class CommentRepository {
 	public List<Comment> get(Integer documentId) {
 		return commentDao.get(documentId);
 	}
+	
+	public Comment getLast() {
+		return commentDao.getLast();
+	}
 
 	public void deleteWithDocumentId(Integer documentId) {
 		commentDao.deleteWithDocumentId(documentId);

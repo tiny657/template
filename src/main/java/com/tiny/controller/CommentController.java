@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.comment.Comment;
 import com.tiny.service.CommentService;
+import com.tiny.service.MemberService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class CommentController {
@@ -19,19 +21,26 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
+		ModelAndView mav = new ModelAndView();
+		ModelMap model = new ModelMap();
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent(content);
-		commentService.save(comment);
-		
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		model.addAttribute("comment", comment);
+		model.addAttribute("comment", commentService.saveAndGet(comment));
+		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("comment");
 		return mav;
+	}
+
+	@RequestMapping(value = { "/comment" }, method = RequestMethod.DELETE)
+	public void delete(@RequestParam Integer commentId) {
+		commentService.delete(commentId);
 	}
 }
