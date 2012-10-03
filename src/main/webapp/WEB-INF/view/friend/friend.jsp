@@ -6,15 +6,22 @@
 		<table class="table table-striped">
 			<tbody>
 				<%-- friend list --%>
-				<c:forEach var="friend" items="${friends}">
-					<tr>
-						<td>
-							<img class="img-polaroid" src="http://graph.facebook.com/${friend.id}/picture" />
-							${friend.name}
-							<br /><br />
-						</td>
-					</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${empty friends}">
+						There's no friend.
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="friend" items="${friends}">
+							<tr>
+								<td>
+									<img class="img-polaroid" src="http://graph.facebook.com/${friend.id}/picture" />
+										${friend.name}
+									<br /><br />
+								</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 		</table>
 	</div>
