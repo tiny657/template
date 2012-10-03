@@ -8,7 +8,11 @@
 				<%-- friend list --%>
 				<c:choose>
 					<c:when test="${empty friends}">
-						There's no friend.
+						<tr>
+							<td>
+								<spring:message code="friend.noFriends" />
+							</td>
+						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="friend" items="${friends}">

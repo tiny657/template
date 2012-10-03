@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.common.util.Constant;
-import com.tiny.service.FacebookService;
+import com.tiny.service.FriendService;
 
 @Controller
 public class FriendController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FriendController.class);
 
 	@Autowired
-	private FacebookService facebookService;
+	private FriendService friendService;
 
 	@RequestMapping(value = { "/friend" }, method = RequestMethod.GET)
 	public ModelAndView getFriends() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("friends", facebookService.getFriends());
+		model.addAttribute("friends", friendService.getTemplateFriends());
 		model.addAttribute("url", Constant.friend);
 		mav.addAllObjects(model);
 		mav.setViewName("friend");

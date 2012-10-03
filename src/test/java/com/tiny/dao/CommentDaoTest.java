@@ -95,11 +95,11 @@ public class CommentDaoTest extends CommonTest {
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent("content");
-		comment.setProviderUserId("userId");
+		comment.setProviderUserId("providerUserId");
 		comment.setRegDate(new Date());
 		return comment;
 	}
-	
+
 	@Transactional
 	private Document createDocument() {
 		Document document = new Document();
