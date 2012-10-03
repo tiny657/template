@@ -15,6 +15,33 @@
 		<result property="expireTime" column="expireTime" />
 	</resultMap>
 	
+	<insert id="save" parameterType="userConnection">
+		INSERT
+		INTO UserConnection
+				(userId,
+				providerId,
+				providerUserId,
+				rank,
+				displayName,
+				profileUrl,
+				imageUrl,
+				accessToken,
+				secret,
+				refreshToken,
+				expireTime)
+		VALUES (#{userId},
+				#{providerId},
+				#{providerUserId},
+				#{rank},
+				#{displayName},
+				#{profileUrl},
+				#{imageUrl},
+				#{accessToken},
+				#{secret},
+				#{refreshToken},
+				#{expireTime});
+	</insert>
+	
 	<select id="getProviderUserId" resultType="String">
 		SELECT providerUserId
 		FROM UserConnection

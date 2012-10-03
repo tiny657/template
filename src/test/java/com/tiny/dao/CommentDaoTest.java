@@ -21,59 +21,59 @@ public class CommentDaoTest extends CommonTest {
 
 	@Autowired
 	private DocumentDao documentDao;
-	
+
 	private Document document;
 
 	@Transactional
 	@Before
 	public void setUp() {
-		documentDao.save(getDocument());
+		documentDao.save(createDocument());
 		document = documentDao.getLast();
 	}
 
 	@Test
-	public void testInsertComment() {
+	public void save() {
 		// Given
 		int count = commentDao.count();
 
 		// When
-		commentDao.save(getComment(document.getDocumentId()));
+		commentDao.save(createComment(document.getDocumentId()));
 
 		// Then
 		assertThat(commentDao.count(), is(count + 1));
 	}
-	
+
 	@Test
-	public void testGetComments() {
+	public void get() {
 		// Given
-		commentDao.save(getComment(document.getDocumentId()));
-		
+		commentDao.save(createComment(document.getDocumentId()));
+
 		// When
 		List<Comment> comments = commentDao.get(document.getDocumentId());
 
 		// Then
-		assertThat(comments.get(0).getProviderUserId(), is(getComment(document.getDocumentId()).getProviderUserId()));
+		assertThat(comments.get(0).getProviderUserId(), is(createComment(document.getDocumentId()).getProviderUserId()));
 	}
 
 	@Test
-	public void testUpdateComment() {
+	public void update() {
 		// Given
-		commentDao.save(getComment(document.getDocumentId()));
+		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
 
 		// When
-		commentDao.update(getComment(document.getDocumentId()));
+		commentDao.update(createComment(document.getDocumentId()));
 
 		// Then
 		assertThat(commentDao.count(), is(count));
 	}
 
 	@Test
-	public void testDeleteComment() {
+	public void delete() {
 		// Given
-		commentDao.save(getComment(document.getDocumentId()));
+		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
-		
+
 		// When
 		commentDao.delete(commentDao.getLastCommentId());
 
@@ -82,10 +82,10 @@ public class CommentDaoTest extends CommonTest {
 	}
 
 	@Test
-	public void testDeleteCommentWithDocumentId() {
+	public void deleteWithDocumentId() {
 		// Given
-		commentDao.save(getComment(document.getDocumentId()));
-		commentDao.save(getComment(document.getDocumentId()));
+		commentDao.save(createComment(document.getDocumentId()));
+		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
 
 		// When
@@ -95,7 +95,7 @@ public class CommentDaoTest extends CommonTest {
 		assertThat(commentDao.count(), is(count - 2));
 	}
 
-	private Comment getComment(int documentId) {
+	private Comment createComment(int documentId) {
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent("content");
@@ -104,7 +104,7 @@ public class CommentDaoTest extends CommonTest {
 		return comment;
 	}
 
-	private Document getDocument() {
+	private Document createDocument() {
 		Document document = new Document();
 		document.setContent("content");
 		document.setProviderUserId("userId");

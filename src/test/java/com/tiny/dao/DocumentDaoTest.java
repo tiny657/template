@@ -16,46 +16,46 @@ public class DocumentDaoTest extends CommonTest {
 	private DocumentDao documentDao;
 
 	@Test
-	public void testInsertDocument() {
+	public void save() {
 		// Given
 		int count = documentDao.count();
 
 		// When
-		documentDao.save(getDocument());
+		documentDao.save(createDocument());
 
 		// Then
 		assertThat(documentDao.count(), is(count + 1));
 	}
 
 	@Test
-	public void testUpdateDocument() {
+	public void get() {
 		// Given
-		documentDao.save(getDocument());
+		documentDao.save(createDocument());
+
+		// When
+		Document document = documentDao.getLast();
+
+		// Then
+		assertThat(document.getContent(), is(createDocument().getContent()));
+	}
+
+	@Test
+	public void update() {
+		// Given
+		documentDao.save(createDocument());
 		int count = documentDao.count();
 
 		// When
-		documentDao.update(getDocument());
+		documentDao.update(createDocument());
 
 		// Then
 		assertThat(documentDao.count(), is(count));
 	}
 
 	@Test
-	public void testGetDocument() {
+	public void delete() {
 		// Given
-		documentDao.save(getDocument());
-
-		// When
-		Document document = documentDao.getLast();
-
-		// Then
-		assertThat(document.getContent(), is(getDocument().getContent()));
-	}
-
-	@Test
-	public void testDeleteDocument() {
-		// Given
-		documentDao.save(getDocument());
+		documentDao.save(createDocument());
 		int count = documentDao.count();
 
 		// When
@@ -65,7 +65,7 @@ public class DocumentDaoTest extends CommonTest {
 		assertThat(documentDao.count(), is(count - 1));
 	}
 
-	private Document getDocument() {
+	private Document createDocument() {
 		Document document = new Document();
 		document.setContent("content");
 		document.setProviderUserId("userId");

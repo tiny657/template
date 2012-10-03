@@ -5,45 +5,53 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
 import com.tiny.member.Member;
+import com.tiny.userConnection.UserConnection;
 
 public class MemberDaoTest extends CommonTest {
 	@Autowired
 	private MemberDao memberDao;
 
+	@Autowired
+	private UserConnectionDao userConnectionDao;
+
+	private final String userId = "userId";
+	private final String providerUserId = "providerUserId";
+	private final String facebook = "facebook";
+	private final String accessToken = "accessToken";
+
+	@Before
+	public void setUp() {
+		UserConnection userConnection = new UserConnection();
+		userConnection.setUserId(userId);
+		userConnection.setProviderId(facebook);
+		userConnection.setProviderUserId(providerUserId);
+		userConnection.setRank(1);
+		userConnection.setAccessToken(accessToken);
+		userConnectionDao.save(userConnection);
+	}
+
 	@Test
-	public void testInsertMember() {
+	public void save() {
 		// Given
 		int count = memberDao.count();
 
 		// When
-		memberDao.save(getMember());
+		memberDao.save(createMember());
 
 		// Then
 		assertThat(memberDao.count(), is(count + 1));
 	}
 
 	@Test
-	public void testUpdateMember() {
+	public void get() {
 		// Given
-		memberDao.save(getMember());
-		int count = memberDao.count();
-
-		// When
-		memberDao.update(getMember());
-
-		// Then
-		assertThat(memberDao.count(), is(count));
-	}
-
-	@Test
-	public void testGetMember() {
-		// Given
-		Member memberTmp = getMember();
+		Member memberTmp = createMember();
 		memberDao.save(memberTmp);
 
 		// When
@@ -54,9 +62,37 @@ public class MemberDaoTest extends CommonTest {
 	}
 
 	@Test
-	public void testDeleteMember() {
+	public void update() {
 		// Given
-		Member member = getMember();
+		memberDao.save(createMember());
+		int count = memberDao.count();
+
+		// When
+		memberDao.update(createMember());
+
+		// Then
+		assertThat(memberDao.count(), is(count));
+	}
+
+	@Test
+	public void updateLastLogin() throws InterruptedException {
+		// Given
+		Member member = createMember();
+		memberDao.save(member);
+
+		// When
+		Thread.sleep(1000);
+		memberDao.updateLastLogin(userId);
+		Member memberAfterUpdate = memberDao.get(member.getProviderUserId());
+
+		// Then
+		assertThat(member.getLastLogin().toString(), not(memberAfterUpdate.getLastLogin().toString()));
+	}
+
+	@Test
+	public void delete() {
+		// Given
+		Member member = createMember();
 		memberDao.save(member);
 		int count = memberDao.count();
 
@@ -67,9 +103,9 @@ public class MemberDaoTest extends CommonTest {
 		assertThat(memberDao.count(), is(count - 1));
 	}
 
-	private Member getMember() {
+	private Member createMember() {
 		Member member = new Member();
-		member.setProviderUserId(("u" + Math.random() * 100).substring(0, 12));
+		member.setProviderUserId(providerUserId);
 		member.setRegDate(new Date());
 		member.setLastLogin(new Date());
 		return member;
