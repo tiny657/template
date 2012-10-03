@@ -24,7 +24,7 @@ public class MemberController {
 	public ModelAndView profile() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		model.addAttribute("url", Constant.profile);
 		mav.addAllObjects(model);
 		mav.setViewName("member");

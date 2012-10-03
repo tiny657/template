@@ -38,7 +38,7 @@ public class DocumentController {
 		ModelMap model = new ModelMap();
 		document.setIpAddress(request.getRemoteAddr());
 		model.addAttribute("document", documentService.saveAndGet(document));
-		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("document");
 		return mav;

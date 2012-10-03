@@ -53,7 +53,7 @@ public class ListController {
 		}
 		model.addAttribute("comments", map);
 		model.addAttribute("url", Constant.list);
-		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;

@@ -33,7 +33,7 @@ public class CommentController {
 		comment.setDocumentId(documentId);
 		comment.setContent(content);
 		model.addAttribute("comment", commentService.saveAndGet(comment));
-		model.addAttribute("member", memberService.getMember(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("comment");
 		return mav;

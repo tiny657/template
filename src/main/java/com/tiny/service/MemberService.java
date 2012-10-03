@@ -23,16 +23,16 @@ public class MemberService {
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
 	
-	public Member getMember(String userId) {
+	public Member get(String userId) {
 		Member member = memberRepository.get(userConnectionRepository.getProviderUserId(userId));
 		if (member == null) {
-			member = saveMember();
+			member = save();
 		}
 		
 		return member;
 	}
 	
-	public Member saveMember() {
+	public Member save() {
 		FacebookProfile facebookProfile = facebookService.getProfile();
 		Member member = new Member();
 		member.setProviderUserId(facebookProfile.getId());
