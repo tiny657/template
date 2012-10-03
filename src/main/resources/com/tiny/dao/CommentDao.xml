@@ -4,10 +4,12 @@
 	<resultMap id="result" type="comment">
 		<result property="commentId" column="commentId" />
 		<result property="documentId" column="documentId" />
-		<result property="like" column="like" />
-		<result property="dislike" column="dislike" />
+		<result property="likeCount" column="likeCount" />
+		<result property="dislikeCount" column="dislikeCount" />
 		<result property="content" column="content" />
-		<result property="userId" column="userId" />
+		<result property="providerUserId" column="providerUserId" />
+		<result property="name" column="name" />
+		<result property="regDate" column="regDate" />
 	</resultMap>
 	
 	<insert id="save" parameterType="comment">
@@ -18,12 +20,14 @@
 				dislikeCount,
 				content,
 				providerUserId,
+				name,
 				regDate)
 		VALUES (#{documentId},
 				#{likeCount},
 				#{dislikeCount},
 				#{content},
 				#{providerUserId},
+				#{name},
 				#{regDate});
 	</insert>
 	

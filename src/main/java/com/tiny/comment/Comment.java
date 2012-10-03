@@ -12,5 +12,6 @@ public class Comment {
 	private boolean dislikeCount;
 	private String content;
 	private String providerUserId;
+	private String name;
 	private Date regDate;
 }

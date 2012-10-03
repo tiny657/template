@@ -17,7 +17,6 @@ public class Document {
 	private int shareCount;
 	private String providerUserId;
 	private String name;
-	private String email;
 	private String ipAddress;
 	private String tags;
 	private Date regDate;

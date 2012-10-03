@@ -20,24 +20,8 @@ public class FacebookService {
 	public FacebookProfile getProfile() {
 		return facebook.userOperations().getUserProfile();
 	}
-
-	public byte[] getProfileImage() {
-		return facebook.userOperations().getUserProfileImage(ImageType.LARGE);
-	}
 	
 	public List<FacebookProfile> getFriends() {
 		return facebook.friendOperations().getFriendProfiles();
-	}
-
-	public String getId() {
-		return facebook.userOperations().getUserProfile().getId();
-	}
-
-	public String getEmail() {
-		return facebook.userOperations().getUserProfile().getEmail();
-	}
-
-	public String getName() {
-		return facebook.userOperations().getUserProfile().getName();
 	}
 }

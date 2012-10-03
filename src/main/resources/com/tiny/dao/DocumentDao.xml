@@ -13,7 +13,6 @@
 		<result property="shareCount" column="shareCount" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
-		<result property="email" column="email" />
 		<result property="ipAddress" column="ipAddress" />
 		<result property="tags" column="tags" />
 		<result property="regDate" column="regDate" />
@@ -32,7 +31,6 @@
 				shareCount,
 				providerUserId,
 				name,
-				email,
 				ipAddress,
 				tags,
 				regDate)
@@ -46,7 +44,6 @@
 				#{shareCount},
 				#{providerUserId},
 				#{name},
-				#{email},
 				#{ipAddress},
 				#{tags},
 				NOW());
@@ -82,7 +79,6 @@
 			shareCount = #{shareCount},
 			providerUserId = #{providerUserId},
 			name = #{name},
-			email = #{email},
 			ipAddress = #{ipAddress},
 			tags = #{tags}
   		where documentId = #{documentId};

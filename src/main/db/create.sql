@@ -45,7 +45,6 @@ CREATE TABLE document (
 	shareCount INT DEFAULT 0,
 	providerUserId VARCHAR(16) NOT NULL,
 	name VARCHAR(20),
-	email VARCHAR(40),
 	ipAddress CHAR(8) NOT NULL,
 	tags TEXT,
 	regDate DATE NOT NULL,
@@ -59,6 +58,7 @@ CREATE TABLE comment (
 	dislikeCount BOOLEAN DEFAULT 0,
 	content TEXT NOT NULL,
 	providerUserId VARCHAR(16) NOT NULL,
+	name VARCHAR(20),
 	regDate DATE NOT NULL,
 	PRIMARY KEY (commentId),
 	FOREIGN KEY (documentId) REFERENCES document(documentId)

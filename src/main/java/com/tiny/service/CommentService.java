@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +28,9 @@ public class CommentService {
 	private FacebookService facebookService;
 
 	public void save(Comment comment) {
-		comment.setProviderUserId(facebookService.getId());
+		FacebookProfile facebookProfile = facebookService.getProfile();
+		comment.setProviderUserId(facebookProfile.getId());
+		comment.setName(facebookProfile.getName());
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
