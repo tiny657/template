@@ -22,18 +22,10 @@ public class CommentDaoTest extends CommonTest {
 	@Autowired
 	private DocumentDao documentDao;
 
-	private Document document;
-
-	@Transactional
-	@Before
-	public void setUp() {
-		documentDao.save(createDocument());
-		document = documentDao.getLast();
-	}
-
 	@Test
 	public void save() {
 		// Given
+		Document document = createDocument();
 		int count = commentDao.count();
 
 		// When
@@ -46,6 +38,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void get() {
 		// Given
+		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
 
 		// When
@@ -58,6 +51,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void update() {
 		// Given
+		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
 
@@ -71,6 +65,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void delete() {
 		// Given
+		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
 
@@ -84,6 +79,7 @@ public class CommentDaoTest extends CommonTest {
 	@Test
 	public void deleteWithDocumentId() {
 		// Given
+		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
 		commentDao.save(createComment(document.getDocumentId()));
 		int count = commentDao.count();
@@ -103,13 +99,15 @@ public class CommentDaoTest extends CommonTest {
 		comment.setRegDate(new Date());
 		return comment;
 	}
-
+	
+	@Transactional
 	private Document createDocument() {
 		Document document = new Document();
 		document.setContent("content");
-		document.setProviderUserId("userId");
+		document.setProviderUserId("providerUserId");
 		document.setIpAddress("127.0.0.1");
 		document.setRegDate(new Date());
-		return document;
+		documentDao.save(document);
+		return documentDao.getLast();
 	}
 }
