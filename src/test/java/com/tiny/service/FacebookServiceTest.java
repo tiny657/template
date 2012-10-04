@@ -2,40 +2,65 @@ package com.tiny.service;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.api.FriendOperations;
+import org.springframework.social.facebook.api.UserOperations;
 
-import com.tiny.common.CommonTest;
+import com.tiny.common.CommonMockTest;
 
-@Ignore
-public class FacebookServiceTest extends CommonTest {
-	private FacebookTemplate facebook;
-
-	@Before
-	public void before() {
-		facebook = new FacebookTemplate(
-				"AAAC1oNlnFTcBAHgMtDUZCe8XZAbS3Lnl8pbZAsi9gUZCZC8iiN70eGW1ZAcZCsaki9sJJq2ODkazf9I3ZB3Vvvqz8ZCTjwxr4Xn"
-						+ "qPCePjct6FtQZDZD");
-	}
-
+public class FacebookServiceTest extends CommonMockTest {
+	private FacebookService facebookService;
+	
+	@Mock
+	private UserOperations mockUserOperations;
+	
+	@Mock
+	private FriendOperations mockFriendOperations;
+	
+	@Mock
+	private FacebookProfile mockFacebookProfile;
+	
+	private List<FacebookProfile> mockFacebookProfiles;
+	
+	@Mock
+	private Facebook mockFacebook;
+	
 	@Test
-	public void testGetMember() {
-		FacebookProfile userProfile = facebook.userOperations().getUserProfile();
-		assertThat(userProfile.getName(), is("Gildong Hong"));
-		assertThat(userProfile.getEmail(), is("tiny657@naver.com"));
-		assertThat(userProfile.getId(), is("100004435682348"));
-		assertThat(userProfile.getGender(), is("male"));
+	public void getProfile() {
+		// Given
+		when(mockFacebookProfile.getEmail()).thenReturn("template@template.com");
+		when(mockFacebook.userOperations()).thenReturn(mockUserOperations);
+		when(mockFacebook.userOperations().getUserProfile()).thenReturn(mockFacebookProfile);
+		FacebookService facebookService = new FacebookService(mockFacebook);
+		
+		// When
+		FacebookProfile profile = facebookService.getProfile();
+		
+		// Then
+		assertThat(profile.getEmail(), is("template@template.com"));
 	}
 	
 	@Test
-	public void testGetFriend() {
-		List<FacebookProfile> friendProfiles = facebook.friendOperations().getFriendProfiles();
-		assertThat(friendProfiles.size(), greaterThan(0));
+	public void getFriends() {
+		// Given
+		mockFacebookProfiles = new ArrayList<FacebookProfile>();
+		mockFacebookProfiles.add(mockFacebookProfile);
+		when(mockFacebook.friendOperations()).thenReturn(mockFriendOperations);
+		when(mockFacebook.friendOperations().getFriendProfiles()).thenReturn(mockFacebookProfiles);
+		FacebookService facebookService = new FacebookService(mockFacebook);
+		
+		// When
+		List<FacebookProfile> friends = facebookService.getFriends();
+		
+		// Then
+		assertThat(friends.size(), is(1));
 	}
 }

@@ -184,7 +184,7 @@ Preference > Checkstyle > New 선택하여 아래 설정대로 입력한다.
  - Preferences/General/Editors/File Associations/*.md 파일에 Text Editor 추가한다.
 
 ### 자주 쓰는 static import 등록 ###
-Preference > Java > Editor > Templates > Favorites > New Type에 클릭 후 아래 내용 추가한다.
+Preference > Java > Editor > Templates > New Type에 클릭 후 아래 내용 추가한다.
 
 	name : ti
 	context : java

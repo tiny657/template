@@ -14,8 +14,12 @@ import org.springframework.stereotype.Service;
 public class FacebookService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FacebookService.class);
 
-	@Autowired
 	private Facebook facebook;
+	
+	@Autowired
+	FacebookService(Facebook facebook) {
+		this.facebook = facebook;
+	}
 
 	public FacebookProfile getProfile() {
 		return facebook.userOperations().getUserProfile();
