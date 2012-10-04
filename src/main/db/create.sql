@@ -18,19 +18,20 @@ CREATE TABLE IF NOT EXISTS UserConnection (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE member (
-	memberId INT AUTO_INCREMENT,
-	providerUserId VARCHAR(16) UNIQUE NOT NULL,
+	providerUserId VARCHAR(16),
 	name VARCHAR(20),
+	gender BOOLEAN,
 	email VARCHAR(40),
 	point INT DEFAULT 0,
 	documentCount INT DEFAULT 0,
 	commentCount INT DEFAULT 0,
 	likeCount INT DEFAULT 0,
 	dislikeCount INT DEFAULT 0,
+	locale VARCHAR(10),
 	isAdmin BOOLEAN DEFAULT false,
 	regDate DATETIME NOT NULL,
 	lastLogin DATETIME NOT NULL,
-	PRIMARY KEY (memberId)
+	PRIMARY KEY (providerUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE document (

@@ -2,15 +2,16 @@
 
 <mapper namespace="com.tiny.dao.MemberDao">
 	<resultMap id="result" type="member">
-		<result property="memberId" column="memberId" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="email" column="email" />
 		<result property="name" column="name" />
+		<result property="gender" column="gender" />
 		<result property="point" column="point" />
 		<result property="documentCount" column="documentCount" />
 		<result property="commentCount" column="commentCount" />
 		<result property="likeCount" column="likeCount" />
 		<result property="dislikeCount" column="dislikeCount" />
+		<result property="locale" column="locale" />
 		<result property="isAdmin" column="isAdmin" />
 		<result property="regDate" column="regDate" />
 		<result property="lastLogin" column="lastLogin" />
@@ -22,22 +23,26 @@
 				(providerUserId,
 				email,
 				name,
+				gender,
 				point,
 				documentCount,
 				commentCount,
 				likeCount,
 				dislikeCount,
+				locale,
 				isAdmin,
 				regDate,
 				lastLogin)
 		VALUES (#{providerUserId},
 				#{email},
 				#{name},
+				#{gender},
 				#{point},
 				#{documentCount},
 				#{commentCount},
 				#{likeCount},
 				#{dislikeCount},
+				#{locale},
 				#{isAdmin},
 				NOW(),
 				NOW());
@@ -64,11 +69,13 @@
   		SET
 			email = #{email},
 			name = #{name},
+			gender = #{gender},
 			point = #{point},
 			documentCount = #{documentCount},
 			commentCount = #{commentCount},
 			likeCount = #{likeCount},
 			dislikeCount = #{dislikeCount},
+			locale = #{locale},
 			isAdmin = #{isAdmin},
 			lastLogin = NOW()
   		where providerUserId = #{providerUserId};

@@ -37,7 +37,9 @@ public class MemberService {
 		Member member = new Member();
 		member.setProviderUserId(facebookProfile.getId());
 		member.setName(facebookProfile.getName());
+		member.setGender(facebookProfile.getGender().equals("male"));
 		member.setEmail(facebookProfile.getEmail());
+		member.setLocale(facebookProfile.getLocale().toString());
 		memberRepository.save(member);
 		return member;
 	}
