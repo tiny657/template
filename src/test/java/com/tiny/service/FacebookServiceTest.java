@@ -39,9 +39,9 @@ public class FacebookServiceTest extends CommonMockTest {
 		when(mockFacebookProfile.getEmail()).thenReturn("template@template.com");
 		when(mockFacebook.userOperations()).thenReturn(mockUserOperations);
 		when(mockFacebook.userOperations().getUserProfile()).thenReturn(mockFacebookProfile);
-		FacebookService facebookService = new FacebookService(mockFacebook);
 		
 		// When
+		FacebookService facebookService = new FacebookService(mockFacebook);
 		FacebookProfile profile = facebookService.getProfile();
 		
 		// Then
@@ -55,9 +55,9 @@ public class FacebookServiceTest extends CommonMockTest {
 		mockFacebookProfiles.add(mockFacebookProfile);
 		when(mockFacebook.friendOperations()).thenReturn(mockFriendOperations);
 		when(mockFacebook.friendOperations().getFriendProfiles()).thenReturn(mockFacebookProfiles);
-		FacebookService facebookService = new FacebookService(mockFacebook);
 		
 		// When
+		FacebookService facebookService = new FacebookService(mockFacebook);
 		List<FacebookProfile> friends = facebookService.getFriends();
 		
 		// Then

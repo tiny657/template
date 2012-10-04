@@ -16,11 +16,14 @@ import com.tiny.repository.MemberRepository;
 public class FriendService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FriendService.class);
 
-	@Autowired
 	private FacebookService facebookService;
-
-	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	FriendService(FacebookService facebookService, MemberRepository memberRepository) {
+		this.facebookService = facebookService;
+		this.memberRepository = memberRepository;
+	}
 
 	public List<FacebookProfile> getTemplateFriends() {
 		List<FacebookProfile> result = new ArrayList<FacebookProfile>();
