@@ -26,6 +26,7 @@ Skill Set
 Getting Started
 ---------------
 ### JDK ###
+
 설치하기
 
 	$ yum install java-1.6.0-openjdk.x86_64 java-1.6.0-openjdk-devel.x86_64
@@ -48,7 +49,7 @@ Getting Started
 
 기본 template DB 생성하기
 
-	$ mysql -u root -e "CREATE DATABASE template"
+	$ mysql -u root < src/main/db/create.sql
 
 ### Tomcat ###
 
@@ -94,11 +95,13 @@ Import existing projects 시 No projects found 라는 에러가 발생하면 아
 Package Explorer에서 template 우클릭 > Configure > Convert To Maven Project를 수행하여 maven project로 생성한다.
 
 ### Eclipse project 생성 ###
+
 다운로드 받아진 template project에서 경로에서 아래와 같이 입력하여 eclipse project를 생성한다.
 
 	$ mvn eclipse:eclipse
 
 ### 브라우저 설치 ###
+
 Selenium 테스트를 위해 아래 브라우저 설치한다.
  - Internet Explorer
  - Chrome
@@ -108,6 +111,7 @@ Selenium 테스트를 위해 아래 브라우저 설치한다.
 STS Setting
 -----------
 ### Eclipse Plugin 설치 ###
+
  - STS > Help > Install New Software... 클릭 후 work with에 설치하고자 plugin URL을 입력한다.
 
 MoreUnit : http://moreunit.sourceforge.net/update-site
@@ -184,6 +188,7 @@ Preference > Checkstyle > New 선택하여 아래 설정대로 입력한다.
  - Preferences/General/Editors/File Associations/*.md 파일에 Text Editor 추가한다.
 
 ### 자주 쓰는 static import 등록 ###
+
 Preference > Java > Editor > Templates > New Type에 클릭 후 아래 내용 추가한다.
 
 	name : ti
@@ -197,9 +202,11 @@ Preference > Java > Editor > Templates > New Type에 클릭 후 아래 내용 �
 	import static org.mockito.Mockito.*;
 
 ### static import 에서 *이 풀리지 않게 설정 ###
+
  - Preference > Java > Code Style > Organize Imports > Number of static imports를 1로 설정한다.
 
 ### resources 순서 변경 ###
+
 STS에서 local 설정을 적용하기 위해 다음과 같이 설정한다.  
 Project Properties > Java Build Path > Order and Export 에서 아래와 같은 순서로 설정 변경한다.
  	
@@ -218,7 +225,7 @@ AWS 운영 서버 설정 (Amazon Linux AMI)
 
 	Defaults    requiretty
 
-### tomcat 배포 ###
+### Tomcat 배포 설정 ###
 
 mvn으로 tomcat에 배포하기 위해서 /usr/share/tomcat6/conf/tomcat-users.conf 파일에 아래 내용 추가한다.
 
@@ -240,7 +247,13 @@ pom.xml 파일에 AWS 배포 서버 IP 설정
 		</configuration>
 	</plugin>
 			
-AWS 서버 배포
+### AWS 서버 배포 ###
+
+최초 배포
+
+	mvn tomcat:deploy
+
+그 외
 
 	mvn tomcat:undeploy tomcat:deploy
 

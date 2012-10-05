@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS template;
 USE template;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS comment;
