@@ -233,6 +233,13 @@ mvn으로 tomcat에 배포하기 위해서 /usr/share/tomcat6/conf/tomcat-users.
 	    <role rolename="manager"/>
 	    <user username="admin" password="" roles="manager"/>
 	</tomcat-users>
+
+UTF-8을 지원하기 위해 아래 내용 중 가장 아래 줄을 추가한다.
+
+	<Connector port="8080" protocol="HTTP/1.1" 
+		connectionTimeout="20000" 
+		redirectPort="8443" 
+		URIEncoding="UTF-8" />
 	
 pom.xml 파일에 AWS 배포 서버 IP 설정
 
@@ -246,7 +253,7 @@ pom.xml 파일에 AWS 배포 서버 IP 설정
 			<path>/ROOT</path>
 		</configuration>
 	</plugin>
-			
+
 ### AWS 서버 배포 ###
 
 최초 배포
