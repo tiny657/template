@@ -81,7 +81,14 @@
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="updateLastLogin" parameterType="String">
+	<update id="updateName" parameterType="map">
+  		UPDATE member
+  		SET
+			name = #{name}
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="updateLastLoginTime" parameterType="String">
   		UPDATE member
   		SET
 			lastLogin = NOW()

@@ -23,7 +23,7 @@
 			<div class="nav-collapse">
 				<ul class="nav">
 					<li><a href="#">List</a></li>
-					<li><a href="#">Profile</a></li>
+					<li><a href="#">Member</a></li>
 					<li><a href="#">Friend</a></li>
 					<li><form:form method="get" action="/search" class="navbar-search pull-left"><input type="text" class="search-query span2" name="q" placeholder="Search"></form:form></li>
 				</ul>

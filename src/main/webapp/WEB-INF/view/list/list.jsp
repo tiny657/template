@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="span12">
 			<textarea path="content" id="content" class="span12" placeholder="contents"></textarea>
-			<button type="submit" class="btn btn-info" onclick="saveDocument()" id="save">Save</button>
+			<button type="submit" id="save" class="btn btn-info" onclick="saveDocument()">Save</button>
 			<br />
 			<br />
 		</div>

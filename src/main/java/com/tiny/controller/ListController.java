@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.tiny.comment.Comment;
 import com.tiny.common.util.Constant;
@@ -44,8 +45,12 @@ public class ListController {
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
+		if (!memberService.isExisted(SecurityContext.getCurrentUser().getId())) {
+			return new ModelAndView(new RedirectView("/profile"));
+		}
+
 		// update lastLogin time
-		memberService.updateLastLogin(SecurityContext.getCurrentUser().getId());
+		memberService.updateLastLoginTime(SecurityContext.getCurrentUser().getId());
 
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();

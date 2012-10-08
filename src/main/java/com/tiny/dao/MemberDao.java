@@ -1,6 +1,7 @@
 package com.tiny.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tiny.member.Member;
 
@@ -15,7 +16,9 @@ public interface MemberDao {
 
 	public void update(Member member);
 	
-	public void updateLastLogin(String userId);
+	public void updateName(Map<String, String> map);
+	
+	public void updateLastLoginTime(String userId);
 
 	public void delete(String userId);
 }

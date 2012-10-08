@@ -2,8 +2,9 @@
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
 <div class="container">
+	<form:form method="post" action="/memberUpdate" modelAttribute="member">
 	<img class="thumbnail" src="http://graph.facebook.com/${member.providerUserId}/picture?type=large" />
-	<h3 style="color:#0082CC">${member.name}</h3>
+	<h3 style="color:#0082CC"><form:input type="text" path="name" value="${member.name}" /></h3>
 	<h4 style="color:#AAA">${member.email}</h4>
 	<h4 style="color:#AAA">
 		<c:choose>
@@ -16,6 +17,8 @@
 		</c:choose>
 	</h4>
 	<h4 style="color:#AAA">${member.locale}</h4>
+	<button type="submit" class="btn btn-info">Save</button>
+	</form:form>
 
 	<hr>
 

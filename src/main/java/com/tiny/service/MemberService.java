@@ -23,6 +23,15 @@ public class MemberService {
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
 	
+	public boolean isExisted(String userId) {
+		boolean isExisted = true;
+		Member member = memberRepository.get(userConnectionRepository.getProviderUserId(userId));
+		if (member == null) {
+			isExisted = false;
+		}
+		return isExisted;
+	}
+	
 	public Member get(String userId) {
 		Member member = memberRepository.get(userConnectionRepository.getProviderUserId(userId));
 		if (member == null) {
@@ -30,6 +39,10 @@ public class MemberService {
 		}
 		
 		return member;
+	}
+	
+	public void updateName(String name) {
+		memberRepository.updateName(facebookService.getProfile().getId(), name);
 	}
 	
 	public Member save() {
@@ -44,7 +57,7 @@ public class MemberService {
 		return member;
 	}
 	
-	public void updateLastLogin(String userId) {
-		memberRepository.updateLastLogin(userId);
+	public void updateLastLoginTime(String userId) {
+		memberRepository.updateLastLoginTime(userId);
 	}
 }

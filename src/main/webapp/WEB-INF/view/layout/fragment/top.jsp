@@ -18,8 +18,8 @@
 						<c:otherwise><li><a href="/list">List</a></li></c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${url eq 'profile'}"><li class="active"><a href="/profile">Profile</a></li></c:when>
-						<c:otherwise><li><a href="/profile">Profile</a></li></c:otherwise>
+						<c:when test="${url eq 'member'}"><li class="active"><a href="/member">Member</a></li></c:when>
+						<c:otherwise><li><a href="/member">Member</a></li></c:otherwise>
 					</c:choose>
 					<c:choose>
 						<c:when test="${url eq 'friend'}"><li class="active"><a href="/friend">Friend</a></li></c:when>

@@ -18,36 +18,36 @@ import com.tiny.common.CommonMockTest;
 
 public class FacebookServiceTest extends CommonMockTest {
 	private FacebookService facebookService;
-	
+
 	@Mock
 	private UserOperations mockUserOperations;
-	
+
 	@Mock
 	private FriendOperations mockFriendOperations;
-	
+
 	@Mock
 	private FacebookProfile mockFacebookProfile;
-	
+
 	private List<FacebookProfile> mockFacebookProfiles;
-	
+
 	@Mock
 	private Facebook mockFacebook;
-	
+
 	@Test
 	public void getProfile() {
 		// Given
 		when(mockFacebookProfile.getEmail()).thenReturn("template@template.com");
 		when(mockFacebook.userOperations()).thenReturn(mockUserOperations);
 		when(mockFacebook.userOperations().getUserProfile()).thenReturn(mockFacebookProfile);
-		
+
 		// When
 		FacebookService facebookService = new FacebookService(mockFacebook);
 		FacebookProfile profile = facebookService.getProfile();
-		
+
 		// Then
 		assertThat(profile.getEmail(), is("template@template.com"));
 	}
-	
+
 	@Test
 	public void getFriends() {
 		// Given
@@ -55,11 +55,11 @@ public class FacebookServiceTest extends CommonMockTest {
 		mockFacebookProfiles.add(mockFacebookProfile);
 		when(mockFacebook.friendOperations()).thenReturn(mockFriendOperations);
 		when(mockFacebook.friendOperations().getFriendProfiles()).thenReturn(mockFacebookProfiles);
-		
+
 		// When
 		FacebookService facebookService = new FacebookService(mockFacebook);
 		List<FacebookProfile> friends = facebookService.getFriends();
-		
+
 		// Then
 		assertThat(friends.size(), is(1));
 	}
