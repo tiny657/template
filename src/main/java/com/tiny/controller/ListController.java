@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.DuplicateStatusException;
+import org.springframework.social.RateLimitExceededException;
+import org.springframework.social.UncategorizedApiException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,6 +77,12 @@ public class ListController {
 		} catch (DuplicateStatusException e) {
 			model.addAttribute("isSuccess", false);
 			model.addAttribute("alertMessage", "Already Posted.");
+		} catch (UncategorizedApiException e) {
+			model.addAttribute("isSuccess", false);
+			model.addAttribute("alertMessage", "Content is empty.");
+		} catch (RateLimitExceededException e) {
+			model.addAttribute("isSuccess", false);
+			model.addAttribute("alertMessage", "The rate limit has been exceeded.");
 		} catch (Exception e) {
 			model.addAttribute("isSuccess", false);
 			model.addAttribute("alertMessage", "Error.");

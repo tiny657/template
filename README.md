@@ -121,7 +121,7 @@ MoreUnit : http://moreunit.sourceforge.net/update-site
 		
 Checkstyle : http://eclipse-cs.sf.net/update
 
- - Activation
+ - Checkstyle 활성화
  
 		프로젝트 이름을 우클릭 후 Checkstyle > Activate Checkstyle
  
@@ -145,7 +145,7 @@ FindBugs : http://findbugs.cs.umd.edu/eclipse
 
 		프로젝트 명 우클릭 > Find bugs > Find bugs 수행 후 아래 view에서 결과 확인한다.
 		
- - view
+ - View
 
 		Window > Show View > Find Bugs > Bug Explorer	
 
