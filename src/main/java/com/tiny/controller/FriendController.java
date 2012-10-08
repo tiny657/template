@@ -24,7 +24,7 @@ public class FriendController {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		model.addAttribute("friends", friendService.getTemplateFriends());
-		model.addAttribute("url", Constant.friend);
+		model.addAttribute("url", Constant.FRIEND);
 		mav.addAllObjects(model);
 		mav.setViewName("friend");
 		return mav;
