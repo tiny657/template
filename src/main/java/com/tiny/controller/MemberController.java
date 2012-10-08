@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.common.util.Constant;
+import com.tiny.service.FacebookService;
 import com.tiny.service.MemberService;
 import com.tiny.social.SecurityContext;
 

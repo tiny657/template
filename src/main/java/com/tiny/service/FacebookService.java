@@ -27,4 +27,8 @@ public class FacebookService {
 	public List<FacebookProfile> getFriends() {
 		return facebook.friendOperations().getFriendProfiles();
 	}
+	
+	public void post(String content) {
+		facebook.feedOperations().updateStatus(content);
+	}
 }

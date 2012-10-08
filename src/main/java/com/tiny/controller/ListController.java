@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.tiny.document.Document;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
+import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
 
 @Controller
@@ -28,18 +30,21 @@ public class ListController {
 
 	@Autowired
 	private DocumentService documentService;
-	
+
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private PostService postService;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		// update lastLogin time
 		memberService.updateLastLogin(SecurityContext.getCurrentUser().getId());
-		
+
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		List<Document> documents = documentService.getAll();
@@ -56,6 +61,26 @@ public class ListController {
 		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("list");
+		return mav;
+	}
+
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
+	public ModelAndView post(@RequestParam String content) {
+		ModelAndView mav = new ModelAndView();
+		ModelMap model = new ModelMap();
+		try {
+			postService.post(content);
+			model.addAttribute("isSuccess", true);
+			model.addAttribute("alertMessage", "Posted.");
+		} catch (DuplicateStatusException e) {
+			model.addAttribute("isSuccess", false);
+			model.addAttribute("alertMessage", "Already Posted.");
+		} catch (Exception e) {
+			model.addAttribute("isSuccess", false);
+			model.addAttribute("alertMessage", "Error.");
+		}
+		mav.addAllObjects(model);
+		mav.setViewName("postAlert");
 		return mav;
 	}
 

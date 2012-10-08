@@ -2,6 +2,12 @@
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
 <div class="container">
+	<%-- alert --%>
+	<div id="alertPosition"></div>
+	<div id="posting" class="alert alert-info" style="display:none">
+		Posting...<img src="img/wait24trans.gif" />
+	</div>
+	
 	<%-- new document form --%>
 	<div class="row">
 		<div class="span12">
@@ -17,7 +23,7 @@
 			<tbody>
 				<%-- waiting icon --%>
 				<tr id="waitingDocument" style="display: none;"><td>
-					<img src="img/wait24trans.gif" id="waitingDocument"/>
+					<img src="img/wait24trans.gif" id="waitingDocument" />
 				</td></tr>
 		
 				<%-- document list --%>
@@ -29,6 +35,23 @@
 	</div>
 	
 	<script type="text/javascript">
+		function post(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/post",
+				dataType: "text",
+				data: {"content": $("#content" + documentId).text()},
+				beforeSend: function() {
+					$("#posting").css("display", "");
+					$("#postAlert").remove();
+				},
+				success : function(content) {
+					$("#posting").css("display", "none");
+					$("#alertPosition").after(content);
+				}
+			});
+		}
+				
 		function saveDocument() {
 			$.ajax({
 				type : "POST",
@@ -46,7 +69,7 @@
 				}
 			});
 		}
-				
+		
 		function saveComment(documentId) {
 			$.ajax({
 				type : "POST",

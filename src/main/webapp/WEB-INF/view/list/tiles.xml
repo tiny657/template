@@ -10,4 +10,7 @@
 	<definition name="comment" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/comment.jsp" />
 	</definition>
+	<definition name="postAlert" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/postAlert.jsp" />
+	</definition>
 </tiles-definitions>

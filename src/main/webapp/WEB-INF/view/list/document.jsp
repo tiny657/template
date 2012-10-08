@@ -7,7 +7,9 @@
 <tr id="document${documentId}">
 	<td>
 		<%-- content --%>
-		${document.content}
+		<div id="content${documentId}">
+			${document.content}
+		</div>
 		
 		<br /><br />
 		
@@ -36,19 +38,35 @@
 	<td>
 		<c:if test="${member.providerUserId eq document.providerUserId}">
 			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
+			<%-- Modal (Delete) --%>
+			<div id="deleteModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">DELETE</h3>
+				</div>
+				<div class="modal-body">
+					<p>Do you want to delete?</p>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
+				</div>
+			</div>
 		</c:if>
-		<%-- Modal --%>
-		<div class="modal hide fade" id="deleteModal${documentId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		
+		<a href="#postModal${documentId}" data-toggle="modal"><i class="icon-share"></i></a>
+		<%-- Modal (Post) --%>
+		<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">DELETE</h3>
+				<h3 id="myModalLabel">POST</h3>
 			</div>
 			<div class="modal-body">
-				<p>Do you want to delete?</p>
+				<p>Do you want to post?</p>
 			</div>
 			<div class="modal-footer">
 				<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-				<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
 			</div>
 		</div>
 	</td>
