@@ -35,7 +35,7 @@ public class MemberService {
 	public Member get(String userId) {
 		Member member = memberRepository.get(userConnectionRepository.getProviderUserId(userId));
 		if (member == null) {
-			member = save();
+			member = saveAndGet();
 		}
 		
 		return member;
@@ -45,14 +45,14 @@ public class MemberService {
 		memberRepository.updateName(facebookService.getProfile().getId(), name);
 	}
 	
-	public Member save() {
+	public Member saveAndGet() {
 		FacebookProfile facebookProfile = facebookService.getProfile();
 		Member member = new Member();
 		member.setProviderUserId(facebookProfile.getId());
 		member.setName(facebookProfile.getName());
 		member.setGender(facebookProfile.getGender().equals("male"));
 		member.setEmail(facebookProfile.getEmail());
-		member.setLocale(facebookProfile.getLocale().toString());
+		member.setLocale(facebookProfile.getLocale().getDisplayCountry());
 		memberRepository.save(member);
 		return member;
 	}

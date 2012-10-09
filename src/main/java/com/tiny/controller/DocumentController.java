@@ -25,10 +25,10 @@ public class DocumentController {
 
 	@Autowired
 	private DocumentService documentService;
-	
+
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private MemberService memberService;
 

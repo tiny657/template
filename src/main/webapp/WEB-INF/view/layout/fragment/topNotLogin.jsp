@@ -37,7 +37,7 @@
 							<li>
 								<a tabindex="-1" href="javascript:facebookLogin()">Facebook</a>
 								<div style="display:none">
-									<form id="facebookForm" action="<c:url value="/signin/facebook" />" method=POST>
+									<form id="facebookForm" action="<c:url value="/signin/facebook" />" method="post">
 										<input type="hidden" name="scope" value="email,publish_stream,offline_access" />
 									</form>
 								</div>

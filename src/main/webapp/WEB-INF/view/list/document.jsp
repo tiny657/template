@@ -3,7 +3,6 @@
 <%-- documentId를 string으로 설정함. comment에서 Map key로 integer 사용 안 됨. --%>
 <c:set var="documentId">${document.documentId}</c:set>
 
-<%-- document --%>
 <tr id="document${documentId}">
 	<td>
 		<%-- content --%>
@@ -13,7 +12,7 @@
 		
 		<br /><br />
 		
-		<%-- comment list --%>
+		<%-- COMMENT LIST --%>
 		<c:forEach var="comment" items="${comments[documentId]}">
 			<%@include file="comment.jsp"%>
 		</c:forEach>
@@ -24,7 +23,7 @@
 		<%-- waiting icon --%>
 		<blockquote><p><img src="/img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
 		
-		<%-- comment form --%>
+		<%-- COMMENT FORM --%>
 		<c:if test="${not empty member}">
 			<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>
 			<br />

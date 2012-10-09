@@ -27,7 +27,6 @@ import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
-import com.tiny.social.User;
 
 @Controller
 public class ListController {

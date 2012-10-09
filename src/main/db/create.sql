@@ -28,7 +28,7 @@ CREATE TABLE member (
 	commentCount INT DEFAULT 0,
 	likeCount INT DEFAULT 0,
 	dislikeCount INT DEFAULT 0,
-	locale VARCHAR(10),
+	locale VARCHAR(20),
 	isAdmin BOOLEAN DEFAULT false,
 	regDate DATETIME NOT NULL,
 	lastLogin DATETIME NOT NULL,
