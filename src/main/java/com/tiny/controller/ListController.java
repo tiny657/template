@@ -27,6 +27,7 @@ import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
+import com.tiny.social.User;
 
 @Controller
 public class ListController {
@@ -79,6 +80,9 @@ public class ListController {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		Document document = documentService.get(documentId);
+		if (document == null) {
+			return new ModelAndView(new RedirectView("/list"));
+		}
 		model.addAttribute("document", document);
 		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
 		model.addAttribute("newComment" + document.getDocumentId(), new Comment());
@@ -87,12 +91,17 @@ public class ListController {
 		model.addAttribute("comments", map);
 		model.addAttribute("url", Constant.LIST);
 		// for posting
-		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		try {
+			model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+			mav.setViewName("listOne");
+		} catch (IllegalStateException e) {
+			LOGGER.info("No user logined in.");
+			mav.setViewName("listOneNotLogin");
+		}
 		mav.addAllObjects(model);
-		mav.setViewName("listOne");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ModelAndView post(@RequestParam String content) {
 		ModelAndView mav = new ModelAndView();

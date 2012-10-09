@@ -4,15 +4,24 @@
 	<definition name="list" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/list.jsp" />
 	</definition>
+	
 	<definition name="listOne" extends="defaultLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/listOne.jsp" />
 	</definition>
+	
+	<definition name="listOneNotLogin" extends="defaultLayout">
+		<put-attribute name="top" value="/WEB-INF/view/layout/fragment/topNotLogin.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/list/listOne.jsp" />
+	</definition>
+	
 	<definition name="document" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/document.jsp" />
 	</definition>
+	
 	<definition name="comment" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/comment.jsp" />
 	</definition>
+	
 	<definition name="postAlert" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/postAlert.jsp" />
 	</definition>

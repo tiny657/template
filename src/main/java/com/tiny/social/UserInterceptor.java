@@ -21,7 +21,9 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		rememberUser(request, response);
 		handleSignOut(request, response);
-		if (SecurityContext.userSignedIn() || requestForSignIn(request)) {
+		
+		// modified by template
+		if (SecurityContext.userSignedIn() || requestForSignIn(request) || requestForListOne(request)) {
 			return true;
 		} else {
 			return requireSignIn(request, response);
@@ -52,6 +54,12 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 			userCookieGenerator.removeCookie(response);
 			SecurityContext.remove();
 		}
+	}
+
+	// added by template.
+	private boolean requestForListOne(HttpServletRequest request) {
+		String path = request.getServletPath();
+		return path.startsWith("/list/") && (path.length() > "/list/".length()) && Character.isDigit(path.charAt(6));
 	}
 
 	private boolean requestForSignIn(HttpServletRequest request) {

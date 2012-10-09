@@ -25,18 +25,22 @@
 		<blockquote><p><img src="/img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
 		
 		<%-- comment form --%>
-		<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>
-		<br />
-		<button type="submit" class="btn btn-info" id="saveComment${documentId}" onclick="saveComment(${documentId})" style="display:none;">Save</button>
-		<br /><br />
-		<script>
-			$("#newComment${documentId}").click(function() {
-				$("#saveComment${documentId}").css('display', 'inline');
-			});
-		</script>
+		<c:if test="${not empty member}">
+			<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>
+			<br />
+			<button type="submit" class="btn btn-info" id="saveComment${documentId}" onclick="saveComment(${documentId})" style="display:none;">Save</button>
+			<br /><br />
+			<script>
+				$("#newComment${documentId}").click(function() {
+					$("#saveComment${documentId}").css('display', 'inline');
+				});
+			</script>
+		</c:if>
 	</td>
 	<td>
-		<c:if test="${member.providerUserId eq document.providerUserId}">
+		<%-- DELETE --%>
+		<c:if test="${not empty member && member.providerUserId eq document.providerUserId}">
+			<!-- icon -->
 			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
 			<%-- Modal (Delete) --%>
 			<div id="deleteModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -54,20 +58,24 @@
 			</div>
 		</c:if>
 		
-		<a href="#postModal${documentId}" data-toggle="modal"><i class="icon-share"></i></a>
-		<%-- Modal (Post) --%>
-		<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">POST</h3>
+		<%-- POST --%>
+		<c:if test="${not empty member}">
+			<%-- icon --%>
+			<a href="#postModal${documentId}" data-toggle="modal"><i class="icon-share"></i></a>
+			<%-- Modal (Post) --%>
+			<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">POST</h3>
+				</div>
+				<div class="modal-body">
+					<p>Do you want to post?</p>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
+				</div>
 			</div>
-			<div class="modal-body">
-				<p>Do you want to post?</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-				<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
-			</div>
-		</div>
+		</c:if>
 	</td>
 </tr>
