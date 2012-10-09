@@ -7,10 +7,10 @@
 		<result property="isNotice" column="isNotice" />
 		<result property="color" column="color" />
 		<result property="content" column="content" />
-		<result property="likeCount" column="likeCount" />
-		<result property="dislikeCount" column="dislikeCount" />
-		<result property="commentCount" column="commentCount" />
-		<result property="shareCount" column="shareCount" />
+		<result property="countToLike" column="countToLike" />
+		<result property="countToDislike" column="countToDislike" />
+		<result property="countToComment" column="countToComment" />
+		<result property="countToShare" column="countToShare" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="ipAddress" column="ipAddress" />
@@ -25,10 +25,10 @@
 				isNotice,
 				color,
 				content,
-				likeCount,
-				dislikeCount,
-				commentCount,
-				shareCount,
+				countToLike,
+				countToDislike,
+				countToComment,
+				countToShare,
 				providerUserId,
 				name,
 				ipAddress,
@@ -38,10 +38,10 @@
 				#{isNotice},
 				#{color},
 				#{content},
-				#{likeCount},
-				#{dislikeCount},
-				#{commentCount},
-				#{shareCount},
+				#{countToLike},
+				#{countToDislike},
+				#{countToComment},
+				#{countToShare},
 				#{providerUserId},
 				#{name},
 				#{ipAddress},
@@ -79,10 +79,10 @@
 			isNotice = #{isNotice},
 			color = #{color},
 			content = #{content},
-			likeCount = #{likeCount},
-			dislikeCount = #{dislikeCount},
-			commentCount = #{commentCount},
-			shareCount = #{shareCount},
+			countToLike = #{countToLike},
+			countToDislike = #{countToDislike},
+			countToComment = #{countToComment},
+			countToShare = #{countToShare},
 			providerUserId = #{providerUserId},
 			name = #{name},
 			ipAddress = #{ipAddress},

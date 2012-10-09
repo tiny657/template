@@ -11,10 +11,10 @@ public class Document {
 	private boolean isNotice;
 	private String color;
 	private String content;
-	private int likeCount;
-	private int dislikeCount;
-	private int commentCount;
-	private int shareCount;
+	private int countToLike;
+	private int countToDislike;
+	private int countToComment;
+	private int countToShare;
 	private String providerUserId;
 	private String name;
 	private String ipAddress;

@@ -8,8 +8,8 @@ import lombok.Data;
 public class Comment {
 	private int commentId;
 	private int documentId;
-	private boolean likeCount;
-	private boolean dislikeCount;
+	private boolean countToLike;
+	private boolean countToDislike;
 	private String content;
 	private String providerUserId;
 	private String name;
