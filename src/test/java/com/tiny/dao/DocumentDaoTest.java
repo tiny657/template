@@ -31,6 +31,19 @@ public class DocumentDaoTest extends CommonTest {
 	public void get() {
 		// Given
 		documentDao.save(createDocument());
+		Document document = documentDao.getLast();
+
+		// When
+		Document document2 = documentDao.get(document.getDocumentId());
+
+		// Then
+		assertThat(document.getContent(), is(document2.getContent()));
+	}
+	
+	@Test
+	public void getLast() {
+		// Given
+		documentDao.save(createDocument());
 
 		// When
 		Document document = documentDao.getLast();

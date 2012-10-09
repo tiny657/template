@@ -12,6 +12,7 @@ import org.springframework.social.RateLimitExceededException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,8 +46,9 @@ public class ListController {
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
+		// initial access
 		if (!memberService.isExisted(SecurityContext.getCurrentUser().getId())) {
-			return new ModelAndView(new RedirectView("/profile"));
+			return new ModelAndView(new RedirectView("/member"));
 		}
 
 		// update lastLogin time
@@ -65,12 +67,32 @@ public class ListController {
 		}
 		model.addAttribute("comments", map);
 		model.addAttribute("url", Constant.LIST);
+		// for posting
 		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
 	}
 
+	@RequestMapping(value = "/list/{documentId}", method = RequestMethod.GET)
+	public ModelAndView list(@PathVariable Integer documentId) {
+		ModelAndView mav = new ModelAndView();
+		ModelMap model = new ModelMap();
+		Document document = documentService.get(documentId);
+		model.addAttribute("document", document);
+		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
+		model.addAttribute("newComment" + document.getDocumentId(), new Comment());
+		List<Comment> comments = commentService.get(document.getDocumentId());
+		map.put(Integer.toString(document.getDocumentId()), comments);
+		model.addAttribute("comments", map);
+		model.addAttribute("url", Constant.LIST);
+		// for posting
+		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		mav.addAllObjects(model);
+		mav.setViewName("listOne");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ModelAndView post(@RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
@@ -97,7 +119,7 @@ public class ListController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam String q) {
 		return list();
 	}

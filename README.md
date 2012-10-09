@@ -38,16 +38,14 @@ Getting Started
 설치하기
 
 	$ yum install mysql-server
+	
+참고 : http://dev.mysql.com/downloads/mysql
 
 시작하기
 
 	$ service mysqld start
 
-참고 : http://dev.mysql.com/downloads/mysql
-
-### MySQL DB 생성 ###
-
-기본 template DB 생성하기
+기본 DB, Table 생성하기
 
 	$ mysql -u root < src/main/db/create.sql
 

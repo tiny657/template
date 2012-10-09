@@ -9,6 +9,8 @@ public interface DocumentDao {
 
 	public List<Document> getAll();
 
+	public Document get(Integer documentId);
+	
 	public Document getLast();
 
 	public Integer count();

@@ -55,6 +55,12 @@
 		ORDER BY documentId DESC;
 	</select>
 	
+	<select id="get" resultType="document">
+		SELECT *
+		FROM document
+		WHERE documentId = #{documentId};
+	</select>
+	
 	<select id="getLast" resultType="document">
 		SELECT *
 		FROM document

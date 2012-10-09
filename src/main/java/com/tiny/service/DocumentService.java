@@ -51,6 +51,10 @@ public class DocumentService {
 		return documents;
 	}
 	
+	public Document get(Integer documentId) {
+		return documentRepository.get(documentId);
+	}
+	
 	public Document getLast() {
 		return documentRepository.getLast();
 	}

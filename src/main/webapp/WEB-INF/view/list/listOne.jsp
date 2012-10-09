@@ -8,28 +8,16 @@
 		Posting...<img src="/img/wait24trans.gif" />
 	</div>
 	
-	<%-- new document form --%>
-	<div class="row">
-		<div class="span12">
-			<textarea path="content" id="content" class="span12" placeholder="contents"></textarea>
-			<button type="submit" id="save" class="btn btn-info" onclick="saveDocument()">Save</button>
-			<br />
-			<br />
-		</div>
-	</div>
-
 	<div>
 		<table class="table table-striped">
 			<tbody>
 				<%-- waiting icon --%>
 				<tr id="waitingDocument" style="display: none;"><td>
-					<img src="img/wait24trans.gif" id="waitingDocument" />
+					<img src="/img/wait24trans.gif" id="waitingDocument" />
 				</td></tr>
 		
-				<%-- document list --%>
-				<c:forEach var="document" items="${documents}">
-					<%@include file="document.jsp"%>
-				</c:forEach>
+				<%-- document one --%>
+				<%@include file="document.jsp"%>
 			</tbody>
 		</table>
 	</div>
@@ -48,24 +36,6 @@
 				success : function(content) {
 					$("#posting").css("display", "none");
 					$("#alertPosition").after(content);
-				}
-			});
-		}
-				
-		function saveDocument() {
-			$.ajax({
-				type : "POST",
-				url : "/document",
-				dataType: "text",
-				data: {"content": $("#content").val()},
-				beforeSend: function() {
-					$("#waitingDocument").css("display", "");
-				},
-				success : function(content) {
-					$("#waitingDocument").css("display", "none");
-					$("#content").val('');
-					$("#waitingDocument").after(content);
-					$("textarea").autoresize();
 				}
 			});
 		}

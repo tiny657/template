@@ -22,7 +22,7 @@
 		<blockquote id="lastCommentPosition${documentId}" style="display:none;"></blockquote>
 		
 		<%-- waiting icon --%>
-		<blockquote><p><img src="img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
+		<blockquote><p><img src="/img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
 		
 		<%-- comment form --%>
 		<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>

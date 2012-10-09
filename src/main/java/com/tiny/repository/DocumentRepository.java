@@ -25,6 +25,10 @@ public class DocumentRepository {
 		return documentDao.getAll();
 	}
 	
+	public Document get(Integer documentId) {
+		return documentDao.get(documentId);
+	}
+	
 	public Document getLast() {
 		return documentDao.getLast();
 	}
