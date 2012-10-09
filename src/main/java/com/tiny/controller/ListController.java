@@ -102,11 +102,13 @@ public class ListController {
 	}
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public ModelAndView post(@RequestParam String content) {
+	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		try {
 			postService.post(content);
+			documentService.increaseCountToShare(documentId);
+			memberService.increaseCountToShare(SecurityContext.getCurrentUser().getId());
 			model.addAttribute("isSuccess", true);
 			model.addAttribute("alertMessage", "Posted.");
 		} catch (DuplicateStatusException e) {
@@ -122,6 +124,7 @@ public class ListController {
 			model.addAttribute("isSuccess", false);
 			model.addAttribute("alertMessage", "Error.");
 		}
+		model.addAttribute("document", documentService.get(documentId));
 		mav.addAllObjects(model);
 		mav.setViewName("postAlert");
 		return mav;

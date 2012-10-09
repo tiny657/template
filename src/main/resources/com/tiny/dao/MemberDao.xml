@@ -109,6 +109,15 @@
   		);
 	</update>
 	
+	<update id="increaseCountToShare" parameterType="String">
+  		UPDATE member
+  		SET
+			countToShare = countToShare + 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
 	<delete id="delete" parameterType="String">
 		DELETE
 		FROM member

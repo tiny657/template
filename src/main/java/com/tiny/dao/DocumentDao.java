@@ -17,5 +17,7 @@ public interface DocumentDao {
 
 	public void update(Document document);
 
+	public void increaseCountToShare(Integer documentId);
+
 	public void delete(int documentId);
 }

@@ -31,18 +31,22 @@ public class MemberRepository {
 		return memberDao.get(providerUserId);
 	}
 	
-	public void updateLastLoginTime(String userId) {
-		memberDao.updateLastLoginTime(userId);
-	}
-	
-	public void delete(String providerUserId) {
-		memberDao.delete(providerUserId);
-	}
-
 	public void updateName(String providerUserId, String name) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("providerUserId", providerUserId);
 		map.put("name", name);
 		memberDao.updateName(map);
+	}
+
+	public void updateLastLoginTime(String userId) {
+		memberDao.updateLastLoginTime(userId);
+	}
+	
+	public void increaseCountToShare(String userId) {
+		memberDao.increaseCountToShare(userId);
+	}
+	
+	public void delete(String providerUserId) {
+		memberDao.delete(providerUserId);
 	}
 }

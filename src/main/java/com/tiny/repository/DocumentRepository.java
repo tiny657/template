@@ -33,6 +33,10 @@ public class DocumentRepository {
 		return documentDao.getLast();
 	}
 
+	public void increaseCountToShare(Integer documentId) {
+		documentDao.increaseCountToShare(documentId);
+	}
+	
 	public void delete(Integer documentId) {
 		documentDao.delete(documentId);
 	}

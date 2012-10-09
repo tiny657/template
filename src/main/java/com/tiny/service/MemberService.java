@@ -32,6 +32,18 @@ public class MemberService {
 		return isExisted;
 	}
 	
+	public Member saveAndGet() {
+		FacebookProfile facebookProfile = facebookService.getProfile();
+		Member member = new Member();
+		member.setProviderUserId(facebookProfile.getId());
+		member.setName(facebookProfile.getName());
+		member.setGender(facebookProfile.getGender().equals("male"));
+		member.setEmail(facebookProfile.getEmail());
+		member.setLocale(facebookProfile.getLocale().getCountry());
+		memberRepository.save(member);
+		return member;
+	}
+	
 	public Member get(String userId) {
 		Member member = memberRepository.get(userConnectionRepository.getProviderUserId(userId));
 		if (member == null) {
@@ -45,16 +57,8 @@ public class MemberService {
 		memberRepository.updateName(facebookService.getProfile().getId(), name);
 	}
 	
-	public Member saveAndGet() {
-		FacebookProfile facebookProfile = facebookService.getProfile();
-		Member member = new Member();
-		member.setProviderUserId(facebookProfile.getId());
-		member.setName(facebookProfile.getName());
-		member.setGender(facebookProfile.getGender().equals("male"));
-		member.setEmail(facebookProfile.getEmail());
-		member.setLocale(facebookProfile.getLocale().getCountry());
-		memberRepository.save(member);
-		return member;
+	public void increaseCountToShare(String userId) {
+		memberRepository.increaseCountToShare(userId);
 	}
 	
 	public void updateLastLoginTime(String userId) {

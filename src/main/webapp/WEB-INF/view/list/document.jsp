@@ -9,6 +9,34 @@
 		<div id="content${documentId}">
 			${document.content}
 		</div>
+		<div>
+			<br />
+			<i class="icon-thumbs-up" onclick="like(${documentId}")></i><span id="countToLike${documentId}">${document.countToLike}</span>&nbsp&nbsp
+			<i class="icon-thumbs-down" onclick="dislike(${documentId}")></i><span id="countToDislike${documentId}">${document.countToDislike}</span>&nbsp&nbsp
+			<i class="icon-comment" onclick="comment(${documentId}")></i><span id="countToComment${documentId}">${document.countToComment}</span>&nbsp&nbsp
+		
+			<%-- POST --%>
+			<c:if test="${not empty member}">
+				<%-- icon --%>
+				<a href="#postModal${documentId}" data-toggle="modal">
+					<i class="icon-retweet"></i><span id="countToShare${documentId}">${document.countToShare}</span>&nbsp&nbsp
+				</a>
+				<%-- Modal (Post) --%>
+				<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">POST</h3>
+					</div>
+					<div class="modal-body">
+						<p>Do you want to post?</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+						<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
+					</div>
+				</div>
+			</c:if>
+		</div>
 		
 		<br /><br />
 		
@@ -53,26 +81,6 @@
 				<div class="modal-footer">
 					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
 					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
-				</div>
-			</div>
-		</c:if>
-		
-		<%-- POST --%>
-		<c:if test="${not empty member}">
-			<%-- icon --%>
-			<a href="#postModal${documentId}" data-toggle="modal"><i class="icon-share"></i></a>
-			<%-- Modal (Post) --%>
-			<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">POST</h3>
-				</div>
-				<div class="modal-body">
-					<p>Do you want to post?</p>
-				</div>
-				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
 				</div>
 			</div>
 		</c:if>

@@ -19,6 +19,8 @@ public interface MemberDao {
 	public void updateName(Map<String, String> map);
 	
 	public void updateLastLoginTime(String userId);
+	
+	public void increaseCountToShare(String userId);
 
 	public void delete(String userId);
 }

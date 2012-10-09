@@ -40,7 +40,7 @@
 				type : "POST",
 				url : "/post",
 				dataType: "text",
-				data: {"content": $("#content" + documentId).text()},
+				data: {"documentId" : documentId, "content": $("#content" + documentId).text()},
 				beforeSend: function() {
 					$("#posting").css("display", "");
 					$("#postAlert").remove();
@@ -107,6 +107,19 @@
 				data: {"commentId": commentId, _method: "DELETE"},
 				success : function() {
 					$("#comment" + commentId).remove();
+				}
+			});
+		}
+		
+		function good(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/good",
+				dataType: "text",
+				data: {"documentId": documentId},
+				beforeSend: function() {
+				},
+				success : function(content) {
 				}
 			});
 		}

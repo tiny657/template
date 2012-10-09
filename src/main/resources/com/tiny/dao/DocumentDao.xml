@@ -90,6 +90,13 @@
   		where documentId = #{documentId};
 	</update>
 	
+	<update id="increaseCountToShare" parameterType="document">
+  		UPDATE document
+  		SET
+			countToShare = countToShare + 1
+  		where documentId = #{documentId};
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM document

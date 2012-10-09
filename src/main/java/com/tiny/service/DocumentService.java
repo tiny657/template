@@ -59,6 +59,10 @@ public class DocumentService {
 		return documentRepository.getLast();
 	}
 	
+	public void increaseCountToShare(Integer documentId) {
+		documentRepository.increaseCountToShare(documentId);
+	}
+	
 	public void delete(Integer documentId) {
 		documentRepository.delete(documentId);
 	}
