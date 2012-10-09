@@ -52,7 +52,7 @@ public class MemberService {
 		member.setName(facebookProfile.getName());
 		member.setGender(facebookProfile.getGender().equals("male"));
 		member.setEmail(facebookProfile.getEmail());
-		member.setLocale(facebookProfile.getLocale().getDisplayCountry());
+		member.setLocale(facebookProfile.getLocale().getCountry());
 		memberRepository.save(member);
 		return member;
 	}
