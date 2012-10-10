@@ -112,21 +112,19 @@
 		}
 				
 		function like(documentId) {
-			var countToLike = parseInt($("#countToLike${documentId}").text());
-			$("#countToLike${documentId}").text(countToLike + 1);
+			var countToLike = parseInt($("#countToLike" + documentId).text());
+			$("#countToLike" + documentId).text(countToLike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/like",
 				dataType: "text",
-				data: {"documentId": documentId},
-				success : function(result) {
-				}
+				data: {"documentId": documentId}
 			});
 		}
 		
 		function dislike(documentId) {
-			var countToDislike = parseInt($("#countToDislike${documentId}").text());
-			$("#countToDislike${documentId}").text(countToDislike + 1);
+			var countToDislike = parseInt($("#countToDislike" + documentId).text());
+			$("#countToDislike" + documentId).text(countToDislike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/dislike",
