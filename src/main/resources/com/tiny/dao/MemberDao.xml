@@ -3,9 +3,10 @@
 <mapper namespace="com.tiny.dao.MemberDao">
 	<resultMap id="result" type="member">
 		<result property="providerUserId" column="providerUserId" />
-		<result property="email" column="email" />
 		<result property="name" column="name" />
 		<result property="gender" column="gender" />
+		<result property="email" column="email" />
+		<result property="level" column="level" />
 		<result property="point" column="point" />
 		<result property="countToDocument" column="contToDocument" />
 		<result property="countToComment" column="countToComment" />
@@ -17,7 +18,6 @@
 		<result property="countToShare" column="countToShare" />
 		<result property="countToBeShared" column="countToBeShared" />
 		<result property="locale" column="locale" />
-		<result property="isAdmin" column="isAdmin" />
 		<result property="regDate" column="regDate" />
 		<result property="lastLogin" column="lastLogin" />
 	</resultMap>
@@ -26,9 +26,10 @@
 		INSERT
 		INTO member
 				(providerUserId,
-				email,
 				name,
 				gender,
+				email,
+				level,
 				point,
 				countToDocument,
 				countToComment,
@@ -40,13 +41,13 @@
 				countToShare,
 				countToBeShared,
 				locale,
-				isAdmin,
 				regDate,
 				lastLogin)
 		VALUES (#{providerUserId},
-				#{email},
 				#{name},
 				#{gender},
+				#{email},
+				#{level},
 				#{point},
 				#{countToDocument},
 				#{countToComment},
@@ -58,7 +59,6 @@
 				#{countToShare},
 				#{countToBeShared},
 				#{locale},
-				#{isAdmin},
 				NOW(),
 				NOW());
 	</insert>
@@ -88,9 +88,10 @@
 	<update id="update" parameterType="member">
   		UPDATE member
   		SET
-			email = #{email},
 			name = #{name},
 			gender = #{gender},
+			email = #{email},
+			level = #{level},
 			point = #{point},
 			countToDocument = #{countToDocument},
 			countToComment = #{countToComment},
@@ -102,7 +103,6 @@
 			countToShare = #{countToShare},
 			countToBeShared = #{countToBeShared},
 			locale = #{locale},
-			isAdmin = #{isAdmin},
 			lastLogin = NOW()
   		where providerUserId = #{providerUserId};
 	</update>

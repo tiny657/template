@@ -5,7 +5,6 @@
 		<result property="documentId" column="documentId" />
 		<result property="point" column="point" />
 		<result property="isNotice" column="isNotice" />
-		<result property="color" column="color" />
 		<result property="content" column="content" />
 		<result property="countToLike" column="countToLike" />
 		<result property="countToDislike" column="countToDislike" />
@@ -14,7 +13,6 @@
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="ipAddress" column="ipAddress" />
-		<result property="tags" column="tags" />
 		<result property="regDate" column="regDate" />
 	</resultMap>
 	
@@ -22,8 +20,6 @@
 		INSERT
 		INTO document 
 				(point,
-				isNotice,
-				color,
 				content,
 				countToLike,
 				countToDislike,
@@ -32,11 +28,8 @@
 				providerUserId,
 				name,
 				ipAddress,
-				tags,
 				regDate)
 		VALUES (#{point},
-				#{isNotice},
-				#{color},
 				#{content},
 				#{countToLike},
 				#{countToDislike},
@@ -45,7 +38,6 @@
 				#{providerUserId},
 				#{name},
 				#{ipAddress},
-				#{tags},
 				NOW());
 	</insert>
 	
@@ -76,8 +68,6 @@
   		UPDATE document
   		SET
   			point = #{point},
-			isNotice = #{isNotice},
-			color = #{color},
 			content = #{content},
 			countToLike = #{countToLike},
 			countToDislike = #{countToDislike},
@@ -85,8 +75,7 @@
 			countToShare = #{countToShare},
 			providerUserId = #{providerUserId},
 			name = #{name},
-			ipAddress = #{ipAddress},
-			tags = #{tags}
+			ipAddress = #{ipAddress}
   		where documentId = #{documentId};
 	</update>
 	

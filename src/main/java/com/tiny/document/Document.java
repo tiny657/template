@@ -9,7 +9,6 @@ public class Document {
 	private int documentId;
 	private int point;
 	private boolean isNotice;
-	private String color;
 	private String content;
 	private int countToLike;
 	private int countToDislike;
@@ -18,7 +17,6 @@ public class Document {
 	private String providerUserId;
 	private String name;
 	private String ipAddress;
-	private String tags;
 	private Date regDate;
 
 	public void setIpAddress(String ipAddress) {

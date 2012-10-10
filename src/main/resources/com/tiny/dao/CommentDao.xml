@@ -4,9 +4,9 @@
 	<resultMap id="result" type="comment">
 		<result property="commentId" column="commentId" />
 		<result property="documentId" column="documentId" />
+		<result property="content" column="content" />
 		<result property="countToLike" column="countToLike" />
 		<result property="countToDislike" column="countToDislike" />
-		<result property="content" column="content" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="regDate" column="regDate" />
@@ -16,16 +16,16 @@
 		INSERT
 		INTO comment 
 				(documentId,
+				content,
 				countToLike,
 				countToDislike,
-				content,
 				providerUserId,
 				name,
 				regDate)
 		VALUES (#{documentId},
+				#{content},
 				#{countToLike},
 				#{countToDislike},
-				#{content},
 				#{providerUserId},
 				#{name},
 				#{regDate});
@@ -61,10 +61,11 @@
 	<update id="update" parameterType="comment">
   		UPDATE comment
   		SET
+			content = #{content},
   			countToLike = #{countToLike},
 			countToDislike = #{countToDislike},
-			content = #{content},
 			providerUserId = #{providerUserId},
+			name = #{name},
 			regDate = #{regDate}
   		where commentId = #{commentId};
 	</update>

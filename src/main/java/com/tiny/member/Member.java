@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class Member {
 	private String providerUserId;
-	private String email;
 	private String name;
-	// female : 0, male : 1
 	private boolean gender;
+	private String email;
+	private int level;
 	private int point;
 	private int countToDocument;
 	private int countToComment;
@@ -22,7 +22,6 @@ public class Member {
 	private int countToShare;
 	private int countToBeShared;
 	private String locale;
-	private boolean isAdmin;
 	private Date regDate;
 	private Date lastLogin;
 }
