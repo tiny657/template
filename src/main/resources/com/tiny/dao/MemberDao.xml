@@ -7,10 +7,15 @@
 		<result property="name" column="name" />
 		<result property="gender" column="gender" />
 		<result property="point" column="point" />
-		<result property="documentCount" column="documentCount" />
-		<result property="commentCount" column="commentCount" />
-		<result property="likeCount" column="likeCount" />
-		<result property="dislikeCount" column="dislikeCount" />
+		<result property="countDocument" column="contDocument" />
+		<result property="countToComment" column="countToComment" />
+		<result property="countToBeCommented" column="countToBeCommented" />
+		<result property="countToLike" column="countToLike" />
+		<result property="countToBeLiked" column="countToBeLiked" />
+		<result property="countToDislike" column="countToDislike" />
+		<result property="countToBeDisliked" column="countToBeDisliked" />
+		<result property="countToShare" column="countToShare" />
+		<result property="countToBeShared" column="countToBeShared" />
 		<result property="locale" column="locale" />
 		<result property="isAdmin" column="isAdmin" />
 		<result property="regDate" column="regDate" />
@@ -33,6 +38,7 @@
 				countToDislike,
 				countToBeDisliked,
 				countToShare,
+				countToBeShared,
 				locale,
 				isAdmin,
 				regDate,
@@ -50,6 +56,7 @@
 				#{countToDislike},
 				#{countToBeDisliked},
 				#{countToShare},
+				#{countToBeShared},
 				#{locale},
 				#{isAdmin},
 				NOW(),
@@ -87,6 +94,7 @@
 			countToDislike = #{countToDislike},
 			countToBeDisliked = #{countToBeDisliked},
 			countToShare = #{countToShare},
+			countToBeShared = #{countToBeShared},
 			locale = #{locale},
 			isAdmin = #{isAdmin},
 			lastLogin = NOW()
@@ -116,6 +124,61 @@
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
+	</update>
+	
+	<update id="increaseCountToBeShared" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeShared = countToBeShared + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increaseCountToLike" parameterType="String">
+  		UPDATE member
+  		SET
+			countToLike = countToLike + 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="increaseCountToBeLiked" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeLiked = countToBeLiked + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increaseCountToDislike" parameterType="String">
+  		UPDATE member
+  		SET
+			countToDislike = countToDislike + 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="increaseCountToBeDisliked" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeDisliked = countToBeDisliked + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increaseCountToComment" parameterType="String">
+  		UPDATE member
+  		SET
+			countToComment = countToComment + 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="increaseCountToBeCommented" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeCommented = countToBeCommented + 1 
+  		where providerUserId = #{providerUserId};
 	</update>
 	
 	<delete id="delete" parameterType="String">

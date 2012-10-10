@@ -63,6 +63,18 @@ public class DocumentService {
 		documentRepository.increaseCountToShare(documentId);
 	}
 	
+	public void increaseCountToLike(Integer documentId) {
+		documentRepository.increaseCountToLike(documentId);
+	}
+	
+	public void increaseCountToDislike(Integer documentId) {
+		documentRepository.increaseCountToDislike(documentId);
+	}
+	
+	public void increaseCountToComment(Integer documentId) {
+		documentRepository.increaseCountToComment(documentId);
+	}
+	
 	public void delete(Integer documentId) {
 		documentRepository.delete(documentId);
 	}

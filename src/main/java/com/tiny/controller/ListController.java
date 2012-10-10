@@ -7,9 +7,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.DuplicateStatusException;
-import org.springframework.social.RateLimitExceededException;
-import org.springframework.social.UncategorizedApiException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +22,6 @@ import com.tiny.document.Document;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
-import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
 
 @Controller
@@ -40,9 +36,6 @@ public class ListController {
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private PostService postService;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -98,35 +91,6 @@ public class ListController {
 			mav.setViewName("listOneNotLogin");
 		}
 		mav.addAllObjects(model);
-		return mav;
-	}
-
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		try {
-			postService.post(content);
-			documentService.increaseCountToShare(documentId);
-			memberService.increaseCountToShare(SecurityContext.getCurrentUser().getId());
-			model.addAttribute("isSuccess", true);
-			model.addAttribute("alertMessage", "Posted.");
-		} catch (DuplicateStatusException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Already Posted.");
-		} catch (UncategorizedApiException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Content is empty.");
-		} catch (RateLimitExceededException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "The rate limit has been exceeded.");
-		} catch (Exception e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Error.");
-		}
-		model.addAttribute("document", documentService.get(documentId));
-		mav.addAllObjects(model);
-		mav.setViewName("postAlert");
 		return mav;
 	}
 

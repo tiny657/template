@@ -25,4 +25,12 @@
 	<definition name="postAlert" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/postAlert.jsp" />
 	</definition>
+	
+	<definition name="like" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/like.jsp" />
+	</definition>
+	
+	<definition name="dislike" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/dislike.jsp" />
+	</definition>
 </tiles-definitions>

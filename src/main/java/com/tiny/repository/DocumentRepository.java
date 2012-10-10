@@ -37,6 +37,18 @@ public class DocumentRepository {
 		documentDao.increaseCountToShare(documentId);
 	}
 	
+	public void increaseCountToLike(Integer documentId) {
+		documentDao.increaseCountToLike(documentId);
+	}
+	
+	public void increaseCountToDislike(Integer documentId) {
+		documentDao.increaseCountToDislike(documentId);
+	}
+	
+	public void increaseCountToComment(Integer documentId) {
+		documentDao.increaseCountToComment(documentId);
+	}
+	
 	public void delete(Integer documentId) {
 		documentDao.delete(documentId);
 	}

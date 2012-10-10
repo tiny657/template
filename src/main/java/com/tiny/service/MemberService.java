@@ -60,6 +60,34 @@ public class MemberService {
 	public void increaseCountToShare(String userId) {
 		memberRepository.increaseCountToShare(userId);
 	}
+
+	public void increaseCountToBeShared(String providerUserId) {
+		memberRepository.increaseCountToBeShared(providerUserId);
+	}
+	
+	public void increaseCountToLike(String userId) {
+		memberRepository.increaseCountToLike(userId);
+	}
+	
+	public void increaseCountToBeLiked(String providerUserId) {
+		memberRepository.increaseCountToBeLiked(providerUserId);
+	}
+	
+	public void increaseCountToDislike(String userId) {
+		memberRepository.increaseCountToDislike(userId);
+	}
+	
+	public void increaseCountToBeDisliked(String providerUserId) {
+		memberRepository.increaseCountToBeDisliked(providerUserId);
+	}
+	
+	public void increaseCountToComment(String userId) {
+		memberRepository.increaseCountToComment(userId);
+	}
+	
+	public void increaseCountToBeCommented(String providerUserId) {
+		memberRepository.increaseCountToBeCommented(providerUserId);
+	}
 	
 	public void updateLastLoginTime(String userId) {
 		memberRepository.updateLastLoginTime(userId);

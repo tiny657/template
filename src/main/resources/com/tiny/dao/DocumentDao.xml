@@ -97,6 +97,27 @@
   		where documentId = #{documentId};
 	</update>
 	
+	<update id="increaseCountToLike" parameterType="document">
+  		UPDATE document
+  		SET
+			countToLike = countToLike + 1
+  		where documentId = #{documentId};
+	</update>
+	
+	<update id="increaseCountToDislike" parameterType="document">
+  		UPDATE document
+  		SET
+			countToDislike = countToDislike + 1
+  		where documentId = #{documentId};
+	</update>
+	
+	<update id="increaseCountToComment" parameterType="document">
+  		UPDATE document
+  		SET
+			countToComment = countToComment + 1
+  		where documentId = #{documentId};
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM document

@@ -38,12 +38,40 @@ public class MemberRepository {
 		memberDao.updateName(map);
 	}
 
-	public void updateLastLoginTime(String userId) {
-		memberDao.updateLastLoginTime(userId);
-	}
-	
 	public void increaseCountToShare(String userId) {
 		memberDao.increaseCountToShare(userId);
+	}
+	
+	public void increaseCountToBeShared(String providerUserId) {
+		memberDao.increaseCountToBeShared(providerUserId);
+	}
+	
+	public void increaseCountToLike(String userId) {
+		memberDao.increaseCountToLike(userId);
+	}
+	
+	public void increaseCountToBeLiked(String providerUserId) {
+		memberDao.increaseCountToBeLiked(providerUserId);
+	}
+	
+	public void increaseCountToDislike(String userId) {
+		memberDao.increaseCountToDislike(userId);
+	}
+	
+	public void increaseCountToBeDisliked(String providerUserId) {
+		memberDao.increaseCountToBeDisliked(providerUserId);
+	}
+	
+	public void increaseCountToComment(String userId) {
+		memberDao.increaseCountToComment(userId);
+	}
+
+	public void increaseCountToBeCommented(String providerUserId) {
+		memberDao.increaseCountToBeCommented(providerUserId);
+	}
+	
+	public void updateLastLoginTime(String userId) {
+		memberDao.updateLastLoginTime(userId);
 	}
 	
 	public void delete(String providerUserId) {

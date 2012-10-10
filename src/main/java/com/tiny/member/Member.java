@@ -20,10 +20,7 @@ public class Member {
 	private int countToDislike;
 	private int countToBeDisliked;
 	private int countToShare;
-	private int documentCount;
-	private int commentCount;
-	private int likeCount;
-	private int dislikeCount;
+	private int countToBeShared;
 	private String locale;
 	private boolean isAdmin;
 	private Date regDate;

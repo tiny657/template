@@ -35,23 +35,6 @@
 	</div>
 	
 	<script type="text/javascript">
-		function post(documentId) {
-			$.ajax({
-				type : "POST",
-				url : "/post",
-				dataType: "text",
-				data: {"documentId" : documentId, "content": $("#content" + documentId).text()},
-				beforeSend: function() {
-					$("#posting").css("display", "");
-					$("#postAlert").remove();
-				},
-				success : function(content) {
-					$("#posting").css("display", "none");
-					$("#alertPosition").after(content);
-				}
-			});
-		}
-				
 		function saveDocument() {
 			$.ajax({
 				type : "POST",
@@ -66,6 +49,18 @@
 					$("#content").val('');
 					$("#waitingDocument").after(content);
 					$("textarea").autoresize();
+				}
+			});
+		}
+		
+		function deleteDocument(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/document",
+				dataType: "text",
+				data: {"documentId": documentId, _method: "DELETE"},
+				success : function() {
+					$("#document" + documentId).remove();
 				}
 			});
 		}
@@ -87,18 +82,6 @@
 			});
 		}
 		
-		function deleteDocument(documentId) {
-			$.ajax({
-				type : "POST",
-				url : "/document",
-				dataType: "text",
-				data: {"documentId": documentId, _method: "DELETE"},
-				success : function() {
-					$("#document" + documentId).remove();
-				}
-			});
-		}
-		
 		function deleteComment(commentId) {
 			$.ajax({
 				type : "POST",
@@ -111,18 +94,60 @@
 			});
 		}
 		
-		function good(documentId) {
+		function post(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/post",
+				dataType: "text",
+				data: {"documentId" : documentId, "content": $("#content" + documentId).text()},
+				beforeSend: function() {
+					$("#posting").css("display", "");
+					$("#postAlert").remove();
+				},
+				success : function(content) {
+					$("#posting").css("display", "none");
+					$("#alertPosition").after(content);
+				}
+			});
+		}
+				
+		function like(documentId) {
+			var countToLike = parseInt($("#countToLike${documentId}").text());
+			$("#countToLike${documentId}").text(countToLike + 1);
 			$.ajax({
 				type : "GET",
-				url : "/good",
+				url : "/like",
 				dataType: "text",
 				data: {"documentId": documentId},
-				beforeSend: function() {
-				},
+				success : function() {
+				}
+			});
+		}
+		
+		function dislike(documentId) {
+			var countToDislike = parseInt($("#countToDislike${documentId}").text());
+			$("#countToDislike${documentId}").text(countToDislike + 1);
+			$.ajax({
+				type : "GET",
+				url : "/dislike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function() {
+				}
+			});
+		}
+		
+		function comment(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/dislike",
+				dataType: "text",
+				data: {"documentId": documentId},
 				success : function(content) {
 				}
 			});
 		}
+		
 		$("textarea").autoresize();
 	</script>
 </div>

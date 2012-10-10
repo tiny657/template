@@ -11,9 +11,9 @@
 		</div>
 		<div>
 			<br />
-			<i class="icon-thumbs-up" onclick="like(${documentId}")></i><span id="countToLike${documentId}">${document.countToLike}</span>&nbsp&nbsp
-			<i class="icon-thumbs-down" onclick="dislike(${documentId}")></i><span id="countToDislike${documentId}">${document.countToDislike}</span>&nbsp&nbsp
-			<i class="icon-comment" onclick="comment(${documentId}")></i><span id="countToComment${documentId}">${document.countToComment}</span>&nbsp&nbsp
+			<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="countToLike${documentId}">${document.countToLike}</span></a>&nbsp&nbsp
+			<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="countToDislike${documentId}">${document.countToDislike}</span></a>&nbsp&nbsp
+			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="countToComment${documentId}">${document.countToComment}</span></a>&nbsp&nbsp
 		
 			<%-- POST --%>
 			<c:if test="${not empty member}">
