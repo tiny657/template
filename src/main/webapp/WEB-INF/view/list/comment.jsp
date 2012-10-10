@@ -3,7 +3,7 @@
 
 <blockquote id="comment${comment.commentId}">
 	<p>${comment.content}
-		<c:if test="${member.providerUserId eq comment.providerUserId}">
+		<c:if test="${providerUserId eq comment.providerUserId}">
 			<a href="#deleteCommentModal${comment.commentId}" class="pull-right" data-toggle="modal"><i class="icon-remove"></i></a>
 		</c:if>
 	</p>
@@ -18,7 +18,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-			<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteComment(${comment.commentId})">Yes</button>
+			<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteComment(${comment.documentId}, ${comment.commentId})">Yes</button>
 		</div>
 	</div>
 </blockquote>

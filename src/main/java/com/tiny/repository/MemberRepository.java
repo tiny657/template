@@ -31,11 +31,23 @@ public class MemberRepository {
 		return memberDao.get(providerUserId);
 	}
 	
+	public String getName(String providerUserId) {
+		return memberDao.getName(providerUserId);
+	}
+	
 	public void updateName(String providerUserId, String name) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("providerUserId", providerUserId);
 		map.put("name", name);
 		memberDao.updateName(map);
+	}
+
+	public void increaseCountToDocument(String providerUserId) {
+		memberDao.increaseCountToDocument(providerUserId);
+	}
+
+	public void decreaseCountToDocument(String providerUserId) {
+		memberDao.decreaseCountToDocument(providerUserId);
 	}
 
 	public void increaseCountToShare(String userId) {
@@ -62,12 +74,20 @@ public class MemberRepository {
 		memberDao.increaseCountToBeDisliked(providerUserId);
 	}
 	
-	public void increaseCountToComment(String userId) {
-		memberDao.increaseCountToComment(userId);
+	public void increaseCountToComment(String providerUserId) {
+		memberDao.increaseCountToComment(providerUserId);
 	}
 
+	public void decreaseCountToComment(String providerUserId) {
+		memberDao.decreaseCountToComment(providerUserId);
+	}
+	
 	public void increaseCountToBeCommented(String providerUserId) {
 		memberDao.increaseCountToBeCommented(providerUserId);
+	}
+
+	public void decreaseCountToBeCommented(String providerUserId) {
+		memberDao.decreaseCountToBeCommented(providerUserId);
 	}
 	
 	public void updateLastLoginTime(String userId) {

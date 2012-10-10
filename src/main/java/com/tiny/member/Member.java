@@ -12,7 +12,7 @@ public class Member {
 	// female : 0, male : 1
 	private boolean gender;
 	private int point;
-	private int countDocument;
+	private int countToDocument;
 	private int countToComment;
 	private int countToBeCommented;
 	private int countToLike;

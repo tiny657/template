@@ -6,13 +6,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.comment.Comment;
 import com.tiny.common.util.XssFilter;
 import com.tiny.repository.CommentRepository;
+import com.tiny.repository.MemberRepository;
+import com.tiny.repository.UserConnectionRepository;
+import com.tiny.social.SecurityContext;
 
 @Service
 public class CommentService {
@@ -23,14 +25,20 @@ public class CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@Autowired
 	private FacebookService facebookService;
+	
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
 	public void save(Comment comment) {
-		FacebookProfile facebookProfile = facebookService.getProfile();
-		comment.setProviderUserId(facebookProfile.getId());
-		comment.setName(facebookProfile.getName());
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		comment.setProviderUserId(providerUserId);
+		comment.setName(memberRepository.getName(providerUserId));
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
@@ -49,6 +57,10 @@ public class CommentService {
 		}
 
 		return comments;
+	}
+
+	public Comment getCommentId(Integer commentId) {
+		return commentRepository.getCommentId(commentId);
 	}
 
 	public void deleteWithDocumentId(Integer documentId) {

@@ -17,13 +17,15 @@ public interface DocumentDao {
 
 	public void update(Document document);
 
-	public void increaseCountToShare(Integer documentId);
+	public void increaseCountToComment(Integer documentId);
+
+	public void decreaseCountToComment(Integer documentId);
 	
 	public void increaseCountToLike(Integer documentId);
 	
 	public void increaseCountToDislike(Integer documentId);
 	
-	public void increaseCountToComment(Integer documentId);
+	public void increaseCountToShare(Integer documentId);
 
 	public void delete(int documentId);
 }

@@ -8,6 +8,8 @@ public interface CommentDao {
 	public void save(Comment comment);
 
 	public List<Comment> get(Integer documentId);
+
+	public Comment getCommentId(Integer commentId);
 	
 	public Comment getLast();
 	

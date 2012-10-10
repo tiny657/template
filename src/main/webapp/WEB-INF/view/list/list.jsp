@@ -66,6 +66,8 @@
 		}
 		
 		function saveComment(documentId) {
+			var countToComment = parseInt($("#countToComment" + documentId).text());
+			$("#countToComment" + documentId).text(countToComment + 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -82,12 +84,16 @@
 			});
 		}
 		
-		function deleteComment(commentId) {
+		function deleteComment(documentId, commentId) {
+			var countToComment = parseInt($("#countToComment" + documentId).text());
+			$("#countToComment" + documentId).text(countToComment - 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
 				dataType: "text",
-				data: {"commentId": commentId, _method: "DELETE"},
+				data: {"documentId": documentId, "commentId": commentId, _method: "DELETE"},
+				beforeSend: function() {
+				},
 				success : function() {
 					$("#comment" + commentId).remove();
 				}
@@ -118,7 +124,9 @@
 				type : "GET",
 				url : "/like",
 				dataType: "text",
-				data: {"documentId": documentId}
+				data: {"documentId": documentId},
+				success : function() {
+				}
 			});
 		}
 		
@@ -130,7 +138,7 @@
 				url : "/dislike",
 				dataType: "text",
 				data: {"documentId": documentId},
-				success : function(result) {
+				success : function() {
 				}
 			});
 		}

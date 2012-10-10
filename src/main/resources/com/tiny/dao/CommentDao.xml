@@ -37,6 +37,12 @@
 		WHERE documentId = #{documentId}
 	</select>
 	
+	<select id="getCommentId" parameterType="int" resultType="comment">
+		SELECT *
+		FROM comment
+		WHERE commentId = #{commentId}
+	</select>
+	
 	<select id="getLast" parameterType="int" resultMap="result">
 		SELECT *
 		FROM comment

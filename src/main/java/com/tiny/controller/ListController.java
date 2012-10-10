@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.tiny.comment.Comment;
 import com.tiny.common.util.Constant;
 import com.tiny.document.Document;
+import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
@@ -36,6 +37,9 @@ public class ListController {
 
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -61,7 +65,8 @@ public class ListController {
 		model.addAttribute("comments", map);
 		model.addAttribute("url", Constant.LIST);
 		// for posting
-		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("providerUserId",
+				userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId()));
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
@@ -84,7 +89,9 @@ public class ListController {
 		model.addAttribute("url", Constant.LIST);
 		// for posting
 		try {
-			model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			model.addAttribute("providerUserId", providerUserId);
+			memberService.increaseCountToDocument(providerUserId);
 			mav.setViewName("listOne");
 		} catch (IllegalStateException e) {
 			LOGGER.info("No user logined in.");

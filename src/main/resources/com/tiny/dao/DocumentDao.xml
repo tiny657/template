@@ -90,10 +90,17 @@
   		where documentId = #{documentId};
 	</update>
 	
-	<update id="increaseCountToShare" parameterType="document">
+	<update id="increaseCountToComment" parameterType="document">
   		UPDATE document
   		SET
-			countToShare = countToShare + 1
+			countToComment = countToComment + 1
+  		where documentId = #{documentId};
+	</update>
+	
+	<update id="decreaseCountToComment" parameterType="document">
+  		UPDATE document
+  		SET
+			countToComment = countToComment - 1
   		where documentId = #{documentId};
 	</update>
 	
@@ -111,10 +118,10 @@
   		where documentId = #{documentId};
 	</update>
 	
-	<update id="increaseCountToComment" parameterType="document">
+	<update id="increaseCountToShare" parameterType="document">
   		UPDATE document
   		SET
-			countToComment = countToComment + 1
+			countToShare = countToShare + 1
   		where documentId = #{documentId};
 	</update>
 	

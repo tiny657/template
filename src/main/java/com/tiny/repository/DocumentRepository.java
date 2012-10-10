@@ -49,6 +49,10 @@ public class DocumentRepository {
 		documentDao.increaseCountToComment(documentId);
 	}
 	
+	public void decreaseCountToComment(Integer documentId) {
+		documentDao.decreaseCountToComment(documentId);
+	}
+	
 	public void delete(Integer documentId) {
 		documentDao.delete(documentId);
 	}

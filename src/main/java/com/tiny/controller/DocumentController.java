@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.document.Document;
+import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
@@ -32,13 +33,18 @@ public class DocumentController {
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
+
 	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
 	public ModelAndView saveDocument(HttpServletRequest request, @ModelAttribute Document document) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		document.setIpAddress(request.getRemoteAddr());
 		model.addAttribute("document", documentService.saveAndGet(document));
-		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		model.addAttribute("providerUserId", providerUserId);
+		memberService.increaseCountToDocument(providerUserId);
 		mav.addAllObjects(model);
 		mav.setViewName("document");
 		return mav;
@@ -46,6 +52,8 @@ public class DocumentController {
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
 	public void delete(@RequestParam Integer documentId) {
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		memberService.decreaseCountToDocument(providerUserId);
 		commentService.deleteWithDocumentId(documentId);
 		documentService.delete(documentId);
 	}

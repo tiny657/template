@@ -7,7 +7,7 @@
 		<result property="name" column="name" />
 		<result property="gender" column="gender" />
 		<result property="point" column="point" />
-		<result property="countDocument" column="contDocument" />
+		<result property="countToDocument" column="contToDocument" />
 		<result property="countToComment" column="countToComment" />
 		<result property="countToBeCommented" column="countToBeCommented" />
 		<result property="countToLike" column="countToLike" />
@@ -30,7 +30,7 @@
 				name,
 				gender,
 				point,
-				countDocument,
+				countToDocument,
 				countToComment,
 				countToBeCommented,
 				countToLike,
@@ -48,7 +48,7 @@
 				#{name},
 				#{gender},
 				#{point},
-				#{countDocument},
+				#{countToDocument},
 				#{countToComment},
 				#{countToBeCommented},
 				#{countToLike},
@@ -74,6 +74,12 @@
 		WHERE providerUserId = #{value}
 	</select>
 	
+	<select id="getName" resultType="String">
+		SELECT name
+		FROM member
+		WHERE providerUserId = #{value}
+	</select>
+	
 	<select id="count" resultType="int">
 		SELECT COUNT(*)
 		FROM member;
@@ -86,7 +92,7 @@
 			name = #{name},
 			gender = #{gender},
 			point = #{point},
-			countDocument = #{countDocument},
+			countToDocument = #{countToDocument},
 			countToComment = #{countToComment},
 			countToBeCommented = #{countToBeCommented},
 			countToLike = #{countToLike},
@@ -108,30 +114,48 @@
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="updateLastLoginTime" parameterType="String">
+	<update id="increaseCountToDocument" parameterType="String">
   		UPDATE member
   		SET
-			lastLogin = NOW()
-  		where providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
-  		);
-	</update>
-	
-	<update id="increaseCountToShare" parameterType="String">
-  		UPDATE member
-  		SET
-			countToShare = countToShare + 1 
-  		where providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
-  		);
-	</update>
-	
-	<update id="increaseCountToBeShared" parameterType="String">
-  		UPDATE member
-  		SET
-			countToBeShared = countToBeShared + 1 
+			countToDocument = countToDocument + 1 
   		where providerUserId = #{providerUserId};
 	</update>
+	
+	<update id="decreaseCountToDocument" parameterType="String">
+  		UPDATE member
+  		SET
+			countToDocument = countToDocument - 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increaseCountToComment" parameterType="String">
+  		UPDATE member
+  		SET
+			countToComment = countToComment + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="decreaseCountToComment" parameterType="String">
+  		UPDATE member
+  		SET
+			countToComment = countToComment - 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increaseCountToBeCommented" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeCommented = countToBeCommented + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="decreaseCountToBeCommented" parameterType="String">
+  		UPDATE member
+  		SET
+			countToBeCommented = countToBeCommented - 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
 	
 	<update id="increaseCountToLike" parameterType="String">
   		UPDATE member
@@ -165,20 +189,29 @@
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increaseCountToComment" parameterType="String">
+	<update id="increaseCountToShare" parameterType="String">
   		UPDATE member
   		SET
-			countToComment = countToComment + 1 
+			countToShare = countToShare + 1 
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increaseCountToBeCommented" parameterType="String">
+	<update id="increaseCountToBeShared" parameterType="String">
   		UPDATE member
   		SET
-			countToBeCommented = countToBeCommented + 1 
+			countToBeShared = countToBeShared + 1 
   		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="updateLastLoginTime" parameterType="String">
+  		UPDATE member
+  		SET
+			lastLogin = NOW()
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
 	</update>
 	
 	<delete id="delete" parameterType="String">

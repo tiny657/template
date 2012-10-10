@@ -25,6 +25,10 @@ public class CommentRepository {
 		return commentDao.get(documentId);
 	}
 	
+	public Comment getCommentId(Integer commentId) {
+		return commentDao.getCommentId(commentId);
+	}
+	
 	public Comment getLast() {
 		return commentDao.getLast();
 	}

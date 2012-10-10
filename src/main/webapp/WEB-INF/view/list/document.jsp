@@ -16,7 +16,7 @@
 			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="countToComment${documentId}">${document.countToComment}</span></a>&nbsp&nbsp
 		
 			<%-- POST --%>
-			<c:if test="${not empty member}">
+			<c:if test="${not empty providerUserId}">
 				<%-- icon --%>
 				<a href="#postModal${documentId}" data-toggle="modal">
 					<i class="icon-retweet"></i><span id="countToShare${documentId}">${document.countToShare}</span>&nbsp&nbsp
@@ -38,7 +38,7 @@
 			</c:if>
 		</div>
 		
-		<br /><br />
+		<br />
 		
 		<%-- COMMENT LIST --%>
 		<c:forEach var="comment" items="${comments[documentId]}">
@@ -52,7 +52,7 @@
 		<blockquote><p><img src="/img/wait24trans.gif" id="waitingComment${documentId}" style="display:none;" /></p></blockquote>
 		
 		<%-- COMMENT FORM --%>
-		<c:if test="${not empty member}">
+		<c:if test="${not empty providerUserId}">
 			<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>
 			<br />
 			<button type="submit" class="btn btn-info" id="saveComment${documentId}" onclick="saveComment(${documentId})" style="display:none;">Save</button>
@@ -66,7 +66,7 @@
 	</td>
 	<td>
 		<%-- DELETE --%>
-		<c:if test="${not empty member && member.providerUserId eq document.providerUserId}">
+		<c:if test="${providerUserId eq document.providerUserId}">
 			<!-- icon -->
 			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
 			<%-- Modal (Delete) --%>

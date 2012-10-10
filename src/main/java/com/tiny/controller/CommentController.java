@@ -8,10 +8,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.comment.Comment;
+import com.tiny.document.Document;
+import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
+import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.social.SecurityContext;
 
@@ -21,9 +25,15 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private DocumentService documentService;
+
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
@@ -33,14 +43,26 @@ public class CommentController {
 		comment.setDocumentId(documentId);
 		comment.setContent(content);
 		model.addAttribute("comment", commentService.saveAndGet(comment));
-		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		model.addAttribute("providerUserId", providerUserId);
+		memberService.increaseCountToComment(providerUserId);
+		Document document = documentService.get(documentId);
+		memberService.increaseCountToBeCommented(document.getProviderUserId());
+		documentService.increaseCountToComment(documentId);
 		mav.addAllObjects(model);
 		mav.setViewName("comment");
 		return mav;
 	}
 
 	@RequestMapping(value = { "/comment" }, method = RequestMethod.DELETE)
-	public void delete(@RequestParam Integer commentId) {
+	public @ResponseBody
+	boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
+		memberService.decreaseCountToComment(userConnectionRepository.getProviderUserId(SecurityContext
+				.getCurrentUser().getId()));
+		Document document = documentService.get(documentId);
+		memberService.decreaseCountToBeCommented(document.getProviderUserId());
+		documentService.decreaseCountToComment(commentService.getCommentId(commentId).getDocumentId());
 		commentService.delete(commentId);
+		return true;
 	}
 }
