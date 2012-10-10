@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.document.Document;
-import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PostService;
@@ -66,18 +65,20 @@ public class CountController {
 	}
 
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
-	public void like(@RequestParam Integer documentId) {
+	public boolean like(@RequestParam Integer documentId) {
 		Document document = documentService.get(documentId);
 		documentService.increaseCountToLike(documentId);
 		memberService.increaseCountToLike(SecurityContext.getCurrentUser().getId());
 		memberService.increaseCountToBeLiked(document.getProviderUserId());
+		return true;
 	}
 	
 	@RequestMapping(value = "/dislike", method = RequestMethod.GET)
-	public void dislike(@RequestParam Integer documentId) {
+	public boolean dislike(@RequestParam Integer documentId) {
 		Document document = documentService.get(documentId);
 		documentService.increaseCountToDislike(documentId);
 		memberService.increaseCountToDislike(SecurityContext.getCurrentUser().getId());
 		memberService.increaseCountToBeDisliked(document.getProviderUserId());
+		return true;
 	}
 }

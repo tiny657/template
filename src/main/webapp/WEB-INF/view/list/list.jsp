@@ -119,7 +119,7 @@
 				url : "/like",
 				dataType: "text",
 				data: {"documentId": documentId},
-				success : function() {
+				success : function(result) {
 				}
 			});
 		}
@@ -132,7 +132,7 @@
 				url : "/dislike",
 				dataType: "text",
 				data: {"documentId": documentId},
-				success : function() {
+				success : function(result) {
 				}
 			});
 		}
