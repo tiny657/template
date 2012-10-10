@@ -10,10 +10,10 @@ public class Document {
 	private int point;
 	private boolean isNotice;
 	private String content;
-	private int countToLike;
-	private int countToDislike;
-	private int countToComment;
-	private int countToShare;
+	private int pointLike;
+	private int pointDislike;
+	private int pointComment;
+	private int pointShare;
 	private String providerUserId;
 	private String name;
 	private String ipAddress;

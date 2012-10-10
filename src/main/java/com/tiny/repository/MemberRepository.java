@@ -42,52 +42,72 @@ public class MemberRepository {
 		memberDao.updateName(map);
 	}
 
-	public void increaseCountToDocument(String providerUserId) {
-		memberDao.increaseCountToDocument(providerUserId);
+	public void increasePointDocument(String providerUserId) {
+		memberDao.increasePointDocument(providerUserId);
 	}
 
-	public void decreaseCountToDocument(String providerUserId) {
-		memberDao.decreaseCountToDocument(providerUserId);
+	public void decreasePointDocument(String providerUserId) {
+		memberDao.decreasePointDocument(providerUserId);
 	}
 
-	public void increaseCountToShare(String userId) {
-		memberDao.increaseCountToShare(userId);
+	public void increasePointShare(String userId) {
+		memberDao.increasePointShare(userId);
 	}
 	
-	public void increaseCountToBeShared(String providerUserId) {
-		memberDao.increaseCountToBeShared(providerUserId);
+	public void decreasePointShare(String userId) {
+		memberDao.decreasePointShare(userId);
 	}
 	
-	public void increaseCountToLike(String userId) {
-		memberDao.increaseCountToLike(userId);
+	public void increasePointBeShared(String providerUserId) {
+		memberDao.increasePointBeShared(providerUserId);
 	}
 	
-	public void increaseCountToBeLiked(String providerUserId) {
-		memberDao.increaseCountToBeLiked(providerUserId);
+	public void increasePointLike(String userId) {
+		memberDao.increasePointLike(userId);
 	}
 	
-	public void increaseCountToDislike(String userId) {
-		memberDao.increaseCountToDislike(userId);
+	public void decreasePointLike(String userId) {
+		memberDao.decreasePointLike(userId);
 	}
 	
-	public void increaseCountToBeDisliked(String providerUserId) {
-		memberDao.increaseCountToBeDisliked(providerUserId);
+	public void increasePointBeLiked(String providerUserId) {
+		memberDao.increasePointBeLiked(providerUserId);
 	}
 	
-	public void increaseCountToComment(String providerUserId) {
-		memberDao.increaseCountToComment(providerUserId);
+	public void decreasePointBeLiked(String providerUserId) {
+		memberDao.decreasePointBeLiked(providerUserId);
+	}
+	
+	public void increasePointDislike(String userId) {
+		memberDao.increasePointDislike(userId);
+	}
+	
+	public void decreasePointDislike(String userId) {
+		memberDao.increasePointDislike(userId);
+	}
+	
+	public void increasePointBeDisliked(String providerUserId) {
+		memberDao.increasePointBeDisliked(providerUserId);
+	}
+	
+	public void decreasePointBeDisliked(String providerUserId) {
+		memberDao.increasePointBeDisliked(providerUserId);
+	}
+	
+	public void increasePointComment(String providerUserId) {
+		memberDao.increasePointComment(providerUserId);
 	}
 
-	public void decreaseCountToComment(String providerUserId) {
-		memberDao.decreaseCountToComment(providerUserId);
+	public void decreasePointComment(String providerUserId) {
+		memberDao.decreasePointComment(providerUserId);
 	}
 	
-	public void increaseCountToBeCommented(String providerUserId) {
-		memberDao.increaseCountToBeCommented(providerUserId);
+	public void increasePointBeCommented(String providerUserId) {
+		memberDao.increasePointBeCommented(providerUserId);
 	}
 
-	public void decreaseCountToBeCommented(String providerUserId) {
-		memberDao.decreaseCountToBeCommented(providerUserId);
+	public void decreasePointBeCommented(String providerUserId) {
+		memberDao.decreasePointBeCommented(providerUserId);
 	}
 	
 	public void updateLastLoginTime(String userId) {

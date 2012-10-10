@@ -9,23 +9,29 @@ public interface DocumentDao {
 
 	public List<Document> getAll();
 
-	public Document get(Integer documentId);
+	public int count();
+
+	public Document get(int documentId);
 	
 	public Document getLast();
 
-	public Integer count();
-
 	public void update(Document document);
 
-	public void increaseCountToComment(Integer documentId);
+	public void increasePointComment(int documentId);
 
-	public void decreaseCountToComment(Integer documentId);
+	public void decreasePointComment(int documentId);
 	
-	public void increaseCountToLike(Integer documentId);
+	public void increasePointLike(int documentId);
 	
-	public void increaseCountToDislike(Integer documentId);
+	public void decreasePointLike(int documentId);
 	
-	public void increaseCountToShare(Integer documentId);
+	public void increasePointDislike(int documentId);
+	
+	public void decreasePointDislike(int documentId);
+	
+	public void increasePointShare(int documentId);
+	
+	public void decreasePointShare(int documentId);
 
 	public void delete(int documentId);
 }

@@ -50,7 +50,7 @@ public class CommentService {
 		return commentRepository.getLast();
 	}
 
-	public List<Comment> get(Integer documentId) {
+	public List<Comment> get(int documentId) {
 		List<Comment> comments = commentRepository.get(documentId);
 		for (Comment comment : comments) {
 			comment.setContent(comment.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
@@ -59,15 +59,15 @@ public class CommentService {
 		return comments;
 	}
 
-	public Comment getCommentId(Integer commentId) {
+	public Comment getCommentId(int commentId) {
 		return commentRepository.getCommentId(commentId);
 	}
 
-	public void deleteWithDocumentId(Integer documentId) {
+	public void deleteWithDocumentId(int documentId) {
 		commentRepository.deleteWithDocumentId(documentId);
 	}
 	
-	public void delete(Integer commentId) {
+	public void delete(int commentId) {
 		commentRepository.delete(commentId);
 	}
 }

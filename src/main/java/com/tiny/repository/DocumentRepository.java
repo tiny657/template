@@ -25,7 +25,7 @@ public class DocumentRepository {
 		return documentDao.getAll();
 	}
 	
-	public Document get(Integer documentId) {
+	public Document get(int documentId) {
 		return documentDao.get(documentId);
 	}
 	
@@ -33,27 +33,39 @@ public class DocumentRepository {
 		return documentDao.getLast();
 	}
 
-	public void increaseCountToShare(Integer documentId) {
-		documentDao.increaseCountToShare(documentId);
+	public void increasePointShare(int documentId) {
+		documentDao.increasePointShare(documentId);
 	}
 	
-	public void increaseCountToLike(Integer documentId) {
-		documentDao.increaseCountToLike(documentId);
+	public void decreasePointShare(int documentId) {
+		documentDao.decreasePointShare(documentId);
 	}
 	
-	public void increaseCountToDislike(Integer documentId) {
-		documentDao.increaseCountToDislike(documentId);
+	public void increasePointLike(int documentId) {
+		documentDao.increasePointLike(documentId);
 	}
 	
-	public void increaseCountToComment(Integer documentId) {
-		documentDao.increaseCountToComment(documentId);
+	public void decreasePointLike(int documentId) {
+		documentDao.increasePointLike(documentId);
 	}
 	
-	public void decreaseCountToComment(Integer documentId) {
-		documentDao.decreaseCountToComment(documentId);
+	public void increasePointDislike(int documentId) {
+		documentDao.increasePointDislike(documentId);
 	}
 	
-	public void delete(Integer documentId) {
+	public void decreasePointDislike(int documentId) {
+		documentDao.increasePointDislike(documentId);
+	}
+	
+	public void increasePointComment(int documentId) {
+		documentDao.increasePointComment(documentId);
+	}
+	
+	public void decreasePointComment(int documentId) {
+		documentDao.decreasePointComment(documentId);
+	}
+	
+	public void delete(int documentId) {
 		documentDao.delete(documentId);
 	}
 }

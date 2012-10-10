@@ -23,6 +23,7 @@ import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
+import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
 
 @Controller
@@ -30,13 +31,16 @@ public class ListController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
 
 	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
 	private DocumentService documentService;
 
 	@Autowired
 	private CommentService commentService;
 
 	@Autowired
-	private MemberService memberService;
+	private PointService pointService;
 
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
@@ -73,7 +77,7 @@ public class ListController {
 	}
 
 	@RequestMapping(value = "/list/{documentId}", method = RequestMethod.GET)
-	public ModelAndView list(@PathVariable Integer documentId) {
+	public ModelAndView list(@PathVariable int documentId) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		Document document = documentService.get(documentId);
@@ -91,7 +95,7 @@ public class ListController {
 		try {
 			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			model.addAttribute("providerUserId", providerUserId);
-			memberService.increaseCountToDocument(providerUserId);
+			pointService.calculatePointToSaveDocument(providerUserId);
 			mav.setViewName("listOne");
 		} catch (IllegalStateException e) {
 			LOGGER.info("No user logined in.");

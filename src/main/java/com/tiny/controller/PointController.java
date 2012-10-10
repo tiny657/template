@@ -17,33 +17,31 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tiny.document.Document;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
+import com.tiny.service.PointService;
 import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
 
 @Controller
-public class CountController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CountController.class);
+public class PointController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(PointController.class);
 
 	@Autowired
 	private DocumentService documentService;
-
+	
 	@Autowired
-	private MemberService memberService;
+	private PointService pointService;
 
 	@Autowired
 	private PostService postService;
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
+	public ModelAndView post(@RequestParam int documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		try {
 			postService.post(content);
+			pointService.calculatePointToShare(documentId);
 			Document document = documentService.get(documentId);
-			documentService.increaseCountToShare(documentId);
-			memberService.increaseCountToShare(document.getProviderUserId());
-			memberService.increaseCountToBeShared(document.getProviderUserId());
-			document = documentService.get(documentId);
 			model.addAttribute("isSuccess", true);
 			model.addAttribute("alertMessage", "Posted.");
 			model.addAttribute("document", document);
@@ -66,20 +64,14 @@ public class CountController {
 	}
 
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
-	public @ResponseBody boolean like(@RequestParam Integer documentId) {
-		Document document = documentService.get(documentId);
-		documentService.increaseCountToLike(documentId);
-		memberService.increaseCountToLike(SecurityContext.getCurrentUser().getId());
-		memberService.increaseCountToBeLiked(document.getProviderUserId());
+	public @ResponseBody boolean like(@RequestParam int documentId) {
+		pointService.calculatePointToClickLike(documentId);
 		return true;
 	}
 	
 	@RequestMapping(value = "/dislike", method = RequestMethod.GET)
-	public @ResponseBody boolean dislike(@RequestParam Integer documentId) {
-		Document document = documentService.get(documentId);
-		documentService.increaseCountToDislike(documentId);
-		memberService.increaseCountToDislike(SecurityContext.getCurrentUser().getId());
-		memberService.increaseCountToBeDisliked(document.getProviderUserId());
+	public @ResponseBody boolean dislike(@RequestParam int documentId) {
+		pointService.calculatePointToClickDislike(documentId);
 		return true;
 	}
 }

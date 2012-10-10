@@ -11,15 +11,15 @@
 		</div>
 		<div>
 			<br />
-			<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="countToLike${documentId}">${document.countToLike}</span></a>&nbsp&nbsp
-			<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="countToDislike${documentId}">${document.countToDislike}</span></a>&nbsp&nbsp
-			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="countToComment${documentId}">${document.countToComment}</span></a>&nbsp&nbsp
+			<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="pointLike${documentId}">${document.pointLike}</span></a>&nbsp&nbsp
+			<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="pointDislike${documentId}">${document.pointDislike}</span></a>&nbsp&nbsp
+			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="pointComment${documentId}">${document.pointComment}</span></a>&nbsp&nbsp
 		
 			<%-- POST --%>
 			<c:if test="${not empty providerUserId}">
 				<%-- icon --%>
 				<a href="#postModal${documentId}" data-toggle="modal">
-					<i class="icon-retweet"></i><span id="countToShare${documentId}">${document.countToShare}</span>&nbsp&nbsp
+					<i class="icon-retweet"></i><span id="pointShare${documentId}">${document.pointShare}</span>&nbsp&nbsp
 				</a>
 				<%-- Modal (Post) --%>
 				<div id="postModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

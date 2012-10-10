@@ -10,39 +10,51 @@ public interface MemberDao {
 
 	public List<Member> getAll();
 
+	public int count();
+
 	public Member get(String providerUserId);
 	
 	public String getName(String providerUserId);
 	
-	public Integer count();
-
 	public void update(Member member);
 	
 	public void updateName(Map<String, String> map);
 	
-	public void increaseCountToDocument(String providerUserId);
+	public void increasePointDocument(String providerUserId);
 
-	public void decreaseCountToDocument(String providerUserId);
+	public void decreasePointDocument(String providerUserId);
 	
-	public void increaseCountToComment(String providerUsreId);
+	public void increasePointComment(String providerUsreId);
 
-	public void decreaseCountToComment(String providerUserId);
+	public void decreasePointComment(String providerUserId);
 	
-	public void increaseCountToBeCommented(String providerUserId);
+	public void increasePointBeCommented(String providerUserId);
 
-	public void decreaseCountToBeCommented(String providerUserId);
+	public void decreasePointBeCommented(String providerUserId);
 	
-	public void increaseCountToLike(String userId);
+	public void increasePointLike(String userId);
 	
-	public void increaseCountToBeLiked(String providerUserId);
+	public void decreasePointLike(String userId);
 	
-	public void increaseCountToDislike(String userId);
+	public void increasePointBeLiked(String providerUserId);
 	
-	public void increaseCountToBeDisliked(String providerUserId);
+	public void decreasePointBeLiked(String providerUserId);
 	
-	public void increaseCountToShare(String userId);
+	public void increasePointDislike(String userId);
 	
-	public void increaseCountToBeShared(String providerUserId);
+	public void decreasePointDislike(String userId);
+	
+	public void increasePointBeDisliked(String providerUserId);
+	
+	public void decreasePointBeDisliked(String providerUserId);
+	
+	public void increasePointShare(String userId);
+	
+	public void decreasePointShare(String userId);
+	
+	public void increasePointBeShared(String providerUserId);
+	
+	public void decreasePointBeShared(String providerUserId);
 	
 	public void updateLastLoginTime(String userId);
 

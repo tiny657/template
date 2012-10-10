@@ -15,5 +15,5 @@
 </c:choose>
 
 <script type="text/javascript">
-	$("#countToShare${document.documentId}").text("${document.countToShare}");
+	$("#pointShare${document.documentId}").text("${document.pointShare}");
 </script>

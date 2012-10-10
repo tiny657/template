@@ -6,11 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tiny.comment.Comment;
 import com.tiny.common.util.XssFilter;
 import com.tiny.document.Document;
 import com.tiny.repository.DocumentRepository;
@@ -58,7 +56,7 @@ public class DocumentService {
 		return documents;
 	}
 
-	public Document get(Integer documentId) {
+	public Document get(int documentId) {
 		return documentRepository.get(documentId);
 	}
 
@@ -66,27 +64,7 @@ public class DocumentService {
 		return documentRepository.getLast();
 	}
 	
-	public void increaseCountToShare(Integer documentId) {
-		documentRepository.increaseCountToShare(documentId);
-	}
-
-	public void increaseCountToLike(Integer documentId) {
-		documentRepository.increaseCountToLike(documentId);
-	}
-
-	public void increaseCountToDislike(Integer documentId) {
-		documentRepository.increaseCountToDislike(documentId);
-	}
-
-	public void increaseCountToComment(Integer documentId) {
-		documentRepository.increaseCountToComment(documentId);
-	}
-
-	public void decreaseCountToComment(Integer documentId) {
-		documentRepository.decreaseCountToComment(documentId);
-	}
-
-	public void delete(Integer documentId) {
+	public void delete(int documentId) {
 		documentRepository.delete(documentId);
 	}
 }

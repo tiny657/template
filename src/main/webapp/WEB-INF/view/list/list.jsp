@@ -66,8 +66,8 @@
 		}
 		
 		function saveComment(documentId) {
-			var countToComment = parseInt($("#countToComment" + documentId).text());
-			$("#countToComment" + documentId).text(countToComment + 1);
+			var pointComment = parseInt($("#pointComment" + documentId).text());
+			$("#pointComment" + documentId).text(pointComment + 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -85,8 +85,8 @@
 		}
 		
 		function deleteComment(documentId, commentId) {
-			var countToComment = parseInt($("#countToComment" + documentId).text());
-			$("#countToComment" + documentId).text(countToComment - 1);
+			var pointComment = parseInt($("#pointComment" + documentId).text());
+			$("#pointComment" + documentId).text(pointComment - 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -118,8 +118,8 @@
 		}
 				
 		function like(documentId) {
-			var countToLike = parseInt($("#countToLike" + documentId).text());
-			$("#countToLike" + documentId).text(countToLike + 1);
+			var pointLike = parseInt($("#pointLike" + documentId).text());
+			$("#pointLike" + documentId).text(pointLike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/like",
@@ -131,8 +131,8 @@
 		}
 		
 		function dislike(documentId) {
-			var countToDislike = parseInt($("#countToDislike" + documentId).text());
-			$("#countToDislike" + documentId).text(countToDislike + 1);
+			var pointDislike = parseInt($("#pointDislike" + documentId).text());
+			$("#pointDislike" + documentId).text(pointDislike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/dislike",

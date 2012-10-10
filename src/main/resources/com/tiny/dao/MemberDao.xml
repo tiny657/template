@@ -8,15 +8,15 @@
 		<result property="email" column="email" />
 		<result property="level" column="level" />
 		<result property="point" column="point" />
-		<result property="countToDocument" column="contToDocument" />
-		<result property="countToComment" column="countToComment" />
-		<result property="countToBeCommented" column="countToBeCommented" />
-		<result property="countToLike" column="countToLike" />
-		<result property="countToBeLiked" column="countToBeLiked" />
-		<result property="countToDislike" column="countToDislike" />
-		<result property="countToBeDisliked" column="countToBeDisliked" />
-		<result property="countToShare" column="countToShare" />
-		<result property="countToBeShared" column="countToBeShared" />
+		<result property="pointDocument" column="pointDocument" />
+		<result property="pointComment" column="pointComment" />
+		<result property="pointBeCommented" column="pointBeCommented" />
+		<result property="pointLike" column="pointLike" />
+		<result property="pointBeLiked" column="pointBeLiked" />
+		<result property="pointDislike" column="pointDislike" />
+		<result property="pointBeDisliked" column="pointBeDisliked" />
+		<result property="pointShare" column="pointShare" />
+		<result property="pointBeShared" column="pointBeShared" />
 		<result property="locale" column="locale" />
 		<result property="regDate" column="regDate" />
 		<result property="lastLogin" column="lastLogin" />
@@ -31,15 +31,15 @@
 				email,
 				level,
 				point,
-				countToDocument,
-				countToComment,
-				countToBeCommented,
-				countToLike,
-				countToBeLiked,
-				countToDislike,
-				countToBeDisliked,
-				countToShare,
-				countToBeShared,
+				pointDocument,
+				pointComment,
+				pointBeCommented,
+				pointLike,
+				pointBeLiked,
+				pointDislike,
+				pointBeDisliked,
+				pointShare,
+				pointBeShared,
 				locale,
 				regDate,
 				lastLogin)
@@ -49,15 +49,15 @@
 				#{email},
 				#{level},
 				#{point},
-				#{countToDocument},
-				#{countToComment},
-				#{countToBeCommented},
-				#{countToLike},
-				#{countToBeLiked},
-				#{countToDislike},
-				#{countToBeDisliked},
-				#{countToShare},
-				#{countToBeShared},
+				#{pointDocument},
+				#{pointComment},
+				#{pointBeCommented},
+				#{pointLike},
+				#{pointBeLiked},
+				#{pointDislike},
+				#{pointBeDisliked},
+				#{pointShare},
+				#{pointBeShared},
 				#{locale},
 				NOW(),
 				NOW());
@@ -93,15 +93,15 @@
 			email = #{email},
 			level = #{level},
 			point = #{point},
-			countToDocument = #{countToDocument},
-			countToComment = #{countToComment},
-			countToBeCommented = #{countToBeCommented},
-			countToLike = #{countToLike},
-			countToBeLiked = #{countToBeLiked},
-			countToDislike = #{countToDislike},
-			countToBeDisliked = #{countToBeDisliked},
-			countToShare = #{countToShare},
-			countToBeShared = #{countToBeShared},
+			pointDocument = #{pointDocument},
+			pointComment = #{pointComment},
+			pointBeCommented = #{pointBeCommented},
+			pointLike = #{pointLike},
+			pointBeLiked = #{pointBeLiked},
+			pointDislike = #{pointDislike},
+			pointBeDisliked = #{pointBeDisliked},
+			pointShare = #{pointShare},
+			pointBeShared = #{pointBeShared},
 			locale = #{locale},
 			lastLogin = NOW()
   		where providerUserId = #{providerUserId};
@@ -114,94 +114,141 @@
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increaseCountToDocument" parameterType="String">
+	<update id="increasePointDocument" parameterType="String">
   		UPDATE member
   		SET
-			countToDocument = countToDocument + 1 
+			pointDocument = pointDocument + 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreaseCountToDocument" parameterType="String">
+	<update id="decreasePointDocument" parameterType="String">
   		UPDATE member
   		SET
-			countToDocument = countToDocument - 1 
+			pointDocument = pointDocument - 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increaseCountToComment" parameterType="String">
+	<update id="increasePointComment" parameterType="String">
   		UPDATE member
   		SET
-			countToComment = countToComment + 1 
+			pointComment = pointComment + 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreaseCountToComment" parameterType="String">
+	<update id="decreasePointComment" parameterType="String">
   		UPDATE member
   		SET
-			countToComment = countToComment - 1 
+			pointComment = pointComment - 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increaseCountToBeCommented" parameterType="String">
+	<update id="increasePointBeCommented" parameterType="String">
   		UPDATE member
   		SET
-			countToBeCommented = countToBeCommented + 1 
+			pointBeCommented = pointBeCommented + 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreaseCountToBeCommented" parameterType="String">
+	<update id="decreasePointBeCommented" parameterType="String">
   		UPDATE member
   		SET
-			countToBeCommented = countToBeCommented - 1 
+			pointBeCommented = pointBeCommented - 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	
-	<update id="increaseCountToLike" parameterType="String">
+	<update id="increasePointLike" parameterType="String">
   		UPDATE member
   		SET
-			countToLike = countToLike + 1 
+			pointLike = pointLike + 1 
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increaseCountToBeLiked" parameterType="String">
+	<update id="decreasePointLike" parameterType="String">
   		UPDATE member
   		SET
-			countToBeLiked = countToBeLiked + 1 
-  		where providerUserId = #{providerUserId};
-	</update>
-	
-	<update id="increaseCountToDislike" parameterType="String">
-  		UPDATE member
-  		SET
-			countToDislike = countToDislike + 1 
+			pointLike = pointLike - 1 
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increaseCountToBeDisliked" parameterType="String">
+	<update id="increasePointBeLiked" parameterType="String">
   		UPDATE member
   		SET
-			countToBeDisliked = countToBeDisliked + 1 
+			pointBeLiked = pointBeLiked + 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increaseCountToShare" parameterType="String">
+	<update id="decreasePointBeLiked" parameterType="String">
   		UPDATE member
   		SET
-			countToShare = countToShare + 1 
+			pointBeLiked = pointBeLiked - 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increasePointDislike" parameterType="String">
+  		UPDATE member
+  		SET
+			pointDislike = pointDislike + 1 
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increaseCountToBeShared" parameterType="String">
+	<update id="decreasePointDislike" parameterType="String">
   		UPDATE member
   		SET
-			countToBeShared = countToBeShared + 1 
+			pointDislike = pointDislike - 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="increasePointBeDisliked" parameterType="String">
+  		UPDATE member
+  		SET
+			pointBeDisliked = pointBeDisliked + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="decreasePointBeDisliked" parameterType="String">
+  		UPDATE member
+  		SET
+			pointBeDisliked = pointBeDisliked - 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="increasePointShare" parameterType="String">
+  		UPDATE member
+  		SET
+			pointShare = pointShare + 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="decreasePointShare" parameterType="String">
+  		UPDATE member
+  		SET
+			pointShare = pointShare - 1 
+  		where providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
+	</update>
+	
+	<update id="increasePointBeShared" parameterType="String">
+  		UPDATE member
+  		SET
+			pointBeShared = pointBeShared + 1 
+  		where providerUserId = #{providerUserId};
+	</update>
+	
+	<update id="decreasePointBeShared" parameterType="String">
+  		UPDATE member
+  		SET
+			pointBeShared = pointBeShared - 1 
   		where providerUserId = #{providerUserId};
 	</update>
 	

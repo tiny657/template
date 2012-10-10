@@ -5,8 +5,6 @@
 		<result property="commentId" column="commentId" />
 		<result property="documentId" column="documentId" />
 		<result property="content" column="content" />
-		<result property="countToLike" column="countToLike" />
-		<result property="countToDislike" column="countToDislike" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="regDate" column="regDate" />
@@ -17,19 +15,26 @@
 		INTO comment 
 				(documentId,
 				content,
-				countToLike,
-				countToDislike,
 				providerUserId,
 				name,
 				regDate)
 		VALUES (#{documentId},
 				#{content},
-				#{countToLike},
-				#{countToDislike},
 				#{providerUserId},
 				#{name},
 				#{regDate});
 	</insert>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM comment;
+	</select>
+	
+	<select id="countWithDocumentId" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM comment
+		WHERE documentId = #{documentId};
+	</select>
 	
 	<select id="get" parameterType="int" resultMap="result">
 		SELECT *
@@ -53,20 +58,13 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
-	<select id="count" resultType="int">
-		SELECT COUNT(*)
-		FROM comment;
-	</select>
-	
 	<update id="update" parameterType="comment">
   		UPDATE comment
   		SET
+  			documentId = #{documentId},
 			content = #{content},
-  			countToLike = #{countToLike},
-			countToDislike = #{countToDislike},
-			providerUserId = #{providerUserId},
 			name = #{name},
-			regDate = #{regDate}
+			providerUserId = #{providerUserId}
   		where commentId = #{commentId};
 	</update>
 	

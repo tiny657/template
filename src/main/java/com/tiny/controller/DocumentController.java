@@ -17,7 +17,7 @@ import com.tiny.document.Document;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
-import com.tiny.service.MemberService;
+import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
 
 @Controller
@@ -31,7 +31,7 @@ public class DocumentController {
 	private CommentService commentService;
 
 	@Autowired
-	private MemberService memberService;
+	private PointService pointService;
 
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
@@ -44,16 +44,16 @@ public class DocumentController {
 		model.addAttribute("document", documentService.saveAndGet(document));
 		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		model.addAttribute("providerUserId", providerUserId);
-		memberService.increaseCountToDocument(providerUserId);
+		pointService.calculatePointToSaveDocument(providerUserId);
 		mav.addAllObjects(model);
 		mav.setViewName("document");
 		return mav;
 	}
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
-	public void delete(@RequestParam Integer documentId) {
+	public void delete(@RequestParam int documentId) {
 		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		memberService.decreaseCountToDocument(providerUserId);
+		pointService.calculatePointToDeleteDocument(providerUserId, documentId);
 		commentService.deleteWithDocumentId(documentId);
 		documentService.delete(documentId);
 	}
