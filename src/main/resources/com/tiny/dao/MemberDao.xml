@@ -7,7 +7,7 @@
 		<result property="gender" column="gender" />
 		<result property="email" column="email" />
 		<result property="level" column="level" />
-		<result property="point" column="point" />
+		<result property="pointTotal" column="pointTotal" />
 		<result property="pointDocument" column="pointDocument" />
 		<result property="pointComment" column="pointComment" />
 		<result property="pointBeCommented" column="pointBeCommented" />
@@ -19,7 +19,7 @@
 		<result property="pointBeShared" column="pointBeShared" />
 		<result property="locale" column="locale" />
 		<result property="regDate" column="regDate" />
-		<result property="lastLogin" column="lastLogin" />
+		<result property="lastLoginDate" column="lastLoginDate" />
 	</resultMap>
 	
 	<insert id="save" parameterType="member">
@@ -30,7 +30,7 @@
 				gender,
 				email,
 				level,
-				point,
+				pointTotal,
 				pointDocument,
 				pointComment,
 				pointBeCommented,
@@ -42,13 +42,13 @@
 				pointBeShared,
 				locale,
 				regDate,
-				lastLogin)
+				lastLoginDate)
 		VALUES (#{providerUserId},
 				#{name},
 				#{gender},
 				#{email},
 				#{level},
-				#{point},
+				#{pointTotal},
 				#{pointDocument},
 				#{pointComment},
 				#{pointBeCommented},
@@ -92,7 +92,7 @@
 			gender = #{gender},
 			email = #{email},
 			level = #{level},
-			point = #{point},
+			pointTotal = #{pointTotal},
 			pointDocument = #{pointDocument},
 			pointComment = #{pointComment},
 			pointBeCommented = #{pointBeCommented},
@@ -103,7 +103,7 @@
 			pointShare = #{pointShare},
 			pointBeShared = #{pointBeShared},
 			locale = #{locale},
-			lastLogin = NOW()
+			lastLoginDate = NOW()
   		where providerUserId = #{providerUserId};
 	</update>
 	
@@ -252,10 +252,10 @@
   		where providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="updateLastLoginTime" parameterType="String">
+	<update id="updateLastLoginDate" parameterType="String">
   		UPDATE member
   		SET
-			lastLogin = NOW()
+			lastLoginDate = NOW()
   		where providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);

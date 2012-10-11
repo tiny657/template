@@ -59,6 +59,6 @@ public class MemberService {
 	}
 	
 	public void updateLastLoginTime(String userId) {
-		memberRepository.updateLastLoginTime(userId);
+		memberRepository.updateLastLoginDate(userId);
 	}
 }

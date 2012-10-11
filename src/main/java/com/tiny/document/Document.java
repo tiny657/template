@@ -7,9 +7,8 @@ import lombok.Data;
 @Data
 public class Document {
 	private int documentId;
-	private int point;
-	private boolean isNotice;
 	private String content;
+	private int pointTotal;
 	private int pointLike;
 	private int pointDislike;
 	private int pointComment;

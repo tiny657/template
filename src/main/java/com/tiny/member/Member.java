@@ -11,7 +11,7 @@ public class Member {
 	private boolean gender;
 	private String email;
 	private int level;
-	private int point;
+	private int pointTotal;
 	private int pointDocument;
 	private int pointComment;
 	private int pointBeCommented;
@@ -23,5 +23,5 @@ public class Member {
 	private int pointBeShared;
 	private String locale;
 	private Date regDate;
-	private Date lastLogin;
+	private Date lastLoginDate;
 }

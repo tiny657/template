@@ -62,7 +62,7 @@ public class FriendServiceTest extends CommonMockTest {
 		Member member = new Member();
 		member.setProviderUserId(providerUserId);
 		member.setRegDate(new Date());
-		member.setLastLogin(new Date());
+		member.setLastLoginDate(new Date());
 		return member;
 	}
 }

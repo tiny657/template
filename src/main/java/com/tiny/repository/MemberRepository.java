@@ -110,8 +110,8 @@ public class MemberRepository {
 		memberDao.decreasePointBeCommented(providerUserId);
 	}
 	
-	public void updateLastLoginTime(String userId) {
-		memberDao.updateLastLoginTime(userId);
+	public void updateLastLoginDate(String userId) {
+		memberDao.updateLastLoginDate(userId);
 	}
 	
 	public void delete(String providerUserId) {

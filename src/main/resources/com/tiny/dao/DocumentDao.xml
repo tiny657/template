@@ -3,8 +3,8 @@
 <mapper namespace="com.tiny.dao.DocumentDao">
 	<resultMap id="result" type="document">
 		<result property="documentId" column="documentId" />
-		<result property="point" column="point" />
 		<result property="content" column="content" />
+		<result property="pointTotal" column="pointTotal" />
 		<result property="pointLike" column="pointLike" />
 		<result property="pointDislike" column="pointDislike" />
 		<result property="pointComment" column="pointComment" />
@@ -18,8 +18,8 @@
 	<insert id="save" parameterType="document">
 		INSERT
 		INTO document 
-				(point,
-				content,
+				(content,
+				pointTotal,
 				pointLike,
 				pointDislike,
 				pointComment,
@@ -28,8 +28,8 @@
 				name,
 				ipAddress,
 				regDate)
-		VALUES (#{point},
-				#{content},
+		VALUES (#{content},
+				#{pointTotal},
 				#{pointLike},
 				#{pointDislike},
 				#{pointComment},
@@ -66,8 +66,8 @@
 	<update id="update" parameterType="document">
   		UPDATE document
   		SET
-  			point = #{point},
 			content = #{content},
+  			pointTotal = #{pointTotal},
 			pointLike = #{pointLike},
 			pointDislike = #{pointDislike},
 			pointComment = #{pointComment},

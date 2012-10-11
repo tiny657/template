@@ -49,16 +49,6 @@ Getting Started
 
 	$ mysql -u root < src/main/db/create.sql
 
-### Tomcat ###
-
-설치하기
-
-	$ yum install tomcat6-webapps tomcat6-admin-webapps
-	
-시작하기
-
-	$ service tomcat6 start
-
 ### SpringSource Tool Suite ###
 
 설치하기
@@ -214,8 +204,18 @@ Project Properties > Java Build Path > Order and Export 에서 아래와 같은 
 	src/main/resources-dev
 	src/main/resources-release
 	
-AWS 운영 서버 설정 (Amazon Linux AMI)
+AWS 운영 서버 설치 (Amazon Linux AMI)
 -----------------------------------
+### Tomcat ###
+
+설치하기
+
+	$ yum install tomcat6-webapps tomcat6-admin-webapps
+	
+시작하기
+
+	$ service tomcat6 start
+
 ### ssh로 War 파일 배포 ###
 
 /usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요하다.  

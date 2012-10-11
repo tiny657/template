@@ -56,7 +56,7 @@ public interface MemberDao {
 	
 	public void decreasePointBeShared(String providerUserId);
 	
-	public void updateLastLoginTime(String userId);
+	public void updateLastLoginDate(String userId);
 
 	public void delete(String userId);
 }

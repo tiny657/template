@@ -75,18 +75,18 @@ public class MemberDaoTest extends CommonTest {
 	}
 
 	@Test
-	public void updateLastLogin() throws InterruptedException {
+	public void updateLastLoginDate() throws InterruptedException {
 		// Given
 		Member member = createMember();
 		memberDao.save(member);
 
 		// When
 		Thread.sleep(1000);
-		memberDao.updateLastLoginTime(userId);
+		memberDao.updateLastLoginDate(userId);
 		Member memberAfterUpdate = memberDao.get(member.getProviderUserId());
 
 		// Then
-		assertThat(member.getLastLogin().toString(), not(memberAfterUpdate.getLastLogin().toString()));
+		assertThat(member.getLastLoginDate().toString(), not(memberAfterUpdate.getLastLoginDate().toString()));
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class MemberDaoTest extends CommonTest {
 		Member member = new Member();
 		member.setProviderUserId(providerUserId);
 		member.setRegDate(new Date());
-		member.setLastLogin(new Date());
+		member.setLastLoginDate(new Date());
 		return member;
 	}
 }

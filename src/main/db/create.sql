@@ -1,6 +1,5 @@
 CREATE DATABASE IF NOT EXISTS template;
 USE template;
-DROP TABLE IF EXISTS UserConnection;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS document;
@@ -26,7 +25,7 @@ CREATE TABLE member (
 	gender BOOLEAN,
 	email CHAR(40),
 	level INT DEFAULT 0,
-	point INT DEFAULT 0,
+	pointTotal INT DEFAULT 0,
 	pointDocument INT DEFAULT 0,
 	pointComment INT DEFAULT 0,
 	pointBeCommented INT DEFAULT 0,
@@ -38,15 +37,14 @@ CREATE TABLE member (
 	pointBeShared INT DEFAULT 0,
 	locale CHAR(4),
 	regDate DATETIME NOT NULL,
-	lastLogin DATETIME NOT NULL,
+	lastLoginDate DATETIME NOT NULL,
 	PRIMARY KEY (providerUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE document (
 	documentId INT AUTO_INCREMENT,
-	point INT DEFAULT 0,
-	isNotice BOOLEAN DEFAULT false,
 	content TEXT NOT NULL,
+	pointTotal INT DEFAULT 0,
 	pointComment INT DEFAULT 0,
 	pointLike INT DEFAULT 0,
 	pointDislike INT DEFAULT 0,
