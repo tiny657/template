@@ -35,9 +35,9 @@ public class MemberRepository {
 		return memberDao.getName(providerUserId);
 	}
 	
-	public void updateName(String providerUserId, String name) {
+	public void updateName(String userId, String name) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("providerUserId", providerUserId);
+		map.put("userId", userId);
 		map.put("name", name);
 		memberDao.updateName(map);
 	}

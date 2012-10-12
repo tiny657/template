@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tiny.member.Member;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;
+import com.tiny.social.SecurityContext;
 
 @Service
 public class MemberService {
@@ -54,7 +55,7 @@ public class MemberService {
 	}
 	
 	public void updateName(String name) {
-		memberRepository.updateName(facebookService.getProfile().getId(), name);
+		memberRepository.updateName(SecurityContext.getCurrentUser().getId(), name);
 	}
 	
 	public void updateLastLoginTime(String userId) {

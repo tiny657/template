@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.tiny.common.util.Constant;
 import com.tiny.member.Member;
@@ -18,7 +19,7 @@ import com.tiny.social.SecurityContext;
 @Controller
 public class MemberController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
-
+	
 	@Autowired
 	private MemberService memberService;
 
@@ -36,6 +37,6 @@ public class MemberController {
 	@RequestMapping(value = { "/memberUpdate" }, method = RequestMethod.POST)
 	public ModelAndView memberUpdate(@ModelAttribute Member member) {
 		memberService.updateName(member.getName());
-		return member();
+		return new ModelAndView(new RedirectView("/list"));
 	}
 }

@@ -63,7 +63,9 @@
   		UPDATE member
   		SET
 			`name` = #{name}
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE providerUserId = (
+	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		);
 	</update>
 	
 	<update id="increaseDoc" parameterType="String">
