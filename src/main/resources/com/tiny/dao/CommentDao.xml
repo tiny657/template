@@ -13,11 +13,11 @@
 	<insert id="save" parameterType="comment">
 		INSERT
 		INTO comment 
-				(documentId,
-				content,
-				providerUserId,
-				name,
-				regDate)
+				(`documentId`,
+				`content`,
+				`providerUserId`,
+				`name`,
+				`regDate`)
 		VALUES (#{documentId},
 				#{content},
 				#{providerUserId},
@@ -61,11 +61,11 @@
 	<update id="update" parameterType="comment">
   		UPDATE comment
   		SET
-  			documentId = #{documentId},
-			content = #{content},
-			name = #{name},
-			providerUserId = #{providerUserId}
-  		where commentId = #{commentId};
+  			`documentId` = #{documentId},
+			`content` = #{content},
+			`name` = #{name},
+			`providerUserId` = #{providerUserId}
+  		WHERE commentId = #{commentId};
 	</update>
 	
 	<delete id="delete" parameterType="int">

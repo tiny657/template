@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
-<blockquote id="comment${comment.commentId}">
+<blockquote id="commentBox${comment.commentId}">
 	<p>${comment.content}
 		<c:if test="${providerUserId eq comment.providerUserId}">
 			<a href="#deleteCommentModal${comment.commentId}" class="pull-right" data-toggle="modal"><i class="icon-remove"></i></a>

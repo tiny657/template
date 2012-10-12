@@ -8,11 +8,11 @@ import lombok.Data;
 public class Document {
 	private int documentId;
 	private String content;
-	private int pointTotal;
-	private int pointLike;
-	private int pointDislike;
-	private int pointComment;
-	private int pointShare;
+	private int point;
+	private int like;
+	private int dislike;
+	private int comment;
+	private int sharing;
 	private String providerUserId;
 	private String name;
 	private String ipAddress;

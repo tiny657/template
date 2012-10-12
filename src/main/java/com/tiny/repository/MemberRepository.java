@@ -42,72 +42,72 @@ public class MemberRepository {
 		memberDao.updateName(map);
 	}
 
-	public void increasePointDocument(String providerUserId) {
-		memberDao.increasePointDocument(providerUserId);
+	public void increasePointDoc(String providerUserId) {
+		memberDao.increaseDoc(providerUserId);
 	}
 
 	public void decreasePointDocument(String providerUserId) {
-		memberDao.decreasePointDocument(providerUserId);
+		memberDao.decreaseDoc(providerUserId);
 	}
 
-	public void increasePointShare(String userId) {
-		memberDao.increasePointShare(userId);
+	public void increaseComment(String providerUserId) {
+		memberDao.increaseComment(providerUserId);
+	}
+
+	public void decreaseComment(String providerUserId) {
+		memberDao.decreaseComment(providerUserId);
 	}
 	
-	public void decreasePointShare(String userId) {
-		memberDao.decreasePointShare(userId);
+	public void increaseCommentOnMyDoc(String providerUserId) {
+		memberDao.increaseCommentOnMyDoc(providerUserId);
+	}
+
+	public void decreaseCommentOnMyDoc(String providerUserId) {
+		memberDao.decreaseCommentOnMyDoc(providerUserId);
+	}
+	
+	public void increaseLike(String userId) {
+		memberDao.increaseLike(userId);
+	}
+	
+	public void decreaseLike(String userId) {
+		memberDao.decreaseLike(userId);
+	}
+	
+	public void increaseLikeOnMyDoc(String providerUserId) {
+		memberDao.increaseLikeOnMyDoc(providerUserId);
+	}
+	
+	public void decreaseLikeOnMyDoc(String providerUserId) {
+		memberDao.decreaseLikeOnMyDoc(providerUserId);
+	}
+	
+	public void increaseDislike(String userId) {
+		memberDao.increaseDislike(userId);
+	}
+	
+	public void decreaseDislike(String userId) {
+		memberDao.decreaseDislike(userId);
+	}
+	
+	public void increaseDislikeOnMyDoc(String providerUserId) {
+		memberDao.increaseDislikeOnMyDoc(providerUserId);
+	}
+	
+	public void decreaseDislikeOnMyDoc(String providerUserId) {
+		memberDao.increaseDislikeOnMyDoc(providerUserId);
+	}
+	
+	public void increaseSharing(String userId) {
+		memberDao.increaseSharing(userId);
+	}
+	
+	public void decreaseSharing(String userId) {
+		memberDao.decreaseSharing(userId);
 	}
 	
 	public void increasePointBeShared(String providerUserId) {
-		memberDao.increasePointBeShared(providerUserId);
-	}
-	
-	public void increasePointLike(String userId) {
-		memberDao.increasePointLike(userId);
-	}
-	
-	public void decreasePointLike(String userId) {
-		memberDao.decreasePointLike(userId);
-	}
-	
-	public void increasePointBeLiked(String providerUserId) {
-		memberDao.increasePointBeLiked(providerUserId);
-	}
-	
-	public void decreasePointBeLiked(String providerUserId) {
-		memberDao.decreasePointBeLiked(providerUserId);
-	}
-	
-	public void increasePointDislike(String userId) {
-		memberDao.increasePointDislike(userId);
-	}
-	
-	public void decreasePointDislike(String userId) {
-		memberDao.increasePointDislike(userId);
-	}
-	
-	public void increasePointBeDisliked(String providerUserId) {
-		memberDao.increasePointBeDisliked(providerUserId);
-	}
-	
-	public void decreasePointBeDisliked(String providerUserId) {
-		memberDao.increasePointBeDisliked(providerUserId);
-	}
-	
-	public void increasePointComment(String providerUserId) {
-		memberDao.increasePointComment(providerUserId);
-	}
-
-	public void decreasePointComment(String providerUserId) {
-		memberDao.decreasePointComment(providerUserId);
-	}
-	
-	public void increasePointBeCommented(String providerUserId) {
-		memberDao.increasePointBeCommented(providerUserId);
-	}
-
-	public void decreasePointBeCommented(String providerUserId) {
-		memberDao.decreasePointBeCommented(providerUserId);
+		memberDao.increaseSharingOfMyDoc(providerUserId);
 	}
 	
 	public void updateLastLoginDate(String userId) {

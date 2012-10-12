@@ -66,8 +66,8 @@
 		}
 		
 		function saveComment(documentId) {
-			var pointComment = parseInt($("#pointComment" + documentId).text());
-			$("#pointComment" + documentId).text(pointComment + 1);
+			var comment = parseInt($("#comment" + documentId).text());
+			$("#comment" + documentId).text(comment + 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -85,8 +85,8 @@
 		}
 		
 		function deleteComment(documentId, commentId) {
-			var pointComment = parseInt($("#pointComment" + documentId).text());
-			$("#pointComment" + documentId).text(pointComment - 1);
+			var comment = parseInt($("#comment" + documentId).text());
+			$("#comment" + documentId).text(comment - 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
@@ -95,7 +95,7 @@
 				beforeSend: function() {
 				},
 				success : function() {
-					$("#comment" + commentId).remove();
+					$("#commentBox" + commentId).remove();
 				}
 			});
 		}
@@ -118,8 +118,8 @@
 		}
 				
 		function like(documentId) {
-			var pointLike = parseInt($("#pointLike" + documentId).text());
-			$("#pointLike" + documentId).text(pointLike + 1);
+			var like = parseInt($("#like" + documentId).text());
+			$("#like" + documentId).text(like + 1);
 			$.ajax({
 				type : "GET",
 				url : "/like",
@@ -131,8 +131,8 @@
 		}
 		
 		function dislike(documentId) {
-			var pointDislike = parseInt($("#pointDislike" + documentId).text());
-			$("#pointDislike" + documentId).text(pointDislike + 1);
+			var dislike = parseInt($("#dislike" + documentId).text());
+			$("#dislike" + documentId).text(dislike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/dislike",

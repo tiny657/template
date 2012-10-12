@@ -16,45 +16,43 @@ public interface MemberDao {
 	
 	public String getName(String providerUserId);
 	
-	public void update(Member member);
-	
 	public void updateName(Map<String, String> map);
 	
-	public void increasePointDocument(String providerUserId);
+	public void increaseDoc(String providerUserId);
 
-	public void decreasePointDocument(String providerUserId);
+	public void decreaseDoc(String providerUserId);
 	
-	public void increasePointComment(String providerUsreId);
+	public void increaseComment(String providerUsreId);
 
-	public void decreasePointComment(String providerUserId);
+	public void decreaseComment(String providerUserId);
 	
-	public void increasePointBeCommented(String providerUserId);
+	public void increaseCommentOnMyDoc(String providerUserId);
 
-	public void decreasePointBeCommented(String providerUserId);
+	public void decreaseCommentOnMyDoc(String providerUserId);
 	
-	public void increasePointLike(String userId);
+	public void increaseLike(String userId);
 	
-	public void decreasePointLike(String userId);
+	public void decreaseLike(String userId);
 	
-	public void increasePointBeLiked(String providerUserId);
+	public void increaseLikeOnMyDoc(String providerUserId);
 	
-	public void decreasePointBeLiked(String providerUserId);
+	public void decreaseLikeOnMyDoc(String providerUserId);
 	
-	public void increasePointDislike(String userId);
+	public void increaseDislike(String userId);
 	
-	public void decreasePointDislike(String userId);
+	public void decreaseDislike(String userId);
 	
-	public void increasePointBeDisliked(String providerUserId);
+	public void increaseDislikeOnMyDoc(String providerUserId);
 	
-	public void decreasePointBeDisliked(String providerUserId);
+	public void decreaseDislikeOnMyDoc(String providerUserId);
 	
-	public void increasePointShare(String userId);
+	public void increaseSharing(String userId);
 	
-	public void decreasePointShare(String userId);
+	public void decreaseSharing(String userId);
 	
-	public void increasePointBeShared(String providerUserId);
+	public void increaseSharingOfMyDoc(String providerUserId);
 	
-	public void decreasePointBeShared(String providerUserId);
+	public void decreaseSharingOfMyDoc(String providerUserId);
 	
 	public void updateLastLoginDate(String userId);
 

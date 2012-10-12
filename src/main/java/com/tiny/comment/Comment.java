@@ -9,8 +9,6 @@ public class Comment {
 	private int commentId;
 	private int documentId;
 	private String content;
-	private boolean pointLike;
-	private boolean pointDislike;
 	private String providerUserId;
 	private String name;
 	private Date regDate;

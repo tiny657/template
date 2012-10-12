@@ -29,51 +29,51 @@ public class PointService {
 	private UserConnectionRepository userConnectionRepository;
 
 	public void calculatePointToSaveDocument(String providerUserId) {
-		memberRepository.increasePointDocument(providerUserId);
+		memberRepository.increasePointDoc(providerUserId);
 	}
 
 	public void calculatePointToDeleteDocument(String providerUserId, int documentId) {
 		int count = commentRepository.countWithDocumentId(documentId);
 		// TODO:: 성능 상 하나의 쿼리로 수정 필요
 		for (int i = 0; i < count; i++) {
-			memberRepository.decreasePointBeCommented(providerUserId);
+			memberRepository.decreaseCommentOnMyDoc(providerUserId);
 		}
 		memberRepository.decreasePointDocument(providerUserId);
 	}
 
 	public void calculatePointToSaveComment(String providerUserId, int documentId) {
-		memberRepository.increasePointComment(providerUserId);
+		memberRepository.increaseComment(providerUserId);
 		Document document = documentRepository.get(documentId);
-		memberRepository.increasePointBeCommented(document.getProviderUserId());
-		documentRepository.increasePointComment(documentId);
+		memberRepository.increaseCommentOnMyDoc(document.getProviderUserId());
+		documentRepository.increaseComment(documentId);
 	}
 
 	public void calculatePointToDeleteComment(int documentId, int commentId) {
-		memberRepository.decreasePointComment(userConnectionRepository.getProviderUserId(SecurityContext
+		memberRepository.decreaseComment(userConnectionRepository.getProviderUserId(SecurityContext
 				.getCurrentUser().getId()));
 		Document document = documentRepository.get(documentId);
-		memberRepository.decreasePointBeCommented(document.getProviderUserId());
-		documentRepository.decreasePointComment(commentRepository.getCommentId(commentId).getDocumentId());
+		memberRepository.decreaseCommentOnMyDoc(document.getProviderUserId());
+		documentRepository.decreaseComment(commentRepository.getCommentId(commentId).getDocumentId());
 	}
 
 	public void calculatePointToShare(int documentId) {
 		Document document = documentRepository.get(documentId);
-		documentRepository.increasePointShare(documentId);
-		memberRepository.increasePointShare(document.getProviderUserId());
+		documentRepository.increaseSharing(documentId);
+		memberRepository.increaseSharing(document.getProviderUserId());
 		memberRepository.increasePointBeShared(document.getProviderUserId());
 	}
 	
 	public void calculatePointToClickLike(int documentId) {
 		Document document = documentRepository.get(documentId);
-		documentRepository.increasePointLike(documentId);
-		memberRepository.increasePointLike(SecurityContext.getCurrentUser().getId());
-		memberRepository.increasePointBeLiked(document.getProviderUserId());
+		documentRepository.increaseLike(documentId);
+		memberRepository.increaseLike(SecurityContext.getCurrentUser().getId());
+		memberRepository.increaseLikeOnMyDoc(document.getProviderUserId());
 	}
 	
 	public void calculatePointToClickDislike(int documentId) {
 		Document document = documentRepository.get(documentId);
-		documentRepository.increasePointDislike(documentId);
-		memberRepository.increasePointDislike(SecurityContext.getCurrentUser().getId());
-		memberRepository.increasePointBeDisliked(document.getProviderUserId());
+		documentRepository.increaseDislike(documentId);
+		memberRepository.increaseDislike(SecurityContext.getCurrentUser().getId());
+		memberRepository.increaseDislikeOnMyDoc(document.getProviderUserId());
 	}
 }

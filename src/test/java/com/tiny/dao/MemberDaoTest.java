@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +37,7 @@ public class MemberDaoTest extends CommonTest {
 		userConnection.setAccessToken(accessToken);
 		userConnectionDao.save(userConnection);
 	}
-
+	
 	@Test
 	public void save() {
 		// Given
@@ -59,19 +61,6 @@ public class MemberDaoTest extends CommonTest {
 
 		// Then
 		assertThat(member.getProviderUserId(), is(memberTmp.getProviderUserId()));
-	}
-
-	@Test
-	public void update() {
-		// Given
-		memberDao.save(createMember());
-		int count = memberDao.count();
-
-		// When
-		memberDao.update(createMember());
-
-		// Then
-		assertThat(memberDao.count(), is(count));
 	}
 
 	@Test

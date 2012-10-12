@@ -15,23 +15,21 @@ public interface DocumentDao {
 	
 	public Document getLast();
 
-	public void update(Document document);
+	public void increaseComment(int documentId);
 
-	public void increasePointComment(int documentId);
-
-	public void decreasePointComment(int documentId);
+	public void decreaseComment(int documentId);
 	
-	public void increasePointLike(int documentId);
+	public void increaseLike(int documentId);
 	
-	public void decreasePointLike(int documentId);
+	public void decreaseLike(int documentId);
 	
-	public void increasePointDislike(int documentId);
+	public void increaseDislike(int documentId);
 	
-	public void decreasePointDislike(int documentId);
+	public void decreaseDislike(int documentId);
 	
-	public void increasePointShare(int documentId);
+	public void increaseSharing(int documentId);
 	
-	public void decreasePointShare(int documentId);
+	public void decreaseSharing(int documentId);
 
 	public void delete(int documentId);
 }

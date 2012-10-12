@@ -4,11 +4,11 @@
 	<resultMap id="result" type="document">
 		<result property="documentId" column="documentId" />
 		<result property="content" column="content" />
-		<result property="pointTotal" column="pointTotal" />
-		<result property="pointLike" column="pointLike" />
-		<result property="pointDislike" column="pointDislike" />
-		<result property="pointComment" column="pointComment" />
-		<result property="pointShare" column="pointShare" />
+		<result property="point" column="point" />
+		<result property="like" column="like" />
+		<result property="dislike" column="dislike" />
+		<result property="comment" column="comment" />
+		<result property="sharing" column="sharing" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
 		<result property="ipAddress" column="ipAddress" />
@@ -18,22 +18,22 @@
 	<insert id="save" parameterType="document">
 		INSERT
 		INTO document 
-				(content,
-				pointTotal,
-				pointLike,
-				pointDislike,
-				pointComment,
-				pointShare,
-				providerUserId,
-				name,
-				ipAddress,
-				regDate)
+				(`content`,
+				`point`,
+				`like`,
+				`dislike`,
+				`comment`,
+				`sharing`,
+				`providerUserId`,
+				`name`,
+				`ipAddress`,
+				`regDate`)
 		VALUES (#{content},
-				#{pointTotal},
-				#{pointLike},
-				#{pointDislike},
-				#{pointComment},
-				#{pointShare},
+				#{point},
+				#{like},
+				#{dislike},
+				#{comment},
+				#{sharing},
 				#{providerUserId},
 				#{name},
 				#{ipAddress},
@@ -63,75 +63,60 @@
 		WHERE documentId = LAST_INSERT_ID();
 	</select>
 	
-	<update id="update" parameterType="document">
+	<update id="increaseComment" parameterType="document">
   		UPDATE document
   		SET
-			content = #{content},
-  			pointTotal = #{pointTotal},
-			pointLike = #{pointLike},
-			pointDislike = #{pointDislike},
-			pointComment = #{pointComment},
-			pointShare = #{pointShare},
-			providerUserId = #{providerUserId},
-			name = #{name},
-			ipAddress = #{ipAddress}
-  		where documentId = #{documentId};
+			`comment` = `comment` + 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="increasePointComment" parameterType="document">
+	<update id="decreaseComment" parameterType="document">
   		UPDATE document
   		SET
-			pointComment = pointComment + 1
-  		where documentId = #{documentId};
+			`comment` = `comment` - 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="decreasePointComment" parameterType="document">
+	<update id="increaseLike" parameterType="document">
   		UPDATE document
   		SET
-			pointComment = pointComment - 1
-  		where documentId = #{documentId};
+			`like` = `like` + 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="increasePointLike" parameterType="document">
+	<update id="decreaseLike" parameterType="document">
   		UPDATE document
   		SET
-			pointLike = pointLike + 1
-  		where documentId = #{documentId};
+			`like` = `like` - 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="decreasePointLike" parameterType="document">
+	<update id="increaseDislike" parameterType="document">
   		UPDATE document
   		SET
-			pointLike = pointLike - 1
-  		where documentId = #{documentId};
+			`dislike` = `dislike` + 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="increasePointDislike" parameterType="document">
+	<update id="decreaseDislike" parameterType="document">
   		UPDATE document
   		SET
-			pointDislike = pointDislike + 1
-  		where documentId = #{documentId};
+			`dislike` = `dislike` - 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="decreasePointDislike" parameterType="document">
+	<update id="increaseSharing" parameterType="document">
   		UPDATE document
   		SET
-			pointDislike = pointDislike - 1
-  		where documentId = #{documentId};
+			`sharing` = `sharing` + 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
-	<update id="increasePointShare" parameterType="document">
+	<update id="decreaseSharing" parameterType="document">
   		UPDATE document
   		SET
-			pointShare = pointShare + 1
-  		where documentId = #{documentId};
-	</update>
-	
-	<update id="decreasePointShare" parameterType="document">
-  		UPDATE document
-  		SET
-			pointShare = pointShare - 1
-  		where documentId = #{documentId};
+			`sharing` = `sharing` - 1
+  		WHERE documentId = #{documentId};
 	</update>
 	
 	<delete id="delete" parameterType="int">

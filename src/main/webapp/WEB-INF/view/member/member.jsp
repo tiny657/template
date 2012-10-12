@@ -52,40 +52,40 @@
 							<td>${member.point}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointDocument" /></td>
-							<td>${member.pointDocument}</td>
+							<td><spring:message code="member.doc" /></td>
+							<td>${member.doc}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointComment" /></td>
-							<td>${member.pointComment}</td>
+							<td><spring:message code="member.comment" /></td>
+							<td>${member.comment}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointBeCommented" /></td>
-							<td>${member.pointBeCommented}</td>
+							<td><spring:message code="member.commentOnMyDoc" /></td>
+							<td>${member.commentOnMyDoc}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointLike" /></td>
-							<td>${member.pointLike}</td>
+							<td><spring:message code="member.like" /></td>
+							<td>${member.like}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointBeLiked" /></td>
-							<td>${member.pointBeLiked}</td>
+							<td><spring:message code="member.likeOnMyDoc" /></td>
+							<td>${member.likeOnMyDoc}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointDislike" /></td>
-							<td>${member.pointDislike}</td>
+							<td><spring:message code="member.dislike" /></td>
+							<td>${member.dislike}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointBeDisliked" /></td>
-							<td>${member.pointBeDisliked}</td>
+							<td><spring:message code="member.dislikeOnMyDoc" /></td>
+							<td>${member.dislikeOnMyDoc}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointShare" /></td>
-							<td>${member.pointShare}</td>
+							<td><spring:message code="member.sharing" /></td>
+							<td>${member.sharing}</td>
 						</tr>
 						<tr>
-							<td><spring:message code="member.pointBeShared" /></td>
-							<td>${member.pointBeShared}</td>
+							<td><spring:message code="member.sharingOfMyDoc" /></td>
+							<td>${member.sharingOfMyDoc}</td>
 						</tr>
 					</tbody>
 				</table>

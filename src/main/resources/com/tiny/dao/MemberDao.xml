@@ -1,72 +1,46 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.tiny.dao.MemberDao">
-	<resultMap id="result" type="member">
-		<result property="providerUserId" column="providerUserId" />
-		<result property="name" column="name" />
-		<result property="gender" column="gender" />
-		<result property="email" column="email" />
-		<result property="level" column="level" />
-		<result property="pointTotal" column="pointTotal" />
-		<result property="pointDocument" column="pointDocument" />
-		<result property="pointComment" column="pointComment" />
-		<result property="pointBeCommented" column="pointBeCommented" />
-		<result property="pointLike" column="pointLike" />
-		<result property="pointBeLiked" column="pointBeLiked" />
-		<result property="pointDislike" column="pointDislike" />
-		<result property="pointBeDisliked" column="pointBeDisliked" />
-		<result property="pointShare" column="pointShare" />
-		<result property="pointBeShared" column="pointBeShared" />
-		<result property="locale" column="locale" />
-		<result property="regDate" column="regDate" />
-		<result property="lastLoginDate" column="lastLoginDate" />
-	</resultMap>
-	
 	<insert id="save" parameterType="member">
 		INSERT
 		INTO member
-				(providerUserId,
-				name,
-				gender,
-				email,
-				level,
-				pointTotal,
-				pointDocument,
-				pointComment,
-				pointBeCommented,
-				pointLike,
-				pointBeLiked,
-				pointDislike,
-				pointBeDisliked,
-				pointShare,
-				pointBeShared,
-				locale,
-				regDate,
-				lastLoginDate)
+				(`providerUserId`,
+				`name`,
+				`gender`,
+				`email`,
+				`level`,
+				`point`,
+				`doc`,
+				`comment`,
+				`commentOnMyDoc`,
+				`like`,
+				`likeOnMyDoc`,
+				`dislike`,
+				`dislikeOnMyDoc`,
+				`sharing`,
+				`sharingOfMyDoc`,
+				`locale`,
+				`regDate`,
+				`lastLoginDate`)
 		VALUES (#{providerUserId},
 				#{name},
 				#{gender},
 				#{email},
 				#{level},
-				#{pointTotal},
-				#{pointDocument},
-				#{pointComment},
-				#{pointBeCommented},
-				#{pointLike},
-				#{pointBeLiked},
-				#{pointDislike},
-				#{pointBeDisliked},
-				#{pointShare},
-				#{pointBeShared},
+				#{point},
+				#{doc},
+				#{comment},
+				#{commentOnMyDoc},
+				#{like},
+				#{likeOnMyDoc},
+				#{dislike},
+				#{dislikeOnMyDoc},
+				#{sharing},
+				#{sharingOfMyDoc},
 				#{locale},
 				NOW(),
 				NOW());
 	</insert>
-	
-	<select id="getAll" resultMap="result">
-		SELECT *
-		FROM member;
-	</select>
 	
 	<select id="get" resultType="member">
 		SELECT *
@@ -85,178 +59,156 @@
 		FROM member;
 	</select>
 	
-	<update id="update" parameterType="member">
-  		UPDATE member
-  		SET
-			name = #{name},
-			gender = #{gender},
-			email = #{email},
-			level = #{level},
-			pointTotal = #{pointTotal},
-			pointDocument = #{pointDocument},
-			pointComment = #{pointComment},
-			pointBeCommented = #{pointBeCommented},
-			pointLike = #{pointLike},
-			pointBeLiked = #{pointBeLiked},
-			pointDislike = #{pointDislike},
-			pointBeDisliked = #{pointBeDisliked},
-			pointShare = #{pointShare},
-			pointBeShared = #{pointBeShared},
-			locale = #{locale},
-			lastLoginDate = NOW()
-  		where providerUserId = #{providerUserId};
-	</update>
-	
 	<update id="updateName" parameterType="map">
   		UPDATE member
   		SET
-			name = #{name}
-  		where providerUserId = #{providerUserId};
+			`name` = #{name}
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointDocument" parameterType="String">
+	<update id="increaseDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointDocument = pointDocument + 1 
-  		where providerUserId = #{providerUserId};
+			`doc` = `doc` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointDocument" parameterType="String">
+	<update id="decreaseDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointDocument = pointDocument - 1 
-  		where providerUserId = #{providerUserId};
+			`doc` = `doc` - 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointComment" parameterType="String">
+	<update id="increaseComment" parameterType="String">
   		UPDATE member
   		SET
-			pointComment = pointComment + 1 
-  		where providerUserId = #{providerUserId};
+			`comment` = `comment` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointComment" parameterType="String">
+	<update id="decreaseComment" parameterType="String">
   		UPDATE member
   		SET
-			pointComment = pointComment - 1 
-  		where providerUserId = #{providerUserId};
+			`comment` = `comment` - 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointBeCommented" parameterType="String">
+	<update id="increaseCommentOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeCommented = pointBeCommented + 1 
-  		where providerUserId = #{providerUserId};
+			`commentOnMyDoc` = `commentOnMyDoc` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointBeCommented" parameterType="String">
+	<update id="decreaseCommentOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeCommented = pointBeCommented - 1 
-  		where providerUserId = #{providerUserId};
+			`commentOnMyDoc` = `commentOnMyDoc` - 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointLike" parameterType="String">
+	<update id="increaseLike" parameterType="String">
   		UPDATE member
   		SET
-			pointLike = pointLike + 1 
-  		where providerUserId = (
+			`like` = `like` + 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="decreasePointLike" parameterType="String">
+	<update id="decreaseLike" parameterType="String">
   		UPDATE member
   		SET
-			pointLike = pointLike - 1 
-  		where providerUserId = (
+			`like` = `like` - 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increasePointBeLiked" parameterType="String">
+	<update id="increaseLikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeLiked = pointBeLiked + 1 
-  		where providerUserId = #{providerUserId};
+			`likeOnMyDoc` = `likeOnMyDoc` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointBeLiked" parameterType="String">
+	<update id="decreaseLikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeLiked = pointBeLiked - 1 
-  		where providerUserId = #{providerUserId};
+			`likeOnMyDoc` = `likeOnMyDoc` - 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointDislike" parameterType="String">
+	<update id="increaseDislike" parameterType="String">
   		UPDATE member
   		SET
-			pointDislike = pointDislike + 1 
-  		where providerUserId = (
+			`dislike` = `dislike` + 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="decreasePointDislike" parameterType="String">
+	<update id="decreaseDislike" parameterType="String">
   		UPDATE member
   		SET
-			pointDislike = pointDislike - 1 
-  		where providerUserId = (
+			`dislike` = `dislike` - 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increasePointBeDisliked" parameterType="String">
+	<update id="increaseDislikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeDisliked = pointBeDisliked + 1 
-  		where providerUserId = #{providerUserId};
+			`dislikeOnMyDoc` = `dislikeOnMyDoc` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointBeDisliked" parameterType="String">
+	<update id="decreaseDislikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeDisliked = pointBeDisliked - 1 
-  		where providerUserId = #{providerUserId};
+			`dislikeOnMyDoc` = `dislikeOnMyDoc` - 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="increasePointShare" parameterType="String">
+	<update id="increaseSharing" parameterType="String">
   		UPDATE member
   		SET
-			pointShare = pointShare + 1 
-  		where providerUserId = (
+			`sharing` = `sharing` + 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="decreasePointShare" parameterType="String">
+	<update id="decreaseSharing" parameterType="String">
   		UPDATE member
   		SET
-			pointShare = pointShare - 1 
-  		where providerUserId = (
+			`sharing` = `sharing` - 1 
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
 	
-	<update id="increasePointBeShared" parameterType="String">
+	<update id="increaseSharingOfMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeShared = pointBeShared + 1 
-  		where providerUserId = #{providerUserId};
+			`sharingOfMyDoc` = `sharingOfMyDoc` + 1 
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
-	<update id="decreasePointBeShared" parameterType="String">
+	<update id="decreaseSharingOfMyDoc" parameterType="String">
   		UPDATE member
   		SET
-			pointBeShared = pointBeShared - 1 
-  		where providerUserId = #{providerUserId};
+			`sharingOfMyDoc` = `sharingOfMyDoc` - 1 
+  		WHERE = #{providerUserId};
 	</update>
 	
 	<update id="updateLastLoginDate" parameterType="String">
   		UPDATE member
   		SET
-			lastLoginDate = NOW()
-  		where providerUserId = (
+			`lastLoginDate` = NOW()
+  		WHERE providerUserId = (
 	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
   		);
 	</update>
@@ -264,6 +216,6 @@
 	<delete id="delete" parameterType="String">
 		DELETE
 		FROM member
-		WHERE providerUserId = #{providerUserId};
+		WHERE `providerUserId` = #{providerUserId};
 	</delete>
 </mapper>
