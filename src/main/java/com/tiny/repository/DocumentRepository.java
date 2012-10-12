@@ -29,6 +29,10 @@ public class DocumentRepository {
 		return documentDao.get(documentId);
 	}
 	
+	public String getProviderUesrId(int documentId) {
+		return documentDao.getProviderUserId(documentId);
+	}
+	
 	public Document getLast() {
 		return documentDao.getLast();
 	}

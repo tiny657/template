@@ -57,6 +57,12 @@
 		WHERE documentId = #{documentId};
 	</select>
 	
+	<select id="getProviderUserId" resultType="String">
+		SELECT providerUserId
+		FROM document
+		WHERE documentId = #{documentId};
+	</select>
+	
 	<select id="getLast" resultType="document">
 		SELECT *
 		FROM document

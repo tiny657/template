@@ -11,8 +11,16 @@
 		</div>
 		<div>
 			<br />
-			<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span></a>&nbsp&nbsp
-			<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span></a>&nbsp&nbsp
+			<c:choose>
+				<c:when test="${providerUserId == document.providerUserId}">
+					<i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span>&nbsp&nbsp
+					<i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span>&nbsp&nbsp
+				</c:when>
+				<c:otherwise>
+					<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span></a>&nbsp&nbsp
+					<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span></a>&nbsp&nbsp
+				</c:otherwise>
+			</c:choose>
 			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="comment${documentId}">${document.comment}</span></a>&nbsp&nbsp
 		
 			<%-- POST --%>
@@ -66,7 +74,7 @@
 	</td>
 	<td>
 		<%-- DELETE --%>
-		<c:if test="${providerUserId eq document.providerUserId}">
+		<c:if test="${providerUserId == document.providerUserId}">
 			<!-- icon -->
 			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
 			<%-- Modal (Delete) --%>

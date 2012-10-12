@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.comment.Comment;
-import com.tiny.document.Document;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
-import com.tiny.service.DocumentService;
-import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
 

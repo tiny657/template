@@ -25,7 +25,7 @@ public class DocumentService {
 
 	@Autowired
 	private DocumentRepository documentRepository;
-	
+
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -63,7 +63,12 @@ public class DocumentService {
 	public Document getLast() {
 		return documentRepository.getLast();
 	}
-	
+
+	public boolean isMyDocument(int documentId) {
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		return documentRepository.getProviderUesrId(documentId).equals(providerUserId);
+	}
+
 	public void delete(int documentId) {
 		documentRepository.delete(documentId);
 	}

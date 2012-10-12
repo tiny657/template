@@ -16,10 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.document.Document;
 import com.tiny.service.DocumentService;
-import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.service.PostService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class PointController {
@@ -27,7 +25,7 @@ public class PointController {
 
 	@Autowired
 	private DocumentService documentService;
-	
+
 	@Autowired
 	private PointService pointService;
 
@@ -64,13 +62,23 @@ public class PointController {
 	}
 
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
-	public @ResponseBody boolean like(@RequestParam int documentId) {
+	public @ResponseBody
+	boolean like(@RequestParam int documentId) {
+		if (documentService.isMyDocument(documentId)) {
+			return false;
+		}
+		
 		pointService.calculatePointToClickLike(documentId);
 		return true;
 	}
-	
+
 	@RequestMapping(value = "/dislike", method = RequestMethod.GET)
-	public @ResponseBody boolean dislike(@RequestParam int documentId) {
+	public @ResponseBody
+	boolean dislike(@RequestParam int documentId) {
+		if (documentService.isMyDocument(documentId)) {
+			return false;
+		}
+		
 		pointService.calculatePointToClickDislike(documentId);
 		return true;
 	}

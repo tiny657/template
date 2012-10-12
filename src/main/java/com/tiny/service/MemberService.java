@@ -7,7 +7,6 @@ import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 
 import com.tiny.member.Member;
-import com.tiny.repository.CommentRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;
 

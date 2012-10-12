@@ -17,8 +17,6 @@ import org.springframework.social.facebook.api.UserOperations;
 import com.tiny.common.CommonMockTest;
 
 public class FacebookServiceTest extends CommonMockTest {
-	private FacebookService facebookService;
-
 	@Mock
 	private UserOperations mockUserOperations;
 

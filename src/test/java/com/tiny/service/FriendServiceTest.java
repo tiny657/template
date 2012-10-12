@@ -11,33 +11,23 @@ import java.util.List;
 
 import org.junit.Test;
 import org.mockito.Mock;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.facebook.api.FriendOperations;
 
 import com.tiny.common.CommonMockTest;
 import com.tiny.member.Member;
 import com.tiny.repository.MemberRepository;
 
 public class FriendServiceTest extends CommonMockTest {
-	private FriendService friendService;
+	@Mock
+	private FacebookService mockFacebookService;
 
 	@Mock
 	private MemberRepository mockMemberRepository;
 
 	@Mock
-	private FacebookService mockFacebookService;
-
-	@Mock
-	private FriendOperations mockFriendOperations;
-
-	@Mock
 	private FacebookProfile mockFacebookProfile;
 
 	private List<FacebookProfile> mockFacebookProfiles;
-
-	@Mock
-	private Facebook mockFacebook;
 
 	private final String providerUserId = "providerUserId";
 

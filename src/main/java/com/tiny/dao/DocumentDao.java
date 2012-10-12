@@ -12,6 +12,8 @@ public interface DocumentDao {
 	public int count();
 
 	public Document get(int documentId);
+
+	public String getProviderUserId(int documentId);
 	
 	public Document getLast();
 

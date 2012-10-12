@@ -215,16 +215,7 @@ AWS 운영 서버 설치 (Amazon Linux AMI)
 시작하기
 
 	$ service tomcat6 start
-
-### ssh로 War 파일 배포 ###
-
-/usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요하다.  
-/etc/sudoers 파일에 아래 부분 주석 처리한다.
-
-	Defaults    requiretty
-
-### Tomcat 배포 설정 ###
-
+	
 mvn으로 tomcat에 배포하기 위해서 /usr/share/tomcat6/conf/tomcat-users.conf 파일에 아래 내용 추가한다.
 
 	<tomcat-users>
@@ -252,15 +243,20 @@ pom.xml 파일에 AWS 배포 서버 IP 설정
 		</configuration>
 	</plugin>
 
-### AWS 서버 배포 ###
-
-최초 배포
+최초 배포 시 아래 명령어를 이용한다.
 
 	mvn tomcat:deploy
 
-그 외
+최초 배포가 아닐 경우 아래 명령어를 이용한다.
 
 	mvn tomcat:undeploy tomcat:deploy
+	
+### ssh로 War 파일 배포 ###
+
+/usr/share/tomcat6/webapps의 root권한이 필요한 폴더에 ssh로 WAR파일을 배포하기 위하여 아래 부분 수정 필요하다.  
+/etc/sudoers 파일에 아래 부분 주석 처리한다.
+
+	Defaults    requiretty
 
 빌드 서버
 --------
