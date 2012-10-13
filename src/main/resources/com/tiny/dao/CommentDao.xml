@@ -33,25 +33,25 @@
 	<select id="countWithDocumentId" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM comment
-		WHERE documentId = #{documentId};
+		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="get" parameterType="int" resultMap="result">
 		SELECT *
 		FROM comment
-		WHERE documentId = #{documentId}
+		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="getCommentId" parameterType="int" resultType="comment">
 		SELECT *
 		FROM comment
-		WHERE commentId = #{commentId}
+		WHERE `commentId` = #{commentId}
 	</select>
 	
 	<select id="getLast" parameterType="int" resultMap="result">
 		SELECT *
 		FROM comment
-		WHERE commentId = LAST_INSERT_ID();
+		WHERE `commentId` = LAST_INSERT_ID();
 	</select>
 	
 	<select id="getLastCommentId" resultType="int">
@@ -65,18 +65,18 @@
 			`content` = #{content},
 			`name` = #{name},
 			`providerUserId` = #{providerUserId}
-  		WHERE commentId = #{commentId};
+  		WHERE `commentId` = #{commentId};
 	</update>
 	
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM comment
-		WHERE commentId = #{commentId};
+		WHERE `commentId` = #{commentId};
 	</delete>
 	
 	<delete id="deleteWithDocumentId" parameterType="int">
 		DELETE
 		FROM comment
-		WHERE documentId = #{documentId};
+		WHERE `documentId` = #{documentId};
 	</delete>
 </mapper>

@@ -45,13 +45,13 @@
 	<select id="get" resultType="member">
 		SELECT *
 		FROM member
-		WHERE providerUserId = #{value}
+		WHERE `providerUserId` = #{value}
 	</select>
 	
 	<select id="getName" resultType="String">
 		SELECT name
 		FROM member
-		WHERE providerUserId = #{value}
+		WHERE `providerUserId` = #{value}
 	</select>
 	
 	<select id="count" resultType="int">
@@ -63,8 +63,8 @@
   		UPDATE member
   		SET
 			`name` = #{name}
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -72,50 +72,50 @@
   		UPDATE member
   		SET
 			`doc` = `doc` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseDoc" parameterType="String">
   		UPDATE member
   		SET
 			`doc` = `doc` - 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseComment" parameterType="String">
   		UPDATE member
   		SET
 			`comment` = `comment` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseComment" parameterType="String">
   		UPDATE member
   		SET
 			`comment` = `comment` - 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseCommentOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
 			`commentOnMyDoc` = `commentOnMyDoc` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseCommentOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
 			`commentOnMyDoc` = `commentOnMyDoc` - 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseLike" parameterType="String">
   		UPDATE member
   		SET
 			`like` = `like` + 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -123,8 +123,8 @@
   		UPDATE member
   		SET
 			`like` = `like` - 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -132,22 +132,22 @@
   		UPDATE member
   		SET
 			`likeOnMyDoc` = `likeOnMyDoc` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseLikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
 			`likeOnMyDoc` = `likeOnMyDoc` - 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseDislike" parameterType="String">
   		UPDATE member
   		SET
 			`dislike` = `dislike` + 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -155,8 +155,8 @@
   		UPDATE member
   		SET
 			`dislike` = `dislike` - 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -164,22 +164,22 @@
   		UPDATE member
   		SET
 			`dislikeOnMyDoc` = `dislikeOnMyDoc` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseDislikeOnMyDoc" parameterType="String">
   		UPDATE member
   		SET
 			`dislikeOnMyDoc` = `dislikeOnMyDoc` - 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseSharing" parameterType="String">
   		UPDATE member
   		SET
 			`sharing` = `sharing` + 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -187,8 +187,8 @@
   		UPDATE member
   		SET
 			`sharing` = `sharing` - 1 
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	
@@ -196,14 +196,14 @@
   		UPDATE member
   		SET
 			`sharingOfMyDoc` = `sharingOfMyDoc` + 1 
-  		WHERE providerUserId = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseSharingOfMyDoc" parameterType="String">
   		UPDATE member
   		SET
 			`sharingOfMyDoc` = `sharingOfMyDoc` - 1 
-  		WHERE = #{providerUserId};
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="updateLastLoginDate" parameterType="String">
@@ -211,7 +211,7 @@
   		SET
 			`lastLoginDate` = NOW()
   		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE userId = #{userId}
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</update>
 	

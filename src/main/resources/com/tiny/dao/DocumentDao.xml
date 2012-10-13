@@ -48,86 +48,86 @@
 	<select id="getAll" resultMap="result">
 		SELECT *
 		FROM document
-		ORDER BY documentId DESC;
+		ORDER BY `documentId` DESC;
 	</select>
 	
 	<select id="get" resultType="document">
 		SELECT *
 		FROM document
-		WHERE documentId = #{documentId};
+		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="getProviderUserId" resultType="String">
 		SELECT providerUserId
 		FROM document
-		WHERE documentId = #{documentId};
+		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="getLast" resultType="document">
 		SELECT *
 		FROM document
-		WHERE documentId = LAST_INSERT_ID();
+		WHERE `documentId` = LAST_INSERT_ID();
 	</select>
 	
 	<update id="increaseComment" parameterType="document">
   		UPDATE document
   		SET
 			`comment` = `comment` + 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="decreaseComment" parameterType="document">
   		UPDATE document
   		SET
 			`comment` = `comment` - 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="increaseLike" parameterType="document">
   		UPDATE document
   		SET
 			`like` = `like` + 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="decreaseLike" parameterType="document">
   		UPDATE document
   		SET
 			`like` = `like` - 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="increaseDislike" parameterType="document">
   		UPDATE document
   		SET
 			`dislike` = `dislike` + 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="decreaseDislike" parameterType="document">
   		UPDATE document
   		SET
 			`dislike` = `dislike` - 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="increaseSharing" parameterType="document">
   		UPDATE document
   		SET
 			`sharing` = `sharing` + 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<update id="decreaseSharing" parameterType="document">
   		UPDATE document
   		SET
 			`sharing` = `sharing` - 1
-  		WHERE documentId = #{documentId};
+  		WHERE `documentId` = #{documentId};
 	</update>
 	
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM document
-		WHERE documentId = #{documentId};
+		WHERE `documentId` = #{documentId};
 	</delete>
 </mapper>
