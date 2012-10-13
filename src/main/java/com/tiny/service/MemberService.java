@@ -54,6 +54,15 @@ public class MemberService {
 		return member;
 	}
 	
+	public Member getByProviderUserId(String providerUserId) {
+		Member member = memberRepository.get(providerUserId);
+		if (member == null) {
+			member = saveAndGet();
+		}
+		
+		return member;
+	}
+	
 	public void updateName(String name) {
 		memberRepository.updateName(SecurityContext.getCurrentUser().getId(), name);
 	}

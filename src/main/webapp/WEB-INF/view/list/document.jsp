@@ -9,8 +9,8 @@
 		<div id="content${documentId}">
 			${document.content}
 		</div>
+		<p class="muted"><small>— ${document.name}</small></p>
 		<div>
-			<br />
 			<c:choose>
 				<c:when test="${providerUserId == document.providerUserId}">
 					<i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span>&nbsp&nbsp

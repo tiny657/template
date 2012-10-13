@@ -7,6 +7,8 @@
 			<a href="#deleteCommentModal${comment.commentId}" class="pull-right" data-toggle="modal"><i class="icon-remove"></i></a>
 		</c:if>
 	</p>
+	<small>${comment.name}</small>
+	
 	<%-- Modal --%>
 	<div class="modal hide fade" id="deleteCommentModal${comment.commentId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">

@@ -32,7 +32,7 @@ public class ListController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private DocumentService documentService;
 
@@ -69,8 +69,10 @@ public class ListController {
 		model.addAttribute("comments", map);
 		model.addAttribute("url", Constant.LIST);
 		// for posting
-		model.addAttribute("providerUserId",
-				userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId()));
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		model.addAttribute("providerUserId", providerUserId);
+		// to check chance of doc, comment, like, dislike.
+		model.addAttribute("member", memberService.getByProviderUserId(providerUserId));
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
@@ -93,7 +95,8 @@ public class ListController {
 		model.addAttribute("url", Constant.LIST);
 		// for posting
 		try {
-			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			String providerUserId = userConnectionRepository
+					.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			model.addAttribute("providerUserId", providerUserId);
 			pointService.calculatePointToSaveDocument(providerUserId);
 			mav.setViewName("listOne");
