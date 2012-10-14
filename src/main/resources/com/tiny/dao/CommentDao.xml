@@ -25,32 +25,21 @@
 				#{regDate});
 	</insert>
 	
-	<select id="count" resultType="int">
-		SELECT COUNT(*)
-		FROM comment;
-	</select>
-	
-	<select id="countByDocumentId" parameterType="int" resultType="int">
-		SELECT COUNT(*)
-		FROM comment
-		WHERE `documentId` = #{documentId};
-	</select>
-	
 	<select id="get" parameterType="int" resultMap="result">
 		SELECT *
-		FROM comment
+		FROM `comment`
 		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="getCommentId" parameterType="int" resultType="comment">
 		SELECT *
-		FROM comment
+		FROM `comment`
 		WHERE `commentId` = #{commentId}
 	</select>
 	
 	<select id="getLast" parameterType="int" resultMap="result">
 		SELECT *
-		FROM comment
+		FROM `comment`
 		WHERE `commentId` = LAST_INSERT_ID();
 	</select>
 	
@@ -58,8 +47,19 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM `comment`;
+	</select>
+	
+	<select id="countByDocumentId" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM `comment`
+		WHERE `documentId` = #{documentId};
+	</select>
+	
 	<update id="update" parameterType="comment">
-  		UPDATE comment
+  		UPDATE `comment`
   		SET
   			`documentId` = #{documentId},
 			`content` = #{content},
@@ -70,13 +70,13 @@
 	
 	<delete id="delete" parameterType="int">
 		DELETE
-		FROM comment
+		FROM `comment`
 		WHERE `commentId` = #{commentId};
 	</delete>
 	
 	<delete id="deleteWithDocumentId" parameterType="int">
 		DELETE
-		FROM comment
+		FROM `comment`
 		WHERE `documentId` = #{documentId};
 	</delete>
 </mapper>

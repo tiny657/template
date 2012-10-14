@@ -2,15 +2,15 @@ package com.tiny.dao;
 
 import java.util.List;
 
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 
 public interface DocumentDao {
 	public void save(Document document);
 	public List<Document> getAll();
-	public Integer count();
 	public Document get(Integer documentId);
 	public String getProviderUserId(Integer documentId);
 	public Document getLast();
+	public Integer count();
 	public void increaseComment(Integer documentId);
 	public void decreaseComment(Integer documentId);
 	public void increaseLike(Integer documentId);

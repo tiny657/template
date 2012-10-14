@@ -5,9 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 import com.tiny.repository.CommentRepository;
 import com.tiny.repository.DocumentRepository;
+import com.tiny.repository.LikeRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.social.SecurityContext;
@@ -24,7 +25,7 @@ public class PointService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-
+	
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
 
@@ -49,8 +50,8 @@ public class PointService {
 	}
 
 	public void calculatePointToDeleteComment(Integer documentId, Integer commentId) {
-		memberRepository.decreaseComment(userConnectionRepository.getProviderUserId(SecurityContext
-				.getCurrentUser().getId()));
+		memberRepository.decreaseComment(userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser()
+				.getId()));
 		Document document = documentRepository.get(documentId);
 		memberRepository.decreaseCommentOnMyDoc(document.getProviderUserId());
 		documentRepository.decreaseComment(commentRepository.getCommentId(commentId).getDocumentId());
@@ -62,12 +63,19 @@ public class PointService {
 		memberRepository.increaseSharing(document.getProviderUserId());
 		memberRepository.increasePointBeShared(document.getProviderUserId());
 	}
-	
+
 	public void calculatePointToClickLike(Integer documentId) {
 		Document document = documentRepository.get(documentId);
 		documentRepository.increaseLike(documentId);
 		memberRepository.increaseLike(SecurityContext.getCurrentUser().getId());
 		memberRepository.increaseLikeOnMyDoc(document.getProviderUserId());
+	}
+
+	public void calculatePointToCancelLike(Integer documentId) {
+		Document document = documentRepository.get(documentId);
+		documentRepository.decreaseLike(documentId);
+		memberRepository.decreaseLike(SecurityContext.getCurrentUser().getId());
+		memberRepository.decreaseLikeOnMyDoc(document.getProviderUserId());
 	}
 	
 	public void calculatePointToClickDislike(Integer documentId) {
@@ -75,5 +83,12 @@ public class PointService {
 		documentRepository.increaseDislike(documentId);
 		memberRepository.increaseDislike(SecurityContext.getCurrentUser().getId());
 		memberRepository.increaseDislikeOnMyDoc(document.getProviderUserId());
+	}
+	
+	public void calculatePointToCancelDislike(Integer documentId) {
+		Document document = documentRepository.get(documentId);
+		documentRepository.decreaseDislike(documentId);
+		memberRepository.decreaseDislike(SecurityContext.getCurrentUser().getId());
+		memberRepository.decreaseDislikeOnMyDoc(document.getProviderUserId());
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tiny.dao.MemberDao;
-import com.tiny.member.Member;
+import com.tiny.model.Member;
 
 @Repository
 public class MemberRepository {
@@ -56,7 +56,7 @@ public class MemberRepository {
 	}
 	
 	public void updateName(String userId, String name) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("name", name);
 		memberDao.updateName(map);
@@ -119,7 +119,7 @@ public class MemberRepository {
 	}
 	
 	public void decreaseDislikeOnMyDoc(String providerUserId) {
-		memberDao.increaseDislikeOnMyDoc(providerUserId);
+		memberDao.decreaseDislikeOnMyDoc(providerUserId);
 	}
 	
 	public void increaseSharing(String userId) {

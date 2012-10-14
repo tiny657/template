@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 
 public class DocumentDaoTest extends CommonTest {
 	@Autowired

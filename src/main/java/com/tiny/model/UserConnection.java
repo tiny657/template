@@ -1,4 +1,4 @@
-package com.tiny.userConnection;
+package com.tiny.model;
 
 import lombok.Data;
 

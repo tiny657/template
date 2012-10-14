@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tiny.comment.Comment;
 import com.tiny.common.CommonTest;
-import com.tiny.document.Document;
+import com.tiny.model.Comment;
+import com.tiny.model.Document;
 
 public class CommentDaoTest extends CommonTest {
 	@Autowired

@@ -30,86 +30,86 @@
 				NOW());
 	</insert>
 	
-	<select id="count" resultType="int">
-		SELECT COUNT(*)
-		FROM document;
-	</select>
-	
 	<select id="getAll" resultMap="result">
 		SELECT *
-		FROM document
+		FROM `document`
 		ORDER BY `documentId` DESC;
 	</select>
 	
-	<select id="get" resultType="document">
+	<select id="get" parameterType="int" resultType="document">
 		SELECT *
-		FROM document
+		FROM `document`
 		WHERE `documentId` = #{documentId};
 	</select>
 	
-	<select id="getProviderUserId" resultType="String">
+	<select id="getProviderUserId" parameterType="int" resultType="String">
 		SELECT providerUserId
-		FROM document
+		FROM `document`
 		WHERE `documentId` = #{documentId};
 	</select>
 	
 	<select id="getLast" resultType="document">
 		SELECT *
-		FROM document
+		FROM `document`
 		WHERE `documentId` = LAST_INSERT_ID();
 	</select>
 	
-	<update id="increaseComment" parameterType="document">
-  		UPDATE document
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM `document`;
+	</select>
+	
+	<update id="increaseComment" parameterType="int">
+  		UPDATE `document`
   		SET
 			`comment` = `comment` + 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="decreaseComment" parameterType="document">
-  		UPDATE document
+	<update id="decreaseComment" parameterType="int">
+  		UPDATE `document`
   		SET
 			`comment` = `comment` - 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="increaseLike" parameterType="document">
-  		UPDATE document
+	<update id="increaseLike" parameterType="int">
+  		UPDATE `document`
   		SET
 			`like` = `like` + 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="decreaseLike" parameterType="document">
-  		UPDATE document
+	<update id="decreaseLike" parameterType="int">
+  		UPDATE `document`
   		SET
 			`like` = `like` - 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="increaseDislike" parameterType="document">
-  		UPDATE document
+	<update id="increaseDislike" parameterType="int">
+  		UPDATE `document`
   		SET
 			`dislike` = `dislike` + 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="decreaseDislike" parameterType="document">
-  		UPDATE document
+	<update id="decreaseDislike" parameterType="int">
+  		UPDATE `document`
   		SET
 			`dislike` = `dislike` - 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="increaseSharing" parameterType="document">
-  		UPDATE document
+	<update id="increaseSharing" parameterType="int">
+  		UPDATE `document`
   		SET
 			`sharing` = `sharing` + 1
   		WHERE `documentId` = #{documentId};
 	</update>
 	
-	<update id="decreaseSharing" parameterType="document">
-  		UPDATE document
+	<update id="decreaseSharing" parameterType="int">
+  		UPDATE `document`
   		SET
 			`sharing` = `sharing` - 1
   		WHERE `documentId` = #{documentId};
@@ -117,7 +117,7 @@
 	
 	<delete id="delete" parameterType="int">
 		DELETE
-		FROM document
+		FROM `document`
 		WHERE `documentId` = #{documentId};
 	</delete>
 </mapper>

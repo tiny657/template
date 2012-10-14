@@ -42,9 +42,9 @@
 				#{expireTime});
 	</insert>
 	
-	<select id="getProviderUserId" resultType="String">
+	<select id="getProviderUserId" parameterType="String" resultType="String">
 		SELECT providerUserId
 		FROM UserConnection
-		WHERE userId = #{value}
+		WHERE userId = #{userId}
 	</select>
 </mapper>

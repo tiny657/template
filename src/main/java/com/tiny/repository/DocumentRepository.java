@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tiny.dao.DocumentDao;
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 
 @Repository
 public class DocumentRepository {
@@ -50,7 +50,7 @@ public class DocumentRepository {
 	}
 	
 	public void decreaseLike(Integer documentId) {
-		documentDao.increaseLike(documentId);
+		documentDao.decreaseLike(documentId);
 	}
 	
 	public void increaseDislike(Integer documentId) {
@@ -58,7 +58,7 @@ public class DocumentRepository {
 	}
 	
 	public void decreaseDislike(Integer documentId) {
-		documentDao.increaseDislike(documentId);
+		documentDao.decreaseDislike(documentId);
 	}
 	
 	public void increaseComment(Integer documentId) {

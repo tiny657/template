@@ -1,4 +1,4 @@
-package com.tiny.member;
+package com.tiny.model;
 
 import java.util.Date;
 

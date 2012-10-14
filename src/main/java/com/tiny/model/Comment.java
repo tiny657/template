@@ -1,4 +1,4 @@
-package com.tiny.comment;
+package com.tiny.model;
 
 import java.util.Date;
 

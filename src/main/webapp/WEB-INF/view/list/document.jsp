@@ -17,8 +17,26 @@
 					<i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span>&nbsp&nbsp
 				</c:when>
 				<c:otherwise>
-					<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span></a>&nbsp&nbsp
-					<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span></a>&nbsp&nbsp
+					<a href="#" onclick="like(${documentId})"><i class="icon-thumbs-up"></i><span id="like${documentId}">${document.like}</span></a>&nbsp
+					<c:choose>
+						<c:when test="${document.hasMyLike}">
+							<a href="#" id="cancelLike${documentId}" onclick="cancelLike(${documentId})"><spring:message code="list.cancel" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="#" id="cancelLike${documentId}" onclick="cancelLike(${documentId})" style="display:none;"><spring:message code="list.cancel" /></a>
+						</c:otherwise>
+					</c:choose>
+					&nbsp
+					<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span></a>&nbsp
+					<c:choose>
+						<c:when test="${document.hasMyDislike}">
+							<a href="#" id="cancelDislike${documentId}" onclick="cancelDislike(${documentId})"><spring:message code="list.cancel" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="#" id="cancelDislike${documentId}" onclick="cancelDislike(${documentId})" style="display:none;"><spring:message code="list.cancel" /></a>
+						</c:otherwise>
+					</c:choose>
+					&nbsp
 				</c:otherwise>
 			</c:choose>
 			<i class="icon-comment"></i><span id="comment${documentId}">${document.comment}</span>&nbsp&nbsp
@@ -40,7 +58,7 @@
 					</div>
 					<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-						<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="post(${documentId})">Yes</button>
+						<button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="post(${documentId})">Yes</button>
 					</div>
 				</div>
 			</c:if>
@@ -88,7 +106,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
 				</div>
 			</div>
 		</c:if>

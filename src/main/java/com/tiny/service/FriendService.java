@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 
-import com.tiny.member.Member;
+import com.tiny.model.Member;
 import com.tiny.repository.MemberRepository;
 
 @Service

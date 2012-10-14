@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.tiny.common.util.Constant;
-import com.tiny.member.Member;
+import com.tiny.model.Member;
 import com.tiny.service.MemberService;
 import com.tiny.social.SecurityContext;
 

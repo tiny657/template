@@ -44,7 +44,7 @@
 				
 				<table class="table table-bordered table-striped">
 					<thead>
-						<tr><th colspan=2" style="text-align: center; "><spring:message code="member.titleChance" /></th></tr>
+						<tr><th colspan=2 style="text-align: center; "><spring:message code="member.titleChance" /></th></tr>
 					</thead>
 					<tbody>
 						<tr>
@@ -68,7 +68,7 @@
 				
 				<table class="table table-bordered table-striped">
 					<thead>
-						<tr><th colspan=2" style="text-align: center; "><spring:message code="member.titlePoint" /></th></tr>
+						<tr><th colspan=2 style="text-align: center; "><spring:message code="member.titlePoint" /></th></tr>
 					</thead>
 					<tbody>
 						<tr>

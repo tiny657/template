@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.tiny.comment.Comment;
 import com.tiny.common.util.Constant;
-import com.tiny.document.Document;
+import com.tiny.model.Comment;
+import com.tiny.model.Document;
+import com.tiny.model.Like;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
+import com.tiny.service.LikeService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
@@ -41,6 +43,9 @@ public class ListController {
 
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private LikeService likeService;
 
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
@@ -57,22 +62,35 @@ public class ListController {
 
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		List<Document> documents = documentService.getAll();
-		model.addAttribute("documents", documents);
-		model.addAttribute("newDocument", new Document());
-		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
+		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		for (Document document : documents) {
 			model.addAttribute("newComment" + document.getDocumentId(), new Comment());
-			List<Comment> comments = commentService.get(document.getDocumentId());
-			map.put(Integer.toString(document.getDocumentId()), comments);
+			comments.put(Integer.toString(document.getDocumentId()), commentService.get(document.getDocumentId()));
+			
+			// like, dislike 클릭 여부
+			Like like = likeService.get(providerUserId, document.getDocumentId());
+			if (like != null) {
+				if (like.getIsLike()) {
+					document.setHasMyLike(true);
+				}
+				else {
+					document.setHasMyDislike(true);
+				}
+			}
 		}
-		model.addAttribute("comments", map);
+		model.addAttribute("documents", documents);
+		model.addAttribute("newDocument", new Document());
+		model.addAttribute("comments", comments);
 		model.addAttribute("url", Constant.LIST);
+		
 		// for posting
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		model.addAttribute("providerUserId", providerUserId);
+		
 		// to check chance of doc, comment, like, dislike.
 		model.addAttribute("member", memberService.getByProviderUserId(providerUserId));
+		
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
@@ -87,11 +105,10 @@ public class ListController {
 			return new ModelAndView(new RedirectView("/list"));
 		}
 		model.addAttribute("document", document);
-		Map<String, List<Comment>> map = new HashMap<String, List<Comment>>();
+		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		model.addAttribute("newComment" + document.getDocumentId(), new Comment());
-		List<Comment> comments = commentService.get(document.getDocumentId());
-		map.put(Integer.toString(document.getDocumentId()), comments);
-		model.addAttribute("comments", map);
+		comments.put(Integer.toString(document.getDocumentId()), commentService.get(document.getDocumentId()));
+		model.addAttribute("comments", comments);
 		model.addAttribute("url", Constant.LIST);
 		// for posting
 		try {

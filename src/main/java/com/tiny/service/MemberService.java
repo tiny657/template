@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 
-import com.tiny.member.Member;
-import com.tiny.repository.DocumentRepository;
+import com.tiny.model.Member;
 import com.tiny.repository.MemberRepository;
-import com.tiny.repository.UserConnectionRepository;
 import com.tiny.social.SecurityContext;
 
 @Service
@@ -21,9 +19,6 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-
-	@Autowired
-	private UserConnectionRepository userConnectionRepository;
 
 	public void save() {
 		FacebookProfile facebookProfile = facebookService.getProfile();

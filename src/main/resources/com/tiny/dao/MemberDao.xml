@@ -3,7 +3,7 @@
 <mapper namespace="com.tiny.dao.MemberDao">
 	<insert id="save" parameterType="member">
 		INSERT
-		INTO member
+		INTO `member`
 				(`providerUserId`,
 				`name`,
 				`gender`,
@@ -22,51 +22,51 @@
 	
 	<select id="get" resultType="member">
 		SELECT *
-		FROM member
+		FROM `member`
   		WHERE `providerUserId` = (
 	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</select>
 	
-	<select id="getByProviderUserId" resultType="member">
+	<select id="getByProviderUserId" parameterType="String" resultType="member">
 		SELECT *
 		FROM member
-		WHERE `providerUserId` = #{value}
+		WHERE `providerUserId` = #{providerUserId}
 	</select>
 	
-	<select id="getName" resultType="String">
+	<select id="getName" parameterType="String" resultType="String">
 		SELECT name
-		FROM member
-		WHERE `providerUserId` = #{value}
+		FROM `member`
+		WHERE `providerUserId` = #{providerUserId}
 	</select>
 	
-	<select id="getChanceToDoc" resultType="int">
+	<select id="getChanceToDoc" parameterType="String" resultType="int">
 		SELECT chanceToDoc
-		FROM member
+		FROM `member`
   		WHERE `providerUserId` = (
 	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</select>
 	
-	<select id="getChanceToComment" resultType="int">
+	<select id="getChanceToComment" parameterType="String" resultType="int">
 		SELECT chanceToComment
-		FROM member
+		FROM `member`
   		WHERE `providerUserId` = (
 	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</select>
 	
-	<select id="getChanceToLike" resultType="int">
+	<select id="getChanceToLike" parameterType="String" resultType="int">
 		SELECT chanceToLike
-		FROM member
+		FROM `member`
   		WHERE `providerUserId` = (
 	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
 	</select>
 	
-	<select id="getChanceToDislike" resultType="int">
+	<select id="getChanceToDislike" parameterType="String" resultType="int">
 		SELECT chanceToDislike
-		FROM member
+		FROM `member`
   		WHERE `providerUserId` = (
 	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
   		);
@@ -74,11 +74,11 @@
 	
 	<select id="count" resultType="int">
 		SELECT COUNT(*)
-		FROM member;
+		FROM `member`;
 	</select>
 	
 	<update id="updateName" parameterType="map">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`name` = #{name}
   		WHERE `providerUserId` = (
@@ -87,49 +87,49 @@
 	</update>
 	
 	<update id="increaseDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`doc` = `doc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`doc` = `doc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseComment" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`comment` = `comment` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseComment" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`comment` = `comment` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseCommentOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`commentOnMyDoc` = `commentOnMyDoc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseCommentOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`commentOnMyDoc` = `commentOnMyDoc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseLike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`like` = `like` + 1 
   		WHERE `providerUserId` = (
@@ -138,7 +138,7 @@
 	</update>
 	
 	<update id="decreaseLike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`like` = `like` - 1 
   		WHERE `providerUserId` = (
@@ -147,21 +147,21 @@
 	</update>
 	
 	<update id="increaseLikeOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`likeOnMyDoc` = `likeOnMyDoc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseLikeOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`likeOnMyDoc` = `likeOnMyDoc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseDislike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`dislike` = `dislike` + 1 
   		WHERE `providerUserId` = (
@@ -170,7 +170,7 @@
 	</update>
 	
 	<update id="decreaseDislike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`dislike` = `dislike` - 1 
   		WHERE `providerUserId` = (
@@ -179,21 +179,21 @@
 	</update>
 	
 	<update id="increaseDislikeOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`dislikeOnMyDoc` = `dislikeOnMyDoc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseDislikeOnMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`dislikeOnMyDoc` = `dislikeOnMyDoc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseSharing" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`sharing` = `sharing` + 1 
   		WHERE `providerUserId` = (
@@ -202,7 +202,7 @@
 	</update>
 	
 	<update id="decreaseSharing" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`sharing` = `sharing` - 1 
   		WHERE `providerUserId` = (
@@ -211,77 +211,77 @@
 	</update>
 	
 	<update id="increaseSharingOfMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`sharingOfMyDoc` = `sharingOfMyDoc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseSharingOfMyDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`sharingOfMyDoc` = `sharingOfMyDoc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseChanceToDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToDoc` = `chanceToDoc` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseChanceToDoc" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToDoc` = `chanceToDoc` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseChanceToComment" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToComment` = `chanceToComment` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseChanceToComment" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToComment` = `chanceToComment` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseChanceToLike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToLike` = `chanceToLike` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseChanceToLike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToLike` = `chanceToLike` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseChanceToDislike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToDislike` = `chanceToDislike` + 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseChanceToDislike" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`chanceToDislike` = `chanceToDislike` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="updateLastLoginDate" parameterType="String">
-  		UPDATE member
+  		UPDATE `member`
   		SET
 			`lastLoginDate` = NOW()
   		WHERE providerUserId = (
@@ -291,7 +291,7 @@
 	
 	<delete id="delete" parameterType="String">
 		DELETE
-		FROM member
+		FROM `member`
 		WHERE `providerUserId` = #{providerUserId};
 	</delete>
 </mapper>

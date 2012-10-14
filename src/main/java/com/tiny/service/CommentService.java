@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tiny.comment.Comment;
 import com.tiny.common.util.XssFilter;
+import com.tiny.model.Comment;
 import com.tiny.repository.CommentRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;

@@ -20,7 +20,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-			<button type="submit" class="btn btn-primary" data-dismiss="modal" aria=hidden="true" onclick="deleteComment(${comment.documentId}, ${comment.commentId})">Yes</button>
+			<button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="deleteComment(${comment.documentId}, ${comment.commentId})">Yes</button>
 		</div>
 	</div>
 </blockquote>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tiny.common.util.XssFilter;
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 import com.tiny.repository.DocumentRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;

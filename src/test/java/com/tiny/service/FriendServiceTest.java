@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.springframework.social.facebook.api.FacebookProfile;
 
 import com.tiny.common.CommonMockTest;
-import com.tiny.member.Member;
+import com.tiny.model.Member;
 import com.tiny.repository.MemberRepository;
 
 public class FriendServiceTest extends CommonMockTest {

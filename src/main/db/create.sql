@@ -1,10 +1,12 @@
 CREATE DATABASE IF NOT EXISTS template;
 USE template;
-DROP TABLE IF EXISTS member;
-DROP TABLE IF EXISTS comment;
-DROP TABLE IF EXISTS document;
+DROP TABLE IF EXISTS `member`;
+DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `document`;
+DROP TABLE IF EXISTS `like`;
+DROP TABLE IF EXISTS `dislike`;
 
-CREATE TABLE IF NOT EXISTS UserConnection (
+CREATE TABLE IF NOT EXISTS `UserConnection` (
 	`userId` CHAR(255) NOT NULL,
     `providerId` CHAR(255) NOT NULL,
     `providerUserId` CHAR(255),
@@ -19,7 +21,7 @@ CREATE TABLE IF NOT EXISTS UserConnection (
     PRIMARY KEY (`userId`, `providerId`, `providerUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE member (
+CREATE TABLE `member` (
 	`providerUserId` CHAR(16),
 	`name` CHAR(20),
 	`gender` BOOLEAN,
@@ -45,7 +47,7 @@ CREATE TABLE member (
 	PRIMARY KEY (`providerUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE document (
+CREATE TABLE `document` (
 	`documentId` INT AUTO_INCREMENT,
 	`content` TEXT NOT NULL,
 	`point` INT DEFAULT 0,
@@ -56,17 +58,25 @@ CREATE TABLE document (
 	`providerUserId` CHAR(16) NOT NULL,
 	`name` CHAR(20),
 	`ipAddress` CHAR(8) NOT NULL,
-	`regDate` DATE NOT NULL,
+	`regDate` DATETIME NOT NULL,
 	PRIMARY KEY (`documentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE comment (
+CREATE TABLE `comment` (
 	`commentId` INT AUTO_INCREMENT,
 	`documentId` INT NOT NULL,
 	`content` TEXT NOT NULL,
 	`providerUserId` CHAR(16) NOT NULL,
 	`name` CHAR(20),
-	`regDate` DATE NOT NULL,
+	`regDate` DATETIME NOT NULL,
 	PRIMARY KEY (`commentId`),
 	FOREIGN KEY (`documentId`) REFERENCES document(`documentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `like` (
+	`providerUserId` CHAR(16) NOT NULL,
+	`documentId` INT NOT NULL,
+	`isLike` BOOLEAN NOT NULL,
+	`regDate` DATETIME NOT NULL,
+	INDEX (`providerUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;

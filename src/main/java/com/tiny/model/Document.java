@@ -1,4 +1,4 @@
-package com.tiny.document;
+package com.tiny.model;
 
 import java.util.Date;
 
@@ -17,6 +17,10 @@ public class Document {
 	private String name;
 	private String ipAddress;
 	private Date regDate;
+	
+	// from Like
+	private Boolean hasMyLike;
+	private Boolean hasMyDislike;
 
 	public void setIpAddress(String ipAddress) {
 		String[] split = ipAddress.split("\\.");

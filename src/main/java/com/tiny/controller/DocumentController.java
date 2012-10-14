@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tiny.document.Document;
+import com.tiny.model.Document;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
@@ -27,7 +27,7 @@ public class DocumentController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private DocumentService documentService;
 
@@ -47,14 +47,14 @@ public class DocumentController {
 			ModelMap model = new ModelMap();
 			document.setIpAddress(request.getRemoteAddr());
 			model.addAttribute("document", documentService.saveAndGet(document));
-			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			String providerUserId = userConnectionRepository
+					.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			model.addAttribute("providerUserId", providerUserId);
 			pointService.calculatePointToSaveDocument(providerUserId);
 			memberService.decreaseChanceToDoc(providerUserId);
 			mav.addAllObjects(model);
 			mav.setViewName("document");
-		}
-		else {
+		} else {
 			mav.setViewName("null");
 		}
 		return mav;

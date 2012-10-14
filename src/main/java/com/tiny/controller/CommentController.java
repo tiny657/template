@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tiny.comment.Comment;
+import com.tiny.model.Comment;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.MemberService;
@@ -21,8 +21,8 @@ import com.tiny.social.SecurityContext;
 @Controller
 public class CommentController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
-	
-	@Autowired 
+
+	@Autowired
 	private MemberService memberService;
 
 	@Autowired
@@ -43,14 +43,14 @@ public class CommentController {
 			comment.setDocumentId(documentId);
 			comment.setContent(content);
 			model.addAttribute("comment", commentService.saveAndGet(comment));
-			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			String providerUserId = userConnectionRepository
+					.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			model.addAttribute("providerUserId", providerUserId);
 			pointService.calculatePointToSaveComment(providerUserId, documentId);
 			memberService.decreaseChanceToComment(providerUserId);
 			mav.addAllObjects(model);
 			mav.setViewName("comment");
-		}
-		else {
+		} else {
 			mav.setViewName("null");
 		}
 		return mav;

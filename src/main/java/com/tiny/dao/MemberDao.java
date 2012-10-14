@@ -3,12 +3,11 @@ package com.tiny.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.tiny.member.Member;
+import com.tiny.model.Member;
 
 public interface MemberDao {
 	public void save(Member member);
 	public List<Member> getAll();
-	public Integer count();
 	public Member get(String userId);
 	public Member getByProviderUserId(String providerUserId);
 	public String getName(String providerUserId);
@@ -16,7 +15,8 @@ public interface MemberDao {
 	public Integer getChanceToComment(String userId);
 	public Integer getChanceToLike(String userId);
 	public Integer getChanceToDislike(String userId);
-	public void updateName(Map<String, String> map);
+	public Integer count();
+	public void updateName(Map<String, Object> map);
 	public void increaseDoc(String providerUserId);
 	public void decreaseDoc(String providerUserId);
 	public void increaseComment(String providerUsreId);

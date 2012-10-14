@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tiny.comment.Comment;
 import com.tiny.dao.CommentDao;
+import com.tiny.model.Comment;
 
 @Repository
 public class CommentRepository {
@@ -21,10 +21,6 @@ public class CommentRepository {
 		commentDao.save(comment);
 	}
 	
-	public Integer countByDocumentId(Integer documentId) {
-		return commentDao.countByDocumentId(documentId);
-	}
-
 	public List<Comment> get(Integer documentId) {
 		return commentDao.get(documentId);
 	}
@@ -35,6 +31,10 @@ public class CommentRepository {
 	
 	public Comment getLast() {
 		return commentDao.getLast();
+	}
+
+	public Integer countByDocumentId(Integer documentId) {
+		return commentDao.countByDocumentId(documentId);
 	}
 
 	public void deleteWithDocumentId(Integer documentId) {

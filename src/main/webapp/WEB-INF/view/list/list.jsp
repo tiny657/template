@@ -123,9 +123,26 @@
 					if (isSuccess === "true") {
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like + 1);
+						$("#cancelLike" + documentId).css("display", "");
 					}
 					else {
 						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to like.</div>");
+					}
+				}
+			});
+		}
+		
+		function cancelLike(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/cancelLike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var like = parseInt($("#like" + documentId).text());
+						$("#like" + documentId).text(like - 1);
+						$("#cancelLike" + documentId).css("display", "none");
 					}
 				}
 			});
@@ -141,9 +158,26 @@
 					if (isSuccess === "true") {
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike + 1);
+						$("#cancelDislike" + documentId).css("display", "");
 					}
 					else {
 						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div>");
+					}
+				}
+			});
+		}
+		
+		function cancelDislike(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/cancelDislike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var dislike = parseInt($("#dislike" + documentId).text());
+						$("#dislike" + documentId).text(dislike - 1);
+						$("#cancelDislike" + documentId).css("display", "none");
 					}
 				}
 			});

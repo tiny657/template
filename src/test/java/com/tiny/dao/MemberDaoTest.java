@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tiny.common.CommonTest;
-import com.tiny.member.Member;
-import com.tiny.userConnection.UserConnection;
+import com.tiny.model.Member;
+import com.tiny.model.UserConnection;
 
 public class MemberDaoTest extends CommonTest {
 	@Autowired
