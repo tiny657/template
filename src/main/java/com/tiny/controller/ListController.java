@@ -48,7 +48,7 @@ public class ListController {
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		// initial access
-		if (!memberService.isExisted(SecurityContext.getCurrentUser().getId())) {
+		if (!memberService.isExisted()) {
 			return new ModelAndView(new RedirectView("/member"));
 		}
 
@@ -79,7 +79,7 @@ public class ListController {
 	}
 
 	@RequestMapping(value = "/list/{documentId}", method = RequestMethod.GET)
-	public ModelAndView list(@PathVariable int documentId) {
+	public ModelAndView list(@PathVariable Integer documentId) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		Document document = documentService.get(documentId);

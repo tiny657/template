@@ -25,7 +25,7 @@ public class CommentDaoTest extends CommonTest {
 	public void save() {
 		// Given
 		Document document = createDocument();
-		int count = commentDao.count();
+		Integer count = commentDao.count();
 
 		// When
 		commentDao.save(createComment(document.getDocumentId()));
@@ -52,7 +52,7 @@ public class CommentDaoTest extends CommonTest {
 		// Given
 		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
-		int count = commentDao.count();
+		Integer count = commentDao.count();
 
 		// When
 		commentDao.update(createComment(document.getDocumentId()));
@@ -66,7 +66,7 @@ public class CommentDaoTest extends CommonTest {
 		// Given
 		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
-		int count = commentDao.count();
+		Integer count = commentDao.count();
 
 		// When
 		commentDao.delete(commentDao.getLastCommentId());
@@ -81,7 +81,7 @@ public class CommentDaoTest extends CommonTest {
 		Document document = createDocument();
 		commentDao.save(createComment(document.getDocumentId()));
 		commentDao.save(createComment(document.getDocumentId()));
-		int count = commentDao.count();
+		Integer count = commentDao.count();
 
 		// When
 		commentDao.deleteWithDocumentId(document.getDocumentId());
@@ -90,7 +90,7 @@ public class CommentDaoTest extends CommonTest {
 		assertThat(commentDao.count(), is(count - 2));
 	}
 
-	private Comment createComment(int documentId) {
+	private Comment createComment(Integer documentId) {
 		Comment comment = new Comment();
 		comment.setDocumentId(documentId);
 		comment.setContent("content");

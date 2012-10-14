@@ -32,23 +32,23 @@ public class PointService {
 		memberRepository.increasePointDoc(providerUserId);
 	}
 
-	public void calculatePointToDeleteDocument(String providerUserId, int documentId) {
-		int count = commentRepository.countWithDocumentId(documentId);
+	public void calculatePointToDeleteDocument(String providerUserId, Integer documentId) {
+		Integer count = commentRepository.countByDocumentId(documentId);
 		// TODO:: 성능 상 하나의 쿼리로 수정 필요
-		for (int i = 0; i < count; i++) {
+		for (Integer i = 0; i < count; i++) {
 			memberRepository.decreaseCommentOnMyDoc(providerUserId);
 		}
 		memberRepository.decreasePointDocument(providerUserId);
 	}
 
-	public void calculatePointToSaveComment(String providerUserId, int documentId) {
+	public void calculatePointToSaveComment(String providerUserId, Integer documentId) {
 		memberRepository.increaseComment(providerUserId);
 		Document document = documentRepository.get(documentId);
 		memberRepository.increaseCommentOnMyDoc(document.getProviderUserId());
 		documentRepository.increaseComment(documentId);
 	}
 
-	public void calculatePointToDeleteComment(int documentId, int commentId) {
+	public void calculatePointToDeleteComment(Integer documentId, Integer commentId) {
 		memberRepository.decreaseComment(userConnectionRepository.getProviderUserId(SecurityContext
 				.getCurrentUser().getId()));
 		Document document = documentRepository.get(documentId);
@@ -56,21 +56,21 @@ public class PointService {
 		documentRepository.decreaseComment(commentRepository.getCommentId(commentId).getDocumentId());
 	}
 
-	public void calculatePointToShare(int documentId) {
+	public void calculatePointToShare(Integer documentId) {
 		Document document = documentRepository.get(documentId);
 		documentRepository.increaseSharing(documentId);
 		memberRepository.increaseSharing(document.getProviderUserId());
 		memberRepository.increasePointBeShared(document.getProviderUserId());
 	}
 	
-	public void calculatePointToClickLike(int documentId) {
+	public void calculatePointToClickLike(Integer documentId) {
 		Document document = documentRepository.get(documentId);
 		documentRepository.increaseLike(documentId);
 		memberRepository.increaseLike(SecurityContext.getCurrentUser().getId());
 		memberRepository.increaseLikeOnMyDoc(document.getProviderUserId());
 	}
 	
-	public void calculatePointToClickDislike(int documentId) {
+	public void calculatePointToClickDislike(Integer documentId) {
 		Document document = documentRepository.get(documentId);
 		documentRepository.increaseDislike(documentId);
 		memberRepository.increaseDislike(SecurityContext.getCurrentUser().getId());

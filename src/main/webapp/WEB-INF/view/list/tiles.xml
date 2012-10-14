@@ -33,4 +33,8 @@
 	<definition name="dislike" extends="fragmentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/list/dislike.jsp" />
 	</definition>
+	
+	<definition name="null" extends="fragmentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/list/null.jsp" />
+	</definition>
 </tiles-definitions>

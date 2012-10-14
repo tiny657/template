@@ -15,13 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.document.Document;
+import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.DocumentService;
+import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.service.PostService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class PointController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PointController.class);
+	
+	@Autowired
+	private MemberService memberService;
 
 	@Autowired
 	private DocumentService documentService;
@@ -31,9 +37,12 @@ public class PointController {
 
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public ModelAndView post(@RequestParam int documentId, @RequestParam String content) {
+	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		try {
@@ -63,23 +72,37 @@ public class PointController {
 
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
 	public @ResponseBody
-	boolean like(@RequestParam int documentId) {
+	boolean like(@RequestParam Integer documentId) {
 		if (documentService.isMyDocument(documentId)) {
 			return false;
 		}
 		
-		pointService.calculatePointToClickLike(documentId);
-		return true;
+		if (memberService.isChanceToLike()) {
+			pointService.calculatePointToClickLike(documentId);
+			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			memberService.decreaseChanceToLike(providerUserId);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@RequestMapping(value = "/dislike", method = RequestMethod.GET)
 	public @ResponseBody
-	boolean dislike(@RequestParam int documentId) {
+	boolean dislike(@RequestParam Integer documentId) {
 		if (documentService.isMyDocument(documentId)) {
 			return false;
 		}
 		
-		pointService.calculatePointToClickDislike(documentId);
-		return true;
+		if (memberService.isChanceToDislike()) {
+			pointService.calculatePointToClickDislike(documentId);
+			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			memberService.decreaseChanceToDislike(providerUserId);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

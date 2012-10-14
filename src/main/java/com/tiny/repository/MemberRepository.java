@@ -27,12 +27,32 @@ public class MemberRepository {
 		return memberDao.getAll();
 	}
 	
-	public Member get(String providerUserId) {
-		return memberDao.get(providerUserId);
+	public Member get(String userId) {
+		return memberDao.get(userId);
+	}
+	
+	public Member getByProviderUserId(String providerUserId) {
+		return memberDao.getByProviderUserId(providerUserId);
 	}
 	
 	public String getName(String providerUserId) {
 		return memberDao.getName(providerUserId);
+	}
+	
+	public Integer getChanceToDoc(String userId) {
+		return memberDao.getChanceToDoc(userId);
+	}
+	
+	public Integer getChanceToComment(String userId) {
+		return memberDao.getChanceToComment(userId);
+	}
+	
+	public Integer getChanceToLike(String userId) {
+		return memberDao.getChanceToLike(userId);
+	}
+	
+	public Integer getChanceToDislike(String userId) {
+		return memberDao.getChanceToDislike(userId);
 	}
 	
 	public void updateName(String userId, String name) {
@@ -42,6 +62,10 @@ public class MemberRepository {
 		memberDao.updateName(map);
 	}
 
+	public void updateLastLoginDate(String userId) {
+		memberDao.updateLastLoginDate(userId);
+	}
+	
 	public void increasePointDoc(String providerUserId) {
 		memberDao.increaseDoc(providerUserId);
 	}
@@ -110,8 +134,36 @@ public class MemberRepository {
 		memberDao.increaseSharingOfMyDoc(providerUserId);
 	}
 	
-	public void updateLastLoginDate(String userId) {
-		memberDao.updateLastLoginDate(userId);
+	public void increaseChanceToDoc(String providerUserId) {
+		memberDao.increaseChanceToDoc(providerUserId);
+	}
+	
+	public void decreaseChanceToDoc(String providerUserId) {
+		memberDao.decreaseChanceToDoc(providerUserId);
+	}
+	
+	public void increaseChanceToComment(String providerUserId) {
+		memberDao.increaseChanceToComment(providerUserId);
+	}
+
+	public void decreaseChanceToComment(String providerUserId) {
+		memberDao.decreaseChanceToComment(providerUserId);
+	}
+	
+	public void increaseChanceToLike(String providerUserId) {
+		memberDao.increaseChanceToLike(providerUserId);
+	}
+	
+	public void decreaseChanceToLike(String providerUserId) {
+		memberDao.decreaseChanceToLike(providerUserId);
+	}
+	
+	public void increaseChanceToDislike(String providerUserId) {
+		memberDao.increaseChanceToDislike(providerUserId);
+	}
+	
+	public void decreaseChanceToDislike(String providerUserId) {
+		memberDao.decreaseChanceToDislike(providerUserId);
 	}
 	
 	public void delete(String providerUserId) {

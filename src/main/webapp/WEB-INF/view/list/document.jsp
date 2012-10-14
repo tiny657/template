@@ -21,7 +21,7 @@
 					<a href="#" onclick="dislike(${documentId})"><i class="icon-thumbs-down"></i><span id="dislike${documentId}">${document.dislike}</span></a>&nbsp&nbsp
 				</c:otherwise>
 			</c:choose>
-			<a href="#" onclick="comment(${documentId})"><i class="icon-comment"></i><span id="comment${documentId}">${document.comment}</span></a>&nbsp&nbsp
+			<i class="icon-comment"></i><span id="comment${documentId}">${document.comment}</span>&nbsp&nbsp
 		
 			<%-- POST --%>
 			<c:if test="${not empty providerUserId}">

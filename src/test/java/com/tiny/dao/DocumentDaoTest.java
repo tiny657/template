@@ -18,7 +18,7 @@ public class DocumentDaoTest extends CommonTest {
 	@Test
 	public void save() {
 		// Given
-		int count = documentDao.count();
+		Integer count = documentDao.count();
 
 		// When
 		documentDao.save(createDocument());
@@ -56,7 +56,7 @@ public class DocumentDaoTest extends CommonTest {
 	public void delete() {
 		// Given
 		documentDao.save(createDocument());
-		int count = documentDao.count();
+		Integer count = documentDao.count();
 
 		// When
 		documentDao.delete(documentDao.getLast().getDocumentId());

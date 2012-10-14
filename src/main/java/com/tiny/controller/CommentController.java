@@ -14,12 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tiny.comment.Comment;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
+import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
 
 @Controller
 public class CommentController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
+	
+	@Autowired 
+	private MemberService memberService;
 
 	@Autowired
 	private CommentService commentService;
@@ -31,25 +35,33 @@ public class CommentController {
 	private UserConnectionRepository userConnectionRepository;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
-	public ModelAndView save(@RequestParam int documentId, @RequestParam String content) {
+	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		Comment comment = new Comment();
-		comment.setDocumentId(documentId);
-		comment.setContent(content);
-		model.addAttribute("comment", commentService.saveAndGet(comment));
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		model.addAttribute("providerUserId", providerUserId);
-		pointService.calculatePointToSaveComment(providerUserId, documentId);
-		mav.addAllObjects(model);
-		mav.setViewName("comment");
+		if (memberService.isChanceToComment()) {
+			ModelMap model = new ModelMap();
+			Comment comment = new Comment();
+			comment.setDocumentId(documentId);
+			comment.setContent(content);
+			model.addAttribute("comment", commentService.saveAndGet(comment));
+			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			model.addAttribute("providerUserId", providerUserId);
+			pointService.calculatePointToSaveComment(providerUserId, documentId);
+			memberService.decreaseChanceToComment(providerUserId);
+			mav.addAllObjects(model);
+			mav.setViewName("comment");
+		}
+		else {
+			mav.setViewName("null");
+		}
 		return mav;
 	}
 
 	@RequestMapping(value = { "/comment" }, method = RequestMethod.DELETE)
 	public @ResponseBody
-	boolean delete(@RequestParam int documentId, @RequestParam int commentId) {
+	boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		pointService.calculatePointToDeleteComment(documentId, commentId);
+		memberService.increaseChanceToComment(providerUserId);
 		commentService.delete(commentId);
 		return true;
 	}

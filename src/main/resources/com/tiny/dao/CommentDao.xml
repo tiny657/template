@@ -30,7 +30,7 @@
 		FROM comment;
 	</select>
 	
-	<select id="countWithDocumentId" parameterType="int" resultType="int">
+	<select id="countByDocumentId" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM comment
 		WHERE `documentId` = #{documentId};

@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class Document {
-	private int documentId;
+	private Integer documentId;
 	private String content;
-	private int point;
-	private int like;
-	private int dislike;
-	private int comment;
-	private int sharing;
+	private Integer point;
+	private Integer like;
+	private Integer dislike;
+	private Integer comment;
+	private Integer sharing;
 	private String providerUserId;
 	private String name;
 	private String ipAddress;

@@ -3,9 +3,8 @@
 
 <div class="container">
 	<%-- alert --%>
-	<div id="alertPosition"></div>
-	<div id="posting" class="alert alert-info" style="display:none">
-		Posting...<img src="/img/wait24trans.gif" />
+	<div id="alertPosition">
+		<div id="alert"></div>
 	</div>
 	
 	<%-- new document form --%>
@@ -107,49 +106,45 @@
 				dataType: "text",
 				data: {"documentId" : documentId, "content": $("#content" + documentId).text()},
 				beforeSend: function() {
-					$("#posting").css("display", "");
-					$("#postAlert").remove();
 				},
 				success : function(content) {
-					$("#posting").css("display", "none");
-					$("#alertPosition").after(content);
+					$("#alert").replaceWith(content);
 				}
 			});
 		}
 				
 		function like(documentId) {
-			var like = parseInt($("#like" + documentId).text());
-			$("#like" + documentId).text(like + 1);
 			$.ajax({
 				type : "GET",
 				url : "/like",
 				dataType: "text",
 				data: {"documentId": documentId},
-				success : function() {
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var like = parseInt($("#like" + documentId).text());
+						$("#like" + documentId).text(like + 1);
+					}
+					else {
+						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to like.</div>");
+					}
 				}
 			});
 		}
 		
 		function dislike(documentId) {
-			var dislike = parseInt($("#dislike" + documentId).text());
-			$("#dislike" + documentId).text(dislike + 1);
 			$.ajax({
 				type : "GET",
 				url : "/dislike",
 				dataType: "text",
 				data: {"documentId": documentId},
-				success : function() {
-				}
-			});
-		}
-		
-		function comment(documentId) {
-			$.ajax({
-				type : "GET",
-				url : "/dislike",
-				dataType: "text",
-				data: {"documentId": documentId},
-				success : function(content) {
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var dislike = parseInt($("#dislike" + documentId).text());
+						$("#dislike" + documentId).text(dislike + 1);
+					}
+					else {
+						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div>");
+					}
 				}
 			});
 		}

@@ -17,6 +17,7 @@ import com.tiny.document.Document;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
+import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.social.SecurityContext;
 
@@ -24,6 +25,9 @@ import com.tiny.social.SecurityContext;
 public class DocumentController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentController.class);
 
+	@Autowired
+	private MemberService memberService;
+	
 	@Autowired
 	private DocumentService documentService;
 
@@ -39,21 +43,28 @@ public class DocumentController {
 	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
 	public ModelAndView saveDocument(HttpServletRequest request, @ModelAttribute Document document) {
 		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		document.setIpAddress(request.getRemoteAddr());
-		model.addAttribute("document", documentService.saveAndGet(document));
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		model.addAttribute("providerUserId", providerUserId);
-		pointService.calculatePointToSaveDocument(providerUserId);
-		mav.addAllObjects(model);
-		mav.setViewName("document");
+		if (memberService.isChanceToDoc()) {
+			ModelMap model = new ModelMap();
+			document.setIpAddress(request.getRemoteAddr());
+			model.addAttribute("document", documentService.saveAndGet(document));
+			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+			model.addAttribute("providerUserId", providerUserId);
+			pointService.calculatePointToSaveDocument(providerUserId);
+			memberService.decreaseChanceToDoc(providerUserId);
+			mav.addAllObjects(model);
+			mav.setViewName("document");
+		}
+		else {
+			mav.setViewName("null");
+		}
 		return mav;
 	}
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
-	public void delete(@RequestParam int documentId) {
+	public void delete(@RequestParam Integer documentId) {
 		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		pointService.calculatePointToDeleteDocument(providerUserId, documentId);
+		memberService.increaseChanceToDoc(providerUserId);
 		commentService.deleteWithDocumentId(documentId);
 		documentService.delete(documentId);
 	}

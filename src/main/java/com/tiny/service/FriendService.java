@@ -31,7 +31,7 @@ public class FriendService {
 		
 		// TODO:: 성능 상 튜닝 필요
 		for (FacebookProfile facebookProfile : friends) {
-			Member member = memberRepository.get(facebookProfile.getId());
+			Member member = memberRepository.getByProviderUserId(facebookProfile.getId());
 			if (member != null) {
 				result.add(facebookProfile);
 			}

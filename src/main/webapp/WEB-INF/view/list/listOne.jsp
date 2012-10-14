@@ -31,11 +31,10 @@
 				data: {"content": $("#content" + documentId).text()},
 				beforeSend: function() {
 					$("#posting").css("display", "");
-					$("#postAlert").remove();
 				},
 				success : function(content) {
 					$("#posting").css("display", "none");
-					$("#alertPosition").after(content);
+					$("#alert").replaceWith(content);
 				}
 			});
 		}

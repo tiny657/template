@@ -56,7 +56,7 @@ public class DocumentService {
 		return documents;
 	}
 
-	public Document get(int documentId) {
+	public Document get(Integer documentId) {
 		return documentRepository.get(documentId);
 	}
 
@@ -64,12 +64,12 @@ public class DocumentService {
 		return documentRepository.getLast();
 	}
 
-	public boolean isMyDocument(int documentId) {
+	public boolean isMyDocument(Integer documentId) {
 		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		return documentRepository.getProviderUesrId(documentId).equals(providerUserId);
 	}
 
-	public void delete(int documentId) {
+	public void delete(Integer documentId) {
 		documentRepository.delete(documentId);
 	}
 }

@@ -44,6 +44,30 @@
 				
 				<table class="table table-bordered table-striped">
 					<thead>
+						<tr><th colspan=2" style="text-align: center; "><spring:message code="member.titleChance" /></th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><spring:message code="member.chanceToDoc" /></td>
+							<td>${member.chanceToDoc}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.chanceToComment" /></td>
+							<td>${member.chanceToComment}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.chanceToLike" /></td>
+							<td>${member.chanceToLike}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.chanceToDislike" /></td>
+							<td>${member.chanceToDislike}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="table table-bordered table-striped">
+					<thead>
 						<tr><th colspan=2" style="text-align: center; "><spring:message code="member.titlePoint" /></th></tr>
 					</thead>
 					<tbody>

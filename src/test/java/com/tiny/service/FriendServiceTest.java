@@ -38,7 +38,7 @@ public class FriendServiceTest extends CommonMockTest {
 		when(mockFacebookProfile.getId()).thenReturn(providerUserId);
 		mockFacebookProfiles.add(mockFacebookProfile);
 		when(mockFacebookService.getFriends()).thenReturn(mockFacebookProfiles);
-		when(mockMemberRepository.get(anyString())).thenReturn(createMember());
+		when(mockMemberRepository.getByProviderUserId(anyString())).thenReturn(createMember());
 
 		// When
 		FriendService friendService = new FriendService(mockFacebookService, mockMemberRepository);

@@ -8,17 +8,6 @@
 				`name`,
 				`gender`,
 				`email`,
-				`level`,
-				`point`,
-				`doc`,
-				`comment`,
-				`commentOnMyDoc`,
-				`like`,
-				`likeOnMyDoc`,
-				`dislike`,
-				`dislikeOnMyDoc`,
-				`sharing`,
-				`sharingOfMyDoc`,
 				`locale`,
 				`regDate`,
 				`lastLoginDate`)
@@ -26,23 +15,20 @@
 				#{name},
 				#{gender},
 				#{email},
-				#{level},
-				#{point},
-				#{doc},
-				#{comment},
-				#{commentOnMyDoc},
-				#{like},
-				#{likeOnMyDoc},
-				#{dislike},
-				#{dislikeOnMyDoc},
-				#{sharing},
-				#{sharingOfMyDoc},
 				#{locale},
 				NOW(),
 				NOW());
 	</insert>
 	
 	<select id="get" resultType="member">
+		SELECT *
+		FROM member
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
+  		);
+	</select>
+	
+	<select id="getByProviderUserId" resultType="member">
 		SELECT *
 		FROM member
 		WHERE `providerUserId` = #{value}
@@ -52,6 +38,38 @@
 		SELECT name
 		FROM member
 		WHERE `providerUserId` = #{value}
+	</select>
+	
+	<select id="getChanceToDoc" resultType="int">
+		SELECT chanceToDoc
+		FROM member
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
+  		);
+	</select>
+	
+	<select id="getChanceToComment" resultType="int">
+		SELECT chanceToComment
+		FROM member
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
+  		);
+	</select>
+	
+	<select id="getChanceToLike" resultType="int">
+		SELECT chanceToLike
+		FROM member
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
+  		);
+	</select>
+	
+	<select id="getChanceToDislike" resultType="int">
+		SELECT chanceToDislike
+		FROM member
+  		WHERE `providerUserId` = (
+	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
+  		);
 	</select>
 	
 	<select id="count" resultType="int">
@@ -203,6 +221,62 @@
   		UPDATE member
   		SET
 			`sharingOfMyDoc` = `sharingOfMyDoc` - 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="increaseChanceToDoc" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToDoc` = `chanceToDoc` + 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="decreaseChanceToDoc" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToDoc` = `chanceToDoc` - 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="increaseChanceToComment" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToComment` = `chanceToComment` + 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="decreaseChanceToComment" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToComment` = `chanceToComment` - 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="increaseChanceToLike" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToLike` = `chanceToLike` + 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="decreaseChanceToLike" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToLike` = `chanceToLike` - 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="increaseChanceToDislike" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToDislike` = `chanceToDislike` + 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="decreaseChanceToDislike" parameterType="String">
+  		UPDATE member
+  		SET
+			`chanceToDislike` = `chanceToDislike` - 1 
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	

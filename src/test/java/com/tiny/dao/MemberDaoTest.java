@@ -41,7 +41,7 @@ public class MemberDaoTest extends CommonTest {
 	@Test
 	public void save() {
 		// Given
-		int count = memberDao.count();
+		Integer count = memberDao.count();
 
 		// When
 		memberDao.save(createMember());
@@ -57,7 +57,7 @@ public class MemberDaoTest extends CommonTest {
 		memberDao.save(memberTmp);
 
 		// When
-		Member member = memberDao.get(memberTmp.getProviderUserId());
+		Member member = memberDao.getByProviderUserId(memberTmp.getProviderUserId());
 
 		// Then
 		assertThat(member.getProviderUserId(), is(memberTmp.getProviderUserId()));
@@ -72,7 +72,7 @@ public class MemberDaoTest extends CommonTest {
 		// When
 		Thread.sleep(1000);
 		memberDao.updateLastLoginDate(userId);
-		Member memberAfterUpdate = memberDao.get(member.getProviderUserId());
+		Member memberAfterUpdate = memberDao.getByProviderUserId(member.getProviderUserId());
 
 		// Then
 		assertThat(member.getLastLoginDate().toString(), not(memberAfterUpdate.getLastLoginDate().toString()));
@@ -83,7 +83,7 @@ public class MemberDaoTest extends CommonTest {
 		// Given
 		Member member = createMember();
 		memberDao.save(member);
-		int count = memberDao.count();
+		Integer count = memberDao.count();
 
 		// When
 		memberDao.delete(member.getProviderUserId());

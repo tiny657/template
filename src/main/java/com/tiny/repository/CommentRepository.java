@@ -21,15 +21,15 @@ public class CommentRepository {
 		commentDao.save(comment);
 	}
 	
-	public int countWithDocumentId(int documentId) {
-		return commentDao.countWithDocumentId(documentId);
+	public Integer countByDocumentId(Integer documentId) {
+		return commentDao.countByDocumentId(documentId);
 	}
 
-	public List<Comment> get(int documentId) {
+	public List<Comment> get(Integer documentId) {
 		return commentDao.get(documentId);
 	}
 	
-	public Comment getCommentId(int commentId) {
+	public Comment getCommentId(Integer commentId) {
 		return commentDao.getCommentId(commentId);
 	}
 	
@@ -37,11 +37,11 @@ public class CommentRepository {
 		return commentDao.getLast();
 	}
 
-	public void deleteWithDocumentId(int documentId) {
+	public void deleteWithDocumentId(Integer documentId) {
 		commentDao.deleteWithDocumentId(documentId);
 	}
 	
-	public void delete(int commentId) {
+	public void delete(Integer commentId) {
 		commentDao.delete(commentId);
 	}
 }

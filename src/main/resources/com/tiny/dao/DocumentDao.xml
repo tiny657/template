@@ -19,21 +19,11 @@
 		INSERT
 		INTO document 
 				(`content`,
-				`point`,
-				`like`,
-				`dislike`,
-				`comment`,
-				`sharing`,
 				`providerUserId`,
 				`name`,
 				`ipAddress`,
 				`regDate`)
 		VALUES (#{content},
-				#{point},
-				#{like},
-				#{dislike},
-				#{comment},
-				#{sharing},
 				#{providerUserId},
 				#{name},
 				#{ipAddress},

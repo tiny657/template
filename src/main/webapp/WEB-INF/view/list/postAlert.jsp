@@ -3,12 +3,12 @@
 
 <c:choose>
 	<c:when test="${isSuccess == true}">
-		<div id="postAlert" class="alert alert-success">
+		<div id="alert" class="alert alert-success">
 			<button type="button" class="close" data-dismiss="alert">x</button>${alertMessage}
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div id="postAlert" class="alert alert-error">
+		<div id="alert" class="alert alert-error">
 			<button type="button" class="close" data-dismiss="alert">x</button>${alertMessage}
 		</div>
 	</c:otherwise>
