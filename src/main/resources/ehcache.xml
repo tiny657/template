@@ -24,9 +24,9 @@
         />
 
     <cache
-    	name="repository"
+    	name="userConnectionRepository"
     	eternal="false"
-        maxElementsInMemory="100"
+        maxElementsInMemory="10000"
         overflowToDisk="false"
         diskPersistent="false"
         timeToIdleSeconds="0"

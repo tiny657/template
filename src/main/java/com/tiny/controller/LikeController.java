@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.model.Document;
-import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.DocumentService;
 import com.tiny.service.LikeService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
 import com.tiny.service.PostService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class LikeController {
@@ -41,9 +39,6 @@ public class LikeController {
 
 	@Autowired
 	private PostService postService;
-
-	@Autowired
-	private UserConnectionRepository userConnectionRepository;
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
@@ -81,15 +76,14 @@ public class LikeController {
 			return false;
 		}
 
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		if (likeService.get(providerUserId, documentId) != null) {
+		if (likeService.getByProviderUserId(documentId) != null) {
 			return false;
 		}
 
 		if (memberService.isChanceToLike()) {
 			pointService.calculatePointToClickLike(documentId);
-			memberService.decreaseChanceToLike(providerUserId);
-			likeService.save(providerUserId, documentId, true);
+			memberService.decreaseChanceToLike();
+			likeService.save(documentId, true);
 			return true;
 		} else {
 			return false;
@@ -104,9 +98,8 @@ public class LikeController {
 		}
 
 		pointService.calculatePointToCancelLike(documentId);
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		memberService.increaseChanceToLike(providerUserId);
-		likeService.delete(providerUserId, documentId);
+		memberService.increaseChanceToLike();
+		likeService.delete(documentId);
 		return true;
 	}
 
@@ -117,15 +110,14 @@ public class LikeController {
 			return false;
 		}
 
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		if (likeService.get(providerUserId, documentId) != null) {
+		if (likeService.getByProviderUserId(documentId) != null) {
 			return false;
 		}
 
 		if (memberService.isChanceToDislike()) {
 			pointService.calculatePointToClickDislike(documentId);
-			memberService.decreaseChanceToDislike(providerUserId);
-			likeService.save(providerUserId, documentId, false);
+			memberService.decreaseChanceToDislike();
+			likeService.save(documentId, false);
 			return true;
 		} else {
 			return false;
@@ -140,10 +132,8 @@ public class LikeController {
 		}
 
 		pointService.calculatePointToCancelDislike(documentId);
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		memberService.increaseChanceToDislike(providerUserId);
-		likeService.delete(providerUserId, documentId);
+		memberService.increaseChanceToDislike();
+		likeService.delete(documentId);
 		return true;
 	}
-
 }

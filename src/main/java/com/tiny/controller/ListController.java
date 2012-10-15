@@ -26,7 +26,6 @@ import com.tiny.service.DocumentService;
 import com.tiny.service.LikeService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class ListController {
@@ -43,7 +42,7 @@ public class ListController {
 
 	@Autowired
 	private PointService pointService;
-	
+
 	@Autowired
 	private LikeService likeService;
 
@@ -57,25 +56,22 @@ public class ListController {
 			return new ModelAndView(new RedirectView("/member"));
 		}
 
-		// update lastLogin time
-		memberService.updateLastLoginTime(SecurityContext.getCurrentUser().getId());
+		memberService.updateLastLoginTime();
 
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		List<Document> documents = documentService.getAll();
 		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		for (Document document : documents) {
 			model.addAttribute("newComment" + document.getDocumentId(), new Comment());
 			comments.put(Integer.toString(document.getDocumentId()), commentService.get(document.getDocumentId()));
-			
+
 			// like, dislike 클릭 여부
-			Like like = likeService.get(providerUserId, document.getDocumentId());
+			Like like = likeService.getByProviderUserId(document.getDocumentId());
 			if (like != null) {
 				if (like.getIsLike()) {
 					document.setHasMyLike(true);
-				}
-				else {
+				} else {
 					document.setHasMyDislike(true);
 				}
 			}
@@ -84,13 +80,13 @@ public class ListController {
 		model.addAttribute("newDocument", new Document());
 		model.addAttribute("comments", comments);
 		model.addAttribute("url", Constant.LIST);
-		
+
 		// for posting
-		model.addAttribute("providerUserId", providerUserId);
-		
+		model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
+
 		// to check chance of doc, comment, like, dislike.
-		model.addAttribute("member", memberService.getByProviderUserId(providerUserId));
-		
+		model.addAttribute("member", memberService.getByProviderUserId());
+
 		mav.addAllObjects(model);
 		mav.setViewName("list");
 		return mav;
@@ -112,10 +108,8 @@ public class ListController {
 		model.addAttribute("url", Constant.LIST);
 		// for posting
 		try {
-			String providerUserId = userConnectionRepository
-					.getProviderUserId(SecurityContext.getCurrentUser().getId());
-			model.addAttribute("providerUserId", providerUserId);
-			pointService.calculatePointToSaveDocument(providerUserId);
+			model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
+			pointService.calculatePointToSaveDocument();
 			mav.setViewName("listOne");
 		} catch (IllegalStateException e) {
 			LOGGER.info("No user logined in.");

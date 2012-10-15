@@ -23,53 +23,43 @@
 	<select id="get" resultType="member">
 		SELECT *
 		FROM `member`
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getByProviderUserId" parameterType="String" resultType="member">
 		SELECT *
 		FROM member
-		WHERE `providerUserId` = #{providerUserId}
+		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getName" parameterType="String" resultType="String">
 		SELECT name
 		FROM `member`
-		WHERE `providerUserId` = #{providerUserId}
+		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getChanceToDoc" parameterType="String" resultType="int">
 		SELECT chanceToDoc
 		FROM `member`
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getChanceToComment" parameterType="String" resultType="int">
 		SELECT chanceToComment
 		FROM `member`
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getChanceToLike" parameterType="String" resultType="int">
 		SELECT chanceToLike
 		FROM `member`
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="getChanceToDislike" parameterType="String" resultType="int">
 		SELECT chanceToDislike
 		FROM `member`
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="count" resultType="int">
@@ -81,9 +71,7 @@
   		UPDATE `member`
   		SET
 			`name` = #{name}
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseDoc" parameterType="String">
@@ -132,18 +120,14 @@
   		UPDATE `member`
   		SET
 			`like` = `like` + 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseLike" parameterType="String">
   		UPDATE `member`
   		SET
 			`like` = `like` - 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseLikeOnMyDoc" parameterType="String">
@@ -164,18 +148,14 @@
   		UPDATE `member`
   		SET
 			`dislike` = `dislike` + 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseDislike" parameterType="String">
   		UPDATE `member`
   		SET
 			`dislike` = `dislike` - 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseDislikeOnMyDoc" parameterType="String">
@@ -196,18 +176,14 @@
   		UPDATE `member`
   		SET
 			`sharing` = `sharing` + 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="decreaseSharing" parameterType="String">
   		UPDATE `member`
   		SET
 			`sharing` = `sharing` - 1 
-  		WHERE `providerUserId` = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
 	<update id="increaseSharingOfMyDoc" parameterType="String">
@@ -284,9 +260,7 @@
   		UPDATE `member`
   		SET
 			`lastLoginDate` = NOW()
-  		WHERE providerUserId = (
-	  		SELECT providerUserId FROM UserConnection WHERE `userId` = #{userId}
-  		);
+  		WHERE providerUserId = #{providerUserId};
 	</update>
 	
 	<delete id="delete" parameterType="String">

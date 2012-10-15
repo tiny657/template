@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.model.Comment;
-import com.tiny.model.Document;
 import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class CommentController {
@@ -42,7 +40,7 @@ public class CommentController {
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		boolean isMyDocument = documentService.isMyDocument(documentId);
 		if (memberService.isChanceToComment() || isMyDocument) {
 			ModelMap model = new ModelMap();
@@ -50,11 +48,10 @@ public class CommentController {
 			comment.setDocumentId(documentId);
 			comment.setContent(content);
 			model.addAttribute("comment", commentService.saveAndGet(comment));
-			String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-			model.addAttribute("providerUserId", providerUserId);
+			model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
 			if (!isMyDocument) {
-				pointService.calculatePointToSaveComment(providerUserId, documentId);
-				memberService.decreaseChanceToComment(providerUserId);
+				pointService.calculatePointToSaveComment(documentId);
+				memberService.decreaseChanceToComment();
 			}
 			mav.addAllObjects(model);
 			mav.setViewName("comment");
@@ -67,10 +64,9 @@ public class CommentController {
 	@RequestMapping(value = { "/comment" }, method = RequestMethod.DELETE)
 	public @ResponseBody
 	boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
 		if (!documentService.isMyDocument(documentId)) {
 			pointService.calculatePointToDeleteComment(documentId, commentId);
-			memberService.increaseChanceToComment(providerUserId);
+			memberService.increaseChanceToComment();
 		}
 		commentService.delete(commentId);
 		return true;

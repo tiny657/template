@@ -27,8 +27,8 @@ public class MemberRepository {
 		return memberDao.getAll();
 	}
 	
-	public Member get(String userId) {
-		return memberDao.get(userId);
+	public Member get(String providerUserId) {
+		return memberDao.get(providerUserId);
 	}
 	
 	public Member getByProviderUserId(String providerUserId) {
@@ -39,31 +39,31 @@ public class MemberRepository {
 		return memberDao.getName(providerUserId);
 	}
 	
-	public Integer getChanceToDoc(String userId) {
-		return memberDao.getChanceToDoc(userId);
+	public Integer getChanceToDoc(String providerUserId) {
+		return memberDao.getChanceToDoc(providerUserId);
 	}
 	
-	public Integer getChanceToComment(String userId) {
-		return memberDao.getChanceToComment(userId);
+	public Integer getChanceToComment(String providerUserId) {
+		return memberDao.getChanceToComment(providerUserId);
 	}
 	
-	public Integer getChanceToLike(String userId) {
-		return memberDao.getChanceToLike(userId);
+	public Integer getChanceToLike(String providerUserId) {
+		return memberDao.getChanceToLike(providerUserId);
 	}
 	
-	public Integer getChanceToDislike(String userId) {
-		return memberDao.getChanceToDislike(userId);
+	public Integer getChanceToDislike(String providerUserId) {
+		return memberDao.getChanceToDislike(providerUserId);
 	}
 	
-	public void updateName(String userId, String name) {
+	public void updateName(String providerUserId, String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
+		map.put("providerUserId", providerUserId);
 		map.put("name", name);
 		memberDao.updateName(map);
 	}
 
-	public void updateLastLoginDate(String userId) {
-		memberDao.updateLastLoginDate(userId);
+	public void updateLastLoginDate(String providerUserId) {
+		memberDao.updateLastLoginDate(providerUserId);
 	}
 	
 	public void increasePointDoc(String providerUserId) {
@@ -90,12 +90,12 @@ public class MemberRepository {
 		memberDao.decreaseCommentOnMyDoc(providerUserId);
 	}
 	
-	public void increaseLike(String userId) {
-		memberDao.increaseLike(userId);
+	public void increaseLike(String providerUserId) {
+		memberDao.increaseLike(providerUserId);
 	}
 	
-	public void decreaseLike(String userId) {
-		memberDao.decreaseLike(userId);
+	public void decreaseLike(String providerUserId) {
+		memberDao.decreaseLike(providerUserId);
 	}
 	
 	public void increaseLikeOnMyDoc(String providerUserId) {
@@ -106,12 +106,12 @@ public class MemberRepository {
 		memberDao.decreaseLikeOnMyDoc(providerUserId);
 	}
 	
-	public void increaseDislike(String userId) {
-		memberDao.increaseDislike(userId);
+	public void increaseDislike(String providerUserId) {
+		memberDao.increaseDislike(providerUserId);
 	}
 	
-	public void decreaseDislike(String userId) {
-		memberDao.decreaseDislike(userId);
+	public void decreaseDislike(String providerUserId) {
+		memberDao.decreaseDislike(providerUserId);
 	}
 	
 	public void increaseDislikeOnMyDoc(String providerUserId) {
@@ -122,12 +122,12 @@ public class MemberRepository {
 		memberDao.decreaseDislikeOnMyDoc(providerUserId);
 	}
 	
-	public void increaseSharing(String userId) {
-		memberDao.increaseSharing(userId);
+	public void increaseSharing(String providerUserId) {
+		memberDao.increaseSharing(providerUserId);
 	}
 	
-	public void decreaseSharing(String userId) {
-		memberDao.decreaseSharing(userId);
+	public void decreaseSharing(String providerUserId) {
+		memberDao.decreaseSharing(providerUserId);
 	}
 	
 	public void increasePointBeShared(String providerUserId) {

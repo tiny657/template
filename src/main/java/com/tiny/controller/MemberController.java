@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.tiny.common.util.Constant;
 import com.tiny.model.Member;
 import com.tiny.service.MemberService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class MemberController {
@@ -27,7 +26,7 @@ public class MemberController {
 	public ModelAndView member() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.get(SecurityContext.getCurrentUser().getId()));
+		model.addAttribute("member", memberService.get());
 		model.addAttribute("url", Constant.MEMBER);
 		mav.addAllObjects(model);
 		mav.setViewName("member");

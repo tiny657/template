@@ -14,7 +14,6 @@ import com.tiny.model.Comment;
 import com.tiny.repository.CommentRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;
-import com.tiny.social.SecurityContext;
 
 @Service
 public class CommentService {
@@ -36,9 +35,8 @@ public class CommentService {
 	private UserConnectionRepository userConnectionRepository;
 
 	public void save(Comment comment) {
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		comment.setProviderUserId(providerUserId);
-		comment.setName(memberRepository.getName(providerUserId));
+		comment.setProviderUserId(userConnectionRepository.getProviderUserId());
+		comment.setName(memberRepository.getName(userConnectionRepository.getProviderUserId()));
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);

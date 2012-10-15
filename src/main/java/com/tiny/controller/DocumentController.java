@@ -19,7 +19,6 @@ import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
-import com.tiny.social.SecurityContext;
 
 @Controller
 public class DocumentController {
@@ -47,11 +46,9 @@ public class DocumentController {
 			ModelMap model = new ModelMap();
 			document.setIpAddress(request.getRemoteAddr());
 			model.addAttribute("document", documentService.saveAndGet(document));
-			String providerUserId = userConnectionRepository
-					.getProviderUserId(SecurityContext.getCurrentUser().getId());
-			model.addAttribute("providerUserId", providerUserId);
-			pointService.calculatePointToSaveDocument(providerUserId);
-			memberService.decreaseChanceToDoc(providerUserId);
+			model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
+			pointService.calculatePointToSaveDocument();
+			memberService.decreaseChanceToDoc();
 			mav.addAllObjects(model);
 			mav.setViewName("document");
 		} else {
@@ -62,9 +59,8 @@ public class DocumentController {
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
 	public void delete(@RequestParam Integer documentId) {
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		pointService.calculatePointToDeleteDocument(providerUserId, documentId);
-		memberService.increaseChanceToDoc(providerUserId);
+		pointService.calculatePointToDeleteDocument(documentId);
+		memberService.increaseChanceToDoc();
 		commentService.deleteWithDocumentId(documentId);
 		documentService.delete(documentId);
 	}

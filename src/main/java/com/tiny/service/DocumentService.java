@@ -14,7 +14,6 @@ import com.tiny.model.Document;
 import com.tiny.repository.DocumentRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.repository.UserConnectionRepository;
-import com.tiny.social.SecurityContext;
 
 @Service
 public class DocumentService {
@@ -33,9 +32,8 @@ public class DocumentService {
 	private UserConnectionRepository userConnectionRepository;
 
 	public void save(Document document) {
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		document.setProviderUserId(providerUserId);
-		document.setName(memberRepository.getName(providerUserId));
+		document.setProviderUserId(userConnectionRepository.getProviderUserId());
+		document.setName(memberRepository.getName(userConnectionRepository.getProviderUserId()));
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		documentRepository.save(document);
@@ -65,8 +63,7 @@ public class DocumentService {
 	}
 
 	public boolean isMyDocument(Integer documentId) {
-		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		return documentRepository.getProviderUesrId(documentId).equals(providerUserId);
+		return documentRepository.getProviderUesrId(documentId).equals(userConnectionRepository.getProviderUserId());
 	}
 
 	public void delete(Integer documentId) {

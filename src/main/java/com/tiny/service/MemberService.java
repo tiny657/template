@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tiny.model.Member;
 import com.tiny.repository.MemberRepository;
-import com.tiny.social.SecurityContext;
+import com.tiny.repository.UserConnectionRepository;
 
 @Service
 public class MemberService {
@@ -19,6 +19,9 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
 	public void save() {
 		FacebookProfile facebookProfile = facebookService.getProfile();
@@ -30,18 +33,19 @@ public class MemberService {
 		member.setLocale(facebookProfile.getLocale().getCountry());
 		memberRepository.save(member);
 	}
-	
-	public Member get(String userId) {
-		Member member = memberRepository.get(userId);
+
+	public Member get() {
+		Member member = memberRepository.get(userConnectionRepository.getProviderUserId());
 		if (member == null) {
 			save();
-			member = memberRepository.get(userId);
+			member = memberRepository.get(userConnectionRepository.getProviderUserId());
 		}
 
 		return member;
 	}
 
-	public Member getByProviderUserId(String providerUserId) {
+	public Member getByProviderUserId() {
+		String providerUserId = userConnectionRepository.getProviderUserId();
 		Member member = memberRepository.getByProviderUserId(providerUserId);
 		if (member == null) {
 			save();
@@ -53,7 +57,7 @@ public class MemberService {
 
 	public boolean isExisted() {
 		boolean isExisted = true;
-		Member member = memberRepository.get(SecurityContext.getCurrentUser().getId());
+		Member member = memberRepository.get(userConnectionRepository.getProviderUserId());
 		if (member == null) {
 			isExisted = false;
 		}
@@ -61,58 +65,58 @@ public class MemberService {
 	}
 
 	public boolean isChanceToDoc() {
-		return memberRepository.getChanceToDoc(SecurityContext.getCurrentUser().getId()) > 0;
+		return memberRepository.getChanceToDoc(userConnectionRepository.getProviderUserId()) > 0;
 	}
 
 	public boolean isChanceToComment() {
-		return memberRepository.getChanceToComment(SecurityContext.getCurrentUser().getId()) > 0;
+		return memberRepository.getChanceToComment(userConnectionRepository.getProviderUserId()) > 0;
 	}
 
 	public boolean isChanceToLike() {
-		return memberRepository.getChanceToLike(SecurityContext.getCurrentUser().getId()) > 0;
+		return memberRepository.getChanceToLike(userConnectionRepository.getProviderUserId()) > 0;
 	}
 
 	public boolean isChanceToDislike() {
-		return memberRepository.getChanceToDislike(SecurityContext.getCurrentUser().getId()) > 0;
+		return memberRepository.getChanceToDislike(userConnectionRepository.getProviderUserId()) > 0;
 	}
 
 	public void updateName(String name) {
-		memberRepository.updateName(SecurityContext.getCurrentUser().getId(), name);
+		memberRepository.updateName(userConnectionRepository.getProviderUserId(), name);
 	}
 
-	public void updateLastLoginTime(String userId) {
-		memberRepository.updateLastLoginDate(userId);
-	}
-	
-	public void increaseChanceToDoc(String providerUserId) {
-		memberRepository.increaseChanceToDoc(providerUserId);
-	}
-	
-	public void decreaseChanceToDoc(String providerUserId) {
-		memberRepository.decreaseChanceToDoc(providerUserId);
-	}
-	
-	public void increaseChanceToComment(String providerUserId) {
-		memberRepository.increaseChanceToComment(providerUserId);
+	public void updateLastLoginTime() {
+		memberRepository.updateLastLoginDate(userConnectionRepository.getProviderUserId());
 	}
 
-	public void decreaseChanceToComment(String providerUserId) {
-		memberRepository.decreaseChanceToComment(providerUserId);
+	public void increaseChanceToDoc() {
+		memberRepository.increaseChanceToDoc(userConnectionRepository.getProviderUserId());
 	}
-	
-	public void increaseChanceToLike(String providerUserId) {
-		memberRepository.increaseChanceToLike(providerUserId);
+
+	public void decreaseChanceToDoc() {
+		memberRepository.decreaseChanceToDoc(userConnectionRepository.getProviderUserId());
 	}
-	
-	public void decreaseChanceToLike(String providerUserId) {
-		memberRepository.decreaseChanceToLike(providerUserId);
+
+	public void increaseChanceToComment() {
+		memberRepository.increaseChanceToComment(userConnectionRepository.getProviderUserId());
 	}
-	
-	public void increaseChanceToDislike(String providerUserId) {
-		memberRepository.increaseChanceToDislike(providerUserId);
+
+	public void decreaseChanceToComment() {
+		memberRepository.decreaseChanceToComment(userConnectionRepository.getProviderUserId());
 	}
-	
-	public void decreaseChanceToDislike(String providerUserId) {
-		memberRepository.decreaseChanceToDislike(providerUserId);
+
+	public void increaseChanceToLike() {
+		memberRepository.increaseChanceToLike(userConnectionRepository.getProviderUserId());
+	}
+
+	public void decreaseChanceToLike() {
+		memberRepository.decreaseChanceToLike(userConnectionRepository.getProviderUserId());
+	}
+
+	public void increaseChanceToDislike() {
+		memberRepository.increaseChanceToDislike(userConnectionRepository.getProviderUserId());
+	}
+
+	public void decreaseChanceToDislike() {
+		memberRepository.decreaseChanceToDislike(userConnectionRepository.getProviderUserId());
 	}
 }

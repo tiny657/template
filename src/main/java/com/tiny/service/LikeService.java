@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tiny.model.Like;
 import com.tiny.repository.LikeRepository;
+import com.tiny.repository.UserConnectionRepository;
 
 @Service
 public class LikeService {
@@ -16,11 +17,14 @@ public class LikeService {
 
 	@Autowired
 	private LikeRepository likeRepository;
+	
+	@Autowired
+	private UserConnectionRepository userConnectionRepository;
 
-	public void save(String providerUserId, Integer documentId, Boolean isLike) {
+	public void save(Integer documentId, Boolean isLike) {
 		Like like = new Like();
 		like.setDocumentId(documentId);
-		like.setProviderUserId(providerUserId);
+		like.setProviderUserId(userConnectionRepository.getProviderUserId());
 		like.setIsLike(isLike);
 		likeRepository.save(like);
 	}
@@ -29,11 +33,11 @@ public class LikeService {
 		return likeRepository.get(providerUserId);
 	}
 	
-	public Like get(String providerUserId, Integer documentId) {
-		return likeRepository.get(providerUserId, documentId);
+	public Like getByProviderUserId(Integer documentId) {
+		return likeRepository.get(userConnectionRepository.getProviderUserId(), documentId);
 	}
 	
-	public void delete(String providerUserId, Integer documentId) {
-		likeRepository.delete(providerUserId, documentId);
+	public void delete(Integer documentId) {
+		likeRepository.delete(userConnectionRepository.getProviderUserId(), documentId);
 	}
 }

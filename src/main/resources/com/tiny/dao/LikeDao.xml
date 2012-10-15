@@ -21,18 +21,18 @@
 				NOW());
 	</insert>
 	
-	<select id="getByProviderUserId" resultMap="result">
-		SELECT *
-		FROM `like`
-		WHERE `providerUserId` = #{providerUserId};
-	</select>
-	
 	<select id="get" parameterType="map" resultType="like">
 		SELECT *
 		FROM `like`
 		WHERE `providerUserId` = #{providerUserId}
 		AND `documentId` = #{documentId}
 		LIMIT 1;
+	</select>
+	
+	<select id="getByProviderUserId" resultMap="result">
+		SELECT *
+		FROM `like`
+		WHERE `providerUserId` = #{providerUserId};
 	</select>
 	
 	<select id="count" resultType="int">
