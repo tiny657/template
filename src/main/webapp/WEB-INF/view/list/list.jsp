@@ -124,6 +124,7 @@
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like + 1);
 						$("#cancelLike" + documentId).css("display", "");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 					else {
 						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to like.</div>");
@@ -143,6 +144,7 @@
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like - 1);
 						$("#cancelLike" + documentId).css("display", "none");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 				}
 			});
@@ -159,6 +161,7 @@
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike + 1);
 						$("#cancelDislike" + documentId).css("display", "");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 					else {
 						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div>");
@@ -178,6 +181,7 @@
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike - 1);
 						$("#cancelDislike" + documentId).css("display", "none");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 				}
 			});

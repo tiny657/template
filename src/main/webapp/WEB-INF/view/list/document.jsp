@@ -10,6 +10,8 @@
 			${document.content}
 		</div>
 		<p class="muted"><small>— ${document.name}</small></p>
+		
+		<%-- LIKE, DISLIKE --%>
 		<div>
 			<c:choose>
 				<c:when test="${providerUserId == document.providerUserId}">

@@ -24,8 +24,8 @@ import com.tiny.service.PostService;
 import com.tiny.social.SecurityContext;
 
 @Controller
-public class PointController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PointController.class);
+public class LikeController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LikeController.class);
 
 	@Autowired
 	private MemberService memberService;
@@ -81,10 +81,13 @@ public class PointController {
 			return false;
 		}
 
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		if (likeService.get(providerUserId, documentId) != null) {
+			return false;
+		}
+
 		if (memberService.isChanceToLike()) {
 			pointService.calculatePointToClickLike(documentId);
-			String providerUserId = userConnectionRepository
-					.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			memberService.decreaseChanceToLike(providerUserId);
 			likeService.save(providerUserId, documentId, true);
 			return true;
@@ -114,10 +117,13 @@ public class PointController {
 			return false;
 		}
 
+		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
+		if (likeService.get(providerUserId, documentId) != null) {
+			return false;
+		}
+
 		if (memberService.isChanceToDislike()) {
 			pointService.calculatePointToClickDislike(documentId);
-			String providerUserId = userConnectionRepository
-					.getProviderUserId(SecurityContext.getCurrentUser().getId());
 			memberService.decreaseChanceToDislike(providerUserId);
 			likeService.save(providerUserId, documentId, false);
 			return true;
@@ -135,7 +141,7 @@ public class PointController {
 
 		pointService.calculatePointToCancelDislike(documentId);
 		String providerUserId = userConnectionRepository.getProviderUserId(SecurityContext.getCurrentUser().getId());
-		memberService.increaseChanceToLike(providerUserId);
+		memberService.increaseChanceToDislike(providerUserId);
 		likeService.delete(providerUserId, documentId);
 		return true;
 	}
