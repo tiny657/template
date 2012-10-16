@@ -22,7 +22,7 @@
 				#{content},
 				#{providerUserId},
 				#{name},
-				#{regDate});
+				NOW());
 	</insert>
 	
 	<select id="get" parameterType="int" resultMap="result">

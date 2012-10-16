@@ -30,19 +30,26 @@ public class DocumentService {
 
 	@Autowired
 	private SecurityContext securityContext;
-	
+
 	public void save(Document document) {
 		document.setProviderUserId(securityContext.getProviderUserId());
 		document.setName(memberRepository.getName(securityContext.getProviderUserId()));
-		document.setContent(xssFilter.doFilter(document.getContent()));
-		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
+		document.setContent(xssFilter.doFilter(document.getRawContent()));
 		documentRepository.save(document);
 	}
 
 	@Transactional
 	public Document saveAndGet(Document document) {
 		save(document);
-		return documentRepository.getLast();
+		Document lastDocument = documentRepository.getLast();
+		lastDocument.setRawContent(document.getRawContent());
+		return lastDocument;
+	}
+
+	public Document updateAndGet(Document document) {
+		document.setContent(xssFilter.doFilter(document.getRawContent()));
+		documentRepository.update(document);
+		return document;
 	}
 
 	public List<Document> getAll() {

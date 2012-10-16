@@ -10,8 +10,8 @@
 	<%-- new document form --%>
 	<div class="row">
 		<div class="span12">
-			<textarea path="content" id="content" class="span12" placeholder="contents"></textarea>
-			<button type="submit" id="save" class="btn btn-info" onclick="saveDocument()">Save</button>
+			<textarea path="rawContent" id="newDocument" class="span12" placeholder="contents"></textarea>
+			<button type="submit" class="btn btn-info" onclick="saveDocument()">Save</button>
 			<br />
 			<br />
 		</div>
@@ -39,15 +39,39 @@
 				type : "POST",
 				url : "/document",
 				dataType: "text",
-				data: {"content": $("#content").val()},
+				data: {"rawContent": $("#newDocument").val()},
 				beforeSend: function() {
 					$("#waitingDocument").css("display", "");
 				},
 				success : function(content) {
 					$("#waitingDocument").css("display", "none");
-					$("#content").val('');
+					$("#newDocument").val('');
 					$("#waitingDocument").after(content);
 					$("textarea").autoresize();
+				}
+			});
+		}
+		
+		function clickDocument(documentId) {
+			$("#divContent" + documentId).css("display", "none");
+			$("#editContent" + documentId).css("display", "");
+			$("#rawContent" + documentId).focus();
+		}
+		
+		function updateDocument(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/document",
+				dataType: "text",
+				data: {"documentId" : documentId, "rawContent": $("#rawContent" + documentId).val(), _method: "PUT"},
+				beforeSend: function() {
+					$("#waitingDocument").css("display", "");
+				},
+				success : function(content) {
+					$("#waitingDocument").css("display", "none");
+					$("#content" + documentId).html(content);
+					$("#editContent" + documentId).css("display", "none");
+					$("#divContent" + documentId).css("display", "");
 				}
 			});
 		}
@@ -124,10 +148,10 @@
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like + 1);
 						$("#cancelLike" + documentId).css("display", "");
-						$("#alert").replaceWith("<div id=\"alert\"></div>");
+						$("#alert").removeClass("alert alert-error").html("");
 					}
 					else {
-						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to like.</div></div>");
+						$("#alert").addClass("alert alert-error").html("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>Fail to dislike.");
 					}
 				}
 			});
@@ -144,7 +168,7 @@
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like - 1);
 						$("#cancelLike" + documentId).css("display", "none");
-						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
+						$("#alert").removeClass("alert alert-error").html("");
 					}
 				}
 			});
@@ -161,10 +185,10 @@
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike + 1);
 						$("#cancelDislike" + documentId).css("display", "");
-						$("#alert").replaceWith("<div id=\"alert\"></div>");
+						$("#alert").removeClass("alert alert-error").html("");
 					}
 					else {
-						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div></div>");
+						$("#alert").addClass("alert alert-error").html("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>Fail to dislike.");
 					}
 				}
 			});
@@ -181,7 +205,7 @@
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike - 1);
 						$("#cancelDislike" + documentId).css("display", "none");
-						$("#alertPosition").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
+						$("#alert").removeClass("alert alert-error").html("");
 					}
 				}
 			});

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.model.Document;
@@ -54,6 +55,15 @@ public class DocumentController {
 			mav.setViewName("null");
 		}
 		return mav;
+	}
+
+	@RequestMapping(value = { "/document" }, method = RequestMethod.PUT)
+	public @ResponseBody
+	String updateDocument(HttpServletRequest request, @RequestParam Integer documentId, @RequestParam String rawContent) {
+		Document document = documentService.get(documentId);
+		document.setIpAddress(request.getRemoteAddr());
+		document.setRawContent(rawContent);
+		return documentService.updateAndGet(document).getContent();
 	}
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)

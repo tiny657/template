@@ -59,6 +59,15 @@
 		FROM `document`;
 	</select>
 	
+	<update id="update" parameterType="document">
+  		UPDATE `document`
+  		SET
+			`content` = #{content},
+			`ipAddress` = #{ipAddress},
+			`regDate` = NOW()
+  		WHERE `documentId` = #{documentId};
+	</update>
+	
 	<update id="increaseComment" parameterType="int">
   		UPDATE `document`
   		SET

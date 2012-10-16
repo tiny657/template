@@ -21,6 +21,9 @@ public class Document {
 	// from Like
 	private Boolean hasMyLike;
 	private Boolean hasMyDislike;
+	
+	// undo xssFilter
+	private String rawContent;
 
 	public void setIpAddress(String ipAddress) {
 		String[] split = ipAddress.split("\\.");

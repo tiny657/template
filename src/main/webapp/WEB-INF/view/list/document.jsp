@@ -5,11 +5,26 @@
 
 <tr id="document${documentId}">
 	<td>
-		<%-- content --%>
-		<div id="content${documentId}">
-			${document.content}
-		</div>
-		<p class="muted"><small>— ${document.name}</small></p>
+		<%-- Content --%>
+		<c:choose>
+			<c:when test="${providerUserId == document.providerUserId}">
+				<div id="divContent${documentId}" style="cursor: pointer;" onclick="clickDocument(${documentId})">
+					<p id="content${documentId}">${document.content}</p>
+					<p class="muted"><small>— ${document.name}</small></p>
+				</div>
+				
+				<div id="editContent${documentId}" style="display: none;">
+					<textarea path="rawContent" id="rawContent${documentId}" class="span12">${document.rawContent}</textarea>
+					<button type="submit" class="btn btn-info" onclick="updateDocument(${documentId})">Update</button>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div id="content${documentId}">
+					${document.content}
+				</div>
+				<p class="muted"><small>— ${document.name}</small></p>
+			</c:otherwise>
+		</c:choose>
 		
 		<%-- LIKE, DISLIKE --%>
 		<div>

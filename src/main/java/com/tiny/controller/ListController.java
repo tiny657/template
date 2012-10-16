@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.tiny.common.util.Constant;
+import com.tiny.common.util.XssFilter;
 import com.tiny.model.Comment;
 import com.tiny.model.Document;
 import com.tiny.model.Like;
@@ -44,6 +45,10 @@ public class ListController {
 	
 	@Autowired
 	private SecurityContext securityContext;
+	
+	@Autowired
+	private XssFilter xssFilter;
+	
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -69,6 +74,11 @@ public class ListController {
 				} else {
 					document.setHasMyDislike(true);
 				}
+			}
+			
+			// undo xssFilter
+			if (securityContext.getProviderUserId().equals(document.getProviderUserId())) {
+				document.setRawContent(xssFilter.undoFilter(document.getContent()));
 			}
 		}
 		model.addAttribute("newDocument", new Document());

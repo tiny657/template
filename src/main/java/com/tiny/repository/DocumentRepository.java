@@ -36,6 +36,10 @@ public class DocumentRepository {
 	public Document getLast() {
 		return documentDao.getLast();
 	}
+	
+	public void update(Document document) {
+		documentDao.update(document);
+	}
 
 	public void increaseSharing(Integer documentId) {
 		documentDao.increaseSharing(documentId);

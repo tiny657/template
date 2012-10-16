@@ -35,7 +35,6 @@ public class CommentService {
 		comment.setProviderUserId(securityContext.getProviderUserId());
 		comment.setName(memberRepository.getName(securityContext.getProviderUserId()));
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
-		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
 	}
 

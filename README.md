@@ -23,7 +23,7 @@ Skill Set
  - FindBugs : 코드 정적 분석 툴
  
  
-Getting Started
+개발 환경 세팅
 ---------------
 ### JDK ###
 

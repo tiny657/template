@@ -11,6 +11,7 @@ public interface DocumentDao {
 	public String getProviderUserId(Integer documentId);
 	public Document getLast();
 	public Integer count();
+	public void update(Document document);
 	public void increaseComment(Integer documentId);
 	public void decreaseComment(Integer documentId);
 	public void increaseLike(Integer documentId);
