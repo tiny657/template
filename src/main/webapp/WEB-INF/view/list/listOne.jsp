@@ -3,9 +3,8 @@
 
 <div class="container">
 	<%-- alert --%>
-	<div id="alertPosition"></div>
-	<div id="posting" class="alert alert-info" style="display:none">
-		Posting...<img src="/img/wait24trans.gif" />
+	<div id="alertPosition">
+		<div id="alert"></div>
 	</div>
 	
 	<div>
@@ -23,22 +22,6 @@
 	</div>
 	
 	<script type="text/javascript">
-		function post(documentId) {
-			$.ajax({
-				type : "POST",
-				url : "/post",
-				dataType: "text",
-				data: {"content": $("#content" + documentId).text()},
-				beforeSend: function() {
-					$("#posting").css("display", "");
-				},
-				success : function(content) {
-					$("#posting").css("display", "none");
-					$("#alert").replaceWith(content);
-				}
-			});
-		}
-		
 		function saveComment(documentId) {
 			$.ajax({
 				type : "POST",
@@ -56,29 +39,110 @@
 			});
 		}
 		
-		function deleteDocument(documentId) {
-			$.ajax({
-				type : "POST",
-				url : "/document",
-				dataType: "text",
-				data: {"documentId": documentId, _method: "DELETE"},
-				success : function() {
-					$("#document" + documentId).remove();
-				}
-			});
-		}
-		
-		function deleteComment(commentId) {
+		function deleteComment(documentId, commentId) {
+			var comment = parseInt($("#comment" + documentId).text());
+			$("#comment" + documentId).text(comment - 1);
 			$.ajax({
 				type : "POST",
 				url : "/comment",
 				dataType: "text",
-				data: {"commentId": commentId, _method: "DELETE"},
+				data: {"documentId": documentId, "commentId": commentId, _method: "DELETE"},
+				beforeSend: function() {
+				},
 				success : function() {
-					$("#comment" + commentId).remove();
+					$("#commentBox" + commentId).remove();
 				}
 			});
 		}
+		
+		function post(documentId) {
+			$.ajax({
+				type : "POST",
+				url : "/post",
+				dataType: "text",
+				data: {"documentId" : documentId, "content": $("#content" + documentId).text()},
+				beforeSend: function() {
+				},
+				success : function(content) {
+					$("#alert").replaceWith(content);
+				}
+			});
+		}
+		
+		function like(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/like",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var like = parseInt($("#like" + documentId).text());
+						$("#like" + documentId).text(like + 1);
+						$("#cancelLike" + documentId).css("display", "");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
+					}
+					else {
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to like.</div></div>");
+					}
+				}
+			});
+		}
+		
+		function cancelLike(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/cancelLike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var like = parseInt($("#like" + documentId).text());
+						$("#like" + documentId).text(like - 1);
+						$("#cancelLike" + documentId).css("display", "none");
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
+					}
+				}
+			});
+		}
+		
+		function dislike(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/dislike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var dislike = parseInt($("#dislike" + documentId).text());
+						$("#dislike" + documentId).text(dislike + 1);
+						$("#cancelDislike" + documentId).css("display", "");
+						$("#alert").replaceWith("<div id=\"alert\"></div>");
+					}
+					else {
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div></div>");
+					}
+				}
+			});
+		}
+		
+		function cancelDislike(documentId) {
+			$.ajax({
+				type : "GET",
+				url : "/cancelDislike",
+				dataType: "text",
+				data: {"documentId": documentId},
+				success : function(isSuccess) {
+					if (isSuccess === "true") {
+						var dislike = parseInt($("#dislike" + documentId).text());
+						$("#dislike" + documentId).text(dislike - 1);
+						$("#cancelDislike" + documentId).css("display", "none");
+						$("#alertPosition").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
+					}
+				}
+			});
+		}
+		
 		$("textarea").autoresize();
 	</script>
 </div>
