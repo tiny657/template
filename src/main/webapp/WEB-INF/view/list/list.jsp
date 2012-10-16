@@ -127,7 +127,7 @@
 						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 					else {
-						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to like.</div>");
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to like.</div></div>");
 					}
 				}
 			});
@@ -144,7 +144,7 @@
 						var like = parseInt($("#like" + documentId).text());
 						$("#like" + documentId).text(like - 1);
 						$("#cancelLike" + documentId).css("display", "none");
-						$("#alert").replaceWith("<div id=\"alert\"></div>");
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
 					}
 				}
 			});
@@ -164,7 +164,7 @@
 						$("#alert").replaceWith("<div id=\"alert\"></div>");
 					}
 					else {
-						$("#alert").replaceWith("<div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div>");
+						$("#alert").replaceWith("<div id=\"alertPosition\"><div id=\"alert\" class=\"alert alert-info\">Fail to dislike.</div></div>");
 					}
 				}
 			});
@@ -181,7 +181,7 @@
 						var dislike = parseInt($("#dislike" + documentId).text());
 						$("#dislike" + documentId).text(dislike - 1);
 						$("#cancelDislike" + documentId).css("display", "none");
-						$("#alert").replaceWith("<div id=\"alert\"></div>");
+						$("#alertPosition").replaceWith("<div id=\"alertPosition\"><div id=\"alert\"></div></div>");
 					}
 				}
 			});

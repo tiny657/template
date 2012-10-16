@@ -3,17 +3,25 @@ package com.tiny.social;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
-public final class UserInterceptor extends HandlerInterceptorAdapter {
+@Component
+public class UserInterceptor extends HandlerInterceptorAdapter {
 
-	private final UsersConnectionRepository connectionRepository;
+	private UsersConnectionRepository connectionRepository;
 
-	private final UserCookieGenerator userCookieGenerator = new UserCookieGenerator();
+	@Autowired
+	private UserCookieGenerator userCookieGenerator;
+	
+	@Autowired
+	private SecurityContext securityContext;
 
+	@Autowired
 	public UserInterceptor(UsersConnectionRepository connectionRepository) {
 		this.connectionRepository = connectionRepository;
 	}
@@ -23,7 +31,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 		handleSignOut(request, response);
 		
 		// modified by template
-		if (SecurityContext.userSignedIn() || requestForSignIn(request) || requestForListOne(request)) {
+		if (securityContext.userSignedIn() || requestForSignIn(request) || requestForListOne(request)) {
 			return true;
 		} else {
 			return requireSignIn(request, response);
@@ -32,7 +40,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		SecurityContext.remove();
+		securityContext.remove();
 	}
 
 	private void rememberUser(HttpServletRequest request, HttpServletResponse response) {
@@ -44,15 +52,15 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 			userCookieGenerator.removeCookie(response);
 			return;
 		}
-		SecurityContext.setCurrentUser(new User(userId));
+		securityContext.setCurrentUser(new User(userId));
 	}
 
 	private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {
-		if (SecurityContext.userSignedIn() && request.getServletPath().startsWith("/signout")) {
-			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId())
+		if (securityContext.userSignedIn() && request.getServletPath().startsWith("/signout")) {
+			connectionRepository.createConnectionRepository(securityContext.getCurrentUser().getId())
 					.removeConnections("facebook");
 			userCookieGenerator.removeCookie(response);
-			SecurityContext.remove();
+			securityContext.remove();
 		}
 	}
 

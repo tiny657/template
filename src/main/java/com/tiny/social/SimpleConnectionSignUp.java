@@ -4,8 +4,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.stereotype.Component;
 
-public final class SimpleConnectionSignUp implements ConnectionSignUp {
+@Component
+public class SimpleConnectionSignUp implements ConnectionSignUp {
 
 	private final AtomicLong userIdSequence = new AtomicLong();
 

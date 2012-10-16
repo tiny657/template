@@ -25,7 +25,7 @@ import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.LikeService;
 import com.tiny.service.MemberService;
-import com.tiny.service.PointService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class ListController {
@@ -41,17 +41,13 @@ public class ListController {
 	private CommentService commentService;
 
 	@Autowired
-	private PointService pointService;
-
-	@Autowired
 	private LikeService likeService;
-
+	
 	@Autowired
-	private UserConnectionRepository userConnectionRepository;
+	private SecurityContext securityContext;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
-		// initial access
 		if (!memberService.isExisted()) {
 			return new ModelAndView(new RedirectView("/member"));
 		}
@@ -76,13 +72,13 @@ public class ListController {
 				}
 			}
 		}
-		model.addAttribute("documents", documents);
 		model.addAttribute("newDocument", new Document());
+		model.addAttribute("documents", documents);
 		model.addAttribute("comments", comments);
 		model.addAttribute("url", Constant.LIST);
 
 		// for posting
-		model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
+		model.addAttribute("providerUserId", securityContext.getProviderUserId());
 
 		// to check chance of doc, comment, like, dislike.
 		model.addAttribute("member", memberService.getByProviderUserId());
@@ -100,21 +96,31 @@ public class ListController {
 		if (document == null) {
 			return new ModelAndView(new RedirectView("/list"));
 		}
-		model.addAttribute("document", document);
 		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		model.addAttribute("newComment" + document.getDocumentId(), new Comment());
 		comments.put(Integer.toString(document.getDocumentId()), commentService.get(document.getDocumentId()));
+		// like, dislike 클릭 여부
+		Like like = likeService.getByProviderUserId(documentId);
+		if (like != null) {
+			if (like.getIsLike()) {
+				document.setHasMyLike(true);
+			} else {
+				document.setHasMyDislike(true);
+			}
+		}
+		model.addAttribute("document", document);
 		model.addAttribute("comments", comments);
 		model.addAttribute("url", Constant.LIST);
-		// for posting
+
 		try {
-			model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
-			pointService.calculatePointToSaveDocument();
+			// for posting
+			model.addAttribute("providerUserId", securityContext.getProviderUserId());
 			mav.setViewName("listOne");
 		} catch (IllegalStateException e) {
 			LOGGER.info("No user logined in.");
-			mav.setViewName("listOneNotLogin");
+			mav.setViewName("listOne");
 		}
+
 		mav.addAllObjects(model);
 		return mav;
 	}

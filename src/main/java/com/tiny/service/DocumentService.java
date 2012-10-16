@@ -13,7 +13,7 @@ import com.tiny.common.util.XssFilter;
 import com.tiny.model.Document;
 import com.tiny.repository.DocumentRepository;
 import com.tiny.repository.MemberRepository;
-import com.tiny.repository.UserConnectionRepository;
+import com.tiny.social.SecurityContext;
 
 @Service
 public class DocumentService {
@@ -29,11 +29,11 @@ public class DocumentService {
 	private MemberRepository memberRepository;
 
 	@Autowired
-	private UserConnectionRepository userConnectionRepository;
-
+	private SecurityContext securityContext;
+	
 	public void save(Document document) {
-		document.setProviderUserId(userConnectionRepository.getProviderUserId());
-		document.setName(memberRepository.getName(userConnectionRepository.getProviderUserId()));
+		document.setProviderUserId(securityContext.getProviderUserId());
+		document.setName(memberRepository.getName(securityContext.getProviderUserId()));
 		document.setContent(xssFilter.doFilter(document.getContent()));
 		document.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		documentRepository.save(document);
@@ -63,7 +63,7 @@ public class DocumentService {
 	}
 
 	public boolean isMyDocument(Integer documentId) {
-		return documentRepository.getProviderUesrId(documentId).equals(userConnectionRepository.getProviderUserId());
+		return documentRepository.getProviderUesrId(documentId).equals(securityContext.getProviderUserId());
 	}
 
 	public void delete(Integer documentId) {

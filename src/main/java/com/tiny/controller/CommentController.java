@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.model.Comment;
-import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
 import com.tiny.service.PointService;
+import com.tiny.social.SecurityContext;
 
 @Controller
 public class CommentController {
@@ -33,9 +33,9 @@ public class CommentController {
 
 	@Autowired
 	private PointService pointService;
-
+	
 	@Autowired
-	private UserConnectionRepository userConnectionRepository;
+	private SecurityContext securityContext;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
@@ -48,7 +48,7 @@ public class CommentController {
 			comment.setDocumentId(documentId);
 			comment.setContent(content);
 			model.addAttribute("comment", commentService.saveAndGet(comment));
-			model.addAttribute("providerUserId", userConnectionRepository.getProviderUserId());
+			model.addAttribute("providerUserId", securityContext.getProviderUserId());
 			if (!isMyDocument) {
 				pointService.calculatePointToSaveComment(documentId);
 				memberService.decreaseChanceToComment();

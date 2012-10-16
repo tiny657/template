@@ -31,6 +31,9 @@ public class SocialConfig {
 
 	@Inject
 	private DataSource dataSource;
+	
+	@Inject
+	private SecurityContext securityContext;
 
 	/**
 	 * When a new provider is added to the app, register its {@link ConnectionFactory} here.
@@ -62,7 +65,7 @@ public class SocialConfig {
 	@Bean
 	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public ConnectionRepository connectionRepository() {
-		User user = SecurityContext.getCurrentUser();
+		User user = securityContext.getCurrentUser();
 		return usersConnectionRepository().createConnectionRepository(user.getId());
 	}
 

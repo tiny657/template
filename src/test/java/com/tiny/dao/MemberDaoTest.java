@@ -69,7 +69,7 @@ public class MemberDaoTest extends CommonTest {
 
 		// When
 		Thread.sleep(1000);
-		memberDao.updateLastLoginDate(userId);
+		memberDao.updateLastLoginDate(providerUserId);
 		Member memberAfterUpdate = memberDao.getByProviderUserId(member.getProviderUserId());
 
 		// Then

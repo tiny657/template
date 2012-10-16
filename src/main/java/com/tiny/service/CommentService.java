@@ -13,7 +13,7 @@ import com.tiny.common.util.XssFilter;
 import com.tiny.model.Comment;
 import com.tiny.repository.CommentRepository;
 import com.tiny.repository.MemberRepository;
-import com.tiny.repository.UserConnectionRepository;
+import com.tiny.social.SecurityContext;
 
 @Service
 public class CommentService {
@@ -24,24 +24,21 @@ public class CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-	
+
 	@Autowired
 	private MemberRepository memberRepository;
-
-	@Autowired
-	private FacebookService facebookService;
 	
 	@Autowired
-	private UserConnectionRepository userConnectionRepository;
+	private SecurityContext securityContext;
 
 	public void save(Comment comment) {
-		comment.setProviderUserId(userConnectionRepository.getProviderUserId());
-		comment.setName(memberRepository.getName(userConnectionRepository.getProviderUserId()));
+		comment.setProviderUserId(securityContext.getProviderUserId());
+		comment.setName(memberRepository.getName(securityContext.getProviderUserId()));
 		comment.setContent(xssFilter.doFilter(comment.getContent()));
 		comment.setRegDate(new Date(java.util.Calendar.getInstance().getTimeInMillis()));
 		commentRepository.save(comment);
 	}
-	
+
 	@Transactional
 	public Comment saveAndGet(Comment comment) {
 		save(comment);
@@ -64,7 +61,7 @@ public class CommentService {
 	public void deleteWithDocumentId(Integer documentId) {
 		commentRepository.deleteWithDocumentId(documentId);
 	}
-	
+
 	public void delete(Integer commentId) {
 		commentRepository.delete(commentId);
 	}
