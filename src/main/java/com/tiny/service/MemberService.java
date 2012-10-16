@@ -57,7 +57,6 @@ public class MemberService {
 
 	public boolean isExisted() {
 		boolean isExisted = true;
-		LOGGER.info(securityContext.getProviderUserId());
 		Member member = memberRepository.get(securityContext.getProviderUserId());
 		if (member == null) {
 			isExisted = false;

@@ -30,7 +30,7 @@ public class LikeService {
 	}
 
 	public List<Like> get(String providerUserId) {
-		return likeRepository.get(providerUserId);
+		return likeRepository.getByProviderUserId(providerUserId);
 	}
 	
 	public Like getByProviderUserId(Integer documentId) {

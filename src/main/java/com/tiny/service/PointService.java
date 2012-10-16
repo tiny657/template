@@ -1,13 +1,18 @@
 package com.tiny.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tiny.model.Comment;
 import com.tiny.model.Document;
+import com.tiny.model.Like;
 import com.tiny.repository.CommentRepository;
 import com.tiny.repository.DocumentRepository;
+import com.tiny.repository.LikeRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.social.SecurityContext;
 
@@ -25,19 +30,50 @@ public class PointService {
 	private CommentRepository commentRepository;
 
 	@Autowired
+	private LikeRepository likeRepository;
+
+	@Autowired
 	private SecurityContext securityContext;
-	
+
 	public void calculatePointToSaveDocument() {
 		memberRepository.increasePointDoc(securityContext.getProviderUserId());
+		memberRepository.decreaseChanceToDoc(securityContext.getProviderUserId());
 	}
 
 	public void calculatePointToDeleteDocument(Integer documentId) {
-		Integer count = commentRepository.countByDocumentId(documentId);
-		// TODO:: 성능 상 하나의 쿼리로 수정 필요
-		for (Integer i = 0; i < count; i++) {
-			memberRepository.decreaseCommentOnMyDoc(securityContext.getProviderUserId());
+		List<Comment> comments = commentRepository.get(documentId);
+
+		// point comment
+		int commentCount = 0;
+		for (Comment comment : comments) {
+			if (!securityContext.getProviderUserId().equals(comment.getProviderUserId())) {
+				memberRepository.decreaseComment(comment.getProviderUserId());
+				memberRepository.increaseChanceToComment(comment.getProviderUserId());
+				commentCount++;
+			}
 		}
-		memberRepository.decreasePointDocument(securityContext.getProviderUserId());
+		memberRepository.decreaseCommentOnMyDocByPoint(securityContext.getProviderUserId(), commentCount);
+
+		// point like, dislike
+		int likeCount = 0, dislikeCount = 0;
+		List<Like> likes = likeRepository.getByDocumentId(documentId);
+		for (Like like : likes) {
+			if (like.getIsLike()) {
+				likeCount++;
+				memberRepository.decreaseLike(like.getProviderUserId());
+				memberRepository.increaseChanceToLike(like.getProviderUserId());
+			} else {
+				dislikeCount++;
+				memberRepository.decreaseDislike(like.getProviderUserId());
+				memberRepository.increaseChanceToDislike(like.getProviderUserId());
+			}
+		}
+		memberRepository.decreaseLikeOnMyDocByPoint(securityContext.getProviderUserId(), likeCount);
+		memberRepository.decreaseDislikeOnMyDocByPoint(securityContext.getProviderUserId(), dislikeCount);
+
+		// point document
+		memberRepository.decreasePointDoc(securityContext.getProviderUserId());
+		memberRepository.increaseChanceToDoc(securityContext.getProviderUserId());
 	}
 
 	public void calculatePointToSaveComment(Integer documentId) {

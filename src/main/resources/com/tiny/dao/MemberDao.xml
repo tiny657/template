@@ -116,6 +116,13 @@
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
+	<update id="decreaseCommentOnMyDocByPoint" parameterType="map">
+  		UPDATE `member`
+  		SET
+			`commentOnMyDoc` = `commentOnMyDoc` - #{point}
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
 	<update id="increaseLike" parameterType="String">
   		UPDATE `member`
   		SET
@@ -144,6 +151,13 @@
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	
+	<update id="decreaseLikeOnMyDocByPoint" parameterType="map">
+  		UPDATE `member`
+  		SET
+			`likeOnMyDoc` = `likeOnMyDoc` - #{point}
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
 	<update id="increaseDislike" parameterType="String">
   		UPDATE `member`
   		SET
@@ -169,6 +183,13 @@
   		UPDATE `member`
   		SET
 			`dislikeOnMyDoc` = `dislikeOnMyDoc` - 1 
+  		WHERE `providerUserId` = #{providerUserId};
+	</update>
+	
+	<update id="decreaseDislikeOnMyDocByPoint" parameterType="map">
+  		UPDATE `member`
+  		SET
+			`dislikeOnMyDoc` = `dislikeOnMyDoc` - #{point}
   		WHERE `providerUserId` = #{providerUserId};
 	</update>
 	

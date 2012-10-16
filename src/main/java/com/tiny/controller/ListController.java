@@ -20,7 +20,6 @@ import com.tiny.common.util.Constant;
 import com.tiny.model.Comment;
 import com.tiny.model.Document;
 import com.tiny.model.Like;
-import com.tiny.repository.UserConnectionRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.LikeService;

@@ -7,13 +7,13 @@ import com.tiny.repository.UserConnectionRepository;
 
 @Component
 public class SecurityContext {
-	private ThreadLocal<User> CURRENTUSER = new ThreadLocal<User>();
+	private ThreadLocal<User> currentUser = new ThreadLocal<User>();
 	
 	@Autowired
 	private UserConnectionRepository userConnectionRepository;
 
 	public User getCurrentUser() {
-		User user = CURRENTUSER.get();
+		User user = currentUser.get();
 		if (user == null) {
 			throw new IllegalStateException("No user is currently signed in");
 		}
@@ -22,18 +22,18 @@ public class SecurityContext {
 
 	public void setCurrentUser(User user) {
 		user.setProviderUserId(userConnectionRepository.getProviderUserId(user.getId()));
-		CURRENTUSER.set(user);
+		currentUser.set(user);
 	}
 	
 	public String getProviderUserId() {
-		return CURRENTUSER.get().getProviderUserId();
+		return currentUser.get().getProviderUserId();
 	}
 	
 	public boolean userSignedIn() {
-		return CURRENTUSER.get() != null;
+		return currentUser.get() != null;
 	}
 
 	public void remove() {
-		CURRENTUSER.remove();
+		currentUser.remove();
 	}
 }

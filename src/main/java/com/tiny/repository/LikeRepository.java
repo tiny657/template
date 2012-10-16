@@ -23,8 +23,12 @@ public class LikeRepository {
 		likeDao.save(like);
 	}
 	
-	public List<Like> get(String providerUserId) {
+	public List<Like> getByProviderUserId(String providerUserId) {
 		return likeDao.getByProviderUserId(providerUserId);
+	}
+	
+	public List<Like> getByDocumentId(Integer documentId) {
+		return likeDao.getByDocumentId(documentId);
 	}
 	
 	public Like get(String providerUserId, Integer documentId) {

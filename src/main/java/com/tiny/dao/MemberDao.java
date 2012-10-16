@@ -23,14 +23,17 @@ public interface MemberDao {
 	public void decreaseComment(String providerUserId);
 	public void increaseCommentOnMyDoc(String providerUserId);
 	public void decreaseCommentOnMyDoc(String providerUserId);
+	public void decreaseCommentOnMyDocByPoint(Map<String, Object> map);
 	public void increaseLike(String providerUserId);
 	public void decreaseLike(String providerUserId);
 	public void increaseLikeOnMyDoc(String providerUserId);
 	public void decreaseLikeOnMyDoc(String providerUserId);
+	public void decreaseLikeOnMyDocByPoint(Map<String, Object> map);
 	public void increaseDislike(String providerUserId);
 	public void decreaseDislike(String providerUserId);
 	public void increaseDislikeOnMyDoc(String providerUserId);
 	public void decreaseDislikeOnMyDoc(String providerUserId);
+	public void decreaseDislikeOnMyDocByPoint(Map<String, Object> map);
 	public void increaseSharing(String providerUserId);
 	public void decreaseSharing(String providerUserId);
 	public void increaseSharingOfMyDoc(String providerUserId);

@@ -7,8 +7,9 @@ import com.tiny.model.Like;
 
 public interface LikeDao {
 	public void save(Like like);
-	public Like get(Map<String, Object> map);
 	public List<Like> getByProviderUserId(String providerUserId);
+	public List<Like> getByDocumentId(Integer documentId);
+	public Like get(Map<String, Object> map);
 	public Integer count();
 	public void delete(Map<String, Object> map);
 }

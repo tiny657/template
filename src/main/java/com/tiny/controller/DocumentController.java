@@ -48,7 +48,6 @@ public class DocumentController {
 			model.addAttribute("document", documentService.saveAndGet(document));
 			model.addAttribute("providerUserId", securityContext.getProviderUserId());
 			pointService.calculatePointToSaveDocument();
-			memberService.decreaseChanceToDoc();
 			mav.addAllObjects(model);
 			mav.setViewName("document");
 		} else {
@@ -60,7 +59,6 @@ public class DocumentController {
 	@RequestMapping(value = { "/document" }, method = RequestMethod.DELETE)
 	public void delete(@RequestParam Integer documentId) {
 		pointService.calculatePointToDeleteDocument(documentId);
-		memberService.increaseChanceToDoc();
 		commentService.deleteWithDocumentId(documentId);
 		documentService.delete(documentId);
 	}
