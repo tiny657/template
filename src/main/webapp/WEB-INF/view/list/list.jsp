@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/common/taglib.jsp"%>
 
-<div class="container">
+<div id="container" class="container">
 	<%-- alert --%>
 	<div id="alertPosition">
 		<div id="alert"></div>
@@ -52,11 +52,28 @@
 			});
 		}
 		
+		function enableCloseEditContent(documentId) {
+			$(document).bind("click", function(event) {
+				var id = event.target.id;
+				if(id != "rawContent" + documentId && id != "updateRawContent" + documentId && id != "deleteRawContent" + documentId) {
+					$("#divContent" + documentId).css("display", "");
+					$("#editContent" + documentId).css("display", "none");
+					$(document).unbind("click");
+				}
+			});
+		}
+		
 		function clickDocument(documentId) {
 			$("#divContent" + documentId).css("display", "none");
 			$("#editContent" + documentId).css("display", "");
 			$("#rawContent" + documentId).focus();
+			<%-- 열리자 마자 바로 닫히는 것 방지 --%>
+			var timer = setInterval(function() {
+				enableCloseEditContent(documentId);
+				clearInterval(timer);
+				}, 100);
 		}
+		
 		
 		function updateDocument(documentId) {
 			$.ajax({
@@ -65,16 +82,18 @@
 				dataType: "text",
 				data: {"documentId" : documentId, "rawContent": $("#rawContent" + documentId).val(), _method: "PUT"},
 				beforeSend: function() {
-					$("#waitingDocument").css("display", "");
+				 	$("#updateRawContent" + documentId).html("Updating...");
 				},
 				success : function(content) {
-					$("#waitingDocument").css("display", "none");
-					$("#content" + documentId).html(content);
-					$("#editContent" + documentId).css("display", "none");
+				 	$("#updateRawContent" + documentId).html("Update");
+				  	$("#editContent" + documentId).css("display", "none");
 					$("#divContent" + documentId).css("display", "");
+					$("#content" + documentId).html(content);
+					<%-- focus out으로 나가지 않은 경우이기 때문에 unbind 해 주어야 함. --%>
+					$(document).unbind("click");
 				}
 			});
-		}
+		}	
 		
 		function deleteDocument(documentId) {
 			$.ajax({
@@ -84,6 +103,8 @@
 				data: {"documentId": documentId, _method: "DELETE"},
 				success : function() {
 					$("#document" + documentId).remove();
+					<%-- focus out으로 나가지 않은 경우이기 때문에 unbind 해 주어야 함. --%>
+					$(document).unbind("click");
 				}
 			});
 		}

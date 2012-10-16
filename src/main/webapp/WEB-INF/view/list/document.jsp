@@ -15,7 +15,23 @@
 				
 				<div id="editContent${documentId}" style="display: none;">
 					<textarea path="rawContent" id="rawContent${documentId}" class="span12">${document.rawContent}</textarea>
-					<button type="submit" class="btn btn-info" onclick="updateDocument(${documentId})">Update</button>
+					<button type="submit" id="updateRawContent${documentId}" class="btn btn-info" onclick="updateDocument(${documentId})">Update</button>
+					<a href="#deleteModal${documentId}" role="button" id="deleteRawContent${documentId}" class="btn btn-danger" data-toggle="modal">Delete</a><br /><br />
+					
+					<%-- Modal (Delete) --%>
+					<div id="deleteModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">DELETE</h3>
+						</div>
+						<div class="modal-body">
+							<p>Do you want to delete?</p>
+						</div>
+						<div class="modal-footer">
+							<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+							<button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
+						</div>
+					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -105,27 +121,6 @@
 					$("#saveComment${documentId}").css('display', 'inline');
 				});
 			</script>
-		</c:if>
-	</td>
-	<td>
-		<%-- DELETE --%>
-		<c:if test="${providerUserId == document.providerUserId}">
-			<!-- icon -->
-			<a href="#deleteModal${documentId}" data-toggle="modal"><i class="icon-remove"></i></a>
-			<%-- Modal (Delete) --%>
-			<div id="deleteModal${documentId}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">DELETE</h3>
-				</div>
-				<div class="modal-body">
-					<p>Do you want to delete?</p>
-				</div>
-				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-					<button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" onclick="deleteDocument(${documentId})">Yes</button>
-				</div>
-			</div>
 		</c:if>
 	</td>
 </tr>
