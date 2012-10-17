@@ -112,15 +112,10 @@
 		
 		<%-- COMMENT FORM --%>
 		<c:if test="${not empty providerUserId}">
-			<textarea id="newComment${documentId}" class="span12" placeholder="comment"></textarea>
+			<textarea id="newComment${documentId}" class="span12" onclick="clickCommentForm(${documentId})" placeholder="comment"></textarea>
 			<br />
-			<button type="submit" class="btn btn-info" id="saveComment${documentId}" onclick="saveComment(${documentId})" style="display:none;">Save</button>
+			<button type="submit" id="saveComment${documentId}" class="btn btn-info" onclick="saveComment(${documentId})" style="display:none;">Save</button>
 			<br /><br />
-			<script>
-				$("#newComment${documentId}").click(function() {
-					$("#saveComment${documentId}").css('display', 'inline');
-				});
-			</script>
 		</c:if>
 	</td>
 </tr>

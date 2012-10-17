@@ -9,11 +9,11 @@ function saveDocument(message) {
 		dataType: "text",
 		data: {"rawContent": $("#newDocument").val()},
 		beforeSend: function() {
-			$("#sendRawContent").attr("onclick", "");
+			$("#saveRawContent").attr("onclick", "");
 			$("#waitingDocument").css("display", "");
 		},
 		success : function(content) {
-			$("#sendRawContent").attr("onclick", "saveDocument()");
+			$("#saveRawContent").attr("onclick", "saveDocument()");
 			$("#waitingDocument").css("display", "none");
 			$("#newDocument").val('');
 			$("#waitingDocument").after(content);
@@ -40,7 +40,7 @@ function clickDocument(documentId) {
 	var timer = setInterval(function() {
 		enableCloseEditContent(documentId);
 		clearInterval(timer);
-		}, 100);
+	}, 100);
 }
 
 function updateDocument(documentId) {
@@ -92,6 +92,10 @@ function saveComment(documentId) {
 			$("blockquote#lastCommentPosition" + documentId).before(content);
 		}
 	});
+}
+
+function clickCommentForm(documentId) {
+	$("#saveComment" + documentId).css("display", "inline");
 }
 
 function deleteComment(documentId, commentId) {

@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="span12">
 			<textarea path="rawContent" id="newDocument" class="span12" placeholder="contents"></textarea>
-			<button type="submit" id="sendRawContent" class="btn btn-info" onclick="saveDocument()">Save</button>
+			<button type="submit" id="saveRawContent" class="btn btn-info" onclick="saveDocument()">Save</button>
 			<br /><br />
 		</div>
 	</div>
