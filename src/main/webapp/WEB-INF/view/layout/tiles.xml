@@ -7,8 +7,11 @@
 		<put-attribute name="top" value="/WEB-INF/view/layout/fragment/top.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/fragment/footer.jsp" />
 
-		<put-list-attribute name="lazyloadngScripts">
-			<add-attribute value="js/bootstrap.js" />
+		<put-list-attribute name="lazyloadingScripts">
+			<add-attribute value="/js/jquery-1.8.0.js?20120904" />
+			<add-attribute value="/js/bootstrap-2.1.0.js?20120904" />
+			<add-attribute value="/js/jquery.autoresize.js?20120925" />
+			<add-attribute value="/js/list.js?20121017" />
 		</put-list-attribute>
 	</definition>
 

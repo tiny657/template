@@ -17,7 +17,7 @@
 	<tiles:insertAttribute name="top" />
 	<tiles:insertAttribute name="body" />
 	<tiles:insertAttribute name="footer" />
-	<tiles:useAttribute id="lazyloadngScripts" name="lazyloadngScripts" classname="java.util.List" />
+	<tiles:useAttribute id="lazyloadingScripts" name="lazyloadingScripts" classname="java.util.List" />
 	<c:forEach var="script" items="${lazyloadingScripts}">
 		<script type="text/javascript" src="<c:url value='${script}'/>"></script>
 	</c:forEach>
