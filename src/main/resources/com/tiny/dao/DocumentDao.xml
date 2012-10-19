@@ -59,6 +59,13 @@
 		FROM `document`;
 	</select>
 	
+	<select id="countDocForLast1Hour" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM `document`
+		WHERE `providerUserId` = #{providerUserId}
+		AND `regDate` > DATE_ADD(NOW(), INTERVAL -1 HOUR);
+	</select>
+	
 	<update id="update" parameterType="document">
   		UPDATE `document`
   		SET

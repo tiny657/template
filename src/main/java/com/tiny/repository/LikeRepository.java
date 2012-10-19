@@ -44,4 +44,12 @@ public class LikeRepository {
 		map.put("documentId", documentId);
 		likeDao.delete(map);
 	}
+	
+	public Integer countLikeForLast1Hour(String providerUserId) {
+		return likeDao.countLikeForLast1Hour(providerUserId);
+	}
+	
+	public Integer countDislikeForLast1Hour(String providerUserId) {
+		return likeDao.countDislikeForLast1Hour(providerUserId);
+	}
 }

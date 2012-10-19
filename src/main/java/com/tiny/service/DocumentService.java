@@ -1,6 +1,5 @@
 package com.tiny.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -69,7 +68,7 @@ public class DocumentService {
 		return documentRepository.getLast();
 	}
 
-	public boolean isMyDocument(Integer documentId) {
+	public boolean isMyDoc(Integer documentId) {
 		return documentRepository.getProviderUesrId(documentId).equals(securityContext.getProviderUserId());
 	}
 

@@ -26,7 +26,9 @@ public class MemberController {
 	public ModelAndView member() {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		model.addAttribute("member", memberService.get());
+		Member member = memberService.get();
+		memberService.setUsage(member);
+		model.addAttribute("member", member);
 		model.addAttribute("url", Constant.MEMBER);
 		mav.addAllObjects(model);
 		mav.setViewName("member");

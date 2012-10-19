@@ -37,6 +37,10 @@ public class DocumentRepository {
 		return documentDao.getLast();
 	}
 	
+	public Integer countDocForLast1Hour(String providerUserId) {
+		return documentDao.countDocForLast1Hour(providerUserId);
+	}
+	
 	public void update(Document document) {
 		documentDao.update(document);
 	}

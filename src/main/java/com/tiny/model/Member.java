@@ -28,4 +28,10 @@ public class Member {
 	private String locale;
 	private Date regDate;
 	private Date lastLoginDate;
+	
+	// from document, comment, like
+	private Integer usageOfDoc;
+	private Integer usageOfComment;
+	private Integer usageOfLike;
+	private Integer usageOfDislike;
 }

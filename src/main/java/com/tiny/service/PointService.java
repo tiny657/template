@@ -37,7 +37,6 @@ public class PointService {
 
 	public void calculatePointToSaveDocument() {
 		memberRepository.increasePointDoc(securityContext.getProviderUserId());
-		memberRepository.decreaseChanceToDoc(securityContext.getProviderUserId());
 	}
 
 	public void calculatePointToDeleteDocument(Integer documentId) {
@@ -48,12 +47,11 @@ public class PointService {
 		for (Comment comment : comments) {
 			if (!securityContext.getProviderUserId().equals(comment.getProviderUserId())) {
 				memberRepository.decreaseComment(comment.getProviderUserId());
-				memberRepository.increaseChanceToComment(comment.getProviderUserId());
 				commentCount++;
 			}
 		}
 		memberRepository.decreaseCommentOnMyDocByPoint(securityContext.getProviderUserId(), commentCount);
-
+		
 		// point like, dislike
 		int likeCount = 0, dislikeCount = 0;
 		List<Like> likes = likeRepository.getByDocumentId(documentId);
@@ -61,11 +59,9 @@ public class PointService {
 			if (like.getIsLike()) {
 				likeCount++;
 				memberRepository.decreaseLike(like.getProviderUserId());
-				memberRepository.increaseChanceToLike(like.getProviderUserId());
 			} else {
 				dislikeCount++;
 				memberRepository.decreaseDislike(like.getProviderUserId());
-				memberRepository.increaseChanceToDislike(like.getProviderUserId());
 			}
 		}
 		memberRepository.decreaseLikeOnMyDocByPoint(securityContext.getProviderUserId(), likeCount);
@@ -73,7 +69,6 @@ public class PointService {
 
 		// point document
 		memberRepository.decreasePointDoc(securityContext.getProviderUserId());
-		memberRepository.increaseChanceToDoc(securityContext.getProviderUserId());
 	}
 
 	public void calculatePointToSaveComment(Integer documentId) {

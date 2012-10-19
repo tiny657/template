@@ -11,5 +11,7 @@ public interface LikeDao {
 	public List<Like> getByDocumentId(Integer documentId);
 	public Like get(Map<String, Object> map);
 	public Integer count();
+	public Integer countLikeForLast1Hour(String providerUserId);
+	public Integer countDislikeForLast1Hour(String providerUserId);
 	public void delete(Map<String, Object> map);
 }

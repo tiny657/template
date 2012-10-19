@@ -7,6 +7,9 @@ import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.stereotype.Service;
 
 import com.tiny.model.Member;
+import com.tiny.repository.CommentRepository;
+import com.tiny.repository.DocumentRepository;
+import com.tiny.repository.LikeRepository;
 import com.tiny.repository.MemberRepository;
 import com.tiny.social.SecurityContext;
 
@@ -15,11 +18,20 @@ public class MemberService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
 	@Autowired
-	private FacebookService facebookService;
-
-	@Autowired
 	private MemberRepository memberRepository;
 	
+	@Autowired
+	private DocumentRepository documentRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	@Autowired
+	private LikeRepository likeRepository;
+	
+	@Autowired
+	private FacebookService facebookService;
+
 	@Autowired
 	private SecurityContext securityContext;
 	
@@ -32,6 +44,13 @@ public class MemberService {
 		member.setEmail(facebookProfile.getEmail());
 		member.setLocale(facebookProfile.getLocale().getCountry());
 		memberRepository.save(member);
+	}
+
+	public void setUsage(Member member) {
+		member.setUsageOfDoc(documentRepository.countDocForLast1Hour(securityContext.getProviderUserId()));
+		member.setUsageOfComment(commentRepository.countCommentForLast1Hour(securityContext.getProviderUserId()));
+		member.setUsageOfLike(likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId()));
+		member.setUsageOfDislike(likeRepository.countDislikeForLast1Hour(securityContext.getProviderUserId()));
 	}
 
 	public Member get() {
@@ -54,7 +73,7 @@ public class MemberService {
 
 		return member;
 	}
-
+	
 	public boolean isExisted() {
 		boolean isExisted = true;
 		Member member = memberRepository.get(securityContext.getProviderUserId());
@@ -65,27 +84,31 @@ public class MemberService {
 	}
 
 	public boolean isChanceToDoc() {
-		return memberRepository.getChanceToDoc(securityContext.getProviderUserId()) > 0;
+		Integer chanceToDoc = memberRepository.getChanceToDoc(securityContext.getProviderUserId());
+		Integer countDocForLast1Hour = documentRepository.countDocForLast1Hour(securityContext.getProviderUserId());
+		return (chanceToDoc - countDocForLast1Hour) > 0;
 	}
 
 	public boolean isChanceToComment() {
-		return memberRepository.getChanceToComment(securityContext.getProviderUserId()) > 0;
+		Integer chanceToComment = memberRepository.getChanceToComment(securityContext.getProviderUserId());
+		Integer countCommentForLast1Hour = commentRepository.countCommentForLast1Hour(securityContext.getProviderUserId());
+		return (chanceToComment - countCommentForLast1Hour) > 0;
 	}
 
 	public boolean isChanceToLike() {
-		return memberRepository.getChanceToLike(securityContext.getProviderUserId()) > 0;
+		Integer chanceToLike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
+		Integer countLikeForLast1Hour = likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId());
+		return (chanceToLike - countLikeForLast1Hour) > 0;
 	}
 
 	public boolean isChanceToDislike() {
-		return memberRepository.getChanceToDislike(securityContext.getProviderUserId()) > 0;
+		Integer chanceToDislike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
+		Integer countDislikeForLast1Hour = likeRepository.countDislikeForLast1Hour(securityContext.getProviderUserId());
+		return (chanceToDislike - countDislikeForLast1Hour) > 0;
 	}
 
 	public void updateName(String name) {
 		memberRepository.updateName(securityContext.getProviderUserId(), name);
-	}
-
-	public void updateLastLoginTime() {
-		memberRepository.updateLastLoginDate(securityContext.getProviderUserId());
 	}
 
 	public void increaseChanceToDoc() {
@@ -118,5 +141,9 @@ public class MemberService {
 
 	public void decreaseChanceToDislike() {
 		memberRepository.decreaseChanceToDislike(securityContext.getProviderUserId());
+	}
+	
+	public void updateLastLoginTime() {
+		memberRepository.updateLastLoginDate(securityContext.getProviderUserId());
 	}
 }

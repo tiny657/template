@@ -49,7 +49,6 @@ public class ListController {
 	@Autowired
 	private XssFilter xssFilter;
 	
-
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		if (!memberService.isExisted()) {

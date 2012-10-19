@@ -68,6 +68,30 @@
 				
 				<table class="table table-bordered table-striped">
 					<thead>
+						<tr><th colspan=2 style="text-align: center; "><spring:message code="member.titleUsage" /></th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><spring:message code="member.usageOfDoc" /></td>
+							<td>${member.usageOfDoc}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.usageOfComment" /></td>
+							<td>${member.usageOfComment}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.usageOfLike" /></td>
+							<td>${member.usageOfLike}</td>
+						</tr>
+						<tr>
+							<td><spring:message code="member.usageOfDislike" /></td>
+							<td>${member.usageOfDislike}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="table table-bordered table-striped">
+					<thead>
 						<tr><th colspan=2 style="text-align: center; "><spring:message code="member.titlePoint" /></th></tr>
 					</thead>
 					<tbody>

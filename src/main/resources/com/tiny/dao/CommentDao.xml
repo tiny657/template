@@ -7,6 +7,7 @@
 		<result property="content" column="content" />
 		<result property="providerUserId" column="providerUserId" />
 		<result property="name" column="name" />
+		<result property="isMyDoc" column="isMyDoc" />
 		<result property="regDate" column="regDate" />
 	</resultMap>
 	
@@ -17,11 +18,13 @@
 				`content`,
 				`providerUserId`,
 				`name`,
+				`isMyDoc`,
 				`regDate`)
 		VALUES (#{documentId},
 				#{content},
 				#{providerUserId},
 				#{name},
+				#{isMyDoc},
 				NOW());
 	</insert>
 	
@@ -56,6 +59,14 @@
 		SELECT COUNT(*)
 		FROM `comment`
 		WHERE `documentId` = #{documentId};
+	</select>
+	
+	<select id="countCommentForLast1Hour" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM `comment`
+		WHERE `providerUserId` = #{providerUserId}
+		AND `regDate` > DATE_ADD(NOW(), INTERVAL -1 HOUR)
+		AND `isMyDoc` = false;
 	</select>
 	
 	<update id="update" parameterType="comment">

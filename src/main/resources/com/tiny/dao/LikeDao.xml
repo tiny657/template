@@ -46,6 +46,22 @@
 		FROM `like`;
 	</select>
 	
+	<select id="countLikeForLast1Hour" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM `like`
+		WHERE providerUserId = #{providerUserId}
+		AND `regDate` > DATE_ADD(NOW(), INTERVAL -1 HOUR)
+		AND isLike = true;
+	</select>
+	
+	<select id="countDislikeForLast1Hour" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM `like`
+		WHERE providerUserId = #{providerUserId}
+		AND `regDate` > DATE_ADD(NOW(), INTERVAL -1 HOUR)
+		AND isLike = false;
+	</select>
+	
 	<delete id="delete" parameterType="map">
 		DELETE
 		FROM `like`

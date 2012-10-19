@@ -11,5 +11,6 @@ public class Comment {
 	private String content;
 	private String providerUserId;
 	private String name;
+	private Boolean isMyDoc;
 	private Date regDate;
 }

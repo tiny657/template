@@ -11,6 +11,7 @@ public interface DocumentDao {
 	public String getProviderUserId(Integer documentId);
 	public Document getLast();
 	public Integer count();
+	public Integer countDocForLast1Hour(String providerUserId);
 	public void update(Document document);
 	public void increaseComment(Integer documentId);
 	public void decreaseComment(Integer documentId);

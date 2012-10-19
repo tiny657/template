@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS `member`;
 DROP TABLE IF EXISTS `comment`;
 DROP TABLE IF EXISTS `document`;
 DROP TABLE IF EXISTS `like`;
-DROP TABLE IF EXISTS `dislike`;
 
 CREATE TABLE IF NOT EXISTS `UserConnection` (
 	`userId` CHAR(255) NOT NULL,
@@ -59,7 +58,8 @@ CREATE TABLE `document` (
 	`name` CHAR(20),
 	`ipAddress` CHAR(8) NOT NULL,
 	`regDate` DATETIME NOT NULL,
-	PRIMARY KEY (`documentId`)
+	PRIMARY KEY (`documentId`),
+	INDEX (`providerUserId`, `regDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE `comment` (
@@ -68,8 +68,10 @@ CREATE TABLE `comment` (
 	`content` TEXT NOT NULL,
 	`providerUserId` CHAR(16) NOT NULL,
 	`name` CHAR(20),
+	`isMyDoc` BOOLEAN NOT NULL,
 	`regDate` DATETIME NOT NULL,
 	PRIMARY KEY (`commentId`),
+	INDEX (`providerUserId`, `regDate`, `isMyDoc`),
 	FOREIGN KEY (`documentId`) REFERENCES document(`documentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
@@ -78,5 +80,5 @@ CREATE TABLE `like` (
 	`documentId` INT NOT NULL,
 	`isLike` BOOLEAN NOT NULL,
 	`regDate` DATETIME NOT NULL,
-	INDEX (`providerUserId`)
+	INDEX (`providerUserId`, `regDate`, `isLike`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;

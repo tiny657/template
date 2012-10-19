@@ -72,7 +72,7 @@ public class LikeController {
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
 	public @ResponseBody
 	boolean like(@RequestParam Integer documentId) {
-		if (documentService.isMyDocument(documentId)) {
+		if (documentService.isMyDoc(documentId)) {
 			return false;
 		}
 
@@ -82,7 +82,6 @@ public class LikeController {
 
 		if (memberService.isChanceToLike()) {
 			pointService.calculatePointToClickLike(documentId);
-			memberService.decreaseChanceToLike();
 			likeService.save(documentId, true);
 			return true;
 		} else {
@@ -93,12 +92,11 @@ public class LikeController {
 	@RequestMapping(value = "/cancelLike", method = RequestMethod.GET)
 	public @ResponseBody
 	boolean cancelLike(@RequestParam Integer documentId) {
-		if (documentService.isMyDocument(documentId)) {
+		if (documentService.isMyDoc(documentId)) {
 			return false;
 		}
 
 		pointService.calculatePointToCancelLike(documentId);
-		memberService.increaseChanceToLike();
 		likeService.delete(documentId);
 		return true;
 	}
@@ -106,7 +104,7 @@ public class LikeController {
 	@RequestMapping(value = "/dislike", method = RequestMethod.GET)
 	public @ResponseBody
 	boolean dislike(@RequestParam Integer documentId) {
-		if (documentService.isMyDocument(documentId)) {
+		if (documentService.isMyDoc(documentId)) {
 			return false;
 		}
 
@@ -116,7 +114,6 @@ public class LikeController {
 
 		if (memberService.isChanceToDislike()) {
 			pointService.calculatePointToClickDislike(documentId);
-			memberService.decreaseChanceToDislike();
 			likeService.save(documentId, false);
 			return true;
 		} else {
@@ -127,12 +124,11 @@ public class LikeController {
 	@RequestMapping(value = "/cancelDislike", method = RequestMethod.GET)
 	public @ResponseBody
 	boolean cancelDislike(@RequestParam Integer documentId) {
-		if (documentService.isMyDocument(documentId)) {
+		if (documentService.isMyDoc(documentId)) {
 			return false;
 		}
 
 		pointService.calculatePointToCancelDislike(documentId);
-		memberService.increaseChanceToDislike();
 		likeService.delete(documentId);
 		return true;
 	}

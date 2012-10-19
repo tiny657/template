@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tiny.model.Comment;
+import com.tiny.repository.DocumentRepository;
 import com.tiny.service.CommentService;
 import com.tiny.service.DocumentService;
 import com.tiny.service.MemberService;
@@ -41,17 +42,17 @@ public class CommentController {
 	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
 		ModelAndView mav = new ModelAndView();
 
-		boolean isMyDocument = documentService.isMyDocument(documentId);
-		if (memberService.isChanceToComment() || isMyDocument) {
+		boolean isMyDoc = documentService.isMyDoc(documentId);
+		if (isMyDoc || memberService.isChanceToComment()) {
 			ModelMap model = new ModelMap();
 			Comment comment = new Comment();
 			comment.setDocumentId(documentId);
 			comment.setContent(content);
+			comment.setIsMyDoc(isMyDoc);
 			model.addAttribute("comment", commentService.saveAndGet(comment));
 			model.addAttribute("providerUserId", securityContext.getProviderUserId());
-			if (!isMyDocument) {
+			if (!isMyDoc) {
 				pointService.calculatePointToSaveComment(documentId);
-				memberService.decreaseChanceToComment();
 			}
 			mav.addAllObjects(model);
 			mav.setViewName("comment");
@@ -64,9 +65,8 @@ public class CommentController {
 	@RequestMapping(value = { "/comment" }, method = RequestMethod.DELETE)
 	public @ResponseBody
 	boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
-		if (!documentService.isMyDocument(documentId)) {
+		if (!documentService.isMyDoc(documentId)) {
 			pointService.calculatePointToDeleteComment(documentId, commentId);
-			memberService.increaseChanceToComment();
 		}
 		commentService.delete(commentId);
 		return true;

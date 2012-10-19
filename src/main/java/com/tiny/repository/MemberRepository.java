@@ -62,10 +62,6 @@ public class MemberRepository {
 		memberDao.updateName(map);
 	}
 
-	public void updateLastLoginDate(String providerUserId) {
-		memberDao.updateLastLoginDate(providerUserId);
-	}
-
 	public void increasePointDoc(String providerUserId) {
 		memberDao.increaseDoc(providerUserId);
 	}
@@ -185,6 +181,10 @@ public class MemberRepository {
 
 	public void decreaseChanceToDislike(String providerUserId) {
 		memberDao.decreaseChanceToDislike(providerUserId);
+	}
+
+	public void updateLastLoginDate(String providerUserId) {
+		memberDao.updateLastLoginDate(providerUserId);
 	}
 
 	public void delete(String providerUserId) {

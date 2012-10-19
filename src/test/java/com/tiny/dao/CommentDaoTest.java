@@ -95,6 +95,7 @@ public class CommentDaoTest extends CommonTest {
 		comment.setDocumentId(documentId);
 		comment.setContent("content");
 		comment.setProviderUserId("providerUserId");
+		comment.setIsMyDoc(false);
 		comment.setRegDate(new Date());
 		return comment;
 	}
