@@ -44,7 +44,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private void rememberUser(HttpServletRequest request, HttpServletResponse response) {
-		String userId = userCookieGenerator.readCookieValue(request);
+		String userId = userCookieGenerator.readUserId(request);
 		if (userId == null) {
 			return;
 		}
@@ -52,7 +52,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 			userCookieGenerator.removeCookie(response);
 			return;
 		}
-		securityContext.setCurrentUser(new User(userId));
+		String providerUserId = userCookieGenerator.readProviderUserId(request);
+		securityContext.setCurrentUser(new User(userId, providerUserId));
 	}
 
 	private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {

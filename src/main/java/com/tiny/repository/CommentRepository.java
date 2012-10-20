@@ -1,8 +1,6 @@
 package com.tiny.repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +20,15 @@ public class CommentRepository {
 	public void save(Comment comment) {
 		commentDao.save(comment);
 	}
-	
+
 	public List<Comment> get(Integer documentId) {
 		return commentDao.get(documentId);
 	}
-	
+
 	public Comment getCommentId(Integer commentId) {
 		return commentDao.getCommentId(commentId);
 	}
-	
+
 	public Comment getLast() {
 		return commentDao.getLast();
 	}
@@ -46,7 +44,7 @@ public class CommentRepository {
 	public void deleteWithDocumentId(Integer documentId) {
 		commentDao.deleteWithDocumentId(documentId);
 	}
-	
+
 	public void delete(Integer commentId) {
 		commentDao.delete(commentId);
 	}

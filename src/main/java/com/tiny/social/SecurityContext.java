@@ -1,17 +1,11 @@
 package com.tiny.social;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.tiny.repository.UserConnectionRepository;
 
 @Component
 public class SecurityContext {
 	private ThreadLocal<User> currentUser = new ThreadLocal<User>();
 	
-	@Autowired
-	private UserConnectionRepository userConnectionRepository;
-
 	public User getCurrentUser() {
 		User user = currentUser.get();
 		if (user == null) {
@@ -21,7 +15,6 @@ public class SecurityContext {
 	}
 
 	public void setCurrentUser(User user) {
-		user.setProviderUserId(userConnectionRepository.getProviderUserId(user.getId()));
 		currentUser.set(user);
 	}
 	
