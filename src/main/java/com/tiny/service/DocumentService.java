@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tiny.common.util.Constant;
 import com.tiny.common.util.XssFilter;
 import com.tiny.model.Document;
 import com.tiny.repository.DocumentRepository;
@@ -53,13 +54,16 @@ public class DocumentService {
 
 	public List<Document> getAll() {
 		List<Document> documents = documentRepository.getAll();
-		for (Document document : documents) {
-			document.setContent(document.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
-		}
 
 		return documents;
 	}
 
+	public List<Document> getList(Integer from) {
+		List<Document> documents = documentRepository.getList(from, Constant.ONEPAGELIMIT);
+
+		return documents;
+	}
+	
 	public Document get(Integer documentId) {
 		return documentRepository.get(documentId);
 	}

@@ -1,6 +1,8 @@
 package com.tiny.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,13 @@ public class DocumentRepository {
 
 	public List<Document> getAll() {
 		return documentDao.getAll();
+	}
+	
+	public List<Document> getList(Integer from, Integer limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("documentId", from);
+		map.put("limit", limit);
+		return documentDao.getList(map);
 	}
 	
 	public Document get(Integer documentId) {

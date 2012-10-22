@@ -36,7 +36,7 @@ CREATE TABLE `member` (
 	`dislikeOnMyDoc` INT DEFAULT 0,
 	`sharing` INT DEFAULT 0,
 	`sharingOfMyDoc` INT DEFAULT 0,
-	`chanceToDoc` INT DEFAULT 2,
+	`chanceToDoc` INT DEFAULT 20,
 	`chanceToComment` INT DEFAULT 2,
 	`chanceToLike` INT DEFAULT 2,
 	`chanceToDislike` INT DEFAULT 2,

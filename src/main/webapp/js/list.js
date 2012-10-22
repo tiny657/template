@@ -202,4 +202,29 @@ function cancelDislike(documentId) {
 	});
 }
 
+function scroll() {
+	if ($("#moreDocument").length > 0) {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				$(window).unbind('scroll');
+				more();
+			}
+		});
+	}
+}
+
+function more() {
+	$.ajax({
+		type : "GET",
+		url : "/list",
+		dataType: "text",
+		data: {"from": $("#from").text()},
+		success : function(content) {
+			$("#moreDocument").replaceWith(content);
+			scroll();
+		}
+	});
+}
+scroll();
+
 $("textarea").autoresize();

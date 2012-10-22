@@ -21,13 +21,11 @@
 			<tbody>
 				<%-- waiting icon --%>
 				<tr id="waitingDocument" style="display: none;"><td>
-					<img src="img/wait24trans.gif" id="waitingDocument" />
+					<img src="img/wait24trans.gif" />
 				</td></tr>
 		
 				<%-- document list --%>
-				<c:forEach var="document" items="${documents}">
-					<%@include file="document.jsp"%>
-				</c:forEach>
+				<%@include file="documents.jsp" %>
 			</tbody>
 		</table>
 	</div>

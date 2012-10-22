@@ -42,15 +42,15 @@ public class ListController {
 
 	@Autowired
 	private LikeService likeService;
-	
+
 	@Autowired
 	private SecurityContext securityContext;
-	
+
 	@Autowired
 	private XssFilter xssFilter;
-	
+
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(defaultValue = "2147483647", required = false) int from) {
 		if (!memberService.isExisted()) {
 			return new ModelAndView(new RedirectView("/member"));
 		}
@@ -59,7 +59,7 @@ public class ListController {
 
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		List<Document> documents = documentService.getAll();
+		List<Document> documents = documentService.getList(from);
 		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		for (Document document : documents) {
 			model.addAttribute("newComment" + document.getDocumentId(), new Comment());
@@ -74,7 +74,7 @@ public class ListController {
 					document.setHasMyDislike(true);
 				}
 			}
-			
+
 			// undo xssFilter
 			if (securityContext.getProviderUserId().equals(document.getProviderUserId())) {
 				document.setRawContent(xssFilter.undoFilter(document.getContent()));
@@ -90,14 +90,28 @@ public class ListController {
 
 		// to check chance of doc, comment, like, dislike.
 		model.addAttribute("member", memberService.getByProviderUserId());
+		
+		// more
+		if (documents.size() == Constant.ONEPAGELIMIT) {
+			model.addAttribute("more", true);
+		}
+		else {
+			model.addAttribute("more", false);
+		}
+		model.addAttribute("from", from);
 
 		mav.addAllObjects(model);
-		mav.setViewName("list");
+		if (from == Integer.MAX_VALUE) {
+			mav.setViewName("list");
+		}
+		else {
+			mav.setViewName("documents");
+		}
 		return mav;
 	}
 
 	@RequestMapping(value = "/list/{documentId}", method = RequestMethod.GET)
-	public ModelAndView list(@PathVariable Integer documentId) {
+	public ModelAndView listOne(@PathVariable Integer documentId) {
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
 		Document document = documentService.get(documentId);
@@ -131,10 +145,5 @@ public class ListController {
 
 		mav.addAllObjects(model);
 		return mav;
-	}
-
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView search(@RequestParam String q) {
-		return list();
 	}
 }

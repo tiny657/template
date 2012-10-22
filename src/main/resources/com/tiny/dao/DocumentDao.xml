@@ -42,6 +42,15 @@
 		WHERE `documentId` = #{documentId};
 	</select>
 	
+	<select id="getList" parameterType="map" resultMap="result">
+		
+		SELECT *
+		FROM `document`
+		WHERE `documentId` <![CDATA[<]]> #{documentId}
+		ORDER BY `documentId` DESC
+		LIMIT #{limit};
+	</select>
+	
 	<select id="getProviderUserId" parameterType="int" resultType="String">
 		SELECT providerUserId
 		FROM `document`

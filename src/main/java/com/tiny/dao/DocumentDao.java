@@ -1,12 +1,14 @@
 package com.tiny.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tiny.model.Document;
 
 public interface DocumentDao {
 	public void save(Document document);
 	public List<Document> getAll();
+	public List<Document> getList(Map<String, Object> map);
 	public Document get(Integer documentId);
 	public String getProviderUserId(Integer documentId);
 	public Document getLast();
