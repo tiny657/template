@@ -11,6 +11,7 @@
 <title id="browserTitleArea"><tiles:insertAttribute name="title" ignore="true" defaultValue="메뉴 :: 브랜드명 서비스" /></title>
 
 <tiles:insertAttribute name="header" />
+<script type="text/javascript" src="/js/jquery-1.8.0.js?20120904"></script>
 </head>
 
 <body>

@@ -39,7 +39,7 @@ public class DocumentDaoTest extends CommonTest {
 		// Then
 		assertThat(document.getContent(), is(document2.getContent()));
 	}
-	
+
 	@Test
 	public void getLast() {
 		// Given

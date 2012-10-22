@@ -90,12 +90,11 @@ public class ListController {
 
 		// to check chance of doc, comment, like, dislike.
 		model.addAttribute("member", memberService.getByProviderUserId());
-		
+
 		// more
 		if (documents.size() == Constant.ONEPAGELIMIT) {
 			model.addAttribute("more", true);
-		}
-		else {
+		} else {
 			model.addAttribute("more", false);
 		}
 		model.addAttribute("from", from);
@@ -103,8 +102,7 @@ public class ListController {
 		mav.addAllObjects(model);
 		if (from == Integer.MAX_VALUE) {
 			mav.setViewName("list");
-		}
-		else {
+		} else {
 			mav.setViewName("documents");
 		}
 		return mav;

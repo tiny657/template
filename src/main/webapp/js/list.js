@@ -17,7 +17,6 @@ function saveDocument(message) {
 			$("#waitingDocument").css("display", "none");
 			$("#newDocument").val('');
 			$("#waitingDocument").after(content);
-			$("textarea").autoresize();
 		}
 	});
 }
@@ -227,4 +226,9 @@ function more() {
 }
 scroll();
 
-$("textarea").autoresize();
+$("#newDocument").keyup(function(event) {
+	if (event.which == 13) {
+		var row = parseInt($("#newDocument").attr("rows"));
+		$("#newDocument").attr("rows", row + 1);
+	}
+})
