@@ -9,6 +9,7 @@
 <c:if test="${more}">
 	<tr id="moreDocument"><td>
 		<img src="img/wait24trans.gif" />
-		<span id="from" style="display: none;">${documentId}</span>
+		<span id="newest" style="display: none;">${documents[0].documentId}</span>
+		<span id="oldest" style="display: none;">${documentId}</span>
 	</td></tr>
 </c:if>

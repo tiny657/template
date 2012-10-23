@@ -8,13 +8,13 @@
 		<%-- Content --%>
 		<c:choose>
 			<c:when test="${providerUserId == document.providerUserId}">
-				<div id="divContent${documentId}" style="cursor: pointer;" onclick="clickDocument(${documentId})">
+				<div id="divContent${documentId}" style="cursor: pointer;" onclick="clickMyDocument(${documentId})">
 					<p id="content${documentId}">${document.content}</p>
 					<p class="muted"><small>— ${document.name}</small></p>
 				</div>
 				
 				<div id="editContent${documentId}" style="display: none;">
-					<textarea path="rawContent" id="rawContent${documentId}" class="span12">${document.rawContent}</textarea>
+					<textarea path="rawContent" id="rawContent${documentId}" class="span12" rows="1">${document.rawContent}</textarea>
 					<button type="submit" id="updateRawContent${documentId}" class="btn btn-info" onclick="updateDocument(${documentId})">Update</button>
 					<a href="#deleteModal${documentId}" role="button" id="deleteRawContent${documentId}" class="btn btn-danger" data-toggle="modal">Delete</a><br /><br />
 					

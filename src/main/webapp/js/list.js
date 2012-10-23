@@ -32,7 +32,9 @@ function enableCloseEditContent(documentId) {
 	});
 }
 
-function clickDocument(documentId) {
+function clickMyDocument(documentId) {
+	var countLF = $("#rawContent" + documentId).val().split(/[\n]/g).length;
+	$("#rawContent" + documentId).attr("rows", countLF);
 	$("#divContent" + documentId).css("display", "none");
 	$("#editContent" + documentId).css("display", "");
 	$("#rawContent" + documentId).focus();
