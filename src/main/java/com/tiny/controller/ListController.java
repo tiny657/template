@@ -50,7 +50,8 @@ public class ListController {
 	private XssFilter xssFilter;
 
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "2147483647", required = false) int from) {
+	public ModelAndView list(@RequestParam(defaultValue = "2147483647", required = false) int documentId,
+			@RequestParam(defaultValue = "false", required = false) boolean viewRecently) {
 		if (!memberService.isExisted()) {
 			return new ModelAndView(new RedirectView("/member"));
 		}
@@ -59,7 +60,12 @@ public class ListController {
 
 		ModelAndView mav = new ModelAndView();
 		ModelMap model = new ModelMap();
-		List<Document> documents = documentService.getList(from);
+		List<Document> documents;
+		if (viewRecently) {
+			documents = documentService.getRecently(documentId);
+		} else {
+			documents = documentService.getList(documentId);
+		}
 		Map<String, List<Comment>> comments = new HashMap<String, List<Comment>>();
 		for (Document document : documents) {
 			model.addAttribute("newComment" + document.getDocumentId(), new Comment());
@@ -92,15 +98,14 @@ public class ListController {
 		model.addAttribute("member", memberService.getByProviderUserId());
 
 		// more
-		if (documents.size() == Constant.ONEPAGELIMIT) {
-			model.addAttribute("more", true);
-		} else {
+		if (viewRecently || documents.size() != Constant.ONEPAGELIMIT) {
 			model.addAttribute("more", false);
+		} else {
+			model.addAttribute("more", true);
 		}
-		model.addAttribute("from", from);
 
 		mav.addAllObjects(model);
-		if (from == Integer.MAX_VALUE) {
+		if (documentId == Integer.MAX_VALUE) {
 			mav.setViewName("list");
 		} else {
 			mav.setViewName("documents");

@@ -1,3 +1,9 @@
+function computeDocumentIdFromHtml(content) {
+	var regexp = /id=\"document([0-9]+)/;
+	var documentId = regexp.exec(content);
+	return documentId[1];
+}
+
 function saveDocument(message) {
 	if ($("#newDocument").val() === "") {
 		return;
@@ -13,6 +19,7 @@ function saveDocument(message) {
 			$("#waitingDocument").css("display", "");
 		},
 		success : function(content) {
+			$("#newest").text(computeDocumentIdFromHtml(content));
 			$("#saveRawContent").attr("onclick", "saveDocument()");
 			$("#waitingDocument").css("display", "none");
 			$("#newDocument").val('');
@@ -203,7 +210,26 @@ function cancelDislike(documentId) {
 	});
 }
 
-function scroll() {
+function isRefreshPosition() {
+	if ($(window).scrollTop() < 10) {
+		$.ajax({
+			type : "GET",
+			url : "/list",
+			dataType: "text",
+			data: {"documentId": $("#newest").text(), "viewRecently": true},
+			success : function(content) {
+				$("#newest").text(computeDocumentIdFromHtml(content));
+				$("#waitingDocument").after(content);
+			}
+		});
+	}
+}
+
+var timerOfRefresh = setInterval(function() {
+	isRefreshPosition();
+}, 5000);
+
+function isMorePosition() {
 	if ($("#moreDocument").length > 0) {
 		$(window).scroll(function() {
 			if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
@@ -219,14 +245,14 @@ function more() {
 		type : "GET",
 		url : "/list",
 		dataType: "text",
-		data: {"from": $("#from").text()},
+		data: {"documentId": $("#oldest").text()},
 		success : function(content) {
 			$("#moreDocument").replaceWith(content);
-			scroll();
+			isMorePosition();
 		}
 	});
 }
-scroll();
+isMorePosition();
 
 $("#newDocument").keyup(function(event) {
 	if (event.which == 13) {

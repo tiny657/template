@@ -24,7 +24,7 @@ public class DocumentService {
 
 	@Autowired
 	private DocumentRepository documentRepository;
-
+	
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -57,9 +57,15 @@ public class DocumentService {
 
 		return documents;
 	}
-
+	
 	public List<Document> getList(Integer from) {
 		List<Document> documents = documentRepository.getList(from, Constant.ONEPAGELIMIT);
+
+		return documents;
+	}
+	
+	public List<Document> getRecently(Integer from) {
+		List<Document> documents = documentRepository.getRecently(from);
 
 		return documents;
 	}

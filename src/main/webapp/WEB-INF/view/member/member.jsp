@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="row-fluid">
-		<div class="thumbnail span5">
+		<div class="thumbnail span4">
 			<form:form method="post" action="/memberUpdate" modelAttribute="member">
 				<div style="text-align: center;">
 					<img src="http://graph.facebook.com/${member.providerUserId}/picture?type=large" />

@@ -34,6 +34,10 @@ public class DocumentRepository {
 		return documentDao.getList(map);
 	}
 	
+	public List<Document> getRecently(Integer from) {
+		return documentDao.getRecently(from);
+	}
+	
 	public Document get(Integer documentId) {
 		return documentDao.get(documentId);
 	}
