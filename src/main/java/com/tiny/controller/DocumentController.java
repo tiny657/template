@@ -1,5 +1,7 @@
 package com.tiny.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -7,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,16 +42,22 @@ public class DocumentController {
 	private SecurityContext securityContext;
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
-	public ModelAndView saveDocument(HttpServletRequest request, @ModelAttribute Document document) {
+	public ModelAndView saveDocument(HttpServletRequest request, @RequestParam Integer documentId,
+			@RequestParam String rawContent) {
 		ModelAndView mav = new ModelAndView();
+		Document document = new Document();
 		if (memberService.isChanceToDoc()) {
 			ModelMap model = new ModelMap();
+			document.setRawContent(rawContent);
 			document.setIpAddress(request.getRemoteAddr());
-			model.addAttribute("document", documentService.saveAndGet(document));
+			List<Document> documents = documentService.getRecently(documentId);
+			documents.add(0, documentService.saveAndGet(document));
+			model.addAttribute("documents", documents);
 			model.addAttribute("providerUserId", securityContext.getProviderUserId());
+			model.addAttribute("more", false);
 			pointService.calculatePointToSaveDocument();
 			mav.addAllObjects(model);
-			mav.setViewName("document");
+			mav.setViewName("documents");
 		} else {
 			mav.setViewName("null");
 		}

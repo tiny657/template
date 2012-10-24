@@ -10,13 +10,22 @@
 	<%-- new document form --%>
 	<div class="row">
 		<div class="span12">
-			<textarea path="rawContent" id="newDocument" class="span12" rows="1" placeholder="contents"></textarea>
+			<textarea id="newDocument" class="span12" rows="1" placeholder="contents"></textarea>
 			<button type="submit" id="saveRawContent" class="btn btn-info" onclick="saveDocument()">Save</button>
 			<br /><br />
 		</div>
 	</div>
 
 	<div>
+		<c:choose>
+			<c:when test="${empty documents}">
+				<span id="newest" style="display: none;">0</span>
+			</c:when>
+			<c:otherwise>
+				<span id="newest" style="display: none;">${documents[0].documentId}</span>
+			</c:otherwise>
+		</c:choose>
+
 		<table class="table table-striped">
 			<tbody>
 				<%-- waiting icon --%>

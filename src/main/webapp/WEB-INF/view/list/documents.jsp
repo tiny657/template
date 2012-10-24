@@ -6,15 +6,6 @@
 	<%@include file="document.jsp"%>
 </c:forEach>
 
-<c:choose>
-	<c:when test="${empty documents}">
-		<span id="newest" style="display: none;">0</span>
-	</c:when>
-	<c:otherwise>
-		<span id="newest" style="display: none;">${documents[0].documentId}</span>
-	</c:otherwise>
-</c:choose>
-
 <%-- waiting icon --%>
 <c:if test="${more}">
 	<tr id="moreDocument"><td>

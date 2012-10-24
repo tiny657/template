@@ -4,7 +4,7 @@ function computeDocumentIdFromHtml(content) {
 	return documentId[1];
 }
 
-function saveDocument(message) {
+function saveDocument() {
 	if ($("#newDocument").val() === "") {
 		return;
 	}
@@ -13,7 +13,7 @@ function saveDocument(message) {
 		type : "POST",
 		url : "/document",
 		dataType: "text",
-		data: {"rawContent": $("#newDocument").val()},
+		data: {"documentId": $("#newest").text(), "rawContent": $("#newDocument").val()},
 		beforeSend: function() {
 			$("#saveRawContent").attr("onclick", "");
 			$("#waitingDocument").css("display", "");
@@ -22,7 +22,7 @@ function saveDocument(message) {
 			$("#newest").text(computeDocumentIdFromHtml(content));
 			$("#saveRawContent").attr("onclick", "saveDocument()");
 			$("#waitingDocument").css("display", "none");
-			$("#newDocument").val('');
+			$("#newDocument").attr("rows", 1).val('');
 			$("#waitingDocument").after(content);
 		}
 	});
@@ -96,7 +96,7 @@ function saveComment(documentId) {
 		},
 		success : function(content) {
 			$("#waitingComment" + documentId).css("display", "none");
-			$("#newComment" + documentId).val('');
+			$("#newComment" + documentId).attr("rows", 1).val('');
 			$("blockquote#lastCommentPosition" + documentId).before(content);
 		}
 	});
@@ -227,7 +227,7 @@ function isRefreshPosition() {
 
 var timerOfRefresh = setInterval(function() {
 	isRefreshPosition();
-}, 5000);
+}, 10000);
 
 function isMorePosition() {
 	if ($("#moreDocument").length > 0) {
