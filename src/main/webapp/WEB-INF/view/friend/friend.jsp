@@ -18,7 +18,18 @@
 						<c:forEach var="friend" items="${friends}">
 							<tr>
 								<td>
-									<img class="img-polaroid" src="http://graph.facebook.com/${friend.id}/picture" />
+									<c:choose>
+										<c:when test="${friend.isTemplateMember}">
+											<i class="icon-ok"></i>
+										</c:when>
+										<c:otherwise>
+											<i class="icon-remove"></i>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								</td>
+								<td>
+									<img class="img-polaroid" src="http://graph.facebook.com/${friend.providerUserId}/picture" />
 										${friend.name}
 									<br /><br />
 								</td>

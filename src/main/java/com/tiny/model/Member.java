@@ -34,4 +34,7 @@ public class Member {
 	private Integer usageOfComment;
 	private Integer usageOfLike;
 	private Integer usageOfDislike;
+	
+	// installed
+	private Boolean isTemplateMember;
 }

@@ -25,17 +25,27 @@ public class FriendService {
 		this.memberRepository = memberRepository;
 	}
 
-	public List<FacebookProfile> getTemplateFriends() {
-		List<FacebookProfile> result = new ArrayList<FacebookProfile>();
+	public List<Member> getTemplateFriends() {
+		List<Member> result = new ArrayList<Member>();
+		List<Member> resultNotInstalled = new ArrayList<Member>();
 		List<FacebookProfile> friends = facebookService.getFriends();
 		
 		// TODO:: 성능 상 튜닝 필요
 		for (FacebookProfile facebookProfile : friends) {
 			Member member = memberRepository.getByProviderUserId(facebookProfile.getId());
 			if (member != null) {
-				result.add(facebookProfile);
+				member.setIsTemplateMember(true);
+				result.add(member);
+			}
+			else {
+				Member memberNotInstalled = new Member();
+				memberNotInstalled.setName(facebookProfile.getName());
+				memberNotInstalled.setProviderUserId(facebookProfile.getId());
+				memberNotInstalled.setIsTemplateMember(false);
+				resultNotInstalled.add(memberNotInstalled);
 			}
 		}
+		result.addAll(resultNotInstalled);
 		return result;
 	}
 }

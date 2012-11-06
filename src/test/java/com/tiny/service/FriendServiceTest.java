@@ -42,7 +42,7 @@ public class FriendServiceTest extends CommonMockTest {
 
 		// When
 		FriendService friendService = new FriendService(mockFacebookService, mockMemberRepository);
-		List<FacebookProfile> friends = friendService.getTemplateFriends();
+		List<Member> friends = friendService.getTemplateFriends();
 
 		// Then
 		assertThat(friends.size(), is(1));

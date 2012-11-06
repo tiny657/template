@@ -19,22 +19,22 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
+
 	@Autowired
 	private DocumentRepository documentRepository;
-	
+
 	@Autowired
 	private CommentRepository commentRepository;
-	
+
 	@Autowired
 	private LikeRepository likeRepository;
-	
+
 	@Autowired
 	private FacebookService facebookService;
 
 	@Autowired
 	private SecurityContext securityContext;
-	
+
 	public void save() {
 		FacebookProfile facebookProfile = facebookService.getProfile();
 		Member member = new Member();
@@ -60,6 +60,8 @@ public class MemberService {
 			member = memberRepository.get(securityContext.getProviderUserId());
 		}
 
+		member.setPoint(member.getDoc() * 10 + member.getLike() + member.getDislike() + member.getCommentOnMyDoc()
+				+ member.getLikeOnMyDoc() - member.getDislikeOnMyDoc());
 		return member;
 	}
 
@@ -73,7 +75,7 @@ public class MemberService {
 
 		return member;
 	}
-	
+
 	public boolean isExisted() {
 		boolean isExisted = true;
 		Member member = memberRepository.get(securityContext.getProviderUserId());
@@ -91,7 +93,8 @@ public class MemberService {
 
 	public boolean isChanceToComment() {
 		Integer chanceToComment = memberRepository.getChanceToComment(securityContext.getProviderUserId());
-		Integer countCommentForLast1Hour = commentRepository.countCommentForLast1Hour(securityContext.getProviderUserId());
+		Integer countCommentForLast1Hour = commentRepository.countCommentForLast1Hour(securityContext
+				.getProviderUserId());
 		return (chanceToComment - countCommentForLast1Hour) > 0;
 	}
 
@@ -142,7 +145,7 @@ public class MemberService {
 	public void decreaseChanceToDislike() {
 		memberRepository.decreaseChanceToDislike(securityContext.getProviderUserId());
 	}
-	
+
 	public void updateLastLoginTime() {
 		memberRepository.updateLastLoginDate(securityContext.getProviderUserId());
 	}

@@ -186,7 +186,7 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
-			<version>2.5.1</version>
+			<version>${ehcache.version}</version>
 		</dependency>
 
 		<!-- MYSQL -->
@@ -375,7 +375,7 @@
 					<configLocation>tinyCheckstyle.xml</configLocation>
 				</configuration>
 			</plugin>
-		
+
 			<!-- COBERTURA -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -387,7 +387,7 @@
 					</formats>
 				</configuration>
 			</plugin>
-			
+
 			<!-- FINDBUGS -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -525,9 +525,9 @@
 					<findbugsXmlOutput>true</findbugsXmlOutput>
 					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
 					<xmlOutput>true</xmlOutput>
-                </configuration>
+				</configuration>
 			</plugin>
-			
+
 			<!-- PMD -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
