@@ -8,14 +8,20 @@ import org.springframework.stereotype.Service;
 
 import com.tiny.model.Member;
 import com.tiny.repository.CommentRepository;
+import com.tiny.repository.DocOnMemberRepository;
 import com.tiny.repository.DocumentRepository;
+import com.tiny.repository.ItemOnMemberRepository;
 import com.tiny.repository.LikeRepository;
 import com.tiny.repository.MemberRepository;
+import com.tiny.repository.MissionOnMemberRepository;
 import com.tiny.social.SecurityContext;
 
 @Service
 public class MemberService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
+	@Autowired
+	private FacebookService facebookService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -28,10 +34,16 @@ public class MemberService {
 
 	@Autowired
 	private LikeRepository likeRepository;
+	
+	@Autowired
+	private ItemOnMemberRepository itemOnMemberRepository;
 
 	@Autowired
-	private FacebookService facebookService;
-
+	private MissionOnMemberRepository missionOnMemberRepository;
+	
+	@Autowired
+	private DocOnMemberRepository docOnMemberRepository;
+	
 	@Autowired
 	private SecurityContext securityContext;
 
@@ -62,6 +74,9 @@ public class MemberService {
 
 		member.setPoint(member.getDoc() * 10 + member.getLike() + member.getDislike() + member.getCommentOnMyDoc()
 				+ member.getLikeOnMyDoc() - member.getDislikeOnMyDoc());
+		member.setItems(itemOnMemberRepository.get(securityContext.getProviderUserId()));
+		member.setMissions(missionOnMemberRepository.get(securityContext.getProviderUserId()));
+		member.setDocsOnMember(docOnMemberRepository.get(securityContext.getProviderUserId()));
 		return member;
 	}
 

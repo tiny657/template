@@ -150,7 +150,7 @@ function like(documentId) {
 				$("#alert").removeClass("alert alert-error").html("");
 			}
 			else {
-				$("#alert").addClass("alert alert-error").html("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>Fail to dislike.");
+				$("#alert").addClass("alert alert-error").html("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>Fail to like.");
 			}
 		}
 	});
@@ -232,7 +232,7 @@ var timerOfRefresh = setInterval(function() {
 function isMorePosition() {
 	if ($("#moreDocument").length > 0) {
 		$(window).scroll(function() {
-			if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+			if ($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
 				$(window).unbind('scroll');
 				more();
 			}

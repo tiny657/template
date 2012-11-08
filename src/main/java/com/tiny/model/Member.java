@@ -1,6 +1,7 @@
 package com.tiny.model;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -34,6 +35,11 @@ public class Member {
 	private Integer usageOfComment;
 	private Integer usageOfLike;
 	private Integer usageOfDislike;
+	
+	// from item, mission, docOnMember
+	private List<DocOnMember> docsOnMember;
+	private List<Item> items;
+	private List<Mission> missions;
 	
 	// installed
 	private Boolean isTemplateMember;

@@ -12,5 +12,10 @@
 		<typeAlias type="com.tiny.model.Comment" alias="comment" />
 		<typeAlias type="com.tiny.model.UserConnection" alias="userConnection" />
 		<typeAlias type="com.tiny.model.Like" alias="like" />
+		<typeAlias type="com.tiny.model.Item" alias="item" />
+		<typeAlias type="com.tiny.model.Mission" alias="mission" />
+		<typeAlias type="com.tiny.model.ItemOnMember" alias="itemOnMember" />
+		<typeAlias type="com.tiny.model.MissionOnMember" alias="missionOnMember" />
+		<typeAlias type="com.tiny.model.DocOnMember" alias="docOnMember" />
 	</typeAliases>
 </configuration>

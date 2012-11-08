@@ -44,12 +44,6 @@
 							</li>
 							<li>
 								<a tabindex="-1" href="#">Twitter</a>
-							<li>
-								<a tabindex="-1" href="#">LinkedIn</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a tabindex="-1" href="#">Sign Up</a>
 							</li>
 						</ul>
 					</li>

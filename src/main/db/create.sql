@@ -1,9 +1,13 @@
 CREATE DATABASE IF NOT EXISTS template;
 USE template;
-DROP TABLE IF EXISTS `member`;
+DROP TABLE IF EXISTS `like`;
 DROP TABLE IF EXISTS `comment`;
 DROP TABLE IF EXISTS `document`;
-DROP TABLE IF EXISTS `like`;
+DROP TABLE IF EXISTS `missionOnMember`;
+DROP TABLE IF EXISTS `itemOnMember`;
+DROP TABLE IF EXISTS `docOnMember`;
+DROP TABLE IF EXISTS `mission`;
+DROP TABLE IF EXISTS `item`;
 
 CREATE TABLE IF NOT EXISTS `UserConnection` (
 	`userId` CHAR(255) NOT NULL,
@@ -20,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `UserConnection` (
     PRIMARY KEY (`userId`, `providerId`, `providerUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-CREATE TABLE `member` (
+CREATE TABLE IF NOT EXISTS `member` (
 	`providerUserId` CHAR(16),
 	`name` CHAR(20),
 	`gender` BOOLEAN,
@@ -36,7 +40,7 @@ CREATE TABLE `member` (
 	`dislikeOnMyDoc` INT DEFAULT 0,
 	`sharing` INT DEFAULT 0,
 	`sharingOfMyDoc` INT DEFAULT 0,
-	`chanceToDoc` INT DEFAULT 20,
+	`chanceToDoc` INT DEFAULT 2,
 	`chanceToComment` INT DEFAULT 2,
 	`chanceToLike` INT DEFAULT 2,
 	`chanceToDislike` INT DEFAULT 2,
@@ -44,6 +48,45 @@ CREATE TABLE `member` (
 	`regDate` DATETIME NOT NULL,
 	`lastLoginDate` DATETIME NOT NULL,
 	PRIMARY KEY (`providerUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `mission` (
+	`missionId` INT,
+	`condition` INT,
+	`desc` TEXT,
+	PRIMARY KEY (`missionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `item` (
+	`itemId` INT,
+	`condition` INT,
+	`desc` TEXT,
+	PRIMARY KEY (`itemId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `docOnMember` (
+	`id` INT AUTO_INCREMENT,
+	`content` TEXT NOT NULL,
+	`providerUserId` CHAR(16) NOT NULL,
+	`regDate` DATETIME NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX (`providerUserId`),
+	FOREIGN KEY (`providerUserId`) REFERENCES `member`(`providerUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `missionOnMember` (
+	`providerUserId` CHAR(16),
+	`missionId` INT,
+	PRIMARY KEY (`providerUserId`, `missionId`),
+	FOREIGN KEY (`providerUserId`) REFERENCES `member`(`providerUserId`),
+	FOREIGN KEY (`missionId`) REFERENCES `mission`(`missionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `itemOnMember` (
+	`providerUserId` CHAR(16),
+	`itemId` INT,
+	PRIMARY KEY (`providerUserId`, `itemId`),
+	FOREIGN KEY (`itemId`) REFERENCES `item`(`itemId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE `document` (

@@ -49,7 +49,7 @@ public class ListController {
 	@Autowired
 	private XssFilter xssFilter;
 
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(defaultValue = "2147483647", required = false) int documentId,
 			@RequestParam(defaultValue = "false", required = false) boolean viewRecently) {
 		if (!memberService.isExisted()) {
