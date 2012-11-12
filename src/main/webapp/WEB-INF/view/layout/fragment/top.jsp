@@ -25,6 +25,10 @@
 						<c:when test="${url eq 'friend'}"><li class="active"><a href="/friend">Friend</a></li></c:when>
 						<c:otherwise><li><a href="/friend">Friend</a></li></c:otherwise>
 					</c:choose>
+					<c:choose>
+						<c:when test="${url eq 'market'}"><li class="active"><a href="/market">Market</a></li></c:when>
+						<c:otherwise><li><a href="/market">Market</a></li></c:otherwise>
+					</c:choose>
 					<li><form:form method="get" action="/search" class="navbar-search pull-left"><input type="text" class="search-query span2" name="q" placeholder="Search"></form:form></li>
 				</ul>
 				<ul class="nav pull-right">

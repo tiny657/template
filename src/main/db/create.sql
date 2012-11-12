@@ -59,8 +59,10 @@ CREATE TABLE IF NOT EXISTS `mission` (
 
 CREATE TABLE IF NOT EXISTS `item` (
 	`itemId` INT,
+	`name` CHAR(10),
 	`condition` INT,
 	`desc` TEXT,
+	`price` INT,
 	PRIMARY KEY (`itemId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
@@ -125,3 +127,42 @@ CREATE TABLE `like` (
 	`regDate` DATETIME NOT NULL,
 	INDEX (`providerUserId`, `regDate`, `isLike`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+INSERT
+INTO `item` 
+	(`itemId`,
+	`name`,
+	`condition`,
+	`price`,
+	`desc`)
+VALUES (1,
+		"item1",
+		1,
+		20,
+		"what's this?");
+	
+INSERT
+INTO `item` 
+	(`itemId`,
+	`name`,
+	`condition`,
+	`price`,
+	`desc`)
+VALUES (2,
+		"item2",
+		2,
+		50,
+		"what's this?");
+	
+INSERT
+INTO `item` 
+	(`itemId`,
+	`name`,
+	`condition`,
+	`price`,
+	`desc`)
+VALUES (3,
+		"item3",
+		3,
+		100,
+		"what's this?");

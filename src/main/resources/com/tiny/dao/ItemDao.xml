@@ -3,7 +3,9 @@
 <mapper namespace="com.tiny.dao.ItemDao">
 	<resultMap id="result" type="item">
 		<result property="itemId" column="itemId" />
+		<result property="name" column="name" />
 		<result property="condition" column="condition" />
+		<result property="price" column="price" />
 		<result property="desc" column="desc" />
 	</resultMap>
 	
@@ -11,12 +13,22 @@
 		INSERT
 		INTO `item`
 				(`itemId`,
+				`name`,
 				`condition`,
+				`price`,
 				`desc`)
 		VALUES (#{itemId},
+				#{name},
 				#{condition},
+				#{price},
 				#{desc});
 	</insert>
+	
+	<select id="getAll" resultMap="result">
+		SELECT *
+		FROM `item`
+		ORDER BY `itemId` DESC;
+	</select>
 	
 	<select id="get" resultMap="result">
 		SELECT *
