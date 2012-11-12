@@ -69,7 +69,6 @@ public class DocumentDaoTest extends CommonTest {
 		Document document = new Document();
 		document.setContent("content");
 		document.setProviderUserId("userId");
-		document.setIpAddress("127.0.0.1");
 		document.setRegDate(new Date());
 		return document;
 	}

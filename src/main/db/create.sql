@@ -101,7 +101,6 @@ CREATE TABLE `document` (
 	`sharing` INT DEFAULT 0,
 	`providerUserId` CHAR(16) NOT NULL,
 	`name` CHAR(20),
-	`ipAddress` CHAR(8) NOT NULL,
 	`regDate` DATETIME NOT NULL,
 	PRIMARY KEY (`documentId`),
 	INDEX (`providerUserId`, `regDate`)

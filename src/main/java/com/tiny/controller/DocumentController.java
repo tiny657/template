@@ -42,14 +42,13 @@ public class DocumentController {
 	private SecurityContext securityContext;
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.POST)
-	public ModelAndView saveDocument(HttpServletRequest request, @RequestParam Integer documentId,
+	public ModelAndView saveDocument(@RequestParam Integer documentId,
 			@RequestParam String rawContent) {
 		ModelAndView mav = new ModelAndView();
 		Document document = new Document();
 		if (memberService.isChanceToDoc()) {
 			ModelMap model = new ModelMap();
 			document.setRawContent(rawContent);
-			document.setIpAddress(request.getRemoteAddr());
 			List<Document> documents = documentService.getRecently(documentId);
 			documents.add(0, documentService.saveAndGet(document));
 			model.addAttribute("documents", documents);
@@ -66,9 +65,8 @@ public class DocumentController {
 
 	@RequestMapping(value = { "/document" }, method = RequestMethod.PUT)
 	public @ResponseBody
-	String updateDocument(HttpServletRequest request, @RequestParam Integer documentId, @RequestParam String rawContent) {
+	String updateDocument(@RequestParam Integer documentId, @RequestParam String rawContent) {
 		Document document = documentService.get(documentId);
-		document.setIpAddress(request.getRemoteAddr());
 		document.setRawContent(rawContent);
 		return documentService.updateAndGet(document).getContent();
 	}
