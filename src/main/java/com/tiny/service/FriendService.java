@@ -18,7 +18,7 @@ public class FriendService {
 
 	private FacebookService facebookService;
 	private MemberRepository memberRepository;
-	
+
 	@Autowired
 	FriendService(FacebookService facebookService, MemberRepository memberRepository) {
 		this.facebookService = facebookService;
@@ -29,15 +29,14 @@ public class FriendService {
 		List<Member> result = new ArrayList<Member>();
 		List<Member> resultNotInstalled = new ArrayList<Member>();
 		List<FacebookProfile> friends = facebookService.getFriends();
-		
+
 		// TODO:: 성능 상 튜닝 필요
 		for (FacebookProfile facebookProfile : friends) {
 			Member member = memberRepository.getByProviderUserId(facebookProfile.getId());
 			if (member != null) {
 				member.setIsTemplateMember(true);
 				result.add(member);
-			}
-			else {
+			} else {
 				Member memberNotInstalled = new Member();
 				memberNotInstalled.setName(facebookProfile.getName());
 				memberNotInstalled.setProviderUserId(facebookProfile.getId());

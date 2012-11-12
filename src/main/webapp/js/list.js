@@ -19,11 +19,13 @@ function saveDocument() {
 			$("#waitingDocument").css("display", "");
 		},
 		success : function(content) {
-			$("#newest").text(computeDocumentIdFromHtml(content));
 			$("#saveRawContent").attr("onclick", "saveDocument()");
 			$("#waitingDocument").css("display", "none");
 			$("#newDocument").attr("rows", 1).val('');
-			$("#waitingDocument").after(content);
+			if ("" !== content) {
+				$("#newest").text(computeDocumentIdFromHtml(content));
+				$("#waitingDocument").after(content);
+			}
 		}
 	});
 }
