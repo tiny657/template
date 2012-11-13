@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS `itemOnMember`;
 DROP TABLE IF EXISTS `docOnMember`;
 DROP TABLE IF EXISTS `mission`;
 DROP TABLE IF EXISTS `item`;
+DROP TABLE IF EXISTS `myDoc`;
 
 CREATE TABLE IF NOT EXISTS `UserConnection` (
 	`userId` CHAR(255) NOT NULL,
@@ -95,9 +96,9 @@ CREATE TABLE `document` (
 	`documentId` INT AUTO_INCREMENT,
 	`content` TEXT NOT NULL,
 	`point` INT DEFAULT 0,
-	`comment` INT DEFAULT 0,
 	`like` INT DEFAULT 0,
 	`dislike` INT DEFAULT 0,
+	`comment` INT DEFAULT 0,
 	`sharing` INT DEFAULT 0,
 	`providerUserId` CHAR(16) NOT NULL,
 	`name` CHAR(20),
@@ -125,6 +126,15 @@ CREATE TABLE `like` (
 	`isLike` BOOLEAN NOT NULL,
 	`regDate` DATETIME NOT NULL,
 	INDEX (`providerUserId`, `regDate`, `isLike`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `myDoc` (
+	`myDocId` INT AUTO_INCREMENT,
+	`content` TEXT NOT NULL,
+	`providerUserId` CHAR(16) NOT NULL,
+	`regDate` DATETIME NOT NULL,
+	PRIMARY KEY (`myDocId`),
+	INDEX (`providerUserId`, `regDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 INSERT

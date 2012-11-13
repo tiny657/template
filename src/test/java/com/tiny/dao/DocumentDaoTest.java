@@ -53,6 +53,19 @@ public class DocumentDaoTest extends CommonTest {
 	}
 
 	@Test
+	public void update() {
+		// Given
+		documentDao.save(createDocument());
+		Integer count = documentDao.count();
+
+		// When
+		documentDao.update(createDocument2());
+
+		// Then
+		assertThat(documentDao.count(), is(count));
+	}
+
+	@Test
 	public void delete() {
 		// Given
 		documentDao.save(createDocument());
@@ -68,6 +81,14 @@ public class DocumentDaoTest extends CommonTest {
 	private Document createDocument() {
 		Document document = new Document();
 		document.setContent("content");
+		document.setProviderUserId("userId");
+		document.setRegDate(new Date());
+		return document;
+	}
+	
+	private Document createDocument2() {
+		Document document = new Document();
+		document.setContent("content2");
 		document.setProviderUserId("userId");
 		document.setRegDate(new Date());
 		return document;

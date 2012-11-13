@@ -1,3 +1,90 @@
+function computeMyDocIdFromHtml(content) {
+	var regexp = /id=\"myDoc([0-9]+)/;
+	var documentId = regexp.exec(content);
+	return documentId[1];
+}
+
+function saveMyDoc() {
+	if ($("#newMyDoc").val() === "") {
+		return;
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : "/myDoc",
+		dataType: "text",
+		data: {"myDocId": $("#newest").text(), "rawContent": $("#newMyDoc").val()},
+		beforeSend: function() {
+			$("#saveRawContent").attr("onclick", "");
+			$("#waitingMyDoc").css("display", "");
+		},
+		success : function(content) {
+			$("#saveRawContent").attr("onclick", "saveMyDoc()");
+			$("#waitingMyDoc").css("display", "none");
+			$("#newMyDoc").attr("rows", 1).val('');
+			if (content !== "") {
+				$("#newest").text(computeMyDocIdFromHtml(content));
+				$("#waitingMyDoc").after(content);
+			}
+		}
+	});
+}
+
+function enableCloseEditContentOfMyDoc(myDocId) {
+	$(document).bind("click", function(event) {
+		var id = event.target.id;
+		if(id != "rawContent" + myDocId && id != "updateRawContent" + myDocId && id != "deleteRawContent" + myDocId) {
+			$("#divContent" + myDocId).css("display", "");
+			$("#editContent" + myDocId).css("display", "none");
+			$(document).unbind("click");
+		}
+	});
+}
+
+function clickMyDoc(myDocId) {
+	var countLF = $("#rawContent" + myDocId).val().split(/[\n]/g).length;
+	$("#rawContent" + myDocId).attr("rows", countLF);
+	$("#divContent" + myDocId).css("display", "none");
+	$("#editContent" + myDocId).css("display", "");
+	$("#rawContent" + myDocId).focus();
+	var timer = setInterval(function() {
+		enableCloseEditContentOfMyDoc(myDocId);
+		clearInterval(timer);
+	}, 100);
+}
+
+function updateMyDoc(myDocId) {
+	$.ajax({
+		type : "POST",
+		url : "/myDoc",
+		dataType: "text",
+		data: {"myDocId" : myDocId, "rawContent": $("#rawContent" + myDocId).val(), _method: "PUT"},
+		beforeSend: function() {
+		 	$("#updateRawContent" + myDocId).html("Updating...");
+		},
+		success : function(content) {
+		 	$("#updateRawContent" + myDocId).html("Update");
+		  	$("#editContent" + myDocId).css("display", "none");
+			$("#divContent" + myDocId).css("display", "");
+			$("#content" + myDocId).html(content);
+			$(document).unbind("click");
+		}
+	});
+}	
+
+function deleteMyDoc(myDocId) {
+	$.ajax({
+		type : "POST",
+		url : "/myDoc",
+		dataType: "text",
+		data: {"myDocId": myDocId, _method: "DELETE"},
+		success : function() {
+			$("#myDoc" + myDocId).remove();
+			$(document).unbind("click");
+		}
+	});
+}
+
 function computeDocumentIdFromHtml(content) {
 	var regexp = /id=\"document([0-9]+)/;
 	var documentId = regexp.exec(content);
@@ -22,7 +109,7 @@ function saveDocument() {
 			$("#saveRawContent").attr("onclick", "saveDocument()");
 			$("#waitingDocument").css("display", "none");
 			$("#newDocument").attr("rows", 1).val('');
-			if ("" !== content) {
+			if (content !== "") {
 				$("#newest").text(computeDocumentIdFromHtml(content));
 				$("#waitingDocument").after(content);
 			}
@@ -260,5 +347,12 @@ $("#newDocument").keyup(function(event) {
 	if (event.which == 13) {
 		var row = parseInt($("#newDocument").attr("rows"));
 		$("#newDocument").attr("rows", row + 1);
+	}
+})
+
+$("#newMyDoc").keyup(function(event) {
+	if (event.which == 13) {
+		var row = parseInt($("#newMyDoc").attr("rows"));
+		$("#newMyDoc").attr("rows", row + 1);
 	}
 })

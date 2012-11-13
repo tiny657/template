@@ -1,6 +1,7 @@
 package com.tiny.common.util;
 
 public class Constant {
+	public static final String MAIN = "";
 	public static final String LIST = "list";
 	public static final String MEMBER = "member";
 	public static final String FRIEND = "friend";
