@@ -8,25 +8,25 @@
 				<c:choose>
 					<c:when test="${empty items}">
 						<tr>
-							<td>
-								<spring:message code="market.noItem" />
-							</td>
+							<td><spring:message code="market.noItem" /></td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="item" items="${items}">
+						<form:form method="post" action="${url}/buy" modelAttribute="checkbox">
+							<c:forEach var="item" items="${items}" varStatus="i">
+								<tr>
+									<td><form:checkbox path="checkboxs[${i.index}]" value="false" /></td>
+									<td>${item.name}</td>
+									<td>${item.price}</td>
+									<td>${item.desc}</td>
+								</tr>
+							</c:forEach>
 							<tr>
-								<td>
-									${item.name}
-								</td>
-								<td>
-									${item.price}
-								</td>
-								<td>
-									${item.desc}
+								<td colspan="4">
+									<button type="submit" id="buyItem" class="btn btn-info" onclick="buyItem()">Buy</button>
 								</td>
 							</tr>
-						</c:forEach>
+						</form:form>
 					</c:otherwise>
 				</c:choose>
 			</tbody>

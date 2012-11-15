@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row-fluid">
 		<div class="thumbnail">
-			<form:form method="post" action="/memberUpdate" modelAttribute="member">
+			<form:form method="post" action="${url}" modelAttribute="member">
 				<div style="text-align: center;">
 					<img src="http://graph.facebook.com/${member.providerUserId}/picture?type=large" />
 				</div>
