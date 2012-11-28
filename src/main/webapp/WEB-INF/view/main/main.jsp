@@ -10,6 +10,7 @@
 	<%-- new document form --%>
 	<div class="row">
 		<div class="span12">
+			<input id="newMyDocTitle" type="text" class="span12" path="title" placeholder="title" /> &nbsp
 			<textarea id="newMyDoc" class="span12" rows="1" placeholder="contents"></textarea>
 			<button type="submit" id="saveRawContent" class="btn btn-info" onclick="saveMyDoc()">Save</button>
 			<br /><br />

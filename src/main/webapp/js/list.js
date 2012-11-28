@@ -13,7 +13,7 @@ function saveMyDoc() {
 		type : "POST",
 		url : "/myDoc",
 		dataType: "text",
-		data: {"myDocId": $("#newest").text(), "rawContent": $("#newMyDoc").val()},
+		data: {"myDocId": $("#newest").text(), "title": $("#newMyDocTitle").val(), "rawContent": $("#newMyDoc").val()},
 		beforeSend: function() {
 			$("#saveRawContent").attr("onclick", "");
 			$("#waitingMyDoc").css("display", "");

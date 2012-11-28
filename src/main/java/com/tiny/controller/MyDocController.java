@@ -28,11 +28,15 @@ public class MyDocController {
 	private SecurityContext securityContext;
 
 	@RequestMapping(value = { "/myDoc" }, method = RequestMethod.POST)
-	public ModelAndView saveMyDoc(@RequestParam Integer myDocId, @RequestParam String rawContent) {
+	public ModelAndView saveMyDoc(@RequestParam Integer myDocId, @RequestParam String title,
+			@RequestParam String rawContent) {
 		ModelAndView mav = new ModelAndView();
 		MyDoc myDoc = new MyDoc();
 		ModelMap model = new ModelMap();
+		myDoc.setTitle(title);
 		myDoc.setRawContent(rawContent);
+		myDoc.setTag("");
+		myDoc.setIsGoal(false);
 		List<MyDoc> myDocs = myDocService.getRecently(myDocId);
 		myDocs.add(0, myDocService.saveAndGet(myDoc));
 		model.addAttribute("myDocs", myDocs);

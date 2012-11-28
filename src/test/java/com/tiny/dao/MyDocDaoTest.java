@@ -80,15 +80,22 @@ public class MyDocDaoTest extends CommonTest {
 
 	private MyDoc createMyDoc() {
 		MyDoc myDoc = new MyDoc();
+		myDoc.setTitle("title");
 		myDoc.setContent("content");
 		myDoc.setProviderUserId("userId");
+		myDoc.setTag("tag");
+		myDoc.setIsGoal(true);
 		myDoc.setRegDate(new Date());
 		return myDoc;
 	}
 	
 	private MyDoc createMyDoc2() {
 		MyDoc myDoc = new MyDoc();
+		myDoc.setTitle("title2");
 		myDoc.setContent("content2");
+		myDoc.setProviderUserId("userId2");
+		myDoc.setTag("tag2");
+		myDoc.setIsGoal(true);
 		myDoc.setRegDate(new Date());
 		return myDoc;
 	}

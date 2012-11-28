@@ -23,7 +23,7 @@ public class MyDocService {
 
 	@Autowired
 	private MyDocRepository myDocRepository;
-	
+
 	@Autowired
 	private SecurityContext securityContext;
 
@@ -52,19 +52,19 @@ public class MyDocService {
 
 		return mydocs;
 	}
-	
+
 	public List<MyDoc> getList(Integer from) {
 		List<MyDoc> mydocs = myDocRepository.getList(from, Constants.ONEPAGELIMIT);
 
 		return mydocs;
 	}
-	
+
 	public List<MyDoc> getRecently(Integer from) {
 		List<MyDoc> mydocs = myDocRepository.getRecently(from);
 
 		return mydocs;
 	}
-	
+
 	public MyDoc get(Integer myDocId) {
 		return myDocRepository.get(myDocId);
 	}

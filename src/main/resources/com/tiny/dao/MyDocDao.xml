@@ -3,19 +3,28 @@
 <mapper namespace="com.tiny.dao.MyDocDao">
 	<resultMap id="result" type="myDoc">
 		<result property="myDocId" column="myDocId" />
+		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="providerUserId" column="providerUserId" />
+		<result property="tag" column="tag" />
+		<result property="isGoal" column="isGoal" />
 		<result property="regDate" column="regDate" />
 	</resultMap>
 	
 	<insert id="save" parameterType="myDoc">
 		INSERT
 		INTO myDoc 
-				(`content`,
+				(`title`,
+				`content`,
 				`providerUserId`,
+				`tag`,
+				`isGoal`,
 				`regDate`)
-		VALUES (#{content},
+		VALUES (#{title},
+				#{content},
 				#{providerUserId},
+				#{tag},
+				#{isGoal},
 				NOW());
 	</insert>
 	
@@ -66,6 +75,7 @@
 	<update id="update" parameterType="myDoc">
   		UPDATE `myDoc`
   		SET
+			`title` = #{title},
 			`content` = #{content},
 			`regDate` = NOW()
   		WHERE `myDocId` = #{myDocId};

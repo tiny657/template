@@ -130,8 +130,11 @@ CREATE TABLE `like` (
 
 CREATE TABLE `myDoc` (
 	`myDocId` INT AUTO_INCREMENT,
+	`title` TEXT NOT NULL,
 	`content` TEXT NOT NULL,
 	`providerUserId` CHAR(16) NOT NULL,
+	`tag` TEXT,
+	`isGoal` BOOLEAN NOT NULL,
 	`regDate` DATETIME NOT NULL,
 	PRIMARY KEY (`myDocId`),
 	INDEX (`providerUserId`, `regDate`)
