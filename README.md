@@ -15,7 +15,6 @@ Skill Set
  - Selenium : Automatic Web Browser Test Framework
  - JUnit : Java Test Framework
  - Mockito : Mocking Framework
- - Lombok : Getter/Setter 등 불필요한 코드 생략 가능한 Library
  - MoreUnit : Code, Test Code 이동 툴
  - Emma : Code Coverage 검사 툴 (eclipse)
  - Cobertura : Code Coverage 검사 툴 (jenkins)
