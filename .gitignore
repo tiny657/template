@@ -4,6 +4,8 @@
 .settings/
 target/
 *.class
+todo
+social.properties
 
 # Package Files #
 *.jar
