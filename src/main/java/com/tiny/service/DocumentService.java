@@ -17,72 +17,73 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class DocumentService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DocumentService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DocumentService.class);
 
-	@Autowired
-	private XssFilter xssFilter;
+  @Autowired
+  private XssFilter xssFilter;
 
-	@Autowired
-	private DocumentRepository documentRepository;
-	
-	@Autowired
-	private MemberRepository memberRepository;
+  @Autowired
+  private DocumentRepository documentRepository;
 
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private MemberRepository memberRepository;
 
-	public void save(Document document) {
-		document.setProviderUserId(securityContext.getProviderUserId());
-		document.setName(memberRepository.getName(securityContext.getProviderUserId()));
-		document.setContent(xssFilter.doFilter(document.getRawContent()));
-		documentRepository.save(document);
-	}
+  @Autowired
+  private SecurityContext securityContext;
 
-	@Transactional
-	public Document saveAndGet(Document document) {
-		save(document);
-		Document lastDocument = documentRepository.getLast();
-		lastDocument.setRawContent(document.getRawContent());
-		return lastDocument;
-	}
+  public void save(Document document) {
+    document.setProviderUserId(securityContext.getProviderUserId());
+    document.setName(memberRepository.getName(securityContext.getProviderUserId()));
+    document.setContent(xssFilter.doFilter(document.getRawContent()));
+    documentRepository.save(document);
+  }
 
-	public Document updateAndGet(Document document) {
-		document.setContent(xssFilter.doFilter(document.getRawContent()));
-		documentRepository.update(document);
-		return document;
-	}
+  @Transactional
+  public Document saveAndGet(Document document) {
+    save(document);
+    Document lastDocument = documentRepository.getLast();
+    lastDocument.setRawContent(document.getRawContent());
+    return lastDocument;
+  }
 
-	public List<Document> getAll() {
-		List<Document> documents = documentRepository.getAll();
+  public Document updateAndGet(Document document) {
+    document.setContent(xssFilter.doFilter(document.getRawContent()));
+    documentRepository.update(document);
+    return document;
+  }
 
-		return documents;
-	}
-	
-	public List<Document> getList(Integer from) {
-		List<Document> documents = documentRepository.getList(from, Constants.ONEPAGELIMIT);
+  public List<Document> getAll() {
+    List<Document> documents = documentRepository.getAll();
 
-		return documents;
-	}
-	
-	public List<Document> getRecently(Integer from) {
-		List<Document> documents = documentRepository.getRecently(from);
+    return documents;
+  }
 
-		return documents;
-	}
-	
-	public Document get(Integer documentId) {
-		return documentRepository.get(documentId);
-	}
+  public List<Document> getList(Integer from) {
+    List<Document> documents = documentRepository.getList(from, Constants.ONEPAGELIMIT);
 
-	public Document getLast() {
-		return documentRepository.getLast();
-	}
+    return documents;
+  }
 
-	public boolean isMyDoc(Integer documentId) {
-		return documentRepository.getProviderUesrId(documentId).equals(securityContext.getProviderUserId());
-	}
+  public List<Document> getRecently(Integer from) {
+    List<Document> documents = documentRepository.getRecently(from);
 
-	public void delete(Integer documentId) {
-		documentRepository.delete(documentId);
-	}
+    return documents;
+  }
+
+  public Document get(Integer documentId) {
+    return documentRepository.get(documentId);
+  }
+
+  public Document getLast() {
+    return documentRepository.getLast();
+  }
+
+  public boolean isMyDoc(Integer documentId) {
+    return documentRepository.getProviderUesrId(documentId).equals(
+        securityContext.getProviderUserId());
+  }
+
+  public void delete(Integer documentId) {
+    documentRepository.delete(documentId);
+  }
 }

@@ -9,12 +9,12 @@ import com.tiny.dao.UserConnectionDao;
 
 @Repository
 public class UserConnectionRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserConnectionRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(UserConnectionRepository.class);
 
-	@Autowired
-	private UserConnectionDao userConnectionDao;
+  @Autowired
+  private UserConnectionDao userConnectionDao;
 
-	public String getProviderUserId(String userId) {
-		return userConnectionDao.getProviderUserId(userId);
-	}
+  public String getProviderUserId(String userId) {
+    return userConnectionDao.getProviderUserId(userId);
+  }
 }

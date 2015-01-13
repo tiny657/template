@@ -19,44 +19,44 @@ import com.tiny.social.SecurityContext;
 
 @Controller
 public class MyDocController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MyDocController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyDocController.class);
 
-	@Autowired
-	private MyDocService myDocService;
+  @Autowired
+  private MyDocService myDocService;
 
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private SecurityContext securityContext;
 
-	@RequestMapping(value = { "/myDoc" }, method = RequestMethod.POST)
-	public ModelAndView saveMyDoc(@RequestParam Integer myDocId, @RequestParam String title,
-			@RequestParam String rawContent) {
-		ModelAndView mav = new ModelAndView();
-		MyDoc myDoc = new MyDoc();
-		ModelMap model = new ModelMap();
-		myDoc.setTitle(title);
-		myDoc.setRawContent(rawContent);
-		myDoc.setTag("");
-		myDoc.setIsGoal(false);
-		List<MyDoc> myDocs = myDocService.getRecently(myDocId);
-		myDocs.add(0, myDocService.saveAndGet(myDoc));
-		model.addAttribute("myDocs", myDocs);
-		model.addAttribute("providerUserId", securityContext.getProviderUserId());
-		model.addAttribute("more", false);
-		mav.addAllObjects(model);
-		mav.setViewName("myDocs");
-		return mav;
-	}
+  @RequestMapping(value = {"/myDoc"}, method = RequestMethod.POST)
+  public ModelAndView saveMyDoc(@RequestParam Integer myDocId, @RequestParam String title,
+      @RequestParam String rawContent) {
+    ModelAndView mav = new ModelAndView();
+    MyDoc myDoc = new MyDoc();
+    ModelMap model = new ModelMap();
+    myDoc.setTitle(title);
+    myDoc.setRawContent(rawContent);
+    myDoc.setTag("");
+    myDoc.setIsGoal(false);
+    List<MyDoc> myDocs = myDocService.getRecently(myDocId);
+    myDocs.add(0, myDocService.saveAndGet(myDoc));
+    model.addAttribute("myDocs", myDocs);
+    model.addAttribute("providerUserId", securityContext.getProviderUserId());
+    model.addAttribute("more", false);
+    mav.addAllObjects(model);
+    mav.setViewName("myDocs");
+    return mav;
+  }
 
-	@RequestMapping(value = { "/myDoc" }, method = RequestMethod.PUT)
-	public @ResponseBody
-	String updateDocument(@RequestParam Integer myDocId, @RequestParam String rawContent) {
-		MyDoc myDoc = myDocService.get(myDocId);
-		myDoc.setRawContent(rawContent);
-		return myDocService.updateAndGet(myDoc).getContent();
-	}
+  @RequestMapping(value = {"/myDoc"}, method = RequestMethod.PUT)
+  public @ResponseBody
+  String updateDocument(@RequestParam Integer myDocId, @RequestParam String rawContent) {
+    MyDoc myDoc = myDocService.get(myDocId);
+    myDoc.setRawContent(rawContent);
+    return myDocService.updateAndGet(myDoc).getContent();
+  }
 
-	@RequestMapping(value = { "/myDoc" }, method = RequestMethod.DELETE)
-	public void delete(@RequestParam Integer myDocId) {
-		myDocService.delete(myDocId);
-	}
+  @RequestMapping(value = {"/myDoc"}, method = RequestMethod.DELETE)
+  public void delete(@RequestParam Integer myDocId) {
+    myDocService.delete(myDocId);
+  }
 }

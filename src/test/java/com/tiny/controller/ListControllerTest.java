@@ -15,95 +15,96 @@ import com.tiny.common.CommonTest;
 
 @Ignore
 public class ListControllerTest extends CommonTest {
-	@Test
-	public void testFireFox() {
-		// Given
-		WebDriver webdriver = new FirefoxDriver();
-		
-		// When
-		webdriver.get("https://github.com");
+  @Test
+  public void testFireFox() {
+    // Given
+    WebDriver webdriver = new FirefoxDriver();
 
-		// Then
-		assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
-		webdriver.quit();
-	}
+    // When
+    webdriver.get("https://github.com");
 
-	@Test
-	public void testChrome() {
-		// Given
-		String chromeBinary = System.getProperty(" ");
-		if (chromeBinary == null || chromeBinary.equals("")) {
-			if (isWindow()) {
-				chromeBinary = "src/main/resources/drivers/chrome/chromedriver.exe";
-			} else if (isMac()) {
-				chromeBinary = "src/main/resources/drivers/chrome/chromedriver-mac";
-			} else if (isLinux()) {
-				if (is64bit()) {
-					chromeBinary = "src/main/resources/drivers/chrome/chromedriver-linux64";
-				} else {
-					chromeBinary = "src/main/resources/drivers/chrome/chromedriver-linux32";
-				}
-			}
-		}
+    // Then
+    assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
+    webdriver.quit();
+  }
 
-		System.setProperty("webdriver.chrome.driver", chromeBinary);
-		WebDriver webdriver = new ChromeDriver();
+  @Test
+  public void testChrome() {
+    // Given
+    String chromeBinary = System.getProperty(" ");
+    if (chromeBinary == null || chromeBinary.equals("")) {
+      if (isWindow()) {
+        chromeBinary = "src/main/resources/drivers/chrome/chromedriver.exe";
+      } else if (isMac()) {
+        chromeBinary = "src/main/resources/drivers/chrome/chromedriver-mac";
+      } else if (isLinux()) {
+        if (is64bit()) {
+          chromeBinary = "src/main/resources/drivers/chrome/chromedriver-linux64";
+        } else {
+          chromeBinary = "src/main/resources/drivers/chrome/chromedriver-linux32";
+        }
+      }
+    }
 
-		// When
-		webdriver.get("https://github.com");
+    System.setProperty("webdriver.chrome.driver", chromeBinary);
+    WebDriver webdriver = new ChromeDriver();
 
-		// Then
-		assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
-		webdriver.quit();
-	}
+    // When
+    webdriver.get("https://github.com");
 
-	@Test
-	public void testIE() {
-		if (isWindow()) {
-			// Given
-			DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
-			capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			WebDriver webdriver = new InternetExplorerDriver(capability);
+    // Then
+    assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
+    webdriver.quit();
+  }
 
-			// When
-			webdriver.get("https://github.com");
+  @Test
+  public void testIE() {
+    if (isWindow()) {
+      // Given
+      DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+      capability.setCapability(
+          InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+      WebDriver webdriver = new InternetExplorerDriver(capability);
 
-			// Then
-			assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
-			webdriver.quit();
-		}
-	}
+      // When
+      webdriver.get("https://github.com");
 
-	private boolean isWindow() {
-		String os = System.getProperty("os.name").toLowerCase();
-		if (0 <= os.indexOf("win")) {
-			return true;
-		}
-		return false;
-	}
+      // Then
+      assertThat(webdriver.getTitle(), is("GitHub · Social Coding"));
+      webdriver.quit();
+    }
+  }
 
-	private boolean isMac() {
-		String os = System.getProperty("os.name").toLowerCase();
-		if (0 <= os.indexOf("mac")) {
-			return true;
-		}
+  private boolean isWindow() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (0 <= os.indexOf("win")) {
+      return true;
+    }
+    return false;
+  }
 
-		return false;
-	}
+  private boolean isMac() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (0 <= os.indexOf("mac")) {
+      return true;
+    }
 
-	private boolean isLinux() {
-		String os = System.getProperty("os.name").toLowerCase();
-		if (0 <= os.indexOf("linux")) {
-			return true;
-		}
+    return false;
+  }
 
-		return false;
-	}
+  private boolean isLinux() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (0 <= os.indexOf("linux")) {
+      return true;
+    }
 
-	private boolean is64bit() {
-		if (System.getProperty("os.arch").equals("64")) {
-			return true;
-		}
-		return false;
-	}
+    return false;
+  }
+
+  private boolean is64bit() {
+    if (System.getProperty("os.arch").equals("64")) {
+      return true;
+    }
+    return false;
+  }
 }

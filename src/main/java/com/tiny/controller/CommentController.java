@@ -21,54 +21,54 @@ import com.tiny.social.SecurityContext;
 
 @Controller
 public class CommentController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
-	@Autowired
-	private MemberService memberService;
+  @Autowired
+  private MemberService memberService;
 
-	@Autowired
-	private DocumentService documentService;
+  @Autowired
+  private DocumentService documentService;
 
-	@Autowired
-	private CommentService commentService;
+  @Autowired
+  private CommentService commentService;
 
-	@Autowired
-	private PointService pointService;
-	
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private PointService pointService;
 
-	@RequestMapping(value = Constants.COMMENT, method = RequestMethod.POST)
-	public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
-		ModelAndView mav = new ModelAndView();
+  @Autowired
+  private SecurityContext securityContext;
 
-		boolean isMyDoc = documentService.isMyDoc(documentId);
-		if (isMyDoc || memberService.isChanceToComment()) {
-			ModelMap model = new ModelMap();
-			Comment comment = new Comment();
-			comment.setDocumentId(documentId);
-			comment.setContent(content);
-			comment.setIsMyDoc(isMyDoc);
-			model.addAttribute("comment", commentService.saveAndGet(comment));
-			model.addAttribute("providerUserId", securityContext.getProviderUserId());
-			if (!isMyDoc) {
-				pointService.calculatePointToSaveComment(documentId);
-			}
-			mav.addAllObjects(model);
-			mav.setViewName("comment");
-		} else {
-			mav.setViewName("null");
-		}
-		return mav;
-	}
+  @RequestMapping(value = Constants.COMMENT, method = RequestMethod.POST)
+  public ModelAndView save(@RequestParam Integer documentId, @RequestParam String content) {
+    ModelAndView mav = new ModelAndView();
 
-	@RequestMapping(value = Constants.COMMENT, method = RequestMethod.DELETE)
-	public @ResponseBody
-	boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
-		if (!documentService.isMyDoc(documentId)) {
-			pointService.calculatePointToDeleteComment(documentId, commentId);
-		}
-		commentService.delete(commentId);
-		return true;
-	}
+    boolean isMyDoc = documentService.isMyDoc(documentId);
+    if (isMyDoc || memberService.isChanceToComment()) {
+      ModelMap model = new ModelMap();
+      Comment comment = new Comment();
+      comment.setDocumentId(documentId);
+      comment.setContent(content);
+      comment.setIsMyDoc(isMyDoc);
+      model.addAttribute("comment", commentService.saveAndGet(comment));
+      model.addAttribute("providerUserId", securityContext.getProviderUserId());
+      if (!isMyDoc) {
+        pointService.calculatePointToSaveComment(documentId);
+      }
+      mav.addAllObjects(model);
+      mav.setViewName("comment");
+    } else {
+      mav.setViewName("null");
+    }
+    return mav;
+  }
+
+  @RequestMapping(value = Constants.COMMENT, method = RequestMethod.DELETE)
+  public @ResponseBody
+  boolean delete(@RequestParam Integer documentId, @RequestParam Integer commentId) {
+    if (!documentService.isMyDoc(documentId)) {
+      pointService.calculatePointToDeleteComment(documentId, commentId);
+    }
+    commentService.delete(commentId);
+    return true;
+  }
 }

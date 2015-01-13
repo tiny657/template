@@ -13,59 +13,59 @@ import com.tiny.common.CommonTest;
 import com.tiny.model.Like;
 
 public class LikeDaoTest extends CommonTest {
-	@Autowired
-	private LikeDao likeDao;
-	
-	private final Integer documentId = 777;
-	private final String providerUserId = "providerUserId";
+  @Autowired
+  private LikeDao likeDao;
 
-	@Test
-	public void save() {
-		// Given
-		Integer count = likeDao.count();
+  private final Integer documentId = 777;
+  private final String providerUserId = "providerUserId";
 
-		// When
-		likeDao.save(createLike());
+  @Test
+  public void save() {
+    // Given
+    Integer count = likeDao.count();
 
-		// Then
-		assertThat(likeDao.count(), is(count + 1));
-	}
-	
-	@Test
-	public void getByProviderUserId() {
-		// Given
-		Like likeTmp = createLike();
-		likeDao.save(likeTmp);
+    // When
+    likeDao.save(createLike());
 
-		// When
-		Like like = likeDao.getByProviderUserId(likeTmp.getProviderUserId()).get(0);
+    // Then
+    assertThat(likeDao.count(), is(count + 1));
+  }
 
-		// Then
-		assertThat(like.getProviderUserId(), is(likeTmp.getProviderUserId()));
-	}
+  @Test
+  public void getByProviderUserId() {
+    // Given
+    Like likeTmp = createLike();
+    likeDao.save(likeTmp);
 
-	@Test
-	public void delete() {
-		// Given
-		Like like = createLike();
-		likeDao.save(like);
-		Integer count = likeDao.count();
+    // When
+    Like like = likeDao.getByProviderUserId(likeTmp.getProviderUserId()).get(0);
 
-		// When
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("providerUserId", providerUserId);
-		map.put("documentId", documentId);
-		likeDao.delete(map);
+    // Then
+    assertThat(like.getProviderUserId(), is(likeTmp.getProviderUserId()));
+  }
 
-		// Then
-		assertThat(likeDao.count(), is(count - 1));
-	}
+  @Test
+  public void delete() {
+    // Given
+    Like like = createLike();
+    likeDao.save(like);
+    Integer count = likeDao.count();
 
-	private Like createLike() {
-		Like like = new Like();
-		like.setProviderUserId(providerUserId);
-		like.setDocumentId(documentId);
-		like.setIsLike(true);
-		return like;
-	}
+    // When
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("providerUserId", providerUserId);
+    map.put("documentId", documentId);
+    likeDao.delete(map);
+
+    // Then
+    assertThat(likeDao.count(), is(count - 1));
+  }
+
+  private Like createLike() {
+    Like like = new Like();
+    like.setProviderUserId(providerUserId);
+    like.setDocumentId(documentId);
+    like.setIsLike(true);
+    return like;
+  }
 }

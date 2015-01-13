@@ -10,16 +10,16 @@ import com.tiny.model.Mission;
 
 @Repository
 public class MissionRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MissionRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MissionRepository.class);
 
-	@Autowired
-	private MissionDao missionDao;
+  @Autowired
+  private MissionDao missionDao;
 
-	public void save(Mission mission) {
-		missionDao.save(mission);
-	}
+  public void save(Mission mission) {
+    missionDao.save(mission);
+  }
 
-	public Mission get(Integer missionId) {
-		return missionDao.get(missionId);
-	}
+  public Mission get(Integer missionId) {
+    return missionDao.get(missionId);
+  }
 }

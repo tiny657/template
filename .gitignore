@@ -6,6 +6,7 @@ target/
 *.class
 todo
 social.properties
+*.iml
 
 # Package Files #
 *.jar

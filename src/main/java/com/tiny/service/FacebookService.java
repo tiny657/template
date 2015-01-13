@@ -11,24 +11,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FacebookService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FacebookService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(FacebookService.class);
 
-	private Facebook facebook;
-	
-	@Autowired
-	FacebookService(Facebook facebook) {
-		this.facebook = facebook;
-	}
+  private Facebook facebook;
 
-	public FacebookProfile getProfile() {
-		return facebook.userOperations().getUserProfile();
-	}
-	
-	public List<FacebookProfile> getFriends() {
-		return facebook.friendOperations().getFriendProfiles();
-	}
-	
-	public void post(String content) {
-		facebook.feedOperations().updateStatus(content);
-	}
+  @Autowired
+  FacebookService(Facebook facebook) {
+    this.facebook = facebook;
+  }
+
+  public FacebookProfile getProfile() {
+    return facebook.userOperations().getUserProfile();
+  }
+
+  public List<FacebookProfile> getFriends() {
+    return facebook.friendOperations().getFriendProfiles();
+  }
+
+  public void post(String content) {
+    facebook.feedOperations().updateStatus(content);
+  }
 }

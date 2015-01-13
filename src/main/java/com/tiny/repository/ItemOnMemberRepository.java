@@ -15,24 +15,24 @@ import com.tiny.model.ItemOnMember;
 
 @Repository
 public class ItemOnMemberRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemOnMemberRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ItemOnMemberRepository.class);
 
-	@Autowired
-	private ItemOnMemberDao itemOnMemberDao;
-	
-	@Autowired
-	private ItemDao itemDao;
+  @Autowired
+  private ItemOnMemberDao itemOnMemberDao;
 
-	public void save(ItemOnMember itemOnMember) {
-		itemOnMemberDao.save(itemOnMember);
-	}
+  @Autowired
+  private ItemDao itemDao;
 
-	public List<Item> get(String providerUserId) {
-		List<Item> items = new ArrayList<Item>();
-		List<ItemOnMember> itemsOnMember = itemOnMemberDao.get(providerUserId);
-		for (ItemOnMember itemOnMember : itemsOnMember) {
-			items.add(itemDao.get(itemOnMember.getItemId()));
-		}
-		return items;
-	}
+  public void save(ItemOnMember itemOnMember) {
+    itemOnMemberDao.save(itemOnMember);
+  }
+
+  public List<Item> get(String providerUserId) {
+    List<Item> items = new ArrayList<Item>();
+    List<ItemOnMember> itemsOnMember = itemOnMemberDao.get(providerUserId);
+    for (ItemOnMember itemOnMember : itemsOnMember) {
+      items.add(itemDao.get(itemOnMember.getItemId()));
+    }
+    return items;
+  }
 }

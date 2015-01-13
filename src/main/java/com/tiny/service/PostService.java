@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PostService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
-	
-	@Autowired
-	private FacebookService facebookService;
+  private static final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
-	public void post(String content) {
-		facebookService.post(content);
-	}
+  @Autowired
+  private FacebookService facebookService;
+
+  public void post(String content) {
+    facebookService.post(content);
+  }
 }

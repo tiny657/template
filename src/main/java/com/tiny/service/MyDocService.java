@@ -16,64 +16,64 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class MyDocService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MyDocService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MyDocService.class);
 
-	@Autowired
-	private XssFilter xssFilter;
+  @Autowired
+  private XssFilter xssFilter;
 
-	@Autowired
-	private MyDocRepository myDocRepository;
+  @Autowired
+  private MyDocRepository myDocRepository;
 
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private SecurityContext securityContext;
 
-	public void save(MyDoc myDoc) {
-		myDoc.setProviderUserId(securityContext.getProviderUserId());
-		myDoc.setContent(xssFilter.doFilter(myDoc.getRawContent()));
-		myDocRepository.save(myDoc);
-	}
+  public void save(MyDoc myDoc) {
+    myDoc.setProviderUserId(securityContext.getProviderUserId());
+    myDoc.setContent(xssFilter.doFilter(myDoc.getRawContent()));
+    myDocRepository.save(myDoc);
+  }
 
-	@Transactional
-	public MyDoc saveAndGet(MyDoc myDoc) {
-		save(myDoc);
-		MyDoc lastMyDoc = myDocRepository.getLast();
-		lastMyDoc.setRawContent(myDoc.getRawContent());
-		return lastMyDoc;
-	}
+  @Transactional
+  public MyDoc saveAndGet(MyDoc myDoc) {
+    save(myDoc);
+    MyDoc lastMyDoc = myDocRepository.getLast();
+    lastMyDoc.setRawContent(myDoc.getRawContent());
+    return lastMyDoc;
+  }
 
-	public MyDoc updateAndGet(MyDoc myDoc) {
-		myDoc.setContent(xssFilter.doFilter(myDoc.getRawContent()));
-		myDocRepository.update(myDoc);
-		return myDoc;
-	}
+  public MyDoc updateAndGet(MyDoc myDoc) {
+    myDoc.setContent(xssFilter.doFilter(myDoc.getRawContent()));
+    myDocRepository.update(myDoc);
+    return myDoc;
+  }
 
-	public List<MyDoc> getAll() {
-		List<MyDoc> mydocs = myDocRepository.getAll();
+  public List<MyDoc> getAll() {
+    List<MyDoc> mydocs = myDocRepository.getAll();
 
-		return mydocs;
-	}
+    return mydocs;
+  }
 
-	public List<MyDoc> getList(Integer from) {
-		List<MyDoc> mydocs = myDocRepository.getList(from, Constants.ONEPAGELIMIT);
+  public List<MyDoc> getList(Integer from) {
+    List<MyDoc> mydocs = myDocRepository.getList(from, Constants.ONEPAGELIMIT);
 
-		return mydocs;
-	}
+    return mydocs;
+  }
 
-	public List<MyDoc> getRecently(Integer from) {
-		List<MyDoc> mydocs = myDocRepository.getRecently(from);
+  public List<MyDoc> getRecently(Integer from) {
+    List<MyDoc> mydocs = myDocRepository.getRecently(from);
 
-		return mydocs;
-	}
+    return mydocs;
+  }
 
-	public MyDoc get(Integer myDocId) {
-		return myDocRepository.get(myDocId);
-	}
+  public MyDoc get(Integer myDocId) {
+    return myDocRepository.get(myDocId);
+  }
 
-	public MyDoc getLast() {
-		return myDocRepository.getLast();
-	}
+  public MyDoc getLast() {
+    return myDocRepository.getLast();
+  }
 
-	public void delete(Integer myDocId) {
-		myDocRepository.delete(myDocId);
-	}
+  public void delete(Integer myDocId) {
+    myDocRepository.delete(myDocId);
+  }
 }

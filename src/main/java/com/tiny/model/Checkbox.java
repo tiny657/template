@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data
 public class Checkbox {
-	private List<Boolean> checkboxs;
+  private List<Boolean> checkboxs;
 }

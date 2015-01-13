@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleConnectionSignUp implements ConnectionSignUp {
 
-	private final AtomicLong userIdSequence = new AtomicLong();
+  private final AtomicLong userIdSequence = new AtomicLong();
 
-	public String execute(Connection<?> connection) {
-		return Long.toString(userIdSequence.incrementAndGet());
-	}
+  public String execute(Connection<?> connection) {
+    return Long.toString(userIdSequence.incrementAndGet());
+  }
 }

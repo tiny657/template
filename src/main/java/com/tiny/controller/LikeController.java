@@ -24,113 +24,113 @@ import com.tiny.service.PostService;
 
 @Controller
 public class LikeController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LikeController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LikeController.class);
 
-	@Autowired
-	private MemberService memberService;
+  @Autowired
+  private MemberService memberService;
 
-	@Autowired
-	private DocumentService documentService;
+  @Autowired
+  private DocumentService documentService;
 
-	@Autowired
-	private LikeService likeService;
+  @Autowired
+  private LikeService likeService;
 
-	@Autowired
-	private PointService pointService;
+  @Autowired
+  private PointService pointService;
 
-	@Autowired
-	private PostService postService;
+  @Autowired
+  private PostService postService;
 
-	@RequestMapping(value = Constants.POST, method = RequestMethod.POST)
-	public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		try {
-			postService.post(content);
-			pointService.calculatePointToShare(documentId);
-			Document document = documentService.get(documentId);
-			model.addAttribute("isSuccess", true);
-			model.addAttribute("alertMessage", "Posted.");
-			model.addAttribute("document", document);
-		} catch (DuplicateStatusException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Already Posted.");
-		} catch (UncategorizedApiException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Content is empty.");
-		} catch (RateLimitExceededException e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "The rate limit has been exceeded.");
-		} catch (Exception e) {
-			model.addAttribute("isSuccess", false);
-			model.addAttribute("alertMessage", "Error to post.");
-		}
-		mav.addAllObjects(model);
-		mav.setViewName("postAlert");
-		return mav;
-	}
+  @RequestMapping(value = Constants.POST, method = RequestMethod.POST)
+  public ModelAndView post(@RequestParam Integer documentId, @RequestParam String content) {
+    ModelAndView mav = new ModelAndView();
+    ModelMap model = new ModelMap();
+    try {
+      postService.post(content);
+      pointService.calculatePointToShare(documentId);
+      Document document = documentService.get(documentId);
+      model.addAttribute("isSuccess", true);
+      model.addAttribute("alertMessage", "Posted.");
+      model.addAttribute("document", document);
+    } catch (DuplicateStatusException e) {
+      model.addAttribute("isSuccess", false);
+      model.addAttribute("alertMessage", "Already Posted.");
+    } catch (UncategorizedApiException e) {
+      model.addAttribute("isSuccess", false);
+      model.addAttribute("alertMessage", "Content is empty.");
+    } catch (RateLimitExceededException e) {
+      model.addAttribute("isSuccess", false);
+      model.addAttribute("alertMessage", "The rate limit has been exceeded.");
+    } catch (Exception e) {
+      model.addAttribute("isSuccess", false);
+      model.addAttribute("alertMessage", "Error to post.");
+    }
+    mav.addAllObjects(model);
+    mav.setViewName("postAlert");
+    return mav;
+  }
 
-	@RequestMapping(value = Constants.LIKE, method = RequestMethod.GET)
-	public @ResponseBody
-	boolean like(@RequestParam Integer documentId) {
-		if (documentService.isMyDoc(documentId)) {
-			return false;
-		}
+  @RequestMapping(value = Constants.LIKE, method = RequestMethod.GET)
+  public @ResponseBody
+  boolean like(@RequestParam Integer documentId) {
+    if (documentService.isMyDoc(documentId)) {
+      return false;
+    }
 
-		if (likeService.getByProviderUserId(documentId) != null) {
-			return false;
-		}
+    if (likeService.getByProviderUserId(documentId) != null) {
+      return false;
+    }
 
-		if (memberService.isChanceToLike()) {
-			pointService.calculatePointToClickLike(documentId);
-			likeService.save(documentId, true);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    if (memberService.isChanceToLike()) {
+      pointService.calculatePointToClickLike(documentId);
+      likeService.save(documentId, true);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	@RequestMapping(value = Constants.CANCELLIKE, method = RequestMethod.GET)
-	public @ResponseBody
-	boolean cancelLike(@RequestParam Integer documentId) {
-		if (documentService.isMyDoc(documentId)) {
-			return false;
-		}
+  @RequestMapping(value = Constants.CANCELLIKE, method = RequestMethod.GET)
+  public @ResponseBody
+  boolean cancelLike(@RequestParam Integer documentId) {
+    if (documentService.isMyDoc(documentId)) {
+      return false;
+    }
 
-		pointService.calculatePointToCancelLike(documentId);
-		likeService.delete(documentId);
-		return true;
-	}
+    pointService.calculatePointToCancelLike(documentId);
+    likeService.delete(documentId);
+    return true;
+  }
 
-	@RequestMapping(value = Constants.DISLIKE, method = RequestMethod.GET)
-	public @ResponseBody
-	boolean dislike(@RequestParam Integer documentId) {
-		if (documentService.isMyDoc(documentId)) {
-			return false;
-		}
+  @RequestMapping(value = Constants.DISLIKE, method = RequestMethod.GET)
+  public @ResponseBody
+  boolean dislike(@RequestParam Integer documentId) {
+    if (documentService.isMyDoc(documentId)) {
+      return false;
+    }
 
-		if (likeService.getByProviderUserId(documentId) != null) {
-			return false;
-		}
+    if (likeService.getByProviderUserId(documentId) != null) {
+      return false;
+    }
 
-		if (memberService.isChanceToDislike()) {
-			pointService.calculatePointToClickDislike(documentId);
-			likeService.save(documentId, false);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    if (memberService.isChanceToDislike()) {
+      pointService.calculatePointToClickDislike(documentId);
+      likeService.save(documentId, false);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	@RequestMapping(value = Constants.CANCELDISLIKE, method = RequestMethod.GET)
-	public @ResponseBody
-	boolean cancelDislike(@RequestParam Integer documentId) {
-		if (documentService.isMyDoc(documentId)) {
-			return false;
-		}
+  @RequestMapping(value = Constants.CANCELDISLIKE, method = RequestMethod.GET)
+  public @ResponseBody
+  boolean cancelDislike(@RequestParam Integer documentId) {
+    if (documentService.isMyDoc(documentId)) {
+      return false;
+    }
 
-		pointService.calculatePointToCancelDislike(documentId);
-		likeService.delete(documentId);
-		return true;
-	}
+    pointService.calculatePointToCancelDislike(documentId);
+    likeService.delete(documentId);
+    return true;
+  }
 }

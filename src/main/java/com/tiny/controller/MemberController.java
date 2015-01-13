@@ -17,27 +17,27 @@ import com.tiny.service.MemberService;
 
 @Controller
 public class MemberController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
-	
-	@Autowired
-	private MemberService memberService;
+  private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 
-	@RequestMapping(value = Constants.MEMBER, method = RequestMethod.GET)
-	public ModelAndView member() {
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		Member member = memberService.get();
-		memberService.setUsage(member);
-		model.addAttribute("member", member);
-		model.addAttribute("url", Constants.MEMBER);
-		mav.addAllObjects(model);
-		mav.setViewName("member");
-		return mav;
-	}
-	
-	@RequestMapping(value = Constants.MEMBER, method = RequestMethod.POST)
-	public ModelAndView memberUpdate(@ModelAttribute Member member) {
-		memberService.updateName(member.getName());
-		return new ModelAndView(new RedirectView("/list"));
-	}
+  @Autowired
+  private MemberService memberService;
+
+  @RequestMapping(value = Constants.MEMBER, method = RequestMethod.GET)
+  public ModelAndView member() {
+    ModelAndView mav = new ModelAndView();
+    ModelMap model = new ModelMap();
+    Member member = memberService.get();
+    memberService.setUsage(member);
+    model.addAttribute("member", member);
+    model.addAttribute("url", Constants.MEMBER);
+    mav.addAllObjects(model);
+    mav.setViewName("member");
+    return mav;
+  }
+
+  @RequestMapping(value = Constants.MEMBER, method = RequestMethod.POST)
+  public ModelAndView memberUpdate(@ModelAttribute Member member) {
+    memberService.updateName(member.getName());
+    return new ModelAndView(new RedirectView("/list"));
+  }
 }

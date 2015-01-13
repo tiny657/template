@@ -12,16 +12,16 @@ import com.tiny.model.DocOnMember;
 
 @Repository
 public class DocOnMemberRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DocOnMemberRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DocOnMemberRepository.class);
 
-	@Autowired
-	private DocOnMemberDao docOnMemberDao;
+  @Autowired
+  private DocOnMemberDao docOnMemberDao;
 
-	public void save(DocOnMember docOnMember) {
-		docOnMemberDao.save(docOnMember);
-	}
+  public void save(DocOnMember docOnMember) {
+    docOnMemberDao.save(docOnMember);
+  }
 
-	public List<DocOnMember> get(String providerUserId) {
-		return docOnMemberDao.get(providerUserId);
-	}
+  public List<DocOnMember> get(String providerUserId) {
+    return docOnMemberDao.get(providerUserId);
+  }
 }

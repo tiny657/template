@@ -14,37 +14,37 @@ import com.tiny.repository.MemberRepository;
 
 @Service
 public class FriendService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FriendService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(FriendService.class);
 
-	private FacebookService facebookService;
-	private MemberRepository memberRepository;
+  private FacebookService facebookService;
+  private MemberRepository memberRepository;
 
-	@Autowired
-	FriendService(FacebookService facebookService, MemberRepository memberRepository) {
-		this.facebookService = facebookService;
-		this.memberRepository = memberRepository;
-	}
+  @Autowired
+  FriendService(FacebookService facebookService, MemberRepository memberRepository) {
+    this.facebookService = facebookService;
+    this.memberRepository = memberRepository;
+  }
 
-	public List<Member> getTemplateFriends() {
-		List<Member> result = new ArrayList<Member>();
-		List<Member> resultNotInstalled = new ArrayList<Member>();
-		List<FacebookProfile> friends = facebookService.getFriends();
+  public List<Member> getTemplateFriends() {
+    List<Member> result = new ArrayList<Member>();
+    List<Member> resultNotInstalled = new ArrayList<Member>();
+    List<FacebookProfile> friends = facebookService.getFriends();
 
-		// TODO:: 성능 상 튜닝 필요
-		for (FacebookProfile facebookProfile : friends) {
-			Member member = memberRepository.getByProviderUserId(facebookProfile.getId());
-			if (member != null) {
-				member.setIsTemplateMember(true);
-				result.add(member);
-			} else {
-				Member memberNotInstalled = new Member();
-				memberNotInstalled.setName(facebookProfile.getName());
-				memberNotInstalled.setProviderUserId(facebookProfile.getId());
-				memberNotInstalled.setIsTemplateMember(false);
-				resultNotInstalled.add(memberNotInstalled);
-			}
-		}
-		result.addAll(resultNotInstalled);
-		return result;
-	}
+    // TODO:: 성능 상 튜닝 필요
+    for (FacebookProfile facebookProfile : friends) {
+      Member member = memberRepository.getByProviderUserId(facebookProfile.getId());
+      if (member != null) {
+        member.setIsTemplateMember(true);
+        result.add(member);
+      } else {
+        Member memberNotInstalled = new Member();
+        memberNotInstalled.setName(facebookProfile.getName());
+        memberNotInstalled.setProviderUserId(facebookProfile.getId());
+        memberNotInstalled.setIsTemplateMember(false);
+        resultNotInstalled.add(memberNotInstalled);
+      }
+    }
+    result.addAll(resultNotInstalled);
+    return result;
+  }
 }

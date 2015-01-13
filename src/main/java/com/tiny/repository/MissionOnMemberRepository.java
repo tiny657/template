@@ -15,24 +15,24 @@ import com.tiny.model.MissionOnMember;
 
 @Repository
 public class MissionOnMemberRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MissionOnMemberRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MissionOnMemberRepository.class);
 
-	@Autowired
-	private MissionOnMemberDao missionOnMemberDao;
+  @Autowired
+  private MissionOnMemberDao missionOnMemberDao;
 
-	@Autowired
-	private MissionDao missionDao;
+  @Autowired
+  private MissionDao missionDao;
 
-	public void save(MissionOnMember missionOnMember) {
-		missionOnMemberDao.save(missionOnMember);
-	}
+  public void save(MissionOnMember missionOnMember) {
+    missionOnMemberDao.save(missionOnMember);
+  }
 
-	public List<Mission> get(String providerUserId) {
-		List<Mission> items = new ArrayList<Mission>();
-		List<MissionOnMember> missionsOnMember = missionOnMemberDao.get(providerUserId);
-		for (MissionOnMember missionOnMember : missionsOnMember) {
-			items.add(missionDao.get(missionOnMember.getMissionId()));
-		}
-		return items;
-	}
+  public List<Mission> get(String providerUserId) {
+    List<Mission> items = new ArrayList<Mission>();
+    List<MissionOnMember> missionsOnMember = missionOnMemberDao.get(providerUserId);
+    for (MissionOnMember missionOnMember : missionsOnMember) {
+      items.add(missionDao.get(missionOnMember.getMissionId()));
+    }
+    return items;
+  }
 }

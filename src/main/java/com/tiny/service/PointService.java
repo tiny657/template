@@ -18,105 +18,107 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class PointService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PointService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PointService.class);
 
-	@Autowired
-	private MemberRepository memberRepository;
+  @Autowired
+  private MemberRepository memberRepository;
 
-	@Autowired
-	private DocumentRepository documentRepository;
+  @Autowired
+  private DocumentRepository documentRepository;
 
-	@Autowired
-	private CommentRepository commentRepository;
+  @Autowired
+  private CommentRepository commentRepository;
 
-	@Autowired
-	private LikeRepository likeRepository;
+  @Autowired
+  private LikeRepository likeRepository;
 
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private SecurityContext securityContext;
 
-	public void calculatePointToSaveDocument() {
-		memberRepository.increasePointDoc(securityContext.getProviderUserId());
-	}
+  public void calculatePointToSaveDocument() {
+    memberRepository.increasePointDoc(securityContext.getProviderUserId());
+  }
 
-	public void calculatePointToDeleteDocument(Integer documentId) {
-		List<Comment> comments = commentRepository.get(documentId);
+  public void calculatePointToDeleteDocument(Integer documentId) {
+    List<Comment> comments = commentRepository.get(documentId);
 
-		// point comment
-		int commentCount = 0;
-		for (Comment comment : comments) {
-			if (!securityContext.getProviderUserId().equals(comment.getProviderUserId())) {
-				memberRepository.decreaseComment(comment.getProviderUserId());
-				commentCount++;
-			}
-		}
-		memberRepository.decreaseCommentOnMyDocByPoint(securityContext.getProviderUserId(), commentCount);
-		
-		// point like, dislike
-		int likeCount = 0, dislikeCount = 0;
-		List<Like> likes = likeRepository.getByDocumentId(documentId);
-		for (Like like : likes) {
-			if (like.getIsLike()) {
-				likeCount++;
-				memberRepository.decreaseLike(like.getProviderUserId());
-			} else {
-				dislikeCount++;
-				memberRepository.decreaseDislike(like.getProviderUserId());
-			}
-		}
-		memberRepository.decreaseLikeOnMyDocByPoint(securityContext.getProviderUserId(), likeCount);
-		memberRepository.decreaseDislikeOnMyDocByPoint(securityContext.getProviderUserId(), dislikeCount);
+    // point comment
+    int commentCount = 0;
+    for (Comment comment : comments) {
+      if (!securityContext.getProviderUserId().equals(comment.getProviderUserId())) {
+        memberRepository.decreaseComment(comment.getProviderUserId());
+        commentCount++;
+      }
+    }
+    memberRepository.decreaseCommentOnMyDocByPoint(securityContext.getProviderUserId(),
+        commentCount);
 
-		// point document
-		memberRepository.decreasePointDoc(securityContext.getProviderUserId());
-	}
+    // point like, dislike
+    int likeCount = 0, dislikeCount = 0;
+    List<Like> likes = likeRepository.getByDocumentId(documentId);
+    for (Like like : likes) {
+      if (like.getIsLike()) {
+        likeCount++;
+        memberRepository.decreaseLike(like.getProviderUserId());
+      } else {
+        dislikeCount++;
+        memberRepository.decreaseDislike(like.getProviderUserId());
+      }
+    }
+    memberRepository.decreaseLikeOnMyDocByPoint(securityContext.getProviderUserId(), likeCount);
+    memberRepository.decreaseDislikeOnMyDocByPoint(securityContext.getProviderUserId(),
+        dislikeCount);
 
-	public void calculatePointToSaveComment(Integer documentId) {
-		memberRepository.increaseComment(securityContext.getProviderUserId());
-		Document document = documentRepository.get(documentId);
-		memberRepository.increaseCommentOnMyDoc(document.getProviderUserId());
-		documentRepository.increaseComment(documentId);
-	}
+    // point document
+    memberRepository.decreasePointDoc(securityContext.getProviderUserId());
+  }
 
-	public void calculatePointToDeleteComment(Integer documentId, Integer commentId) {
-		memberRepository.decreaseComment(securityContext.getProviderUserId());
-		Document document = documentRepository.get(documentId);
-		memberRepository.decreaseCommentOnMyDoc(document.getProviderUserId());
-		documentRepository.decreaseComment(commentRepository.getCommentId(commentId).getDocumentId());
-	}
+  public void calculatePointToSaveComment(Integer documentId) {
+    memberRepository.increaseComment(securityContext.getProviderUserId());
+    Document document = documentRepository.get(documentId);
+    memberRepository.increaseCommentOnMyDoc(document.getProviderUserId());
+    documentRepository.increaseComment(documentId);
+  }
 
-	public void calculatePointToShare(Integer documentId) {
-		Document document = documentRepository.get(documentId);
-		documentRepository.increaseSharing(documentId);
-		memberRepository.increaseSharing(document.getProviderUserId());
-		memberRepository.increasePointBeShared(document.getProviderUserId());
-	}
+  public void calculatePointToDeleteComment(Integer documentId, Integer commentId) {
+    memberRepository.decreaseComment(securityContext.getProviderUserId());
+    Document document = documentRepository.get(documentId);
+    memberRepository.decreaseCommentOnMyDoc(document.getProviderUserId());
+    documentRepository.decreaseComment(commentRepository.getCommentId(commentId).getDocumentId());
+  }
 
-	public void calculatePointToClickLike(Integer documentId) {
-		Document document = documentRepository.get(documentId);
-		documentRepository.increaseLike(documentId);
-		memberRepository.increaseLike(securityContext.getProviderUserId());
-		memberRepository.increaseLikeOnMyDoc(document.getProviderUserId());
-	}
+  public void calculatePointToShare(Integer documentId) {
+    Document document = documentRepository.get(documentId);
+    documentRepository.increaseSharing(documentId);
+    memberRepository.increaseSharing(document.getProviderUserId());
+    memberRepository.increasePointBeShared(document.getProviderUserId());
+  }
 
-	public void calculatePointToCancelLike(Integer documentId) {
-		Document document = documentRepository.get(documentId);
-		documentRepository.decreaseLike(documentId);
-		memberRepository.decreaseLike(securityContext.getProviderUserId());
-		memberRepository.decreaseLikeOnMyDoc(document.getProviderUserId());
-	}
+  public void calculatePointToClickLike(Integer documentId) {
+    Document document = documentRepository.get(documentId);
+    documentRepository.increaseLike(documentId);
+    memberRepository.increaseLike(securityContext.getProviderUserId());
+    memberRepository.increaseLikeOnMyDoc(document.getProviderUserId());
+  }
 
-	public void calculatePointToClickDislike(Integer documentId) {
-		Document document = documentRepository.get(documentId);
-		documentRepository.increaseDislike(documentId);
-		memberRepository.increaseDislike(securityContext.getProviderUserId());
-		memberRepository.increaseDislikeOnMyDoc(document.getProviderUserId());
-	}
+  public void calculatePointToCancelLike(Integer documentId) {
+    Document document = documentRepository.get(documentId);
+    documentRepository.decreaseLike(documentId);
+    memberRepository.decreaseLike(securityContext.getProviderUserId());
+    memberRepository.decreaseLikeOnMyDoc(document.getProviderUserId());
+  }
 
-	public void calculatePointToCancelDislike(Integer documentId) {
-		Document document = documentRepository.get(documentId);
-		documentRepository.decreaseDislike(documentId);
-		memberRepository.decreaseDislike(securityContext.getProviderUserId());
-		memberRepository.decreaseDislikeOnMyDoc(document.getProviderUserId());
-	}
+  public void calculatePointToClickDislike(Integer documentId) {
+    Document document = documentRepository.get(documentId);
+    documentRepository.increaseDislike(documentId);
+    memberRepository.increaseDislike(securityContext.getProviderUserId());
+    memberRepository.increaseDislikeOnMyDoc(document.getProviderUserId());
+  }
+
+  public void calculatePointToCancelDislike(Integer documentId) {
+    Document document = documentRepository.get(documentId);
+    documentRepository.decreaseDislike(documentId);
+    memberRepository.decreaseDislike(securityContext.getProviderUserId());
+    memberRepository.decreaseDislikeOnMyDoc(document.getProviderUserId());
+  }
 }

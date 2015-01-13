@@ -14,87 +14,88 @@ import com.tiny.model.Member;
 import com.tiny.model.UserConnection;
 
 public class MemberDaoTest extends CommonTest {
-	@Autowired
-	private MemberDao memberDao;
+  @Autowired
+  private MemberDao memberDao;
 
-	@Autowired
-	private UserConnectionDao userConnectionDao;
+  @Autowired
+  private UserConnectionDao userConnectionDao;
 
-	private final String userId = "userId";
-	private final String providerUserId = "providerUserId";
-	private final String facebook = "facebook";
-	private final String accessToken = "accessToken";
+  private final String userId = "userId";
+  private final String providerUserId = "providerUserId";
+  private final String facebook = "facebook";
+  private final String accessToken = "accessToken";
 
-	@Before
-	public void setUp() {
-		UserConnection userConnection = new UserConnection();
-		userConnection.setUserId(userId);
-		userConnection.setProviderId(facebook);
-		userConnection.setProviderUserId(providerUserId);
-		userConnection.setRank(1);
-		userConnection.setAccessToken(accessToken);
-		userConnectionDao.save(userConnection);
-	}
-	
-	@Test
-	public void save() {
-		// Given
-		Integer count = memberDao.count();
+  @Before
+  public void setUp() {
+    UserConnection userConnection = new UserConnection();
+    userConnection.setUserId(userId);
+    userConnection.setProviderId(facebook);
+    userConnection.setProviderUserId(providerUserId);
+    userConnection.setRank(1);
+    userConnection.setAccessToken(accessToken);
+    userConnectionDao.save(userConnection);
+  }
 
-		// When
-		memberDao.save(createMember());
+  @Test
+  public void save() {
+    // Given
+    Integer count = memberDao.count();
 
-		// Then
-		assertThat(memberDao.count(), is(count + 1));
-	}
+    // When
+    memberDao.save(createMember());
 
-	@Test
-	public void get() {
-		// Given
-		Member memberTmp = createMember();
-		memberDao.save(memberTmp);
+    // Then
+    assertThat(memberDao.count(), is(count + 1));
+  }
 
-		// When
-		Member member = memberDao.getByProviderUserId(memberTmp.getProviderUserId());
+  @Test
+  public void get() {
+    // Given
+    Member memberTmp = createMember();
+    memberDao.save(memberTmp);
 
-		// Then
-		assertThat(member.getProviderUserId(), is(memberTmp.getProviderUserId()));
-	}
+    // When
+    Member member = memberDao.getByProviderUserId(memberTmp.getProviderUserId());
 
-	@Test
-	public void updateLastLoginDate() throws InterruptedException {
-		// Given
-		Member member = createMember();
-		memberDao.save(member);
+    // Then
+    assertThat(member.getProviderUserId(), is(memberTmp.getProviderUserId()));
+  }
 
-		// When
-		Thread.sleep(1000);
-		memberDao.updateLastLoginDate(providerUserId);
-		Member memberAfterUpdate = memberDao.getByProviderUserId(member.getProviderUserId());
+  @Test
+  public void updateLastLoginDate() throws InterruptedException {
+    // Given
+    Member member = createMember();
+    memberDao.save(member);
 
-		// Then
-		assertThat(member.getLastLoginDate().toString(), not(memberAfterUpdate.getLastLoginDate().toString()));
-	}
+    // When
+    Thread.sleep(1000);
+    memberDao.updateLastLoginDate(providerUserId);
+    Member memberAfterUpdate = memberDao.getByProviderUserId(member.getProviderUserId());
 
-	@Test
-	public void delete() {
-		// Given
-		Member member = createMember();
-		memberDao.save(member);
-		Integer count = memberDao.count();
+    // Then
+    assertThat(member.getLastLoginDate().toString(), not(memberAfterUpdate.getLastLoginDate()
+        .toString()));
+  }
 
-		// When
-		memberDao.delete(member.getProviderUserId());
+  @Test
+  public void delete() {
+    // Given
+    Member member = createMember();
+    memberDao.save(member);
+    Integer count = memberDao.count();
 
-		// Then
-		assertThat(memberDao.count(), is(count - 1));
-	}
+    // When
+    memberDao.delete(member.getProviderUserId());
 
-	private Member createMember() {
-		Member member = new Member();
-		member.setProviderUserId(providerUserId);
-		member.setRegDate(new Date());
-		member.setLastLoginDate(new Date());
-		return member;
-	}
+    // Then
+    assertThat(memberDao.count(), is(count - 1));
+  }
+
+  private Member createMember() {
+    Member member = new Member();
+    member.setProviderUserId(providerUserId);
+    member.setRegDate(new Date());
+    member.setLastLoginDate(new Date());
+    return member;
+  }
 }

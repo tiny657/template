@@ -12,20 +12,20 @@ import com.tiny.model.Item;
 
 @Repository
 public class ItemRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemRepository.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ItemRepository.class);
 
-	@Autowired
-	private ItemDao itemDao;
+  @Autowired
+  private ItemDao itemDao;
 
-	public void save(Item item) {
-		itemDao.save(item);
-	}
-	
-	public List<Item> getAll() {
-		return itemDao.getAll();
-	}
+  public void save(Item item) {
+    itemDao.save(item);
+  }
 
-	public Item get(Integer itemId) {
-		return itemDao.get(itemId);
-	}
+  public List<Item> getAll() {
+    return itemDao.getAll();
+  }
+
+  public Item get(Integer itemId) {
+    return itemDao.get(itemId);
+  }
 }

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class MissionOnMember {
-	private String providerUserId;
-	private Integer missionId;
+  private String providerUserId;
+  private Integer missionId;
 }

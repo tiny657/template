@@ -12,16 +12,16 @@ import com.tiny.repository.ItemRepository;
 
 @Service
 public class MarketService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MarketService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MarketService.class);
 
-	private ItemRepository itemRepository;
-	
-	@Autowired
-	MarketService(ItemRepository itemRepository) {
-		this.itemRepository = itemRepository;
-	}
+  private ItemRepository itemRepository;
 
-	public List<Item> getAll() {
-		return itemRepository.getAll();
-	}
+  @Autowired
+  MarketService(ItemRepository itemRepository) {
+    this.itemRepository = itemRepository;
+  }
+
+  public List<Item> getAll() {
+    return itemRepository.getAll();
+  }
 }

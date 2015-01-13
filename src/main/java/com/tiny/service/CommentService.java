@@ -16,51 +16,51 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class CommentService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
 
-	@Autowired
-	private XssFilter xssFilter;
+  @Autowired
+  private XssFilter xssFilter;
 
-	@Autowired
-	private CommentRepository commentRepository;
+  @Autowired
+  private CommentRepository commentRepository;
 
-	@Autowired
-	private MemberRepository memberRepository;
-	
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private MemberRepository memberRepository;
 
-	public void save(Comment comment) {
-		comment.setProviderUserId(securityContext.getProviderUserId());
-		comment.setName(memberRepository.getName(securityContext.getProviderUserId()));
-		comment.setContent(xssFilter.doFilter(comment.getContent()));
-		commentRepository.save(comment);
-	}
+  @Autowired
+  private SecurityContext securityContext;
 
-	@Transactional
-	public Comment saveAndGet(Comment comment) {
-		save(comment);
-		return commentRepository.getLast();
-	}
+  public void save(Comment comment) {
+    comment.setProviderUserId(securityContext.getProviderUserId());
+    comment.setName(memberRepository.getName(securityContext.getProviderUserId()));
+    comment.setContent(xssFilter.doFilter(comment.getContent()));
+    commentRepository.save(comment);
+  }
 
-	public List<Comment> get(Integer documentId) {
-		List<Comment> comments = commentRepository.get(documentId);
-		for (Comment comment : comments) {
-			comment.setContent(comment.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
-		}
+  @Transactional
+  public Comment saveAndGet(Comment comment) {
+    save(comment);
+    return commentRepository.getLast();
+  }
 
-		return comments;
-	}
+  public List<Comment> get(Integer documentId) {
+    List<Comment> comments = commentRepository.get(documentId);
+    for (Comment comment : comments) {
+      comment.setContent(comment.getContent().replace("\r\n", "<br>").replace(" ", "&nbsp"));
+    }
 
-	public Comment getCommentId(Integer commentId) {
-		return commentRepository.getCommentId(commentId);
-	}
+    return comments;
+  }
 
-	public void deleteWithDocumentId(Integer documentId) {
-		commentRepository.deleteWithDocumentId(documentId);
-	}
+  public Comment getCommentId(Integer commentId) {
+    return commentRepository.getCommentId(commentId);
+  }
 
-	public void delete(Integer commentId) {
-		commentRepository.delete(commentId);
-	}
+  public void deleteWithDocumentId(Integer documentId) {
+    commentRepository.deleteWithDocumentId(documentId);
+  }
+
+  public void delete(Integer commentId) {
+    commentRepository.delete(commentId);
+  }
 }

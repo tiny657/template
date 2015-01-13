@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class Like {
-	private String providerUserId;
-	private Integer  documentId;
-	// true : like
-	// false : dislike
-	private Boolean isLike;
-	private Date regDate;
+  private String providerUserId;
+  private Integer documentId;
+  // true : like
+  // false : dislike
+  private Boolean isLike;
+  private Date regDate;
 }

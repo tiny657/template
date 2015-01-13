@@ -18,150 +18,158 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class MemberService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
-	@Autowired
-	private FacebookService facebookService;
+  @Autowired
+  private FacebookService facebookService;
 
-	@Autowired
-	private MemberRepository memberRepository;
+  @Autowired
+  private MemberRepository memberRepository;
 
-	@Autowired
-	private DocumentRepository documentRepository;
+  @Autowired
+  private DocumentRepository documentRepository;
 
-	@Autowired
-	private CommentRepository commentRepository;
+  @Autowired
+  private CommentRepository commentRepository;
 
-	@Autowired
-	private LikeRepository likeRepository;
-	
-	@Autowired
-	private ItemOnMemberRepository itemOnMemberRepository;
+  @Autowired
+  private LikeRepository likeRepository;
 
-	@Autowired
-	private MissionOnMemberRepository missionOnMemberRepository;
-	
-	@Autowired
-	private DocOnMemberRepository docOnMemberRepository;
-	
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private ItemOnMemberRepository itemOnMemberRepository;
 
-	public void save() {
-		FacebookProfile facebookProfile = facebookService.getProfile();
-		Member member = new Member();
-		member.setProviderUserId(facebookProfile.getId());
-		member.setName(facebookProfile.getName());
-		member.setGender(facebookProfile.getGender().equals("male"));
-		member.setEmail(facebookProfile.getEmail());
-		member.setLocale(facebookProfile.getLocale().getCountry());
-		memberRepository.save(member);
-	}
+  @Autowired
+  private MissionOnMemberRepository missionOnMemberRepository;
 
-	public void setUsage(Member member) {
-		member.setUsageOfDoc(documentRepository.countDocForLast1Hour(securityContext.getProviderUserId()));
-		member.setUsageOfComment(commentRepository.countCommentForLast1Hour(securityContext.getProviderUserId()));
-		member.setUsageOfLike(likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId()));
-		member.setUsageOfDislike(likeRepository.countDislikeForLast1Hour(securityContext.getProviderUserId()));
-	}
+  @Autowired
+  private DocOnMemberRepository docOnMemberRepository;
 
-	public Member get() {
-		Member member = memberRepository.get(securityContext.getProviderUserId());
-		if (member == null) {
-			save();
-			member = memberRepository.get(securityContext.getProviderUserId());
-		}
+  @Autowired
+  private SecurityContext securityContext;
 
-		member.setPoint(member.getDoc() * 10 + member.getLike() + member.getDislike() + member.getCommentOnMyDoc()
-				+ member.getLikeOnMyDoc() - member.getDislikeOnMyDoc());
-		member.setItems(itemOnMemberRepository.get(securityContext.getProviderUserId()));
-		member.setMissions(missionOnMemberRepository.get(securityContext.getProviderUserId()));
-		member.setDocsOnMember(docOnMemberRepository.get(securityContext.getProviderUserId()));
-		return member;
-	}
+  public void save() {
+    FacebookProfile facebookProfile = facebookService.getProfile();
+    Member member = new Member();
+    member.setProviderUserId(facebookProfile.getId());
+    member.setName(facebookProfile.getName());
+    member.setGender(facebookProfile.getGender().equals("male"));
+    member.setEmail(facebookProfile.getEmail());
+    member.setLocale(facebookProfile.getLocale().getCountry());
+    memberRepository.save(member);
+  }
 
-	public Member getByProviderUserId() {
-		String providerUserId = securityContext.getProviderUserId();
-		Member member = memberRepository.getByProviderUserId(providerUserId);
-		if (member == null) {
-			save();
-			member = memberRepository.getByProviderUserId(providerUserId);
-		}
+  public void setUsage(Member member) {
+    member.setUsageOfDoc(documentRepository.countDocForLast1Hour(securityContext
+        .getProviderUserId()));
+    member.setUsageOfComment(commentRepository.countCommentForLast1Hour(securityContext
+        .getProviderUserId()));
+    member
+        .setUsageOfLike(likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId()));
+    member.setUsageOfDislike(likeRepository.countDislikeForLast1Hour(securityContext
+        .getProviderUserId()));
+  }
 
-		return member;
-	}
+  public Member get() {
+    Member member = memberRepository.get(securityContext.getProviderUserId());
+    if (member == null) {
+      save();
+      member = memberRepository.get(securityContext.getProviderUserId());
+    }
 
-	public boolean isExisted() {
-		boolean isExisted = true;
-		Member member = memberRepository.get(securityContext.getProviderUserId());
-		if (member == null) {
-			isExisted = false;
-		}
-		return isExisted;
-	}
+    member.setPoint(member.getDoc() * 10 + member.getLike() + member.getDislike()
+        + member.getCommentOnMyDoc() + member.getLikeOnMyDoc() - member.getDislikeOnMyDoc());
+    member.setItems(itemOnMemberRepository.get(securityContext.getProviderUserId()));
+    member.setMissions(missionOnMemberRepository.get(securityContext.getProviderUserId()));
+    member.setDocsOnMember(docOnMemberRepository.get(securityContext.getProviderUserId()));
+    return member;
+  }
 
-	public boolean isChanceToDoc() {
-		Integer chanceToDoc = memberRepository.getChanceToDoc(securityContext.getProviderUserId());
-		Integer countDocForLast1Hour = documentRepository.countDocForLast1Hour(securityContext.getProviderUserId());
-		return (chanceToDoc - countDocForLast1Hour) > 0;
-	}
+  public Member getByProviderUserId() {
+    String providerUserId = securityContext.getProviderUserId();
+    Member member = memberRepository.getByProviderUserId(providerUserId);
+    if (member == null) {
+      save();
+      member = memberRepository.getByProviderUserId(providerUserId);
+    }
 
-	public boolean isChanceToComment() {
-		Integer chanceToComment = memberRepository.getChanceToComment(securityContext.getProviderUserId());
-		Integer countCommentForLast1Hour = commentRepository.countCommentForLast1Hour(securityContext
-				.getProviderUserId());
-		return (chanceToComment - countCommentForLast1Hour) > 0;
-	}
+    return member;
+  }
 
-	public boolean isChanceToLike() {
-		Integer chanceToLike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
-		Integer countLikeForLast1Hour = likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId());
-		return (chanceToLike - countLikeForLast1Hour) > 0;
-	}
+  public boolean isExisted() {
+    boolean isExisted = true;
+    Member member = memberRepository.get(securityContext.getProviderUserId());
+    if (member == null) {
+      isExisted = false;
+    }
+    return isExisted;
+  }
 
-	public boolean isChanceToDislike() {
-		Integer chanceToDislike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
-		Integer countDislikeForLast1Hour = likeRepository.countDislikeForLast1Hour(securityContext.getProviderUserId());
-		return (chanceToDislike - countDislikeForLast1Hour) > 0;
-	}
+  public boolean isChanceToDoc() {
+    Integer chanceToDoc = memberRepository.getChanceToDoc(securityContext.getProviderUserId());
+    Integer countDocForLast1Hour =
+        documentRepository.countDocForLast1Hour(securityContext.getProviderUserId());
+    return (chanceToDoc - countDocForLast1Hour) > 0;
+  }
 
-	public void updateName(String name) {
-		memberRepository.updateName(securityContext.getProviderUserId(), name);
-	}
+  public boolean isChanceToComment() {
+    Integer chanceToComment =
+        memberRepository.getChanceToComment(securityContext.getProviderUserId());
+    Integer countCommentForLast1Hour =
+        commentRepository.countCommentForLast1Hour(securityContext.getProviderUserId());
+    return (chanceToComment - countCommentForLast1Hour) > 0;
+  }
 
-	public void increaseChanceToDoc() {
-		memberRepository.increaseChanceToDoc(securityContext.getProviderUserId());
-	}
+  public boolean isChanceToLike() {
+    Integer chanceToLike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
+    Integer countLikeForLast1Hour =
+        likeRepository.countLikeForLast1Hour(securityContext.getProviderUserId());
+    return (chanceToLike - countLikeForLast1Hour) > 0;
+  }
 
-	public void decreaseChanceToDoc() {
-		memberRepository.decreaseChanceToDoc(securityContext.getProviderUserId());
-	}
+  public boolean isChanceToDislike() {
+    Integer chanceToDislike = memberRepository.getChanceToLike(securityContext.getProviderUserId());
+    Integer countDislikeForLast1Hour =
+        likeRepository.countDislikeForLast1Hour(securityContext.getProviderUserId());
+    return (chanceToDislike - countDislikeForLast1Hour) > 0;
+  }
 
-	public void increaseChanceToComment() {
-		memberRepository.increaseChanceToComment(securityContext.getProviderUserId());
-	}
+  public void updateName(String name) {
+    memberRepository.updateName(securityContext.getProviderUserId(), name);
+  }
 
-	public void decreaseChanceToComment() {
-		memberRepository.decreaseChanceToComment(securityContext.getProviderUserId());
-	}
+  public void increaseChanceToDoc() {
+    memberRepository.increaseChanceToDoc(securityContext.getProviderUserId());
+  }
 
-	public void increaseChanceToLike() {
-		memberRepository.increaseChanceToLike(securityContext.getProviderUserId());
-	}
+  public void decreaseChanceToDoc() {
+    memberRepository.decreaseChanceToDoc(securityContext.getProviderUserId());
+  }
 
-	public void decreaseChanceToLike() {
-		memberRepository.decreaseChanceToLike(securityContext.getProviderUserId());
-	}
+  public void increaseChanceToComment() {
+    memberRepository.increaseChanceToComment(securityContext.getProviderUserId());
+  }
 
-	public void increaseChanceToDislike() {
-		memberRepository.increaseChanceToDislike(securityContext.getProviderUserId());
-	}
+  public void decreaseChanceToComment() {
+    memberRepository.decreaseChanceToComment(securityContext.getProviderUserId());
+  }
 
-	public void decreaseChanceToDislike() {
-		memberRepository.decreaseChanceToDislike(securityContext.getProviderUserId());
-	}
+  public void increaseChanceToLike() {
+    memberRepository.increaseChanceToLike(securityContext.getProviderUserId());
+  }
 
-	public void updateLastLoginTime() {
-		memberRepository.updateLastLoginDate(securityContext.getProviderUserId());
-	}
+  public void decreaseChanceToLike() {
+    memberRepository.decreaseChanceToLike(securityContext.getProviderUserId());
+  }
+
+  public void increaseChanceToDislike() {
+    memberRepository.increaseChanceToDislike(securityContext.getProviderUserId());
+  }
+
+  public void decreaseChanceToDislike() {
+    memberRepository.decreaseChanceToDislike(securityContext.getProviderUserId());
+  }
+
+  public void updateLastLoginTime() {
+    memberRepository.updateLastLoginDate(securityContext.getProviderUserId());
+  }
 }

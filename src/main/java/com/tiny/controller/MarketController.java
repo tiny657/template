@@ -20,38 +20,38 @@ import com.tiny.service.MarketService;
 
 @Controller
 public class MarketController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MarketController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MarketController.class);
 
-	@Autowired
-	private MarketService marketService;
+  @Autowired
+  private MarketService marketService;
 
-	@RequestMapping(value = Constants.MARKET, method = RequestMethod.GET)
-	public ModelAndView getFriends() {
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		List<Item> items = marketService.getAll();
-		Checkbox checkbox = new Checkbox();
-		ArrayList<Boolean> checkboxs = new ArrayList<Boolean>();
-		for (int i = 0; i < items.size(); i++) {
-			checkboxs.add(false);
-		}
-		checkbox.setCheckboxs(checkboxs);
-		model.addAttribute("items", items);
-		model.addAttribute("checkbox", checkbox);
-		model.addAttribute("url", Constants.MARKET);
-		mav.addAllObjects(model);
-		mav.setViewName("market");
-		return mav;
-	}
+  @RequestMapping(value = Constants.MARKET, method = RequestMethod.GET)
+  public ModelAndView getFriends() {
+    ModelAndView mav = new ModelAndView();
+    ModelMap model = new ModelMap();
+    List<Item> items = marketService.getAll();
+    Checkbox checkbox = new Checkbox();
+    ArrayList<Boolean> checkboxs = new ArrayList<Boolean>();
+    for (int i = 0; i < items.size(); i++) {
+      checkboxs.add(false);
+    }
+    checkbox.setCheckboxs(checkboxs);
+    model.addAttribute("items", items);
+    model.addAttribute("checkbox", checkbox);
+    model.addAttribute("url", Constants.MARKET);
+    mav.addAllObjects(model);
+    mav.setViewName("market");
+    return mav;
+  }
 
-	@RequestMapping(value = Constants.MARKET + "/" + Constants.BUY, method = RequestMethod.POST)
-	public ModelAndView buy(@ModelAttribute Checkbox checkbox) {
-		for (Boolean i : checkbox.getCheckboxs()) {
-			System.out.println(i);
-		}
+  @RequestMapping(value = Constants.MARKET + "/" + Constants.BUY, method = RequestMethod.POST)
+  public ModelAndView buy(@ModelAttribute Checkbox checkbox) {
+    for (Boolean i : checkbox.getCheckboxs()) {
+      System.out.println(i);
+    }
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("market");
-		return mav;
-	}
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("market");
+    return mav;
+  }
 }

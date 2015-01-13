@@ -21,59 +21,60 @@ import com.tiny.social.SecurityContext;
 
 @Controller
 public class MainController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
-	@Autowired
-	private MemberService memberService;
+  @Autowired
+  private MemberService memberService;
 
-	@Autowired
-	private MyDocService myDocService;
+  @Autowired
+  private MyDocService myDocService;
 
-	@Autowired
-	private SecurityContext securityContext;
+  @Autowired
+  private SecurityContext securityContext;
 
-	@Autowired
-	private XssFilter xssFilter;
+  @Autowired
+  private XssFilter xssFilter;
 
-	@RequestMapping(value = Constants.MAIN, method = RequestMethod.GET)
-	public ModelAndView main(@RequestParam(defaultValue = "2147483647", required = false) int myDocId,
-			@RequestParam(defaultValue = "false", required = false) boolean viewRecently) {
-		memberService.updateLastLoginTime();
+  @RequestMapping(value = Constants.MAIN, method = RequestMethod.GET)
+  public ModelAndView main(
+      @RequestParam(defaultValue = "2147483647", required = false) int myDocId, @RequestParam(
+          defaultValue = "false", required = false) boolean viewRecently) {
+    memberService.updateLastLoginTime();
 
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		List<MyDoc> myDocs;
-		if (viewRecently) {
-			myDocs = myDocService.getRecently(myDocId);
-		} else {
-			myDocs = myDocService.getList(myDocId);
-		}
-		for (MyDoc myDoc : myDocs) {
-			// undo xssFilter
-			if (securityContext.getProviderUserId().equals(myDoc.getProviderUserId())) {
-				myDoc.setRawContent(xssFilter.undoFilter(myDoc.getContent()));
-			}
-		}
-		model.addAttribute("newMyDoc", new MyDoc());
-		model.addAttribute("myDocs", myDocs);
-		model.addAttribute("url", Constants.MAIN);
+    ModelAndView mav = new ModelAndView();
+    ModelMap model = new ModelMap();
+    List<MyDoc> myDocs;
+    if (viewRecently) {
+      myDocs = myDocService.getRecently(myDocId);
+    } else {
+      myDocs = myDocService.getList(myDocId);
+    }
+    for (MyDoc myDoc : myDocs) {
+      // undo xssFilter
+      if (securityContext.getProviderUserId().equals(myDoc.getProviderUserId())) {
+        myDoc.setRawContent(xssFilter.undoFilter(myDoc.getContent()));
+      }
+    }
+    model.addAttribute("newMyDoc", new MyDoc());
+    model.addAttribute("myDocs", myDocs);
+    model.addAttribute("url", Constants.MAIN);
 
-		// for posting
-		model.addAttribute("providerUserId", securityContext.getProviderUserId());
+    // for posting
+    model.addAttribute("providerUserId", securityContext.getProviderUserId());
 
-		// more
-		if (viewRecently || myDocs.size() != Constants.ONEPAGELIMIT) {
-			model.addAttribute("more", false);
-		} else {
-			model.addAttribute("more", true);
-		}
+    // more
+    if (viewRecently || myDocs.size() != Constants.ONEPAGELIMIT) {
+      model.addAttribute("more", false);
+    } else {
+      model.addAttribute("more", true);
+    }
 
-		mav.addAllObjects(model);
-		if (myDocId == Integer.MAX_VALUE) {
-			mav.setViewName("main");
-		} else {
-			mav.setViewName("myDocs");
-		}
-		return mav;
-	}
+    mav.addAllObjects(model);
+    if (myDocId == Integer.MAX_VALUE) {
+      mav.setViewName("main");
+    } else {
+      mav.setViewName("myDocs");
+    }
+    return mav;
+  }
 }

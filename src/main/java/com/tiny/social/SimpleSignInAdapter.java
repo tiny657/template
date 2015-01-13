@@ -10,17 +10,18 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 @Component
 public class SimpleSignInAdapter implements SignInAdapter {
-	
-	@Autowired
-	private UserCookieGenerator userCookieGenerator;
-	
-	@Autowired
-	private SecurityContext securityContext;
-	
-	public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
-		String providerUserId = connection.getKey().getProviderUserId();
-		securityContext.setCurrentUser(new User(userId, providerUserId));
-		userCookieGenerator.addCookie(userId, providerUserId, request.getNativeResponse(HttpServletResponse.class));
-		return null;
-	}
+
+  @Autowired
+  private UserCookieGenerator userCookieGenerator;
+
+  @Autowired
+  private SecurityContext securityContext;
+
+  public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
+    String providerUserId = connection.getKey().getProviderUserId();
+    securityContext.setCurrentUser(new User(userId, providerUserId));
+    userCookieGenerator.addCookie(userId, providerUserId,
+        request.getNativeResponse(HttpServletResponse.class));
+    return null;
+  }
 }

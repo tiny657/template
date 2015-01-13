@@ -13,31 +13,31 @@ import com.tiny.social.SecurityContext;
 
 @Service
 public class LikeService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LikeService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LikeService.class);
 
-	@Autowired
-	private LikeRepository likeRepository;
-	
-	@Autowired
-	private SecurityContext securityContext;
-	
-	public void save(Integer documentId, Boolean isLike) {
-		Like like = new Like();
-		like.setDocumentId(documentId);
-		like.setProviderUserId(securityContext.getProviderUserId());
-		like.setIsLike(isLike);
-		likeRepository.save(like);
-	}
+  @Autowired
+  private LikeRepository likeRepository;
 
-	public List<Like> get(String providerUserId) {
-		return likeRepository.getByProviderUserId(providerUserId);
-	}
-	
-	public Like getByProviderUserId(Integer documentId) {
-		return likeRepository.get(securityContext.getProviderUserId(), documentId);
-	}
-	
-	public void delete(Integer documentId) {
-		likeRepository.delete(securityContext.getProviderUserId(), documentId);
-	}
+  @Autowired
+  private SecurityContext securityContext;
+
+  public void save(Integer documentId, Boolean isLike) {
+    Like like = new Like();
+    like.setDocumentId(documentId);
+    like.setProviderUserId(securityContext.getProviderUserId());
+    like.setIsLike(isLike);
+    likeRepository.save(like);
+  }
+
+  public List<Like> get(String providerUserId) {
+    return likeRepository.getByProviderUserId(providerUserId);
+  }
+
+  public Like getByProviderUserId(Integer documentId) {
+    return likeRepository.get(securityContext.getProviderUserId(), documentId);
+  }
+
+  public void delete(Integer documentId) {
+    likeRepository.delete(securityContext.getProviderUserId(), documentId);
+  }
 }

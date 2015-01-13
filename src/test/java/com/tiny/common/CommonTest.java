@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
 @Transactional
 public class CommonTest {
-	@Test
-	public void test() {
-	}
+  @Test
+  public void test() {}
 }

@@ -14,19 +14,19 @@ import com.tiny.service.FriendService;
 
 @Controller
 public class FriendController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FriendController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(FriendController.class);
 
-	@Autowired
-	private FriendService friendService;
+  @Autowired
+  private FriendService friendService;
 
-	@RequestMapping(value = Constants.FRIEND, method = RequestMethod.GET)
-	public ModelAndView getFriends() {
-		ModelAndView mav = new ModelAndView();
-		ModelMap model = new ModelMap();
-		model.addAttribute("friends", friendService.getTemplateFriends());
-		model.addAttribute("url", Constants.FRIEND);
-		mav.addAllObjects(model);
-		mav.setViewName("friend");
-		return mav;
-	}
+  @RequestMapping(value = Constants.FRIEND, method = RequestMethod.GET)
+  public ModelAndView getFriends() {
+    ModelAndView mav = new ModelAndView();
+    ModelMap model = new ModelMap();
+    model.addAttribute("friends", friendService.getTemplateFriends());
+    model.addAttribute("url", Constants.FRIEND);
+    mav.addAllObjects(model);
+    mav.setViewName("friend");
+    return mav;
+  }
 }
