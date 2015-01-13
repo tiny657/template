@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+  <!-- Console Appenders -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{MM-dd HH:mm:ss.SSS} %.-1level %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Application Loggers -->
+  <logger name="com.tiny" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+
+  <!-- 3rd party Loggers -->
+  <logger name="org.springframework.core" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+
+  <logger name="org.springframework.beans" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+
+  <logger name="org.springframework.context" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+
+  <logger name="org.springframework.web" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+
+  <!-- Root Logger -->
+  <root>
+    <priority value="INFO" />
+    <appender-ref ref="console" />
+  </root>
+
+</configuration>
